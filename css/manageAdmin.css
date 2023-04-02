@@ -1,5 +1,4 @@
 /*import fonts START OF NAVIGATION DESIGN*/
-@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
 
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -14,7 +13,7 @@
     --bg: #FEFBFF;
     --black1: #222;
     --black2: #999;
-    --title: #402950;
+    --hover: #6762b6;
 }
 
 body {
@@ -219,7 +218,7 @@ body {
 
 .menu-toggle {
     position: relative;
-    background-color: var(--bg);
+    background-color: var(--bg) /* to be changed*/;
     height: 100vh;
     left: 260px;
     width: calc(100% - 260px);
@@ -264,150 +263,226 @@ body {
 
 /* END OF NAVIGATION DESIGN - CARCILLAR */
 
-/* INFO DATA PROGRESS START */
-
-.info-data {
-    margin-top: 36px;
-    margin-left: 20px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 20px;
+/* ADD NEW BUTTON */
+.add-new {
+    margin: 30px 20px;
+    background-color: var(--main);
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    padding: 12px;
 }
 
-.info-data .card {
-    padding: 20px;
-    border-radius: 10px;
-    background: var(--white);
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, .1);
+.add-new:hover {
+    background-color: var(--hover);
 }
 
-.card .head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+.add-new a {
+    text-decoration: none;
 }
 
-.card .head h2 {
-    font-size: 24px;
-    font-weight: 600;
+.btn-add {
+    font-size: 18px;
+    padding: 10px 8px;
+    text-align: center;
+    color: var(--white);
 }
 
-.card .head p {
+/* END OF ADD NEW BUTTON - CARCILLAR */
+
+/* DATA TABLE */
+.table-wrapper {
+    min-width: 10%;
+    background: #fff;
+    padding: 20px 20px 40px 20px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
+    margin: 50px 20px;
+}
+
+.row {
+    padding: 5px;
+}
+
+.search-box {
+    margin-left: 75%;
+    margin-bottom: 10px;
+}
+
+.search-box i {
+    color: #a0a5b1;
+    position: absolute;
+    top: 33.5%;
+    font-size: 19px;
+    margin-left: 13px;
+}
+
+.search-box input {
+    height: 28px;
+    border-radius: 20px;
+    padding-left: 35px;
+    border-color: #ddd;
+    box-shadow: none;
+}
+
+table {
+    width: 100%;
+
+}
+
+.table tr th, td {
+    border: 1px solid beige;
+    padding: 8px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+}
+
+th, td {
+    text-align: left;
     font-size: 14px;
 }
 
-.card .progress {
-    display: block;
-    margin-top: 24px;
-    height: 10px;
-    width: 100%;
-    border-radius: 10px;
-    background: var(--black2);
-    overflow-y: hidden;
-    position: relative;
-    margin-bottom: 4px;
+th {
+    color: var(--main);
 }
 
-.card .progress::before {
-    content: '';
+.table td a {
+    color: #a0a5b1;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.hint-text {
+    float: left;
+    margin-top: 6px;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: var(--main);
+}
+
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+    margin-right: 0;
+    margin-top: 10px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li a {
+    background-color: var(--main);
+    font-size: 13px;
+    color: #999;
+    margin: 0 2px;
+    border-radius: 50% !important;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white);
+    padding: 2px 7px;
+}
+
+.pagination li a:hover {
+    color: #666;
+    background-color: var(--white);
+}
+/* END OF TABLE - CARCILLAR */
+
+/* ADD NEW FORM */
+.popup {
+    display: none;
+    width: 33.333333%;
+    padding: 15px;
+    left: 0;
+    margin-left: 33.333333%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: white;
     position: absolute;
+    top: 15%;
+    box-shadow: 5px 5px 5px #000;
+    z-index: 10001;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
     top: 0;
     left: 0;
-    height: 100%;
-    background: var(--main);
-    width: var(--value);
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.10);
+    z-index: 10000;
 }
 
-.card .label {
-    font-size: 14px;
-    font-weight: 700;
-}
-
-/* END OF PROGRESS DATA - CARCILLAR */
-
-/* START OF CIRCLE PROGRESS*/
-.analytics {
-    margin-top: 1.8rem;
-    padding-left: 20px;
-    display: grid;
-    grid-template-columns: auto 60%;
-    grid-gap: 2rem;
-}
-
-.analytics .analytics-card {
-    background: var(--white);
-    padding-left: 75px;
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, .1);
-    border-radius: 10px;
-}
-
-.analytics-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.chart-circle {
-    position: relative;
-    height: 250px;
-    width: 250px;
-    background: conic-gradient(#402950 3.6deg, #ededed 0deg);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.chart-circle::before {
-    content: '';
-    position: absolute;
-    height: 210px;
-    width: 210px;
-    background-color: var(--white);
-    border-radius: 50%;
-}
-
-.analytics-value {
-    position: relative;
-    font-size: 40px;
-    font-weight: 600;
-    color: #402950;
-}
-
-.analytics-head h2{
-    font-size: 20px;
-    font-weight: 500;
+.formHeader {
+    text-align: center;
+    font-size: 16px;
     color: var(--main);
-    padding-bottom: 15px;
-}
-/*END OF CIRCLE PROGRESS - CARCILLAR */
-
-
-/* START OF OWNER REQUEST */
-.analytics .request-card {
-    padding: 20px;
-    border-radius: 10px;
-    background: var(--white);
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, .1);
-    height: 120px;
-}
-
-.request-card .request-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.request-card .request-head h2 {
-    font-size: 24px;
     font-weight: 600;
 }
 
-.request-card .request-head p {
-    font-size: 14px;
+#addFrm {
+    padding: 10px;
+    margin-top: 10px;
 }
 
-.view-request {
+.btn-primary {
     float: right;
+    background-color: var(--main);
+    border: none;
+    color: var(--white);
 }
+
+.btn-primary:hover {
+    background-color: var(--hover);
+}
+
+.cancel {
+    border: 1px solid var(--main);
+    margin-right: 10px;
+}
+
+.formHeader {
+    text-align: center;
+    font-size: 16px;
+}
+
+.form-group {
+    margin-top: 15px;
+}
+
+.form-group label, input {
+    font-size: 16px;
+}
+
+input {
+    padding: 5px;
+    width: 75%;
+}
+
+#email {
+    margin-left: 40px;
+}
+
+#password {
+    margin-left: 10px;
+}
+
+#username {
+    margin-left: 5px;
+}
+
+.form-btn {
+    width: 70px;
+    padding: 10px 0px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+/* END OF ADD NEW FORM - CARCILAR*/
+
 
