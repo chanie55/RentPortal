@@ -1,4 +1,5 @@
 /*import fonts START OF NAVIGATION DESIGN*/
+@import url('https://fonts.googleapis.com/css2?family=Tilt+Warp&display=swap');
 
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -10,9 +11,10 @@
 :root {
     --main: #5D59AF;
     --white: #FFF;
-    --gray: #F5F5F5;
+    --bg: #FEFBFF;
     --black1: #222;
     --black2: #999;
+    --title: #402950;
 }
 
 body {
@@ -47,11 +49,12 @@ body {
 }
 
 .navigation .logo .logo-name {
-    font-size: 22px;
+    font-size: 26px;
     color: var(--white);
-    font-weight: 600;
+    font-weight: 500;
     transition: 0.3s ease;
     transition-delay: 0.1s;
+    font-family: 'Tilt Warp', cursive;
 }
 
 .navigation.close .logo .logo-name {
@@ -215,7 +218,7 @@ body {
 
 .menu-toggle {
     position: relative;
-    background-color: white /* to be changed*/;
+    background-color: var(--bg);
     height: 100vh;
     left: 260px;
     width: calc(100% - 260px);
@@ -260,8 +263,150 @@ body {
 
 /* END OF NAVIGATION DESIGN - CARCILLAR */
 
+/* INFO DATA PROGRESS START */
+
+.info-data {
+    margin-top: 36px;
+    margin-left: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+.info-data .card {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .1);
+}
+
+.card .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.card .head h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.card .head p {
+    font-size: 14px;
+}
+
+.card .progress {
+    display: block;
+    margin-top: 24px;
+    height: 10px;
+    width: 100%;
+    border-radius: 10px;
+    background: var(--black2);
+    overflow-y: hidden;
+    position: relative;
+    margin-bottom: 4px;
+}
+
+.card .progress::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--main);
+    width: var(--value);
+}
+
+.card .label {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* END OF PROGRESS DATA - CARCILLAR */
+
+/* START OF CIRCLE PROGRESS*/
+.analytics {
+    margin-top: 1.8rem;
+    padding-left: 20px;
+    display: grid;
+    grid-template-columns: auto 60%;
+    grid-gap: 2rem;
+}
+
+.analytics .analytics-card {
+    background: var(--white);
+    padding-left: 75px;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .1);
+    border-radius: 10px;
+}
+
+.analytics-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chart-circle {
+    position: relative;
+    height: 250px;
+    width: 250px;
+    background: conic-gradient(#402950 3.6deg, #ededed 0deg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chart-circle::before {
+    content: '';
+    position: absolute;
+    height: 210px;
+    width: 210px;
+    background-color: var(--white);
+    border-radius: 50%;
+}
+
+.analytics-value {
+    position: relative;
+    font-size: 40px;
+    font-weight: 600;
+    color: #402950;
+}
+
+.analytics-head h2{
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--main);
+    padding-bottom: 15px;
+}
+/*END OF CIRCLE PROGRESS - CARCILLAR */
 
 
+/* START OF OWNER REQUEST */
+.analytics .request-card {
+    padding: 20px;
+    border-radius: 10px;
+    background: var(--white);
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, .1);
+    height: 120px;
+}
 
+.request-card .request-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
 
+.request-card .request-head h2 {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.request-card .request-head p {
+    font-size: 14px;
+}
+
+.view-request {
+    float: right;
+}
 
