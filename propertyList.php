@@ -2,10 +2,10 @@
 <html> 
     <head> 
         <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title> Admin Dashboard </title>
+        <title> Reports </title>
         <style>
             <?php
-                include "css/adminDashboard.css"
+                include "css/propertyList.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -65,7 +65,7 @@
         <section class = "menu-toggle"> 
             <div class = "toggle-content"> 
                 <i class = "bx bx-menu"> </i>
-                <span class = "text"> Dashboard </span> 
+                <span class = "text"> Property List Reports </span> 
             </div>
         </section>
         
