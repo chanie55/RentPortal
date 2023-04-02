@@ -1,4 +1,4 @@
-/*import fonts*/
+/*import fonts START OF NAVIGATION DESIGN*/
 
 * {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
@@ -20,12 +20,6 @@ body {
     overflow-x: hidden;
 }
 
-/*
-.container {
-    position: relative;
-    width: 100%;
-}*/
-
 .navigation {
     position: fixed;
     top: 0;
@@ -33,189 +27,183 @@ body {
     width: 260px;
     height: 100%;
     background: var(--main);
-    border-left: 10px solid var(--main);
-    transition: 0.5s;
-    overflow: hidden; 
+    z-index: 100;
 }
 
-.logo {
+.navigation .logo {
     height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
 }
 
-.logo-name {
-    font-size: 22px;
+.navigation .logo i{
+    font-size: 30px;
     color: var(--white);
+    height: 50px;
+    min-width: 78px;
+    text-align: center;
+    line-height: 50px;
 }
 
-.navigation ul { /*nav-link*/
-    padding-top: 30px 0 150px 0;
-    width: 100%;
+.navigation .logo .logo-name {
+    font-size: 22px;
+    color: var(--white);
+    font-weight: 600;
+    transition: 0.3s ease;
+    transition-delay: 0.1s;
+}
+
+.navigation.close .logo .logo-name {
+    transition-delay: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navigation .nav-links { /*nav-link*/
+    padding: 30px 0 150px 0;
+    height: 100%;
     overflow: auto;
 }
 
-.navigation ul::-webkit-scrollbar {
+.navigation .nav-links {
+    overflow: visible;
+}
+
+.navigation .nav-links::-webkit-scrollbar {
     display: none;
 }
 
-.navigation ul li {
+.navigation .nav-links li {
     position: relative;
-    width: 100%;
     list-style: none;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
-.navigation ul li:hover {
+.navigation .nav-links li:hover {
     background-color: var(--white);
 }
 
-.menu {
+.navigation .nav-links li:hover a {
+    color: var(--main);
+}
+
+.navigation .nav-links li .menu {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.navigation ul li a {
-    position: relative;
-    width: 100%;
-    display: flex;
-    text-decoration: none;
-    color: var(--white);
-}
-
-.navigation ul li a:hover {
-    color: var(--main);
-}
-
-.icon {
-    position: relative;
-    display: block;
-    min-width: 60px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-}
-
-.menu ion-icon {
+.navigation .nav-links li i {
     height: 50px;
-    min-width: 70px;
+    min-width: 78px;
+    text-align: center;
     line-height: 50px;
+    color: var(--white);
+    font-size: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
-ion-icon li.showMenu .arrow {
+.navigation .nav-links li.showMenu i.arrow {
     transform: rotate(-180deg);
 }
 
-/*
-li.showMenu ion-icon {
-    transform: rotate(-180deg);
-}*/
-
-.label {
-    height: 50px;
-    line-height: 60px;
-    text-align: start;
+.navigation.close .nav-links i.arrow {
+    display: none;
 }
 
-/* curve
-li:hover a::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    top: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px 35px 0 10px var(--white);
+.navigation .nav-links li a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navigation .nav-links li a .label {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--white);
+}
+
+.navigation.close .nav-links li a .label {
+    opacity: 0;
     pointer-events: none;
+    display: none;
 }
 
-li:hover a::after {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: -50px;
-    width: 50px;
-    height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    box-shadow: 35px -35px 0 10px var(--white);
-    pointer-events: none;
-}
-*/
-
-.navigation .sub-menu {
+.navigation .nav-links li .sub-menu {
     padding: 6px 6px 14px 80px;
     margin-top: -10px;
     background-color: var(--main);
     display: none;
 }
 
-.navigation li.showMenu .sub-menu {
+.navigation .nav-links li.showMenu .sub-menu {
     display: block;
 }
 
-.sub-menu a {
-    padding: 15px 0;
+.navigation .nav-links li .sub-menu a {
+    color: var(--white);
+    font-size: 15px;
+    padding: 5px 0;
     white-space: nowrap;
     opacity: 0.6;
     transition: all 0.3s ease;
 }
 
-.sub-menu a:hover {
+.navigation .nav-links li .sub-menu a:hover {
     opacity: 1;
 }
 
-
-.navigation.close ul li .sub-menu {
+.navigation.close .nav-links li .sub-menu {
     position: absolute;
     left: 100%;
     top: -10px;
     margin-top: 0;
     padding: 10px 20px;
     border-radius: 0 6px 6px 0;
-    transition: all 0.4s ease;
     opacity: 0;
+    display: block;
     pointer-events: none;
+    transition: 0s;
 }
 
-.navigation.close ul li:hover .sub-menu {
-    top:0;
+.navigation.close .nav-links li:hover .sub-menu {
+    top: 0;
     opacity: 1;
     pointer-events: auto;
+    transition: all 0.4s ease;
 }
 
-.navigation ul li .sub-menu .sub-menu-title {
+.navigation .nav-links li .sub-menu .sub-menu-title {
     display: none;
 }
 
-.navigation.close ul li .sub-menu .sub-menu-title {
+.navigation.close .nav-links li .sub-menu .sub-menu-title {
     display: none;
 }
 
-.navigation.close ul li .sub-menu .sub-menu-title {
-    font-size: 18px;
+.navigation.close .nav-links li .sub-menu .sub-menu-title {
+    font-size: 15px;
     opacity: 1;
     display: block;
 }
 
-.navigation ul li .sub-menu .blank {
+.navigation .nav-links li .sub-menu.blank {
     opacity: 1;
     pointer-events: auto;
     padding: 3px 20px 6px 16px;
+    opacity: 0;
+    pointer-events: none;
 }
 
-.navigation ul li:hover .sub-menu .blank {
+.navigation .nav-links li:hover .sub-menu.blank {
     top: 50%;
     transform: translateY(-50%);
 }
+
 
 .menu-toggle {
     position: relative;
@@ -226,10 +214,19 @@ li:hover a::after {
     transition: all 0.5s ease;
 }
 
-.navigation.close ~ .menu-toggle {
-    left: 18px;
-    width: calc(100% - 78px);
+.menu-toggle.close {
+    left: 80px;
 }
+
+.navigation.close {
+    width: 72px;
+}
+
+/* not working
+.navigation.close ~ .menu-toggle {
+    left: 78px;
+    width: calc(100% - 78px);
+}*/
 
 .menu-toggle .toggle-content {
     height: 60px;
@@ -237,11 +234,12 @@ li:hover a::after {
     align-items: center;
 }
 
-.menu-toggle .toggle-content .box,
+.menu-toggle .toggle-content .bx-menu,
 .menu-toggle .toggle-content .text {
     color: var(--main);
     font-size: 35px;
 }
+
 .menu-toggle .toggle-content .box {
     margin: 0 15px;
     cursor: pointer;
@@ -249,4 +247,13 @@ li:hover a::after {
 
 .menu-toggle .toggle-content .text {
     font-size: 26px;
+    font-weight: 600;
 }
+
+/* END OF NAVIGATION DESIGN - CARCILLAR */
+
+
+
+
+
+
