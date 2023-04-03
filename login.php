@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheet.css">
-    <script src="https://kit.fontawesome.com/649a00f146.js" crossorigin="anonymous"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Login</title>
 </head>
 <header>
@@ -22,12 +22,12 @@
         <br>
         <form action="login.php" method="post">
         <div class="form">
-        <i class="fa-sharp fa-solid fa-user"></i>
+        <i class='bx bx-user' class="icon"></i>
             <input type="text" name="username" id="username" placeholder="Username">
         </div>
         <br>
         <div class="form">
-        <i class="fa-sharp fa-solid fa-lock"></i>
+        <i class='bx bx-lock-alt' class="icon"></i>
             <input type="password" name="password" id="password" placeholder="Password">
         </div>
         <div>

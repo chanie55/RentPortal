@@ -52,14 +52,6 @@
                             <input type="password" class="input" placeholder="Confirm your password" required>
                         </div>  
 
-                        <div class="input_fieldTerms">
-                            <label class="check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span> 
-                            </label>
-                            <p class="p">I agree all statements in <b>Terms of Service</b><p>
-                        </div>
-                        
                         <div class="button">
                             <input type="submit" value="Register" class="btn">
                         </div>
