@@ -1,0 +1,204 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+h3, a {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+header {
+    position: relative;
+    top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+a {
+    text-decoration: none;
+}
+
+.login-navigation {
+    margin-top: 8px;
+    cursor: pointer;
+}
+
+.login-button {
+    margin: 13px;
+    color: #402950;
+}
+.register-button {
+    border: 1px solid;
+    background-color: #5D59AF;
+    color: white;
+    padding: 10px 15px 10px 15px;
+}
+
+.login-button:hover {
+    color: #75528d;
+}
+
+.register-button:hover {
+    background-color: #6762b6;
+}
+
+.container {
+    display: flex;
+    position: static;
+    justify-content: space-between;
+    width: 80%;
+    padding: 30px;
+    margin-left: 100px;
+    margin-top: 25px;
+}
+
+.container .title {
+    font-size: 24px;
+    font-weight: 700px;
+    margin-bottom: 35px;
+    text-align: center;
+}
+
+.container .content{
+    width: 100%;
+}
+
+.container .content .input_field{
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.container .content .input_field label{
+    width: 200px;
+    margin-right: 0px;
+    font-size: 20px;
+}
+
+.container .content .input_field .input{
+    height: 40px;
+    width: 100%;
+    outline: none;
+    border: 1px solid #d5d5d5;
+    font-size: 15px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-bottom-width: 2px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+.container .content .btn{
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 15px;
+    border: 0;
+    background: #5D59AF;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+}   
+.container .content .input_field .input:focus,
+.container .content .input_field .input:valid{
+  border-color: #9b59b6;
+}
+
+.button {
+    height: 45px;
+    margin: 35px 0
+}
+.content .button input{
+    height: 100%;
+    width: 50%;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #75528d;
+}
+.content .button input:hover{
+   /* transform: scale(0.99); */
+   background: #75528d;;
+}
+.container .content .input_field .p{
+    font-size: 12px;
+    color: #757575;
+}
+.container .content .input_field .check{
+    width: 15px;
+    height: 15px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+.container .content .input_fieldTerms .check input[type="checkbox"]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.container .content .input_fieldTerms .check .checkmark{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #5D59AF;
+    display: block;
+    position: relative;
+}
+.container .content .input_fieldTerms .check .checkmark:before{
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    width: 5px;
+    height: 2px;
+    border: 2px solid;
+    border-color: transparent transparent white #f1f1f1;
+    transform: rotate(-45deg);
+    display: none;
+}
+.container .content .input_fieldTerms .check input[type="checkbox"]:checked ~ .checkmark{
+    background:  #5D59AF;
+} 
+.container .content .input_fieldTerms .check input[type="checkbox"]:checked ~ .checkmark:before{
+    display: block;
+} 
+
+.image {
+    background-image: url(1.png);
+    height: 26rem;
+    margin-left: 140px;
+    width: 26rem;
+    background-size: cover;
+    float: right;
+    margin-top: 30px;
+}
+.checkbox-dropdown{
+    width: 200px;
+    border: 1px solid #aaa;
+    padding: 10px;
+    position: relative;
+    margin: 0 auto;
+    user-select: none;
+}
+.checkbox-dropdown:after{
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+    border: 6px solid transparent;
+    border-top-color: #6762b6;
+    top: 50%;
+    right: 10px;
+    margin-top: -3px;
+}
+.checkbox-dropdown.is-active:after{
+    border-bottom-color: #000;
+    border-top-color: aliceblue;
+    margin-top: -9px;
+}
