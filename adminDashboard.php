@@ -16,7 +16,7 @@
             <div class = "navigation"> 
                 <div class = "logo">
                 <i class='bx bxs-building-house'></i>
-                    <span class = "logo-name"> rentin </span>
+                    <span class = "logo-name"> RENTIN </span>
                 </div>
 
                 <ul class = "nav-links"> 
@@ -32,7 +32,7 @@
 
                     <li> 
                         <div class = "menu"> 
-                            <i class='bx bxs-user-plus'></i>
+                            <i class='bx bxs-user'></i>
                             <span class = "label"> Manage User 
                             </span>
                             <i class='bx bxs-chevron-down arrow'></i> 
@@ -47,7 +47,7 @@
 
                     <li> 
                         <div class = "menu"> 
-                        <i class='bx bxs-report' ></i> 
+                        <i class='bx bxs-folder-open' ></i> 
                             <span class = "label"> View Reports </span>
                         <i class='bx bxs-chevron-down arrow'></i> 
                         </div>
@@ -144,7 +144,7 @@
                         </div>
                         <i class = 'bx bx-user icon'> </i>
                     </div>
-                    <button class = "view-request"> See All > </button>
+                    <a href = "manageOwner.php" class = "view-request"> See All > </a>
                 </div>
         </div>
         </section>

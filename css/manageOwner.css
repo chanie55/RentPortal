@@ -10,7 +10,8 @@
 :root {
     --main: #5D59AF;
     --white: #FFF;
-    --gray: #F5F5F5;
+    --bg: #FEFBFF;
+    --hover: #6762b6;
     --black1: #222;
     --black2: #999;
 }
@@ -44,6 +45,8 @@ body {
     min-width: 78px;
     text-align: center;
     line-height: 60px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .navigation .logo .logo-name {
@@ -215,7 +218,7 @@ body {
 
 .menu-toggle {
     position: relative;
-    background-color: white /* to be changed*/;
+    background-color: var(--bg) /* to be changed*/;
     height: 100vh;
     left: 260px;
     width: calc(100% - 260px);
@@ -260,8 +263,166 @@ body {
 
 /* END OF NAVIGATION DESIGN - CARCILLAR */
 
+/* DATA TABLE */
+.table-wrapper {
+    min-width: 10%;
+    background: #fff;
+    padding: 20px 20px 40px 20px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
+    margin: 50px 20px;
+}
 
+.row {
+    padding: 5px;
+}
 
+.search-box {
+    margin-left: 75%;
+    margin-bottom: 10px;
+}
+
+.search-box i {
+    color: #a0a5b1;
+    position: absolute;
+    top: 33.5%;
+    font-size: 19px;
+    margin-left: 13px;
+}
+
+.search-box input {
+    height: 28px;
+    border-radius: 20px;
+    padding-left: 35px;
+    border-color: #ddd;
+    box-shadow: none;
+}
+
+table {
+    width: 100%;
+
+}
+
+.table tr th, td {
+    border: 1px solid beige;
+    padding: 8px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+}
+
+th, td {
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    color: var(--main);
+}
+
+.table td a {
+    color: #a0a5b1;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.hint-text {
+    float: left;
+    margin-top: 6px;
+    font-size: 13px;
+    margin-left: 5px;
+    margin-top: 10px;
+    color: var(--main);
+}
+
+.pagination {
+    float: right;
+    margin: 0 0 5px;
+    margin-right: 0;
+    margin-top: 10px;
+}
+
+.pagination li {
+    display: inline-block;
+}
+
+.pagination li a {
+    background-color: var(--main);
+    font-size: 13px;
+    color: #999;
+    margin: 0 2px;
+    border-radius: 50% !important;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white);
+    padding: 2px 7px;
+}
+
+.pagination li a:hover {
+    color: #666;
+    background-color: var(--white);
+}
+/* END OF TABLE - CARCILLAR */
+
+/* VIEW OWNER DETAILS */
+.popup {
+    display: none;
+    width: 33.333333%;
+    padding: 15px;
+    left: 0;
+    margin-left: 33.333333%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: white;
+    position: absolute;
+    top: 15%;
+    box-shadow: 5px 5px 5px #000;
+    z-index: 10001;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.10);
+    z-index: 10000;
+}
+
+.btn-primary {
+    float: right;
+    background-color:var(--main);
+    border: none;
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--hover);
+}
+
+.cancel {
+    border: 1px solid var(--main);
+    margin-right: 10px;
+}
+
+.form-btn {
+    width: 70px;
+    padding: 10px 0px;
+    cursor: pointer;
+    border-radius: 50px;
+}
+
+.owner-details {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.owner-details p {
+    padding-top: 15px;
+}
 
 
 

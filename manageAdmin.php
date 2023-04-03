@@ -32,7 +32,7 @@
 
                     <li> 
                         <div class = "menu"> 
-                            <i class='bx bxs-user-plus'></i>
+                            <i class='bx bxs-user'></i>
                             <span class = "label"> Manage User 
                             </span>
                             <i class='bx bxs-chevron-down arrow'></i> 
@@ -47,7 +47,7 @@
 
                     <li> 
                         <div class = "menu"> 
-                        <i class='bx bxs-report' ></i> 
+                        <i class='bx bxs-folder-open' ></i> 
                             <span class = "label"> View Reports </span>
                         <i class='bx bxs-chevron-down arrow'></i> 
                         </div>
@@ -67,6 +67,123 @@
                 <i class = "bx bx-menu"> </i>
                 <span class = "text"> Manage Admin </span> 
             </div>
+
+            <!-- ADD NEW BUTTON -->
+            <div class="add-new">   
+            <a href="#" class = "btn btn-add mb-5" onclick = "openAdd()"> 
+                    <i class="bx bxs-user-plus"style="font-size:30px;float:left" > </i> Add New
+                </a>
+            </div>
+
+            <!-- DATA TABLE -->
+            <div class="container-xl">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="search-box">
+                                    <i class="bx bx-search-alt-2" style="font-size: 18px;"></i>
+                                    <input type="text" class="form-control" placeholder="Search&hellip;">
+                                </div>
+                            </div>
+                        </div>
+
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Khytryn Faye Carcillar</td>
+                                <td>kate@gmail.com</td>
+                                <td>
+                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
+                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
+                                </td>
+                            </tr>       
+                        </tbody>
+                        
+                        <tbody>
+                            <tr>
+                                <td>Beverly Jane Gicale</td>
+                                <td>bev@gmail.com</td>
+                                <td>
+                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
+                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
+                                </td>
+                            </tr>       
+                        </tbody> 
+
+                        <tbody>
+                            <tr>
+                                <td>Aj Lynn Jusayan</td>
+                                <td>aj@gmail.com</td>
+                                <td>
+                                    <a href="#" class="edit" title="Edit"><i class="bx bxs-edit-alt"></i></a>
+                                    <a href="#" class="delete" title="Delete"><i class="bx bxs-trash-alt"></i></a>
+                                </td>
+                            </tr>       
+                        </tbody>  
+                    </table>
+                    <div class="clearfix">
+                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
+                        <ul class="pagination">
+                            <li class="page-item disabled"><a href="#"><i class="bx bxs-chevron-left"></i></a></li>
+                            <li class="page-item"><a href="#" class="page-link">1</a></li>
+                            <li class="page-item"><a href="#" class="page-link">2</a></li>
+                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
+                            <li class="page-item"><a href="#" class="page-link">4</a></li>
+                            <li class="page-item"><a href="#" class="page-link">5</a></li>
+                            <li class="page-item"><a href="#" class="page-link"><i class="bx bxs-chevron-right"></i></a></li>
+                        </ul>
+                    </div>
+                    </div>
+                </div>  
+            </div>
+
+
+        <!-- ADD ADMIN FORM -->
+        <div class="overlay" id = "openAdd">
+        <div class="popup" id = "popupAdd">
+            <p class = "formHeader">Add New Admin</p>
+            <form method="post" id="addFrm" name="addFrm" action = "addtenant.php">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>First Name:</label>
+                        <input type="text" name="firstname" id="firstname" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Last Name:</label>
+                        <input type="text"  name="lastname" id="lastname" class="form-control"  required="" >
+                    </div>
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input type="text" name="username" id="username" class="form-control" pattern="[A-Za-z]{1,}" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="password" name="email" id="email" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Password:</label>
+                        <input type="text" name="password" id="password" class="form-control" pattern="[0-9]*"  required="">
+
+                    </div>
+                    <br>
+                    </form>
+            <div class="text-right">
+                <button class="form-btn btn btn-cancel cancel" onclick="closeAdd()">Cancel</button>
+                <button class="form-btn btn btn-primary" onclick="" name = "submit-tenant">Add</button>
+            </div>
+        </div>
+    </div>
+
+      
         </section>
         
         
@@ -94,6 +211,17 @@
         });
         </script>
 
+<script>
+    function openAdd() {
+    document.getElementById("openAdd").style.display = "block";
+    document.getElementById("popupAdd").style.display = "block";
+    }
+
+    function closeAdd() {
+        document.getElementById("openAdd").style.display = "none";
+    document.getElementById("popupAdd").style.display = "none";
+    }
+</script>
    
         
     </body>
