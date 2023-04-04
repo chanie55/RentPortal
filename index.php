@@ -14,7 +14,7 @@
         <header>
             <h3> RENTIN </h3>
             <nav class = "login-navigation"> 
-                <a href = "" class = "login-button"> Login </a>
+                <a href = "login.php" class = "login-button"> Login </a>
                 <a href = "" class = "register-button"> Register </a>
             </nav>
         </header>

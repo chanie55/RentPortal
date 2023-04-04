@@ -62,14 +62,11 @@
                         
                         <div class="button">
                             <input type="submit" value="Register" class="btn">
-                        </div>
-                    </div>
-                    <div>
-                        <div class = "image"> </div>
-                        </div>
+                        </div> 
                 </div>
-      </form>
-    </div>
-  </div>
+                
+                <div class = "image"> </div>
+            </div>
+
     </body>
 </html>

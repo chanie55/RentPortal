@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesheet.css">
+    <style>
+            <?php
+                include "stylesheet.css"
+            ?>
+        </style>
     <script src="https://kit.fontawesome.com/649a00f146.js" crossorigin="anonymous"></script>
     <title>Login</title>
 </head>
@@ -20,7 +24,14 @@
         <div>
         <h1>Welcome</h1>
         <br>
-        <form action="login.php" method="post">
+        <?php
+					if(isset($_GET['error'])) { ?>
+					<p class = "error">
+						<?php
+							echo $_GET['error']; ?>
+				<?php } ?>
+
+        <form action="adminLogin.php" method="post">
         <div class="form">
         <i class="fa-sharp fa-solid fa-user"></i>
             <input type="text" name="username" id="username" placeholder="Username">
@@ -33,7 +44,7 @@
         <div>
             <a href= "forgotpw" class="forgotpw" > Forgot Password? </a>
             <br>
-            <button type="submit">Login</button>
+            <button type="submit" name = "login-submit">Login</button>
         </div>
     </form>
         </section>
