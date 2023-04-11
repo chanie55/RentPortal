@@ -56,24 +56,19 @@
                             <label>Confirm Password</label>
                             <input type="password" class="input" placeholder="Confirm your password" required>
                         </div> 
-
-                        <div class="checkbox-dropdown">
-                            Property Documents
-                            <ul class="checkbox-dropdown-list">
-                                <li>
-                                    <label>
-                                        <input type="checkbox" value="permit" name="permit"/> Business Permit </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" value="DTI" name="DTI"/> DTI Permit </label>
-                                </li>
-                                <li>
-                                    <label>
-                                        <input type="checkbox" value="BIR" name="BIR"/> 0605 BIR Form  </label>
-                                </li>
+    
+                        <span class="span"> Property <br> Documents </span>
+                        <div class="dropdown">
+                            <div class="select">
+                                <span class="selected"> Select </span>
+                                <div class="caret"></div>
+                            </div>
+                            <ul class="menu">
+                                <li class="active"> Business Permit </li>
+                                <li> DTI Permit </li>
+                                <li> 065 </li>
                             </ul>
-                        </div>   
+                        </div> 
 
                         <div class="button">
                             <input type="submit" value="Register" class="btn">
@@ -86,5 +81,7 @@
       </form>
     </div>
   </div>
+  <script src="js/registerOwner.js"></script>
+    
     </body>
 </html>
