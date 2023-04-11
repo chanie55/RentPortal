@@ -113,14 +113,14 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT emailAdd, CONCAT(firstName,' ', lastName) AS fullName FROM tbl_user LIMIT $offset, $limit";
+                            $sql = "SELECT email, CONCAT(firstName,' ', lastName) AS fullName FROM tbl_userinfo LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr class = "data-row"> 
                                         <td> <?php echo $row['fullName'] ?> </td>
-                                        <td> <?php echo $row['emailAdd'] ?> </td>
+                                        <td> <?php echo $row['email'] ?> </td>
                                         <td>
                                         <a href="#" class="edit" title="Edit"><i class="bx bxs-edit" style="font-size: 24px;"></i></a>
                                         <a href="#" class="edit" title="Edit"><i class="bx bxs-trash" style="font-size: 24px;"></i></a>
@@ -195,8 +195,12 @@
                         <input type="text"  name="lastname" id="lastname" class="form-control"  required="" >
                     </div>
                     <div class="form-group">
-                        <label>Email:</label>
-                        <input type="text" name="email" id="email" class="form-control" required="">
+                        <label for = "email">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label for = "contact">Contact:</label>
+                        <input type="tel" name="contact" id="contact" class="form-control" pattern="[0-9]*">
                     </div>
                     <div class="form-group">
                         <label>Username:</label>

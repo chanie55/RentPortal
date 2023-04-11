@@ -41,14 +41,34 @@ a {
     color: #75528d;
 }
 
-.register-button:hover {
+.register-button:hover{
     background-color: #6762b6;
+}
+
+ul.dropdown {
+    width: 100%;
+    background-color:  #aaa7ee;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    list-style: none;
+    width: 93px;
+    margin-left: 5.8%;
+    margin-top: 9px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+li a:hover {
+    color: white;
+    cursor: pointer;
 }
 
 .container {
     display: flex;
     position: relative;
     justify-content: space-between;
+    margin-top: 25px;
 }
 
 .heading{

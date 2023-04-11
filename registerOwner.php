@@ -5,7 +5,7 @@
         <title> Register </title>
         <style>
             <?php
-                include "css/registerSeeker.css"
+                include "css/registerOwner.css"
             ?>
         </style>
     </head>
@@ -25,7 +25,7 @@
 
             <div class="container">
                 <div class="content">
-                    <form method = "post" action = "">
+                <form method = "post" action = "">
                     <div class="title"><h1>Register</h1></div>
                         <div class="input_field">
                             <label>First Name</label>
@@ -48,6 +48,11 @@
                         </div>
 
                         <div class="input_field">
+                            <label>Username</label>
+                            <input type="username" class="input" placeholder="Enter your username" required>
+                        </div>
+
+                        <div class="input_field">
                             <label>Password</label>
                             <input type="password" class="input" placeholder="Enter your password" required>
                         </div>
@@ -55,15 +60,36 @@
                         <div class="input_field">
                             <label>Confirm Password</label>
                             <input type="password" class="input" placeholder="Confirm your password" required>
-                        </div>  
+                        </div> 
+
+                        <div class="checkbox-dropdown">
+                            Property Documents
+                            <ul class="checkbox-dropdown-list">
+                                <li>
+                                    <label>
+                                        <input type="checkbox" value="permit" name="permit"/> Business Permit </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="checkbox" value="DTI" name="DTI"/> DTI Permit </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="checkbox" value="BIR" name="BIR"/> 0605 BIR Form  </label>
+                                </li>
+                            </ul>
+                        </div>   
 
                         <div class="button">
-                            <input type="submit" value="Register" class="btn" onclick="location.href='#'">
-                        </div> 
-                        </form>
+                            <input type="submit" value="Register" class="btn">
+                        </div>
+                    </div>
+                    <div>
+                        <div class = "image"> </div>
+                        </div>
+                    </div>
+                </form>
                 </div>
-                
-                <div class = "image"> </div>
             </div>
         
         <script>
@@ -71,6 +97,6 @@
             document.getElementById("register-dropdown").style.display = "block";
         }
         </script>
-
+        
     </body>
 </html>

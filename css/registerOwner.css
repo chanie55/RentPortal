@@ -99,7 +99,7 @@ li a:hover {
 
 .container .content .input_field .input{
     height: 40px;
-    width: 280px;
+    width: 100%;
     outline: none;
     border: 1px solid #d5d5d5;
     font-size: 15px;
@@ -110,7 +110,7 @@ li a:hover {
     transition: all 0.3s ease;
 }
 .container .content .btn{
-    width: 86.8%;
+    width: 100%;
     padding: 8px 10px;
     font-size: 15px;
     border: 0;
@@ -155,16 +155,69 @@ li a:hover {
     position: relative;
     display: block;
     cursor: pointer;
+}
+.container .content .input_fieldTerms .check input[type="checkbox"]{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+.container .content .input_fieldTerms .check .checkmark{
+    width: 15px;
+    height: 15px;
+    border: 1px solid #5D59AF;
+    display: block;
+    position: relative;
+}
+.container .content .input_fieldTerms .check .checkmark:before{
+    content: "";
+    position: absolute;
+    top: 1px;
+    left: 2px;
+    width: 5px;
+    height: 2px;
+    border: 2px solid;
+    border-color: transparent transparent white #f1f1f1;
+    transform: rotate(-45deg);
+    display: none;
+}
+.container .content .input_fieldTerms .check input[type="checkbox"]:checked ~ .checkmark{
+    background:  #5D59AF;
+} 
+.container .content .input_fieldTerms .check input[type="checkbox"]:checked ~ .checkmark:before{
+    display: block;
 } 
 
 .image {
     background-image: url(1.png);
-    height: 27rem;
+    height: 26rem;
     margin-left: 140px;
-    width: 40rem;
+    width: 26rem;
     background-size: cover;
     float: right;
     margin-top: 30px;
 }
-
-
+.checkbox-dropdown{
+    width: 200px;
+    border: 1px solid #aaa;
+    padding: 10px;
+    position: relative;
+    margin: 0 auto;
+    user-select: none;
+}
+.checkbox-dropdown:after{
+    content: '';
+    height: 0;
+    position: absolute;
+    width: 0;
+    border: 6px solid transparent;
+    border-top-color: #6762b6;
+    top: 50%;
+    right: 10px;
+    margin-top: -3px;
+}
+.checkbox-dropdown.is-active:after{
+    border-bottom-color: #000;
+    border-top-color: aliceblue;
+    margin-top: -9px;
+}

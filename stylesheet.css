@@ -29,9 +29,10 @@ input[type=text] {
     border-bottom: 1px solid gray;
     margin-bottom: 10px;   
   }
-  .fa-sharp{
+  .icon{
     position: absolute;
     padding: 9px 0px;
+    
   }
   button[type=submit]{
     width: 30%;
@@ -45,7 +46,9 @@ input[type=text] {
     margin-top: 40px;
     background-color: #6762b6;
     color: white;
+    cursor: pointer;
   }
+  
 input{
     width: 60%;
     padding: 10px 20px;
@@ -119,6 +122,25 @@ a {
     background-color: #6762b6;
 }
 
+ul.dropdown {
+    width: 100%;
+    background-color:  #aaa7ee;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    list-style: none;
+    width: 93px;
+    margin-left: 5.8%;
+    margin-top: 9px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+li a:hover {
+    color: white;
+    cursor: pointer;
+}
+
 .container {
     display: flex;
     position: relative;
@@ -157,47 +179,3 @@ a {
     margin: 60px 30px 40px 30px;
 }
 
-.first-box, .second-box, .third-box {
-    background-color: beige;
-    width: 32%;
-    height: 250px;
-    padding: 30px;
-}
-
-@media (max-width: 320px) {
-    body {
-        margin-left: 0;
-    }
-    h3 {
-        font-size: 20px;
-    }
-
-    .login-button, .register-button {
-        font-size: 12px;
-    }
-
-    .container {
-        display: flex;
-        position: relative;
-        flex-direction: column-reverse;
-    }
-
-    .heading {
-        margin-top: 5px;
-    }
-
-    .label {
-        font-size: 24px;
-        margin-top: 0;
-    }
-
-    .image {
-        width: 16.1rem;
-        height: 10rem;
-        background-size: cover;
-        margin-top: 53px;
-        margin-left: 30px;
-        margin-right: 30px;
-        margin-bottom: 0;
-    }
-}
