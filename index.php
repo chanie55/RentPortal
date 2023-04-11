@@ -14,8 +14,12 @@
         <header>
             <h3> RENTIN </h3>
             <nav class = "login-navigation"> 
-                <a href = "" class = "login-button"> Login </a>
-                <a href = "" class = "register-button"> Register </a>
+                <a href = "login.php" class = "login-button"> Login </a>
+                <a href = "#" class = "register-button" onclick = "openAdd()"> Register </a>
+                <ul class = "dropdown" id = "register-dropdown"> 
+                    <li> <a href = "registerSeeker.php"> Seeker </a> </li>
+                    <li> <a href = "registerOwner.php"> Owner </a> </li>
+                </ul>
             </nav>
         </header>
 
@@ -45,5 +49,12 @@
                 <p> I am the third content </p>
             </div>
         </div>
+
+    <script>
+    function openAdd() {
+    document.getElementById("register-dropdown").style.display = "block";
+    }
+    </script>
+
     </body>
 </html>

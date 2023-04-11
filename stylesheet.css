@@ -7,6 +7,16 @@ h3, a {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.error {
+	color: #C62828;
+	background: rgba(255, 0, 0 ,0.1);
+	padding: 10px;
+	width: 30%;
+	border-radius: 5px;
+	margin-left: 18%;
+    text-align: center;
+}
+
 input[type=text] {
     display: inline;
     border: none;
@@ -36,7 +46,9 @@ input[type=text] {
     margin-top: 40px;
     background-color: #6762b6;
     color: white;
+    cursor: pointer;
   }
+  
 input{
     width: 60%;
     padding: 10px 20px;
@@ -108,6 +120,25 @@ a {
 
 .register-button:hover {
     background-color: #6762b6;
+}
+
+ul.dropdown {
+    width: 100%;
+    background-color:  #aaa7ee;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    list-style: none;
+    width: 93px;
+    margin-left: 5.8%;
+    margin-top: 9px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+li a:hover {
+    color: white;
+    cursor: pointer;
 }
 
 .container {

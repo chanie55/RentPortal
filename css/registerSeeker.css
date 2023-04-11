@@ -45,6 +45,25 @@ a {
     background-color: #6762b6;
 }
 
+ul.dropdown {
+    width: 100%;
+    background-color:  #aaa7ee;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    list-style: none;
+    width: 93px;
+    margin-left: 5.8%;
+    margin-top: 9px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+li a:hover {
+    color: white;
+    cursor: pointer;
+}
+
 .container {
     display: flex;
     position: static;
@@ -80,7 +99,7 @@ a {
 
 .container .content .input_field .input{
     height: 40px;
-    width: 100%;
+    width: 280px;
     outline: none;
     border: 1px solid #d5d5d5;
     font-size: 15px;
@@ -91,7 +110,7 @@ a {
     transition: all 0.3s ease;
 }
 .container .content .btn{
-    width: 100%;
+    width: 86.8%;
     padding: 8px 10px;
     font-size: 15px;
     border: 0;
@@ -136,46 +155,16 @@ a {
     position: relative;
     display: block;
     cursor: pointer;
-}
-.container .content .input_fieldTerms .check input[type="checkbox"]{
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-}
-.container .content .input_fieldTerms .check .checkmark{
-    width: 15px;
-    height: 15px;
-    border: 1px solid #5D59AF;
-    display: block;
-    position: relative;
-}
-.container .content .input_fieldTerms .check .checkmark:before{
-    content: "";
-    position: absolute;
-    top: 1px;
-    left: 2px;
-    width: 5px;
-    height: 2px;
-    border: 2px solid;
-    border-color: transparent transparent white #f1f1f1;
-    transform: rotate(-45deg);
-    display: none;
-}
-.container .content .input_fieldTerms .check input[type="checkbox"]:checked ~ .checkmark{
-    background:  #5D59AF;
-} 
-.container .content .input_fieldTerms .check input[type="checkbox"]:checked ~ .checkmark:before{
-    display: block;
 } 
 
 .image {
     background-image: url(1.png);
-    height: 26rem;
+    height: 27rem;
     margin-left: 140px;
-    width: 26rem;
+    width: 40rem;
     background-size: cover;
     float: right;
     margin-top: 30px;
 }
+
 

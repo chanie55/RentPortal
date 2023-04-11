@@ -98,60 +98,93 @@
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Khytryn Faye Carcillar</td>
-                                <td>kate@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody>
-                        
-                        <tbody>
-                            <tr>
-                                <td>Beverly Jane Gicale</td>
-                                <td>bev@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody> 
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
 
-                        <tbody>
-                            <tr>
-                                <td>Aj Lynn Jusayan</td>
-                                <td>aj@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
+                            $limit = 7;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT email, CONCAT(firstName,' ', lastName) AS fullName FROM tbl_userinfo LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['email'] ?> </td>
+                                        <td>
+                                        <a href="#" class="edit" title="Edit"><i class="bx bxs-edit" style="font-size: 24px;"></i></a>
+                                        <a href="#" class="edit" title="Edit"><i class="bx bxs-trash" style="font-size: 24px;"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>       
                         </tbody>  
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                         <ul class="pagination">
-                            <li class="page-item disabled"><a href="#"><i class="bx bxs-chevron-left"></i></a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="bx bxs-chevron-right"></i></a></li>
-                        </ul>
+                    <?php
+            
+                    $query =  "SELECT COUNT(*) FROM tbl_user";
+                    $result_count = mysqli_query($conn, $query);
+                    $records = mysqli_fetch_row($result_count);
+                    $total_records = $records[0];
+
+                    $total_pages = ceil($total_records / $limit);
+                    $link = "";
+
+                    ?>
+                
+
+                    <?php
+                        if ($page >= 2) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href = 'manageAdmin.php?page=".($page-1)."'> 
+                            <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                        }
+
+                         for ($counter = 1; $counter <= $total_pages; $counter++){
+                            if ($counter == $page) {
+                                $link .= "<li class = 'page-item active'>
+                                <a class = 'page-link' href= 'manageAdmin?page="
+                                .$counter."'>".$counter." </a></li>";
+                            } else {
+                                $link .= "<li class = 'page-item'>
+                                <a class = 'page-link' href='manageAdmin.php?page=".$counter."'> ".$counter." </a> </li>";
+                            }
+                        };
+
+                        echo $link;
+
+                        if($page < $total_pages) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href='manageAdmin.php?page=".($page+1)."'>
+                            <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                        }
+                    ?>
+                </ul>
+
+                <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
                     </div>
                     </div>
                 </div>  
             </div>
 
-
         <!-- ADD ADMIN FORM -->
         <div class="overlay" id = "openAdd">
         <div class="popup" id = "popupAdd">
             <p class = "formHeader">Add New Admin</p>
-            <form method="post" id="addFrm" name="addFrm" action = "addtenant.php">
+            <form method="post" id="contactFrm" name="contactFrm" action = "addAdmin.php">
                 <div class="modal-body">
                     <div class="form-group">
                         <label>First Name:</label>
@@ -162,23 +195,27 @@
                         <input type="text"  name="lastname" id="lastname" class="form-control"  required="" >
                     </div>
                     <div class="form-group">
-                        <label>Username:</label>
-                        <input type="text" name="username" id="username" class="form-control" pattern="[A-Za-z]{1,}" required="">
+                        <label for = "email">Email:</label>
+                        <input type="email" name="email" id="email" class="form-control" required="">
                     </div>
                     <div class="form-group">
-                        <label>Email:</label>
-                        <input type="password" name="email" id="email" class="form-control" required="">
+                        <label for = "contact">Contact:</label>
+                        <input type="tel" name="contact" id="contact" class="form-control" pattern="[0-9]*">
+                    </div>
+                    <div class="form-group">
+                        <label>Username:</label>
+                        <input type="text" name="username" id="username" class="form-control"  required="">
                     </div>
                     <div class="form-group">
                         <label>Password:</label>
-                        <input type="text" name="password" id="password" class="form-control" pattern="[0-9]*"  required="">
+                        <input type="password" name="password" id="password" class="form-control" required="">
 
                     </div>
                     <br>
-                    </form>
+            </form>
             <div class="text-right">
                 <button class="form-btn btn btn-cancel cancel" onclick="closeAdd()">Cancel</button>
-                <button class="form-btn btn btn-primary" onclick="" name = "submit-tenant">Add</button>
+                <button class="form-btn btn btn-primary" onclick="" name = "submit-admin">Add</button>
             </div>
         </div>
     </div>

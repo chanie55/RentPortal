@@ -45,6 +45,25 @@ a {
     background-color: #6762b6;
 }
 
+ul.dropdown {
+    width: 100%;
+    background-color:  #aaa7ee;
+    position: absolute;
+    z-index: 999;
+    display: none;
+    list-style: none;
+    width: 93px;
+    margin-left: 5.8%;
+    margin-top: 9px;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+li a:hover {
+    color: white;
+    cursor: pointer;
+}
+
 .container {
     display: flex;
     position: static;
@@ -178,27 +197,99 @@ a {
     float: right;
     margin-top: 30px;
 }
-.checkbox-dropdown{
-    width: 200px;
-    border: 1px solid #aaa;
-    padding: 10px;
+
+body{
+    flex-wrap: wrap; 
+}
+
+.dropdown{
+    min-width: 15em;
     position: relative;
-    margin: 0 auto;
-    user-select: none;
+    margin-left: 30%;
+    
 }
-.checkbox-dropdown:after{
-    content: '';
-    height: 0;
-    position: absolute;
+
+.dropdown *{
+    box-sizing: border-box;
+}
+
+.select{
+    background: #5D59AF;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px #9b59b6 solid;
+    border-radius: 0.5em;
+    padding: 1em;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.select-cliked{
+    border: 2px #9b59b6 solid;
+    box-shadow: 0 0 0.8em #9b59b6;
+}
+
+.select:hover{
+    background: #9b59b6;
+} 
+
+.caret{
     width: 0;
-    border: 6px solid transparent;
-    border-top-color: #6762b6;
-    top: 50%;
-    right: 10px;
-    margin-top: -3px;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #fff;
+    transition: 0.3s;
 }
-.checkbox-dropdown.is-active:after{
-    border-bottom-color: #000;
-    border-top-color: aliceblue;
-    margin-top: -9px;
+
+.caret-rotate{
+    transform: rotate(180deg);
+}
+
+.menu{
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background: #75528d;
+    border: 1px #7e2f6a solid;
+    border-radius: 0.5em;
+    color: #9fa5b5;
+    position: absolute;
+    top: 3em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    opacity: 0;
+    display: none;
+    transition: 0.2s;
+    z-index: 1;
+}
+
+.menu li{
+    padding: 0.7em 0.5em;
+    margin: 0.3em 0;
+    border-radius: 0.5em;
+    cursor: pointer;
+    color: #fff;
+}
+
+.menu li:hover{
+    background: #75528d;
+}
+
+.active{
+    background: #75528d;
+}
+
+.menu-open{
+    display: block;
+    opacity: 1;
+}
+
+.span{
+    width: 200px;
+    margin-right: 0px;
+    font-size: 20px;
+    flex-wrap: wrap;
 }
