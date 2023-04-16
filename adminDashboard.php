@@ -58,6 +58,20 @@
                             <li> <a href = "propertyList.php"> Property List </a> </li>
                         </ul>
                     </li>
+
+                    <li> 
+                        <div class = "menu"> 
+                        <i class='bx bxs-folder-open' ></i> 
+                            <span class = "label"> Maintenance </span>
+                        <i class='bx bxs-chevron-down arrow'></i> 
+                        </div>
+
+                        <ul class = "sub-menu"> 
+                            <span class = "sub-menu-title"> Maintenance </span>
+                            <li> <a href = "property.php"> Property </a> </li>
+                            <li> <a href = "reports.php"> Reports </a> </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -68,29 +82,78 @@
                 <span class = "text"> Dashboard </span> 
             </div>
 
+            <div class = "user-profile"> 
+                <i class = 'bx bx-user'> user </i>
+
+            </div>
+
             <div class = "info-data"> 
                 <div class = "card"> 
                     <div class = "head"> 
                         <div>
-                            <h2> 34 </h2>
-                            <p> Seekers </p> 
+                            <?php
+                                include "dbconn.php";
+
+                                $seekers_query = "SELECT * FROM user WHERE userLevel_ID = 3";
+                                $seekers_query_num = mysqli_query($conn, $seekers_query);
+
+                                if ($seekers_total = mysqli_num_rows($seekers_query_num)) {
+                                    echo '<h3 class = "fs-2"> '.$seekers_total.' </h3>';
+                                    echo '<p> Seekers </p>';
+                                } else {
+                                    echo '<h3 class = "fs-2"> No Data </h3>';
+                                }
+                            ?> 
                         </div>
                         <i class = 'bx bx-user icon'> </i>
                     </div>
-                    <span class = "progress" data-value = "50%"> </span>
-                    <span class = "label"> 50% </span>
+                        <?php
+                            include "dbconn.php";
+
+                            $countowner = "SELECT COUNT(*) FROM user WHERE userLevel_ID = 3";
+                            $result = mysqli_query($conn, $countowner);
+                            
+                            if ($percentage = mysqli_num_rows($result) / 3) {
+                                echo "<span class = 'progress' data-value = '.$percentage.'> </span>";
+                                echo '<span class = "label"> '.$percentage.' </span>';
+                            } else {
+                                echo '<h3 class = "fs-2"> No Data </h3>';
+                            }
+                        ?>
                 </div>
                 
                 <div class = "card"> 
                     <div class = "head"> 
                         <div>
-                            <h2> 34 </h2>
-                            <p> Owners </p> 
+                            <?php
+                                include "dbconn.php";
+
+                                $owners_query = "SELECT * FROM user WHERE userLevel_ID = 2";
+                                $owners_query_num = mysqli_query($conn, $owners_query);
+
+                                if ($owners_total = mysqli_num_rows($owners_query_num)) {
+                                    echo '<h3 class = "fs-2"> '.$owners_total.' </h3>';
+                                    echo '<p> Owners </p>';
+                                } else {
+                                    echo '<h3 class = "fs-2"> No Data </h3>';
+                                }
+                            ?> 
                         </div>
                         <i class = 'bx bx-user icon'> </i>
                     </div>
-                    <span class = "progress" data-value = "40%"> </span>
-                    <span class = "label"> 40% </span>
+                        <?php
+                            include "dbconn.php";
+
+                            $countowner = "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2";
+                            $result = mysqli_query($conn, $countowner);
+                            
+                            if ($percentage = mysqli_num_rows($result) / 3) {
+                                echo "<span class = 'progress' data-value = '.$percentage.'> </span>";
+                                echo '<span class = "label"> '.$percentage.' </span>';
+                            } else {
+                                echo '<h3 class = "fs-2"> No Data </h3>';
+                            }
+                        ?> 
                 </div>
 
                 <div class = "card"> 
@@ -119,34 +182,28 @@
             </div>
 
             <div class = "analytics">
-                <div class = "analytics-card"> 
-                    <div class = "analytics-head"> 
-                        <h2> New Users </h2>
-                        <span class = ""> </span>
-                    </div>
-
-                    <div class = "analytics-chart"> 
-                        <div class = "chart-circle"> 
-                            <span class = "analytics-value"> 0 </span>
-                        </div>
-
-                        <div class = "analytics-note"> 
-                            <small> Note : </small>
-                        </div>
-                    </div>
-                </div> 
-
                 <div class = "request-card"> 
                     <div class = "request-head"> 
                         <div>
-                            <p> Pending Owner Registration </p>
-                            <h2> 18 </h2>
+                            <?php
+                                include "dbconn.php";
+
+                                $pendingreg = "SELECT * FROM user WHERE userLevel_ID = 2 AND status = 0";
+                                $seekers_query_num = mysqli_query($conn, $pendingreg);
+
+                                if ($seekers_total = mysqli_num_rows($seekers_query_num)) {
+                                    echo '<h2 class = ""> '.$seekers_total.' </h2>';
+                                    echo '<p> Pending Owner Registration </p>';
+                                } else {
+                                    echo '<h3 class = "fs-2"> No Data </h3>';
+                                }
+                            ?>
                         </div>
                         <i class = 'bx bx-user icon'> </i>
                     </div>
                     <a href = "manageOwner.php" class = "view-request"> See All > </a>
                 </div>
-        </div>
+            </div>
         </section>
         
         <!-- Menu Toggle -->
@@ -180,27 +237,6 @@
             allProgress.forEach(item => {
                 item.style.setProperty('--value', item.dataset.value)
             });
-        </script>
-
-        <!-- Circular Progress not yet working-->
-        <script> 
-            let circularProgress = document.querySelector(".chart-circle"),
-                progressValue = document.querySelector(".analytics-value");
-
-            let progressStartValue = 0, 
-                progressEndValue = 20,
-                speed = 100;
-            
-            let progress = setInterval(() => {
-                progressStartValue++;
-
-                progressValue.textContent = ${progressStartValue}%;
-
-                if (progressStartValue == progressEndValue){
-                    clearInterval(progress);
-                }
-            }, speed);
-        </script>
-        
+        </script>    
     </body>
 </html>

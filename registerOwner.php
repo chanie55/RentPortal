@@ -25,78 +25,84 @@
 
             <div class="container">
                 <div class="content">
-                <form method = "post" action = "">
+                <form method = "post" action = "addOwner.php" enctype="multipart/form-data">
                     <div class="title"><h1>Register</h1></div>
                         <div class="input_field">
                             <label>First Name</label>
-                            <input type="text" class="input" placeholder="Enter your first name" required>
+                            <input type="text" name = "firstname" class="input" required>
                         </div>
 
                         <div class="input_field">
                             <label>Last Name</label>
-                            <input type="text" class="input" placeholder="Enter your last name" required>
+                            <input type="text" name = "lastname" class="input" required>
                         </div>
 
                         <div class="input_field">
-                            <label>Email</label>
-                            <input type="text" class="input" placeholder="Enter your email" required>
+                            <label for = "email">Email</label>
+                            <input type="email" name = "email" class="input" required>
                         </div>
 
                         <div class="input_field">
-                            <label>Contact</label>
-                            <input type="text" class="input" placeholder="Enter your contact" required>
+                            <label for = "contact" >Contact</label>
+                            <input type="tel" name = "contact" class="input" pattern="[0-9]*" required>
                         </div>
 
                         <div class="input_field">
                             <label>Username</label>
-                            <input type="username" class="input" placeholder="Enter your username" required>
+                            <input type="username" name = "username" class="input" required>
                         </div>
 
                         <div class="input_field">
                             <label>Password</label>
-                            <input type="password" class="input" placeholder="Enter your password" required>
+                            <input type="password" name = "password" class="input" required>
                         </div>
 
                         <div class="input_field">
                             <label>Confirm Password</label>
-                            <input type="password" class="input" placeholder="Confirm your password" required>
+                            <input type="password" name = "password2" class="input" required>
                         </div> 
     
-                        <span class="span"> Property <br> Documents </span>
-                        <div class="dropdown">
-                            <div class="select">
-                                <span class="selected"> Select </span>
-                                <div class="caret"></div>
+                        <p class="span"> Property <br> Documents </p>  
+                        <div class ="dropdown1">
+                            <input type="text" class="textBox" name = "documents" placeholder="Property Documents" readonly>
+                            <div class="option">
+                                <div onclick="show('Business Permit')"> Business Permit </div>
+                                <div onclick="show('DTI')"> DTI </div>
+                                <div onclick="show('065')"> 065 BIR</div>
                             </div>
-                            <ul class="menu">
-                                <li class="active"> Business Permit </li>
-                                <li> DTI Permit </li>
-                                <li> 065 </li>
-                            </ul>
-                        </div> 
-
-                        <div class="button">
-                            <input type="submit" value="Register" class="btn">
                         </div>
+                        
+                        <?php 
+                            if (isset($_GET['error'])): ?>
+                                <p> <?php echo $_GET['error'] ?> </p>
+                            <?php endif ?>
+                        
+                        <input type="file" name="my_image">
+                            
+                        <div class="button">
+                            <input type="submit" value="Register" name = "submit-owner" class="btn">
+                        </div>
+                    </form>
+
+                        
                     </div>
                     <div>
                         <div class = "image"> </div>
-                        </div>
                     </div>
-                </form>
+                    </div>
+                   
+                 </form>
                 </div>
-            </div>
-        
-        <script>
-        function openAdd() {
-            document.getElementById("register-dropdown").style.display = "block";
-        }
-        </script>
-        
-      </form>
-    </div>
-  </div>
-  <script src="js/registerOwner.js"></script>
-    
+         </div>  
+         <script>
+            function show(anything){
+                document.querySelector('.textBox') .value = anything;
+            }
+                let dropdown1 = document.querySelector('.dropdown1');
+                dropdown1.onclick =function(){
+                    dropdown1.classList.toggle('active');
+                }
+            
+            </script>
     </body>
 </html>

@@ -58,6 +58,20 @@
                             <li> <a href = "propertyList.php"> Property List </a> </li>
                         </ul>
                     </li>
+
+                    <li> 
+                        <div class = "menu"> 
+                        <i class='bx bxs-folder-open' ></i> 
+                            <span class = "label"> Maintenance </span>
+                        <i class='bx bxs-chevron-down arrow'></i> 
+                        </div>
+
+                        <ul class = "sub-menu"> 
+                            <span class = "sub-menu-title"> Maintenance </span>
+                            <li> <a href = "userList.php"> Property </a> </li>
+                            <li> <a href = "propertyList.php"> Reports </a> </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <?php
 include "dbconn.php";
 
-if(isset($_POST['login-submit'])){
+if(isset($_POST['username']) && isset($_POST['password'])){
 
     function validate($data) {
         $data = trim($data);
@@ -21,44 +21,29 @@ if(isset($_POST['login-submit'])){
         header("Location: login.php?error=Password is required");
         exit();
     } else {
-        $sql = "SELECT * FROM tbl_user WHERE username = '$uname' AND password = '$pass'";
-
+        $sql = "SELECT * FROM user WHERE username = '$uname' AND password = '$pass'";
         $result = mysqli_query($conn, $sql);
 
         if (mysqli_num_rows($result) === 1) {
             $row = mysqli_fetch_assoc($result);
-                if ($row['username'] === $uname && $row['password'] === $pass && $row['userLevel_ID'] == 1) {
+                if ($row['username'] === $uname && $row['password'] === $pass && $row['userLevel_ID'] == 1 && $row['status'] == 1) {
                     $_SESSION['username'] = $row['username'];
                     header("Location: adminDashboard.php");
                     exit();
-                } else {
-                    header("Location: login.php?error=Incorrect username or password");
-                    exit();
-                }
-
-        } else if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
-                if ($row['username'] === $uname && $row['password'] === $pass && $row['userLevel_ID'] == 2) {
+                } else if ($row['username'] === $uname && $row['password'] === $pass && $row['userLevel_ID'] == 2 && $row['status'] == 1) {
                     $_SESSION['username'] = $row['username'];
                     header("Location: ownerDashboard.php");
                     exit();
-                } else {
-                    header("Location: login.php?error=Incorrect username or password");
-                    exit();
-                }
-
-        } else if (mysqli_num_rows($result) === 1) {
-            $row = mysqli_fetch_assoc($result);
-                if ($row['username'] === $uname && $row['password'] === $pass && $row['userLevel_ID'] == 3) {
+                } if ($row['username'] === $uname && $row['password'] === $pass && $row['userLevel_ID'] == 3 && $row['status'] == 1) {
                     $_SESSION['username'] = $row['username'];
                     header("Location: seekerDashboard.php");
                     exit();
                 } else {
-                    header("Location: login.php?error=Incorrect username or password");
+                    header("Location: login.php?error=No Permission to Login");
                     exit();
                 }
 
-        } else {
+            } else {
             header("Location: login.php?error=Incorrect username or password");
             exit();
         }

@@ -58,6 +58,20 @@
                             <li> <a href = "propertyList.php"> Property List </a> </li>
                         </ul>
                     </li>
+
+                    <li> 
+                        <div class = "menu"> 
+                        <i class='bx bxs-folder-open' ></i> 
+                            <span class = "label"> Maintenance </span>
+                        <i class='bx bxs-chevron-down arrow'></i> 
+                        </div>
+
+                        <ul class = "sub-menu"> 
+                            <span class = "sub-menu-title"> Maintenance </span>
+                            <li> <a href = "property.php"> Property </a> </li>
+                            <li> <a href = "reports.php"> Reports </a> </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -93,7 +107,7 @@
                             <tr>
                                 <th>Name</th>
                                 <th>Email</th>
-                                <th>Action</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
 
@@ -107,13 +121,13 @@
                                 $page = 1;
                             }
 
-                            $limit = 7;
+                            $limit = 6;
                             $offset = ($page - 1) * $limit;
 
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT email, CONCAT(firstName,' ', lastName) AS fullName FROM tbl_userinfo LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -122,8 +136,13 @@
                                         <td> <?php echo $row['fullName'] ?> </td>
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td>
-                                        <a href="#" class="edit" title="Edit"><i class="bx bxs-edit" style="font-size: 24px;"></i></a>
-                                        <a href="#" class="edit" title="Edit"><i class="bx bxs-trash" style="font-size: 24px;"></i></a>
+                                            <?php
+                                                if ($row['status'] == 1) {
+                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=0"> active </a> </p>';
+                                                } else {
+                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=1"> inactive </a> </p>';
+                                                }
+                                            ?>
                                         </td>
                                     </tr>
                                 <?php
@@ -135,7 +154,7 @@
                         <ul class="pagination">
                     <?php
             
-                    $query =  "SELECT COUNT(*) FROM tbl_user";
+                    $query =  "SELECT COUNT(*) FROM user";
                     $result_count = mysqli_query($conn, $query);
                     $records = mysqli_fetch_row($result_count);
                     $total_records = $records[0];
