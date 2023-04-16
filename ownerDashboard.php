@@ -32,7 +32,7 @@
 
                     <li> 
                         <a href = "ownerProperty.php"> 
-                        <i class='bx bxs-home'></i>
+                        <i class='bx bxs-building'></i>
                             <span class = "label"> Post Property </span>
                         </a>
                         <ul class = "sub-menu blank"> 
@@ -42,7 +42,7 @@
 
                     <li> 
                         <a href = "adminDashboard.php"> 
-                        <i class='bx bxs-home'></i>
+                        <i class='bx bxs-edit-location'></i>
                             <span class = "label"> Visit Schedule </span>
                         </a>
                         <ul class = "sub-menu blank"> 
@@ -52,7 +52,7 @@
 
                     <li> 
                         <a href = "adminDashboard.php"> 
-                        <i class='bx bxs-home'></i>
+                        <i class='bx bxs-calendar-exclamation'></i>
                             <span class = "label"> Reservation </span>
                         </a>
                         <ul class = "sub-menu blank"> 
@@ -62,7 +62,7 @@
 
                     <li> 
                         <a href = "adminDashboard.php"> 
-                        <i class='bx bxs-home'></i>
+                        <i class='bx bxs-message-rounded-add'></i>
                             <span class = "label"> FAQ </span>
                         </a>
                         <ul class = "sub-menu blank"> 
