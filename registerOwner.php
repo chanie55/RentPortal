@@ -62,41 +62,42 @@
                             <input type="password" class="input" placeholder="Confirm your password" required>
                         </div> 
     
-                        <span class="span"> Property <br> Documents </span>
-                        <div class="dropdown">
-                            <div class="select">
-                                <span class="selected"> Select </span>
-                                <div class="caret"></div>
+                        <p class="span"> Property <br> Documents </p>  
+                        <div class ="dropdown1">
+                            <input type="text" class="textBox" placeholder="Property Documents" readonly>
+                            <div class="option">
+                                <div onclick="show('Business Permit')"> Business Permit </div>
+                                <div onclick="show('DTI')"> DTI </div>
+                                <div onclick="show('065')"> 065 </div>
                             </div>
-                            <ul class="menu">
-                                <li class="active"> Business Permit </li>
-                                <li> DTI Permit </li>
-                                <li> 065 </li>
-                            </ul>
-                        </div> 
-
-                        <div class="button">
-                            <input type="submit" value="Register" class="btn">
                         </div>
+                        
+                        <form action="upload.php" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="file">
+                        <div class="button">
+                            <input type="submit" name="submit" value="Register" class="btn">
+                        </div>
+                    </form>
+
+                        
                     </div>
                     <div>
                         <div class = "image"> </div>
-                        </div>
                     </div>
-                </form>
+                    </div>
+                   
+                 </form>
                 </div>
-            </div>
-        
-        <script>
-        function openAdd() {
-            document.getElementById("register-dropdown").style.display = "block";
-        }
-        </script>
-        
-      </form>
-    </div>
-  </div>
-  <script src="js/registerOwner.js"></script>
-    
+         </div>  
+         <script>
+            function show(anything){
+                document.querySelector('.textBox') .value = anything;
+            }
+                let dropdown1 = document.querySelector('.dropdown1');
+                dropdown1.onclick =function(){
+                    dropdown1.classList.toggle('active');
+                }
+            
+            </script>
     </body>
 </html>
