@@ -25,41 +25,41 @@
 
             <div class="container">
                 <div class="content">
-                <form method = "post" action = "">
+                <form method = "post" action = "addOwner.php">
                     <div class="title"><h1>Register</h1></div>
                         <div class="input_field">
                             <label>First Name</label>
-                            <input type="text" class="input" placeholder="Enter your first name" required>
+                            <input type="text" name = "firstname" class="input" required>
                         </div>
 
                         <div class="input_field">
                             <label>Last Name</label>
-                            <input type="text" class="input" placeholder="Enter your last name" required>
+                            <input type="text" name = "lastname" class="input" required>
                         </div>
 
                         <div class="input_field">
-                            <label>Email</label>
-                            <input type="text" class="input" placeholder="Enter your email" required>
+                            <label for = "email">Email</label>
+                            <input type="email" name = "email" class="input" required>
                         </div>
 
                         <div class="input_field">
-                            <label>Contact</label>
-                            <input type="text" class="input" placeholder="Enter your contact" required>
+                            <label for = "contact" >Contact</label>
+                            <input type="tel" name = "contact" class="input" pattern="[0-9]*" required>
                         </div>
 
                         <div class="input_field">
                             <label>Username</label>
-                            <input type="username" class="input" placeholder="Enter your username" required>
+                            <input type="username" name = "username" class="input" required>
                         </div>
 
                         <div class="input_field">
                             <label>Password</label>
-                            <input type="password" class="input" placeholder="Enter your password" required>
+                            <input type="password" name = "password" class="input" required>
                         </div>
 
                         <div class="input_field">
                             <label>Confirm Password</label>
-                            <input type="password" class="input" placeholder="Confirm your password" required>
+                            <input type="password" class="input" required>
                         </div> 
     
                         <span class="span"> Property <br> Documents </span>
@@ -76,7 +76,7 @@
                         </div> 
 
                         <div class="button">
-                            <input type="submit" value="Register" class="btn">
+                            <input type="submit" value="Register" name = "submit-owner" class="btn">
                         </div>
                     </div>
                     <div>

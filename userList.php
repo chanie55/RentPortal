@@ -58,6 +58,20 @@
                             <li> <a href = "propertyList.php"> Property List </a> </li>
                         </ul>
                     </li>
+
+                    <li> 
+                        <div class = "menu"> 
+                        <i class='bx bxs-folder-open' ></i> 
+                            <span class = "label"> Maintenance </span>
+                        <i class='bx bxs-chevron-down arrow'></i> 
+                        </div>
+
+                        <ul class = "sub-menu"> 
+                            <span class = "sub-menu-title"> Maintenance </span>
+                            <li> <a href = "property.php"> Property </a> </li>
+                            <li> <a href = "reports.php"> Reports </a> </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -81,63 +95,110 @@
                             </div>
                         </div>
 
-                    <table class="table table-striped table-hover table-bordered">
+                        <table class="table table-striped table-hover table-bordered">
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Address</th>
                                 <th>Email</th>
-                                <th>Action</th>
+                                <th>User Type</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Khytryn Faye Carcillar</td>
-                                <td>Isulan, Sultan Kudarat</td>
-                                <td>kate@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody>
-                        
-                        <tbody>
-                            <tr>
-                                <td>Beverly Jane Gicale</td>
-                                <td>Tambler</td>
-                                <td>bev@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody> 
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
 
-                        <tbody>
-                            <tr>
-                                <td>Aj Lynn Jusayan</td>
-                                <td>Bawing</td>
-                                <td>aj@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['email'] ?> </td>
+                                        <td> 
+                                            <?php 
+                                                if ($row['userLevel_ID'] == 1){
+                                                    echo "Admin";
+                                                } else if ($row['userLevel_ID'] == 2){
+                                                    echo "Owner";
+                                                } if ($row['userLevel_ID'] == 3){
+                                                    echo "Seeker";
+                                                }
+                                            ?>
+                                        </td>
+                                        <td>
+                                            <?php
+                                                if ($row['status'] == 1) {
+                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=0"> active </a> </p>';
+                                                } else {
+                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=1"> inactive </a> </p>';
+                                                }
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>       
                         </tbody>  
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                         <ul class="pagination">
-                            <li class="page-item disabled"><a href="#"><i class="bx bxs-chevron-left"></i></a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="bx bxs-chevron-right"></i></a></li>
-                        </ul>
+                    <?php
+            
+                    $query =  "SELECT COUNT(*) FROM user";
+                    $result_count = mysqli_query($conn, $query);
+                    $records = mysqli_fetch_row($result_count);
+                    $total_records = $records[0];
+
+                    $total_pages = ceil($total_records / $limit);
+                    $link = "";
+
+                    ?>
+                
+
+                    <?php
+                        if ($page >= 2) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href = 'manageAdmin.php?page=".($page-1)."'> 
+                            <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                        }
+
+                         for ($counter = 1; $counter <= $total_pages; $counter++){
+                            if ($counter == $page) {
+                                $link .= "<li class = 'page-item active'>
+                                <a class = 'page-link' href= 'manageAdmin?page="
+                                .$counter."'>".$counter." </a></li>";
+                            } else {
+                                $link .= "<li class = 'page-item'>
+                                <a class = 'page-link' href='manageAdmin.php?page=".$counter."'> ".$counter." </a> </li>";
+                            }
+                        };
+
+                        echo $link;
+
+                        if($page < $total_pages) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href='manageAdmin.php?page=".($page+1)."'>
+                            <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                        }
+                    ?>
+                </ul>
+
+                <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
                     </div>
                     </div>
                 </div>  

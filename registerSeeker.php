@@ -25,40 +25,56 @@
 
             <div class="container">
                 <div class="content">
-                    <form method = "post" action = "">
+                    <form method = "post" action = "addSeeker.php">
                     <div class="title"><h1>Register</h1></div>
+                        <?php
+					        if(isset($_GET['error'])) { ?>
+					            <p class = "error">
+						    <?php
+							    echo $_GET['error']; ?>
+				        <?php } ?>
+
+                            
+
                         <div class="input_field">
                             <label>First Name</label>
-                            <input type="text" class="input" placeholder="Enter your first name" required>
+                                <input required type = "text" name = "firstname" class = "input" value = "<?php if (isset($_POST['firstname'])) { echo $_POST['firstname']; }?>"> 
                         </div>
 
                         <div class="input_field">
                             <label>Last Name</label>
-                            <input type="text" class="input" placeholder="Enter your last name" required>
+                            <input type="text" name = "lastname" class="input"value = "<?php if (isset($_POST['lastname'])) { echo $_POST['lastname']; }?>" required>
                         </div>
 
                         <div class="input_field">
-                            <label>Email</label>
-                            <input type="text" class="input" placeholder="Enter your email" required>
+                            <label for = "email">Email</label>
+                            <input type="email" name = "email" class="input" required>
                         </div>
 
                         <div class="input_field">
-                            <label>Contact</label>
-                            <input type="text" class="input" placeholder="Enter your contact" required>
+                            <label for = "contact">Contact</label>
+                            <input type="tel" name = "contact" class="input" pattern="[0-9]*" required>
+                        </div>
+
+                        <div class="input_field">
+                            <label>Username</label>
+                            <input type="text" name = "username" class="input" required>
+  
                         </div>
 
                         <div class="input_field">
                             <label>Password</label>
-                            <input type="password" class="input" placeholder="Enter your password" required>
+                            <input type="password" name = "password" class="input" required>
+
                         </div>
 
                         <div class="input_field">
                             <label>Confirm Password</label>
-                            <input type="password" class="input" placeholder="Confirm your password" required>
+                            <input type="password" name = "password2" class="input" required>
                         </div>  
 
                         <div class="button">
-                            <input type="submit" value="Register" class="btn" onclick="location.href='#'">
+                            <input type="submit" value="Register" class="btn" name = "submit-seeker">
                         </div> 
                         </form>
                 </div>
