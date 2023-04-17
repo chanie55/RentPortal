@@ -61,7 +61,7 @@
                     </li>
 
                     <li> 
-                        <a href = "#"> 
+                        <a href = "FAQ.php"> 
                         <i class='bx bxs-message-rounded-add'></i>
                             <span class = "label"> FAQ </span>
                         </a>
