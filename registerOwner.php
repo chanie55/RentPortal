@@ -25,7 +25,7 @@
 
             <div class="container">
                 <div class="content">
-                <form method = "post" action = "addOwner.php">
+                <form method = "post" action = "addOwner.php" enctype="multipart/form-data">
                     <div class="title"><h1>Register</h1></div>
                         <div class="input_field">
                             <label>First Name</label>
@@ -59,21 +59,26 @@
 
                         <div class="input_field">
                             <label>Confirm Password</label>
-                            <input type="password" class="input" required>
+                            <input type="password" name = "password2" class="input" required>
                         </div> 
     
                         <p class="span"> Property <br> Documents </p>  
                         <div class ="dropdown1">
-                            <input type="text" class="textBox" placeholder="Property Documents" readonly>
+                            <input type="text" class="textBox" name = "documents" placeholder="Property Documents" readonly>
                             <div class="option">
                                 <div onclick="show('Business Permit')"> Business Permit </div>
                                 <div onclick="show('DTI')"> DTI </div>
-                                <div onclick="show('065')"> 065 </div>
+                                <div onclick="show('065')"> 065 BIR</div>
                             </div>
                         </div>
                         
-                        <form action="upload.php" method="POST" enctype="multipart/form-data">
-                        <input type="file" name="file">
+                        <?php 
+                            if (isset($_GET['error'])): ?>
+                                <p> <?php echo $_GET['error'] ?> </p>
+                            <?php endif ?>
+                        
+                        <input type="file" name="my_image">
+                            
                         <div class="button">
                             <input type="submit" value="Register" name = "submit-owner" class="btn">
                         </div>

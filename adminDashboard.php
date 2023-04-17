@@ -185,8 +185,19 @@
                 <div class = "request-card"> 
                     <div class = "request-head"> 
                         <div>
-                            <p> Pending Owner Registration </p>
-                            <h2> 18 </h2>
+                            <?php
+                                include "dbconn.php";
+
+                                $pendingreg = "SELECT * FROM user WHERE userLevel_ID = 2 AND status = 0";
+                                $seekers_query_num = mysqli_query($conn, $pendingreg);
+
+                                if ($seekers_total = mysqli_num_rows($seekers_query_num)) {
+                                    echo '<h2 class = ""> '.$seekers_total.' </h2>';
+                                    echo '<p> Pending Owner Registration </p>';
+                                } else {
+                                    echo '<h3 class = "fs-2"> No Data </h3>';
+                                }
+                            ?>
                         </div>
                         <i class = 'bx bx-user icon'> </i>
                     </div>
