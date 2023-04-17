@@ -8,6 +8,7 @@
                 include "css/FAQ.css"
             ?>
         </style>
+        <script scr = "richtext/jquery.richtext.js"> </script>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     </head>
 
@@ -80,13 +81,13 @@
                 <i class = "bx bx-menu"> </i>
                 <span class = "text"> FAQ </span> 
             </div>
-            <form method = "post" action = "">
+            <form method = "post" action = "addFAQ.php">
                 <div class="form">
                        <div class="input_field">
                              <label> Enter Question</label>
                              <br>
                              <br>
-                            <input type="text" class="input" placeholder="" required>
+                            <input type="text" name = "question" class="input" placeholder="" required>
                         </div>
                         <br>
                         <br>
@@ -94,7 +95,7 @@
                              <label> Enter Answer</label>
                              <br>
                              <br>
-                            <input type="text" class="input" placeholder="" required>
+                            <textarea name = "answer" id = "answer" class="input" placeholder="" required> </textarea>
                         </div>
                         <button type="submit" name = "add_FAQ" class="add-new"> Add FAQ </button>
                     </div>
@@ -116,7 +117,87 @@
                                 <th>Action</th>
                             </tr>
                         </thead>
+                        <tbody>
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
+
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT question, answer FROM faq LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['question'] ?> </td>
+                                        <td> <?php echo $row['answer'] ?> </td>
+                                        <td>
+                                            <a href="#" class="edit" title="Edit"><i class="bx bxs-edit-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>       
+                        </tbody>  
                     </table>
+                    <div class="clearfix">
+                        <ul class="pagination">
+                    <?php
+            
+                    $query =  "SELECT COUNT(*) FROM faq";
+                    $result_count = mysqli_query($conn, $query);
+                    $records = mysqli_fetch_row($result_count);
+                    $total_records = $records[0];
+
+                    $total_pages = ceil($total_records / $limit);
+                    $link = "";
+
+                    ?>
+                
+
+                    <?php
+                        if ($page >= 2) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href = 'FAQ.php?page=".($page-1)."'> 
+                            <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                        }
+
+                         for ($counter = 1; $counter <= $total_pages; $counter++){
+                            if ($counter == $page) {
+                                $link .= "<li class = 'page-item active'>
+                                <a class = 'page-link' href= 'FAQ?page="
+                                .$counter."'>".$counter." </a></li>";
+                            } else {
+                                $link .= "<li class = 'page-item'>
+                                <a class = 'page-link' href='FAQ.php?page=".$counter."'> ".$counter." </a> </li>";
+                            }
+                        };
+
+                        echo $link;
+
+                        if($page < $total_pages) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href='FAQ.php?page=".($page+1)."'>
+                            <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                        }
+                    ?>
+                </ul>
+
+                <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                    </div>
+                    </div>
+                </div>  
+            </div>
         </section>
         
 
@@ -144,6 +225,13 @@
             menu.classList.toggle("close");
         });
 
-        </script>    
+        </script>  
+        
+        <!-- Initialize rich text library -->
+        <script> 
+            window.addEventListener("load", function () {
+                $("#answer").richText();
+            });
+        </script>
     </body>
 </html>
