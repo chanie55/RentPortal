@@ -19,7 +19,7 @@ if (isset($_POST['submit-owner'])) {
 
     if($result === TRUE) {
         $sql2 = "INSERT INTO user(username, password, userInfo_ID, status, userLevel_ID)
-                VALUES ('$user_name', '$password', '$userID', 0, 3)";
+                VALUES ('$user_name', '$password', '$userID', 0, 2)";
         $result2 = mysqli_query($conn, $sql2);
         
             if (isset($_FILES['my_image'])) {

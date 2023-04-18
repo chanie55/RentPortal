@@ -79,7 +79,7 @@
         <section class = "menu-toggle"> 
             <div class = "toggle-content"> 
                 <i class = "bx bx-menu"> </i>
-                <span class = "text"> Manage Owner </span> 
+                <span class = "text"> Owner Registration </span> 
             </div>
 
             <!-- DATA TABLE -->
@@ -99,56 +99,91 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Address</th>
                                 <th>Email</th>
+                                <th>Contact</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <tr>
-                                <td>Khytryn Faye Carcillar</td>
-                                <td>Isulan, Sultan Kudarat</td> 
-                                <td>kate@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" onclick = "openForm()"><i class="bx bxs-show" style="font-size: 24px;"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody>
-                        
-                        <tbody>
-                            <tr>
-                                <td>Beverly Jane Gicale</td>
-                                <td>Tambler</td>
-                                <td>bev@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="View" onclick = "openForm()"><i class="bx bxs-show" style="font-size: 24px;"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody> 
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
 
-                        <tbody>
-                            <tr>
-                                <td>Aj Lynn Jusayan</td>
-                                <td>Bawing</td>
-                                <td>aj@gmail.com</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit"><i class="bx bxs-show" style="font-size: 24px;"></i></a>
-                                </td>
-                            </tr>       
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT userinfo.contact, userinfo.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID WHERE user.status = 0 AND user.userLevel_ID = 2 LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['email'] ?> </td>
+                                        <td> 
+                                            <?php echo $row['contact'] ?> </td>
+                                        <td>
+                                            <a href="#" class="edit" title="Edit" onclick = "openForm()"><i class="bx bxs-edit-alt"></i></a>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>       
                         </tbody>  
                     </table>
                     <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
                         <ul class="pagination">
-                            <li class="page-item disabled"><a href="#"><i class="bx bxs-chevron-left"></i></a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="bx bxs-chevron-right"></i></a></li>
-                        </ul>
+                    <?php
+            
+                    $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2 AND status = 0";
+                    $result_count = mysqli_query($conn, $query);
+                    $records = mysqli_fetch_row($result_count);
+                    $total_records = $records[0];
+
+                    $total_pages = ceil($total_records / $limit);
+                    $link = "";
+
+                    ?>
+                
+
+                    <?php
+                        if ($page >= 2) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href = 'manageOwner.php?page=".($page-1)."'> 
+                            <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                        }
+
+                         for ($counter = 1; $counter <= $total_pages; $counter++){
+                            if ($counter == $page) {
+                                $link .= "<li class = 'page-item active'>
+                                <a class = 'page-link' href= 'manageOwner?page="
+                                .$counter."'>".$counter." </a></li>";
+                            } else {
+                                $link .= "<li class = 'page-item'>
+                                <a class = 'page-link' href='manageOwner.php?page=".$counter."'> ".$counter." </a> </li>";
+                            }
+                        };
+
+                        echo $link;
+
+                        if($page < $total_pages) {
+                            echo "<li class = 'page-item'>
+                            <a class = 'page-link' href='manageOwner.php?page=".($page+1)."'>
+                            <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                        }
+                    ?>
+                </ul>
+
+                <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
                     </div>
                     </div>
                 </div>  
@@ -157,11 +192,17 @@
             <!-- VIEW OWNER DETAILS -->
             <div class="overlay" id = "popup-msg">
                 <div class="popup" id = "popup">
+                    <?php 
+                        include "dbconn.php";
+
+                        $query = "SELECT email, contact, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo WHERE userInfo_ID = 2";
+                        $name_result = mysqli_query($conn, $query);
+                        $resultCheck = mysqli_num_rows($result);
+                    ?>
                     <p class = "date"> Date: </p>
 
                     <div class = "owner-details"> 
-                        <p class = "name"> Name: </p>
-                        <p class = "name"> Address: </p>
+                        <p class = "name"> Name: <?php if($resultCheck > 0) { while($row = mysqli_fetch_assoc($result)) { echo $row ['fullName']; }} ?></p>
                         <p class = "name"> Email: </p>
                         <p class = "name"> Contact: </p>
                         <p class = "name"> Property Documents: </p>

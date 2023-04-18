@@ -16,6 +16,7 @@
     --black1: #222;
     --black2: #999;
     --title: #402950;
+    --hover: #6762b6;
 }
 
 body {
@@ -335,7 +336,7 @@ body {
 
 .calendar .month .prev:hover,
 .calendar .month .next:hover {
-    color: var(--white);
+    color: var(--hover);
 }
 
 .calendar .weekdays {
@@ -607,4 +608,6 @@ body {
 .event:hover::after {
     display: flex;
 }
+
+/* END OF CALENDAR - CARCILLAR */
 
