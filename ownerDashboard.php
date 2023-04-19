@@ -46,7 +46,7 @@
                             <span class = "label"> Visit Schedule </span>
                         </a>
                         <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
+                            <li> <a href = "#" class = "sub-menu-title"> Dashboard </a> </li>
                         </ul>
                     </li>
 
