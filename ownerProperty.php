@@ -96,10 +96,18 @@
                     <div class="form-group">
                         <label>Choose Property:</label>
                         <select name = "select-type"> 
-                        <option> Apartment </option>
-                        <option> Boarding House </option>
-                        <option> House Rent </option>
-                        <option> Commercial Building </option>
+                        <?php
+                            include "dbconn.php";
+                            
+                            $name_query = "SELECT property FROM propertytype";
+                            $r = mysqli_query($conn, $name_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                <option> <?php echo $row['property']; ?></option>
+                            <?php
+                            }
+                            ?>
                     </select>
                     </div>
                     <div class="form-group">
@@ -134,31 +142,69 @@
                     <div class="form-group">
                         <label>Room Type:</label>
                         <select name = "select-type"> 
-                        <option> Single </option>
-                        <option> 2 person per room </option>
-                        <option> Bedspacer </option>
+                        <?php
+                            include "dbconn.php";
+                            
+                            $name_query = "SELECT room_Type FROM room";
+                            $r = mysqli_query($conn, $name_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                <option> <?php echo $row['room_Type']; ?></option>
+                            <?php
+                            }
+                            ?>
                     </select>
                     </div>
                     <div class="form-group">
                         <label>Bed Type:</label>
                         <select name = "select-type"> 
-                        <option> Single </option>
-                        <option> Bed spacer </option>
+                        <?php
+                            include "dbconn.php";
+                            
+                            $name_query = "SELECT bed_Type FROM bed";
+                            $r = mysqli_query($conn, $name_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                <option> <?php echo $row['bed_Type']; ?></option>
+                            <?php
+                            }
+                            ?>
                     </select>
                     </div>
                     <div class="form-group">
                         <label>Comfort Room:</label>
                         <select name = "select-type"> 
-                        <option> Common </option>
-                        <option> Per Room </option>
+                        <?php
+                            include "dbconn.php";
+                            
+                            $name_query = "SELECT cr_Type FROM cr";
+                            $r = mysqli_query($conn, $name_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                <option> <?php echo $row['cr_Type']; ?></option>
+                            <?php
+                            }
+                            ?>
                     </select>
                     </div>
                     <div class="form-group">
                         <label>Kitchen:</label>
                         <select name = "select-type"> 
-                        <option> Common </option>
-                        <option> Per Room </option>
-                        <option> Not Provided </option>
+                        <?php
+                            include "dbconn.php";
+                            
+                            $name_query = "SELECT kitchen_Type FROM kitchen";
+                            $r = mysqli_query($conn, $name_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                <option> <?php echo $row['kitchen_Type']; ?></option>
+                            <?php
+                            }
+                            ?>
                     </select>
                     </div>
                     <div class="form-group">

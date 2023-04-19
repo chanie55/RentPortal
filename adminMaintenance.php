@@ -107,34 +107,5 @@
         });
         </script>
 
-        <!-- Progress Bar -->
-        <script> 
-            const allProgress = document.querySelectorAll('.card .progress');
-
-            allProgress.forEach(item => {
-                item.style.setProperty('--value', item.dataset.value)
-            });
-        </script>
-
-        <!-- Circular Progress not yet working-->
-        <script> 
-            let circularProgress = document.querySelector(".chart-circle"),
-                progressValue = document.querySelector(".analytics-value");
-
-            let progressStartValue = 0, 
-                progressEndValue = 20,
-                speed = 100;
-            
-            let progress = setInterval(() => {
-                progressStartValue++;
-
-                progressValue.textContent = ${progressStartValue}%;
-
-                if (progressStartValue == progressEndValue){
-                    clearInterval(progress);
-                }
-            }, speed);
-        </script>
-        
     </body>
 </html>

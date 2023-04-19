@@ -69,7 +69,7 @@
                         <ul class = "sub-menu"> 
                             <span class = "sub-menu-title"> Maintenance </span>
                             <li> <a href = "userList.php"> Property </a> </li>
-                            <li> <a href = "propertyList.php"> Reports </a> </li>
+                            <li> <a href = "reports.php"> Reports </a> </li>
                         </ul>
                     </li>
                 </ul>
@@ -132,7 +132,7 @@
                                         <td> 
                                             <?php echo $row['contact'] ?> </td>
                                         <td>
-                                            <a href="#" class="edit" title="Edit" onclick = "openForm()"><i class="bx bxs-edit-alt"></i></a>
+                                            <button class="edit" name = "showData" title="Edit" onclick = "openForm()" id="<?php echo $row['fullName']; ?>"><i class="bx bxs-edit-alt"></i></button>
                                         </td>
                                     </tr>
                                 <?php
@@ -202,16 +202,44 @@
                     <p class = "date"> Date: </p>
 
                     <div class = "owner-details"> 
-                        <p class = "name"> Name: <?php if($resultCheck > 0) { while($row = mysqli_fetch_assoc($result)) { echo $row ['fullName']; }} ?></p>
-                        <p class = "name"> Email: </p>
-                        <p class = "name"> Contact: </p>
+                        <p class = "name"> Name: <span id = "name"> </span></p>
+                        <p class = "name"> Email: <span id = "email"> </span></p>
+                        <p class = "name"> Contact: <span id = "contact"> </span></p>
                         <p class = "name"> Property Documents: </p>
                         <p class = "name"> Valid ID: </p>
                     </div>
                     <div class="text-right">
                         <button class="form-btn btn btn-cancel" onclick="closeForm()">Decline</button>
-                        <button class="form-btn btn btn-primary" onclick="location.href='index.php'">Accept</button>
+                        <button class="form-btn btn btn-primary" onclick="openEmail()">Accept</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- SEND EMAIL -->
+            <div class="overlay2" id = "popup-msg2">
+                <div class="popup2" id = "popup2">
+                    <p class = "date"> Send Email </p>
+
+                    <form action = "sendEmail.php" method = "post">
+                    <div class="sendemail">
+                        <label>Email:</label>
+                        <input type="text" name="emailAdd" id="emailAdd" class="form-control" required="">
+                    </div>
+                    <div class="sendemail">
+                        <label>Subject:</label>
+                        <input type="text" name="subject" id="subject" class="form-control" required="">
+                    </div>
+                    <div class="sendemail">
+                        <label>Message:</label>
+                        <textarea type="text" name="message" id="message" class="form-control" required="" style = "height: 13%;"> </textarea>
+                    </div>
+
+                    <div class="text-right">
+                        <button class="form-btn btn btn-cancel" onclick="closeEmail()">Cancel</button>
+                        <button type="submit" class="form-btn btn btn-primary" name = "send" >Send</button>
+                    </div>
+                    </form>
+                    
                 </div>
             </div>
 
@@ -245,11 +273,45 @@
             function openForm() {
                 document.getElementById("popup-msg").style.display = "block";
                 document.getElementById("popup").style.display = "block";
+
+                function showDetails(button) {
+                    var name = button.id;
+
+                    $.ajax ({
+                        url: "showData.php",
+                        method: "GET",
+                        data: {"email": name},
+                        success: function(response) {
+                            response = JSON.parse(response);
+                            console.log(response);
+
+                            var html = " ";
+
+                            html += "<div class = 'row'>";
+                                html += "<div class = 'col-md-6'> City </div>";
+                                html += "<div class = 'col-md-6'>" + response.city + "</div>";
+                            html += "</div>";
+
+                            $("#popup").html(html);
+                            $("#popup-msg").modal();
+                        }
+                    });
+                }
             }
 
             function closeForm() {
                 document.getElementById("popup-msg").style.display = "none";
                 document.getElementById("popup").style.display = "none";
+            }
+
+            function openEmail() {
+                document.getElementById("popup-msg2").style.display = "block";
+                document.getElementById("popup2").style.display = "block";
+            }
+
+            function closeEmail() {
+                document.getElementById("popup-msg2").style.display = "none";
+                document.getElementById("popup2").style.display = "none";
             }
 </script>
         

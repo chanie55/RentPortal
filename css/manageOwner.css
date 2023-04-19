@@ -392,6 +392,33 @@ th {
     z-index: 10000;
 }
 
+.popup2 {
+    display: none;
+    width: 33.333333%;
+    padding: 15px;
+    left: 0;
+    margin-left: 33.333333%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: white;
+    position: absolute;
+    top: 15%;
+    box-shadow: 5px 5px 5px #000;
+    z-index: 10001;
+}
+
+.overlay2 {
+    display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,.10);
+    z-index: 10000;
+}
+
 .btn-primary {
     float: right;
     background-color:var(--main);
@@ -424,5 +451,17 @@ th {
     padding-top: 15px;
 }
 
+.sendemail {
+    margin-top: 20px;
+}
+
+.sendemail input, textarea {
+    padding: 5px 5px;
+    width: 100%;
+}
+
+.btn {
+    margin-top: 40px;
+}
 
 
