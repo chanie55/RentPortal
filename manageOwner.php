@@ -132,7 +132,7 @@
                                         <td> 
                                             <?php echo $row['contact'] ?> </td>
                                         <td>
-                                            <a href="#" class="edit" title="Edit"><i class="bx bxs-edit-alt"></i></a>
+                                            <a href="#" class="edit" title="Edit" onclick = "openForm()"><i class="bx bxs-edit-alt"></i></a>
                                         </td>
                                     </tr>
                                 <?php
@@ -192,11 +192,17 @@
             <!-- VIEW OWNER DETAILS -->
             <div class="overlay" id = "popup-msg">
                 <div class="popup" id = "popup">
+                    <?php 
+                        include "dbconn.php";
+
+                        $query = "SELECT email, contact, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo WHERE userInfo_ID = 2";
+                        $name_result = mysqli_query($conn, $query);
+                        $resultCheck = mysqli_num_rows($result);
+                    ?>
                     <p class = "date"> Date: </p>
 
                     <div class = "owner-details"> 
-                        <p class = "name"> Name: </p>
-                        <p class = "name"> Address: </p>
+                        <p class = "name"> Name: <?php if($resultCheck > 0) { while($row = mysqli_fetch_assoc($result)) { echo $row ['fullName']; }} ?></p>
                         <p class = "name"> Email: </p>
                         <p class = "name"> Contact: </p>
                         <p class = "name"> Property Documents: </p>

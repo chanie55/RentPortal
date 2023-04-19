@@ -41,7 +41,7 @@
                     </li>
 
                     <li> 
-                        <a href = "#"> 
+                        <a href = "ownerVisit.php"> 
                         <i class='bx bxs-edit-location'></i>
                             <span class = "label"> Visit Schedule </span>
                         </a>
@@ -90,30 +90,82 @@
            <!-- ADD ADMIN FORM -->
            <div class="overlay" id = "openAdd">
         <div class="popup" id = "popupAdd">
-            <p class = "formHeader">Add New Admin</p>
+            <p class = "formHeader">Add Property</p>
             <form method="post" id="addFrm" name="addFrm" action = "addtenant.php">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>First Name:</label>
-                        <input type="text" name="firstname" id="firstname" class="form-control" required="">
+                        <label>Choose Property:</label>
+                        <select name = "select-type"> 
+                        <option> Apartment </option>
+                        <option> Boarding House </option>
+                        <option> House Rent </option>
+                        <option> Commercial Building </option>
+                    </select>
                     </div>
                     <div class="form-group">
-                        <label>Last Name:</label>
-                        <input type="text"  name="lastname" id="lastname" class="form-control"  required="" >
+                        <label>Property Name:</label>
+                        <input type="text"  name="name" id="name" class="form-control"  required="" >
                     </div>
                     <div class="form-group">
-                        <label>Username:</label>
-                        <input type="text" name="username" id="username" class="form-control" pattern="[A-Za-z]{1,}" required="">
+                        <label>Address:</label>
+                        <input type="text" name="address" id="address" class="form-control" required="">
+                        <a href = "viewmap.php"><i class = "bx bxs-edit-location"> </i></a>
+                    </div>
+                    <div class="form-group">
+                        <label>Contact:</label>
+                        <input type="password" name="contact" id="contact" class="form-control" required="">
                     </div>
                     <div class="form-group">
                         <label>Email:</label>
-                        <input type="password" name="email" id="email" class="form-control" required="">
+                        <input type="email" name="email" id="email" class="form-control" required="">
                     </div>
                     <div class="form-group">
-                        <label>Password:</label>
-                        <input type="text" name="password" id="password" class="form-control" pattern="[0-9]*"  required="">
-
+                        <label>Description:</label> <br>
+                        <textarea type="text" name="description" id="description" class="form-control" required=""> </textarea>
                     </div>
+                    <div class="form-group">
+                        <label>Monthly Rate:</label>
+                        <input type="text" name="rate" id="rate" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Rooms:</label>
+                        <input type="text" name="totalrooms" id="totalrooms" class="form-control" required="">
+                    </div>
+                    <div class="form-group">
+                        <label>Room Type:</label>
+                        <select name = "select-type"> 
+                        <option> Single </option>
+                        <option> 2 person per room </option>
+                        <option> Bedspacer </option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Bed Type:</label>
+                        <select name = "select-type"> 
+                        <option> Single </option>
+                        <option> Bed spacer </option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Comfort Room:</label>
+                        <select name = "select-type"> 
+                        <option> Common </option>
+                        <option> Per Room </option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Kitchen:</label>
+                        <select name = "select-type"> 
+                        <option> Common </option>
+                        <option> Per Room </option>
+                        <option> Not Provided </option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Landmark:</label>
+                        <input type="text" name="landmark" id="landmark" class="form-control" required="">
+                    </div>
+                    <input type="file" name="my_image">
                     <br>
                     </form>
             <div class="text-right">

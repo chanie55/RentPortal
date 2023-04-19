@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2023 at 07:36 AM
+-- Generation Time: Apr 19, 2023 at 04:57 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -42,6 +42,25 @@ CREATE TABLE `cr` (
   `cr_ID` int(11) NOT NULL,
   `cr_Type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faq`
+--
+
+CREATE TABLE `faq` (
+  `faq_ID` int(11) NOT NULL,
+  `question` text NOT NULL,
+  `answer` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `faq`
+--
+
+INSERT INTO `faq` (`faq_ID`, `question`, `answer`) VALUES
+(1, 'KKK', ' KKK');
 
 -- --------------------------------------------------------
 
@@ -221,6 +240,12 @@ ALTER TABLE `cr`
   ADD PRIMARY KEY (`cr_ID`);
 
 --
+-- Indexes for table `faq`
+--
+ALTER TABLE `faq`
+  ADD PRIMARY KEY (`faq_ID`);
+
+--
 -- Indexes for table `images`
 --
 ALTER TABLE `images`
@@ -281,6 +306,12 @@ ALTER TABLE `bed`
 --
 ALTER TABLE `cr`
   MODIFY `cr_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `faq`
+--
+ALTER TABLE `faq`
+  MODIFY `faq_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `images`
