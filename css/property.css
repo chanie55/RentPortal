@@ -411,4 +411,68 @@ body {
     float: right;
 }
 
-/*Add Textbox */
+/* DATA TABLE */
+.table-wrapper {
+    width: 50%;
+    background: #fff;
+    padding: 20px 20px 40px 20px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
+    margin: 50px 20px;
+}
+
+.row {
+    padding: 5px;
+}
+
+.search-box {
+    margin-left: 75%;
+    margin-bottom: 10px;
+}
+
+.search-box i {
+    color: #a0a5b1;
+    position: absolute;
+    top: 33.5%;
+    font-size: 19px;
+    margin-left: 13px;
+}
+
+.search-box input {
+    height: 28px;
+    border-radius: 20px;
+    padding-left: 35px;
+    border-color: #ddd;
+    box-shadow: none;
+}
+
+table {
+    width: 100%;
+
+}
+
+.table tr th, td {
+    border: 1px solid beige;
+    padding: 8px;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fcfcfc;
+}
+
+th, td {
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    color: var(--main);
+}
+
+.table td a {
+    color: #a0a5b1;
+    display: inline-block;
+    margin: 0 5px;
+}
+
+
+/* END OF TABLE - CARCILLAR */

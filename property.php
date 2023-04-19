@@ -97,13 +97,53 @@
                 <div class = "form-group"> 
                     <label> Add Type </label>
                     <input type = "text" name = "type" id = "type_0" class = "myInput form-control">
-                    <input type = "button" class = "mybox" value = "+" onclick = "addBox()"> 
                 </div>
 
                 <button type = "submit" class = "addType" name = "submit-type"> Save </button>
 
                 <div id = "hob"> </div>
             </form>
+
+            <!-- DATA TABLE -->
+            <div class="container-xl">
+                <div class="table-wrapper">
+                    <div class="table-title">
+
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th> Action </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php
+                            include "dbconn.php";
+
+                            $sql = "SELECT * FROM kitchen";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['kitchen_ID'] ?> </td>
+                                        <td> <?php echo $row['kitchen_Type'] ?> </td>
+                                        <td>
+                                            <?php
+                                            echo '<p> <a href = "deletetype.php?kitchen_ID='.$row['kitchen_ID'].'"> <i class = "bx bxs-trash-alt"> </i> </a> </p>';
+                                            ?>
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>       
+                        </tbody>  
+                    </table>
+                    </div>
+                </div>  
+            </div>
         </section>
         
         <!-- Menu Toggle -->
@@ -130,7 +170,7 @@
         });
         </script>
 
-         <!--Generate Textbox-->
+         <!--Generate Textbox
          <script> 
             var counter = 1;
             var textBox = "";
@@ -151,6 +191,6 @@
             function removeBox(ele) {
                 ele.parentNode.remove();
             }
-        </script>
+        </script>-->
     </body>
 </html>
