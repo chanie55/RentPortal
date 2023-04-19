@@ -80,29 +80,11 @@
             <div class = "toggle-content"> 
                 <i class = "bx bx-menu"> </i>
                 <span class = "text"> Dashboard </span> 
-
+                <!--
                 <div class = "user-profile"> 
-                    <img src="images/user.png" class="profile">
-
-                    <div class="sub-menu-wrap">
-                        <div class="sub-menu"> 
-                            <div class="user-info">
-                                <img src="images/user.png" class="user2">
-                                <h2> Khytryn Faye Carcillar </h2>
-                            </div>
-                            <hr>
-
-                            <a href="#" class="sub-menu-link">
-                                <img src="images/edit-profile.png">
-                                <p>Edit Profile</p>
-                                <span></span>
-
-                                <a href="#" class="sub-menu-link">
-                                <img src="images/edit-profile.png">
-                                <p>Edit Profile</p>
-                                <span></span>
-
-                        </div>
+                    <i class='bx bxs-user-circle' id="profile"></i>
+                </div>-->
+            </div>
             <div class = "info-data"> 
                 <div class = "card"> 
                     <div class = "head"> 

@@ -473,7 +473,15 @@ input {
 }
 
 #username {
-    margin-left: 5px;
+    margin-left: 3px;
+}
+
+#firstname {
+    width: 74%;
+}
+
+#contact {
+    margin-left: 20px;
 }
 
 .form-btn {

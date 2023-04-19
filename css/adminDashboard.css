@@ -412,51 +412,85 @@ body {
 }
 
 /*User Profile*/
-
- .menu-toggle .user-profile{
-    padding: 25px;
-    margin: 68%;
+/*
+ .user-profile{
+    height: 50px;
+    width: 20px;
+    padding: 80px;
+    margin: 62%;
     
  }
 
- .profile{
-    height: 35px;
-    width: 35px;
+ .profile .bx .bxs-user-circle{
+    width: 40%;
+    border-radius: 50%;
     cursor: pointer;
  }
+ .dropdown1{
+    position: relative;
+    width: 340px;
+    height: 50px;
+    margin-left: 130px;
+}
 
- .user2{
-    height: 55px;
-    width: 55px;
-    
- }
-
- .sub-menu-wrap{
+.dropdown1::before{
+    content: '';
     position: absolute;
-    top: 100%;
-    right: 10%;
-    width: 320px;
- }
+    width: 8px;
+    height: 8px;
+    border: 2px solid #9b59b6;
+    right: 20px;
+    top: 15px;
+    z-index: 10000; 
+    border-top: 2px solid #fff;
+    border-right: 2px solid #fff;
+    transform: rotate(-45deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
 
- .sub-menu{
-    background: #aaa7ee;
-    padding: 20px;
-    margin: 10px;
- }
+.dropdown.active::before{
+    top: 22px;
+    transform: rotate(-225deg);
+}
 
- .user-info{
-    display: flex;
-    align-items: center;
- }
+.dropdown input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: #fff;
+    border: none;
+    outline: none;
+    box-shadow: 0 5px 20px rgba(163, 62, 189, 0.5) ;
+    padding: 12px 20px;
+    border-radius: 10px;
+}
 
- .user-info h2{
-    font-weight: 500px;
- }
+.dropdown .option{
+    position: absolute;
+    top: 70px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 30px 30px rgba(139, 40, 134, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    display: none;
+}
 
- .user-info img{
-    width: 60px;
-    border-radius: 50%;
-    margin-right: 15px;
- }
+.dropdown.active .option{
+    display: block;
+}
 
+.dropdown .option div{
+    padding: 12px 20px;
+    cursor: pointer;
+}
 
+.dropdown .option div:hover{
+    background: #75528d;
+    color: #fff;
+}
+*/

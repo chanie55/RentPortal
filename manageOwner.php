@@ -235,7 +235,7 @@
                     </div>
 
                     <div class="text-right">
-                        <button class="form-btn btn btn-cancel" onclick="closeEmail()">Cancel</button>
+                        <button type = "submit "class="form-btn btn btn-cancel" name = "send">Cancel</button>
                         <button type="submit" class="form-btn btn btn-primary" name = "send" >Send</button>
                     </div>
                     </form>
