@@ -45,21 +45,6 @@
                         <div class="input_field">
                             <label for = "contact" >Contact</label>
                             <input type="tel" name = "contact" class="input" pattern="[0-9]*" required>
-                        </div>
-
-                        <div class="input_field">
-                            <label>Username</label>
-                            <input type="username" name = "username" class="input" required>
-                        </div>
-
-                        <div class="input_field">
-                            <label>Password</label>
-                            <input type="password" name = "password" class="input" required>
-                        </div>
-
-                        <div class="input_field">
-                            <label>Confirm Password</label>
-                            <input type="password" name = "password2" class="input" required>
                         </div> 
     
                         <p class="span"> Property <br> Documents </p>  

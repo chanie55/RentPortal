@@ -32,16 +32,19 @@ if (isset($_POST['submit-owner'])) {
                 $userID = mysqli_insert_id($conn);
                 $documents = $_POST['documents'];
         
-                $fileExt = explode('.', $fileName);
-                $fileActualExt = strtolower(end($fileExt));
+                $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+                $fileActualExt = strtolower($fileExt);
         
                 $allowed = array('jpg', 'jpeg', 'png', 'pdf');
         
                 if (in_array($fileActualExt, $allowed)){
                     if($fileError === 0){
                         if ($fileSize < 1000000){
-                            $fileNameNew = uniqid('', true).".".$fileActualExt;
-                            $fileDestination = 'upload/'.$fileNameNew;
+                            $fileNameNew = uniqid($user_name, true).'.'.$fileActualExt;
+                            $fileDestination = './images/'.$fileNameNew;
+                            move_uploaded_file($fileTmpName, $fileDestination);
+                            $image_base64 = base64_encode(file_get_contents($fileName));
+                            $image = 'data:image/'.$fileActualExt.';base64,'.$image_base64;
         
                             if ($documents === "Business Permit") {
                             $sql = "INSERT INTO images(image_url, type, user_ID) 

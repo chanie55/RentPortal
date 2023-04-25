@@ -25,7 +25,7 @@
 
             <div class="container">
                 <div class="content">
-                    <form method = "post" action = "addSeeker.php">
+                    <form method = "post" id = "form" action = "addSeeker.php">
                     <div class="title"><h1>Register</h1></div>
                         <?php
 					        if(isset($_GET['error'])) { ?>
@@ -34,43 +34,118 @@
 							    echo $_GET['error']; ?>
 				        <?php } ?>
 
-                            
-
-                        <div class="input_field">
-                            <label>First Name</label>
-                                <input required type = "text" name = "firstname" class = "input" value = "<?php if (isset($_POST['firstname'])) { echo $_POST['firstname']; }?>"> 
+                        <div class="form-control input_field success">
+                        <label>First Name</label>
+                        <?php if (isset($_GET['firstname'])) { ?>
+                            <input type = "text" 
+                                   name = "firstname" 
+                                   class = "input" 
+                                   id = "firstname"
+                                   value = "<?php echo $_GET['firstname']; ?>"><br>
+                        <?php } else { ?>
+                            <input type = "text" 
+                                   name = "firstname" 
+                                   class = "input"
+                                   id = "firstname"><br>
+                        <?php } ?>
+                        <small> Error Message </small>  
                         </div>
 
-                        <div class="input_field">
-                            <label>Last Name</label>
-                            <input type="text" name = "lastname" class="input"value = "<?php if (isset($_POST['lastname'])) { echo $_POST['lastname']; }?>" required>
+                        <div class="form-control input_field">
+                        <label>Last Name</label>
+                        <?php if (isset($_GET['lastname'])) { ?>
+                            <input required type = "text" 
+                                   name = "lastname" 
+                                   class = "input" 
+                                   id = "lastname"
+                                   value = "<?php echo $_GET['lastname']; ?>"><br>
+                        <?php } else { ?>
+                            <input required type = "text" 
+                                   name = "lastname" 
+                                   class = "input"
+                                   id = "lastname"><br>
+                        <?php } ?>
                         </div>
 
-                        <div class="input_field">
-                            <label for = "email">Email</label>
-                            <input type="email" name = "email" class="input" required>
+                        <div class="form-control input_field">
+                        <label>Email</label>
+                        <?php if (isset($_GET['email'])) { ?>
+                            <input required type = "email" 
+                                   name = "email" 
+                                   class = "input" 
+                                   value = "<?php echo $_GET['email']; ?>"><br>
+                        <?php } else { ?>
+                            <input required type = "text" 
+                                   name = "email" 
+                                   class = "input"><br>
+                        <?php } ?>
                         </div>
 
-                        <div class="input_field">
-                            <label for = "contact">Contact</label>
-                            <input type="tel" name = "contact" class="input" pattern="[0-9]*" required>
+                        <div class="form-control input_field">
+                        <label>Contact</label>
+                        <?php if (isset($_GET['contact'])) { ?>
+                            <input required type = "tel" 
+                                   name = "contact" 
+                                   class = "input" 
+                                   id = "contact"
+                                   value = "<?php echo $_GET['contact']; ?>"><br>
+                        <?php } else { ?>
+                            <input required type = "tel" 
+                                   name = "contact" 
+                                   class = "input"
+                                   id = "contact"><br>
+                        <?php } ?>
                         </div>
 
-                        <div class="input_field">
-                            <label>Username</label>
-                            <input type="text" name = "username" class="input" required>
+                        <div class="form-control input_field">
+                        <label>Username</label>
+                        <?php if (isset($_GET['username'])) { ?>
+                            <input required type = "text" 
+                                   name = "username" 
+                                   class = "input" 
+                                   id = "username"
+                                   value = "<?php echo $_GET['username']; ?>"><br>
+                        <?php } else { ?>
+                            <input required type = "text" 
+                                   name = "username" 
+                                   class = "input"
+                                   id = "username"><br>
+                        <?php } ?>
   
                         </div>
 
-                        <div class="input_field">
-                            <label>Password</label>
-                            <input type="password" name = "password" class="input" required>
-
+                        <div class="form-control input_field">
+                        <label>Password</label>
+                        <?php if (isset($_GET['password'])) { ?>
+                            <input required type = "password" 
+                                   name = "password" 
+                                   class = "input"
+                                   id = "password" 
+                                   value = "<?php echo $_GET['password']; ?>"><br>
+                        <?php } else { ?>
+                            <input required type = "password" 
+                                   name = "password" 
+                                   class = "input"
+                                   id = "password" ><br>
+                        <?php } ?>
+                        
                         </div>
+                        <p> * Password must be atleast 8 characters in length and must contain atleast one number and one upper case letter </p>
 
-                        <div class="input_field">
-                            <label>Confirm Password</label>
-                            <input type="password" name = "password2" class="input" required>
+                        <div class="form-control input_field">
+                        <label>Confirm Password</label>
+                        <?php if (isset($_GET['password2'])) { ?>
+                            <input required type = "password" 
+                                   name = "password2" 
+                                   class = "input"
+                                   id = "password2"  
+                                   value = "<?php echo $_GET['password2']; ?>"><br>
+                        <?php } else { ?>
+                            <input required type = "password" 
+                                   name = "password2" 
+                                   class = "input"
+                                   id = "password2" ><br>
+                        <?php } ?>
                         </div>  
 
                         <div class="button">
@@ -88,5 +163,6 @@
         }
         </script>
 
+        
     </body>
 </html>
