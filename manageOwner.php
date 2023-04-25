@@ -10,7 +10,7 @@
 
         <style>
             <?php
-                include "css/manageAdmin.css"
+                include "css/manageOwner.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -58,19 +58,16 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu2">
                             <li>
-                                <a href="#">Category</a>
+                                <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
-                                <a href="#">Property Status</a>
+                                <a href="propertyInclusion.php">Inclusions</a>
                             </li>
                             <li>
-                                <a href="#">Inclusions</a>
+                                <a href="propertyNP.php">Nearest Place</a>
                             </li>
                             <li>
-                                <a href="#">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="#">Amenities</a>
+                                <a href="propertyAmenities.php">Amenities</a>
                             </li>
                         </ul>
                     </li>
@@ -81,10 +78,10 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu3">
                             <li>
-                                <a href="#">About Us</a>
+                                <a href="adminAboutUs.php">About Us</a>
                             </li>
                             <li>
-                                <a href="#">FAQ</a>
+                                <a href="adminFAQ.php">FAQ</a>
                             </li>
                         </ul>
                     </li>
@@ -95,10 +92,10 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu4">
                             <li>
-                                <a href="#">Visit</a>
+                                <a href="visitRecord.php">Visit</a>
                             </li>
                             <li>
-                                <a href="#">Reservation</a>
+                                <a href="reservationRecord.php">Reservation</a>
                             </li>
                         </ul>
                     </li>
@@ -115,7 +112,7 @@
                                 <a href="propertyList.php">Property List</a>
                             </li>
                             <li>
-                                <a href="#">Analytics</a>
+                                <a href="adminAnalytics.php">Analytics</a>
                             </li>
                         </ul>
                     </li>

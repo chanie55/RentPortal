@@ -1,193 +1,208 @@
-<!DOCTYPE>
-<html> 
-    <head> 
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title> Reports </title>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <title>Report</title>
+	    <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
         <style>
             <?php
                 include "css/propertyList.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     </head>
+    <body>
+    
+    <div class="wrapper">
+        <div class="body-overlay"></div>
 
-    <body> 
-        <div class = "container"> 
-            <div class = "navigation"> 
-                <div class = "logo">
-                <i class='bx bxs-building-house'></i>
-                    <span class = "logo-name"> RENTIN </span>
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><i class='bx bxs-building-house'></i><span>Rentin</span></h3>
                 </div>
 
-                <ul class = "nav-links"> 
-                    <li> 
-                        <a href = "adminDashboard.php"> 
-                        <i class='bx bxs-home'></i>
-                            <span class = "label"> Dashboard </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
+                <ul class="list-unstyled components">
+			        <li  class="active">
+                        <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                    </li>
+		
+		            <div class="small-screen navbar-display">
+                        <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
+				    </div>
+			
+                    <li class="dropdown">
+                        <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-user"></i><span>Manage User</span></a>
+                    
+                        <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+                            <li>
+                                <a href="manageAdmin.php">Admin</a>
+                            </li>
+                            <li>
+                                <a href="manageOwner.php">Owner</a>
+                            </li>
+                        </ul>
+                    </li>
+                
+                    <li class="dropdown">
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                            <li>
+                                <a href="propertyCategory.php">Category</a>
+                            </li>
+                            <li>
+                                <a href="propertyInclusion.php">Inclusions</a>
+                            </li>
+                            <li>
+                                <a href="propertyNP.php">Nearest Place</a>
+                            </li>
+                            <li>
+                                <a href="propertyAmenities.php">Amenities</a>
+                            </li>
+                        </ul>
+                    </li>
+				
+				    <li class="dropdown">
+                        <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-message-detail"></i><span>Pages</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                            <li>
+                                <a href="adminAboutUs.php">About Us</a>
+                            </li>
+                            <li>
+                                <a href="adminFAQ.php">FAQ</a>
+                            </li>
                         </ul>
                     </li>
 
-                    <li> 
-                        <div class = "menu"> 
-                            <i class='bx bxs-user'></i>
-                            <span class = "label"> Manage User 
-                            </span>
-                            <i class='bx bxs-chevron-down arrow'></i> 
+				    <li class="dropdown">
+                        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-notepad"></i><span>Activities</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+                            <li>
+                                <a href="visitRecord.php">Visit</a>
+                            </li>
+                            <li>
+                                <a href="reservationRecord.php">Reservation</a>
+                            </li>
+                        </ul>
+                    </li>
+				
+				    <li class="dropdown">
+                        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                            <li>
+                                <a href="userList.php">User List</a>
+                            </li>
+                            <li>
+                                <a href="propertyList.php">Property List</a>
+                            </li>
+                            <li>
+                                <a href="adminAnalytics.php">Analytics</a>
+                            </li>
+                        </ul>
+                    </li>
+               </ul>   
+            </nav>
+		
+		
+
+            <!-- Page Content  -->
+            <div id="content">
+		
+		        <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
+                            <span class="bx bx-menu-alt-left"></span>
+                        </button>
+					    <a class="navbar-brand" href="#"> Property List </a>
+					
+                        <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
+					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="material-icons">more_vert</span>
+                        </button>
+
+                        <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none" id="navbarSupportedContent">
                         </div>
-
-                        <ul class = "sub-menu"> 
-                            <span class = "sub-menu-title"> Users </span>
-                            <li> <a href = "manageAdmin.php"> Admin </a> </li>
-                            <li> <a href = "manageOwner.php"> Owner </a> </li>
-                        </ul>
-                    </li>
-
-                    <li> 
-                        <div class = "menu"> 
-                        <i class='bx bxs-folder-open' ></i> 
-                            <span class = "label"> View Reports </span>
-                        <i class='bx bxs-chevron-down arrow'></i> 
                         </div>
-
-                        <ul class = "sub-menu"> 
-                            <span class = "sub-menu-title"> Reports </span>
-                            <li> <a href = "userList.php"> User List </a> </li>
-                            <li> <a href = "propertyList.php"> Property List </a> </li>
-                        </ul>
-                    </li>
-
-                    <li> 
-                        <div class = "menu"> 
-                        <i class='bx bxs-folder-open' ></i> 
-                            <span class = "label"> Maintenance </span>
-                        <i class='bx bxs-chevron-down arrow'></i> 
-                        </div>
-
-                        <ul class = "sub-menu"> 
-                            <span class = "sub-menu-title"> Maintenance </span>
-                            <li> <a href = "property.php"> Property </a> </li>
-                            <li> <a href = "reports.php"> Reports </a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <section class = "menu-toggle"> 
-            <div class = "toggle-content"> 
-                <i class = "bx bx-menu"> </i>
-                <span class = "text"> Property List Reports </span> 
-            </div>
-
-            <!-- DATA TABLE -->
-            <div class="container-xl">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="search-box">
-                                    <i class="bx bx-search-alt-2" style="font-size: 18px;"></i>
-                                    <input type="text" class="form-control" placeholder="Search&hellip;">
-                                </div>
+                    </nav>
+	            </div>
+			
+			
+			    <div class="main-content">
+			
+			        <div class="row">
+                        <div class="col-lg-3 col-md-6 col-sm-6">
+                            <div class="card card-stats">
+                                
                             </div>
                         </div>
 
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Property Name</th>
-                                <th>Property Type</th>
-                                <th>Location</th>
-                                <th>Owner</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr>
-                                <td>Khytryn Apartment</td>
-                                <td>Apartment</td>
-                                <td>Not defined</td>
-                                <td>Khytryn Faye Carcillar</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody>
-                        
-                        <tbody>
-                            <tr>
-                                <td>Beverly Commercial Rent</td>
-                                <td>Commercial Building</td>
-                                <td>Not defined</td>
-                                <td>Beverly Jane Gicale</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit" data-toggle="tooltip"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody> 
-
-                        <tbody>
-                            <tr>
-                                <td>AJ Apartment</td>
-                                <td>Apartment</td>
-                                <td>Not defined</td>
-                                <td>Aj Lynn Jusayan</td>
-                                <td>
-                                    <a href="#" class="edit" title="Edit"><i class="bx bxs-edit-alt"></i></a>
-                                    <a href="#" class="delete" title="Delete"><i class="bx bxs-trash-alt"></i></a>
-                                </td>
-                            </tr>       
-                        </tbody>  
-                    </table>
-                    <div class="clearfix">
-                        <div class="hint-text">Showing <b>5</b> out of <b>25</b> entries</div>
-                        <ul class="pagination">
-                            <li class="page-item disabled"><a href="#"><i class="bx bxs-chevron-left"></i></a></li>
-                            <li class="page-item"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item active"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link">5</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="bx bxs-chevron-right"></i></a></li>
-                        </ul>
                     </div>
-                    </div>
-                </div>  
-            </div>
-        </section>
-        
-        
-        <script> 
-        let arrow = document.querySelectorAll(".arrow");
-        
+					
+				<footer class="footer">
+                    <div class="container-fluid">
+				        <div class="row">
+				            <div class="col-md-6">
+				                <p class="copyright d-flex justify-content-end"> 
+                                &copy 2023 Design by Rentin Portal | STI College General Santos
+                                </p>
+				            </div>
+				        </div>
+				    </div>
+                </footer>
+					
+			</div>
+        </div>
+    </div>
 
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=> {
-                let arrowParent = e.target.parentElement.parentElement;
-                console.log(arrowParent);
 
-                arrowParent.classList.toggle("showMenu");
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="js/jquery-3.3.1.slim.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/jquery-3.3.1.min.js"></script>
+  
+  
+  <script type="text/javascript">
+  $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+				$('#content').toggleClass('active');
             });
-        }
+			
+			 $('.more-button,.body-overlay').on('click', function () {
+                $('#sidebar,.body-overlay').toggleClass('show-nav');
+            });
+			
+        });      
+   </script>
+  
+   <!-- Progress Bar -->
+   <script> 
+     const allProgress = document.querySelectorAll('.card .progress');
 
-        let navigation = document.querySelector(".navigation");
-        let menu = document.querySelector(".menu-toggle");
-        let navigationBtn = document.querySelector(".bx-menu");
-        console.log(navigationBtn);
-
-        navigationBtn.addEventListener("click", ()=>{
-            navigation.classList.toggle("close");
-            menu.classList.toggle("close");
-        });
-        </script>
-
-   
-        
-    </body>
+            allProgress.forEach(item => {
+                item.style.setProperty('--value', item.dataset.value)
+            });
+   </script>  
+  </body>
 </html>
+
+

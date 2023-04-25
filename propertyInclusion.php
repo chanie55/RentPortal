@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>Manage User</title>
+        <title>Property Inclusion</title>
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <style>
             <?php
-                include "css/manageAdmin.css"
+                include "css/propertyInclusion.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -95,7 +95,7 @@
                                 <a href="visitRecord.php">Visit</a>
                             </li>
                             <li>
-                                <a href="reservationRecord.php">Reservation</a>
+                                <a href="reservation.php">Reservation</a>
                             </li>
                         </ul>
                     </li>
@@ -130,7 +130,7 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Manage Admin </a>
+					    <a class="navbar-brand" href="#"> Inclusion </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -154,163 +154,6 @@
                         </div>
 
                     </div>
-
-
-            <div class="container-xl">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                                <h2 class="ml-lg-2">Admin List</h2>
-                            </div>
-
-                            <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
-                                <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
-		                        <i class="bx bxs-user-plus"></i> <span>Add</span></a>
-                            </div>
-
-                            <div class="col-sm-4">
-                                <div class="search-box">
-                                    <i class="bx bxs-search-alt-2"></i>
-                                <input type="text" class="form-control" placeholder="Search&hellip;">
-                                </div>
-                            </div>
-                        </div>
-
-                        <table class="table table-striped table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                        <tbody>
-                        <?php
-                            include "dbconn.php";
-                            
-                            if(isset($_GET['page']) && $_GET['page'] !== "") {
-                                $page = $_GET['page'];
-                            } else {
-                                $page = 1;
-                            }
-
-                            $limit = 6;
-                            $offset = ($page - 1) * $limit;
-
-                            $previous = $page - 1;
-                            $next = $page + 1;
-
-                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID WHERE user.userLevel_ID = 1 LIMIT $offset, $limit";
-                            $result = mysqli_query($conn, $sql);
-
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <tr class = "data-row"> 
-                                        <td> <?php echo $row['fullName'] ?> </td>
-                                        <td> <?php echo $row['email'] ?> </td>
-                                        <td>
-                                            <?php
-                                                if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=0"> active </a> </p>';
-                                                } else {
-                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=1"> inactive </a> </p>';
-                                                }
-                                            ?>
-                                        </td>
-                                    </tr>
-                                <?php
-                            }
-                        ?>         
-                        </tbody>    
-                        </table>
-                        <div class="clearfix">
-                
-                        <ul class="pagination">
-                        <?php
-            
-                            $query =  "SELECT COUNT(*) FROM user";
-                            $result_count = mysqli_query($conn, $query);
-                            $records = mysqli_fetch_row($result_count);
-                            $total_records = $records[0];
-
-                            $total_pages = ceil($total_records / $limit);
-                            $link = "";
-
-                        ?>
-        
-
-                        <?php
-                            if ($page >= 2) {
-                                echo "<li class = 'page-item'>
-                                <a class = 'page-link' href = 'manageAdmin.php?page=".($page-1)."'> 
-                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
-                            }
-
-                            for ($counter = 1; $counter <= $total_pages; $counter++){
-                                if ($counter == $page) {
-                                    $link .= "<li class = 'page-item active'>
-                                    <a class = 'page-link' href= 'manageAdmin?page="
-                                    .$counter."'>".$counter." </a></li>";
-                                } else {
-                                    $link .= "<li class = 'page-item'>
-                                    <a class = 'page-link' href='manageAdmin.php?page=".$counter."'> ".$counter." </a> </li>";
-                                }
-                            };
-
-                            echo $link;
-
-                            if($page < $total_pages) {
-                                echo "<li class = 'page-item'>
-                                <a class = 'page-link' href='manageAdmin.php?page=".($page+1)."'>
-                                <i class = 'bx bxs-chevron-right'></i> </a></li>";
-                            }
-                        ?>
-                        </ul>
-                        <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
-                    </div>
-                </div>
-            </div>
-
-        <!-- Edit Modal HTML -->
-<div id="addEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method = "post" action = "addAdmin.php">
-        <div class="modal-header">
-          <h4 class="modal-title">Add Admin</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name = "firstname" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name = "lastname" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name = "email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Username</label>
-            <input type="text" name = "username" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name = "password" class="form-control" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-success" name = "submit-admin" value="Add">
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
 					
 				<footer class="footer">
                     <div class="container-fluid">
