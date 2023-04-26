@@ -61,7 +61,20 @@
                                 <a href="#">Category</a>
                             </li>
                             <li>
-                                <a href="#">Inclusions</a>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="incRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="incKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="incCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="#">Nearest Place</a>
@@ -130,7 +143,7 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Manage Admin </a>
+					    <a class="navbar-brand" href="#"> User List </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -160,12 +173,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                        <h2 class="ml-lg-2">Admin List</h2>
-                    </div>
-
-                    <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center">
-                        <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal">
-		                <i class="bx bxs-user-plus"></i> <span>Add</span></a>
+                        <h2 class="ml-lg-2">User List</h2>
                     </div>
 
                     <div class="col-sm-4">

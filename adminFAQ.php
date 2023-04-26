@@ -59,7 +59,7 @@
                         <ul class="collapse list-unstyled menu" id="pageSubmenu2">
                             <li>
                                 <a href="propertyCategory.php">Category</a>
-                            </li>>
+                            </li>
                             <li>
                                 <a href="propertyInclusion.php">Inclusions</a>
                             </li>

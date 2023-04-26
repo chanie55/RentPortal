@@ -61,7 +61,20 @@
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
-                                <a href="propertyInclusion.php">Inclusions</a>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="incRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="incKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="incCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="propertyNP.php">Nearest Place</a>

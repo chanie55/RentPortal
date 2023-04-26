@@ -57,7 +57,20 @@
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
-                                <a href="propertyInclusion.php">Inclusions</a>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="incRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="incKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="incCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="propertyNP.php">Nearest Place</a>
@@ -282,36 +295,46 @@
                             <div class="card" style="min-height: 485px">
                                 <div class="card-header card-header-text">
                                     <h4 class="card-title">Pending Owner Registration</h4>
-                                    <p class="category">See Detailed Information</p>
+                                    <a href = "manageOwner.php"> <p class="category">See Detailed Information</p> </a>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table table-hover">
                                         <thead class="text-primary">
                                             <tr><th>ID</th>
                                             <th>Name</th>
-                                            <th>Address</th>
+                                            <th>Email</th>
                                         </tr></thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Bob Williams</td>
-                                                <td>$23,566</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Mike Tyson</td>
-                                                <td>$10,200</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Tim Sebastian</td>
-                                                <td>$32,190</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Philip Morris</td>
-                                                <td>$31,123</td>
-                                            </tr>
+                                        <tbody>
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
+
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID WHERE user.userLevel_ID = 2 LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['userInfo_ID'] ?> </td>
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['email'] ?> </td>
+                                        
+                                    </tr>
+                                <?php
+                            }
+                        ?>      
                                         </tbody>
                                     </table>
                                 </div>

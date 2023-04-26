@@ -6,12 +6,15 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['ema
     $last_name = $_POST['lastname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
     $user_name = $_POST['username'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
     $length = strlen ($contact);
 
-    $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact;
+    $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&age='. $age.  '&gender='. $gender.  '&address='. $address;
 
     $uname = "SELECT username FROM user WHERE username = '$user_name'";
     $uname_query = mysqli_query($conn, $uname);
@@ -26,19 +29,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['ema
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
 
-    if (!preg_match ("/^[a-zA-z]*$/", $first_name)) {
-        header("Location: registerSeeker.php?error=Only alphabets and whitespace are required in firstname&$user_data");
-
-    } else if (!preg_match ("/^[a-zA-z]*$/", $last_name)) {
-        header("Location: registerSeeker.php?error=Only alphabets and whitespace are required in lastname&$user_data");
-
-    } else if (!preg_match ("/^[0-9]*$/", $contact)) {
-        header("Location: registerSeeker.php?error=Only numeric value is allowed in contact&$user_data");
-
-    } else if (!preg_match ("/^[0-9]{11}+$/", $contact)) {
-        header("Location: registerSeeker.php?error=Contact must be 11 digits&$user_data");
-
-    } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header("Location: registerSeeker.php?error=Invalid email address&$user_data");
 
     } else if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
@@ -57,8 +48,8 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['ema
         header("Location: registerSeeker.php?error=Password already exists&$user_data");
 
     } else {
-        $sql = "INSERT INTO userinfo(firstname, lastname, email, contact)
-             VALUES ('$first_name', '$last_name', '$email', '$contact')";
+        $sql = "INSERT INTO userinfo(firstname, lastname, email, contact, age, address, gender)
+             VALUES ('$first_name', '$last_name', '$email', '$contact', , '$age', , '$address', , '$gender')";
 
         $result = mysqli_query($conn, $sql);
         $userID = mysqli_insert_id($conn);

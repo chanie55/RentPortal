@@ -3,11 +3,14 @@
     <head> 
         <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
         <title> Register </title>
-        <style>
-            <?php
-                include "css/registerOwner.css"
-            ?>
-        </style>
+        <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+    <?php
+        include "css/registerOwner.css"
+    ?>
+</style>
     </head>
 
     <body> 
@@ -23,30 +26,95 @@
             </nav>
         </header>
 
-            <div class="container">
-                <div class="content">
-                <form method = "post" action = "addOwner.php" enctype="multipart/form-data">
-                    <div class="title"><h1>Register</h1></div>
-                        <div class="input_field">
-                            <label>First Name</label>
-                            <input type="text" name = "firstname" class="input" required>
+        <div class="container">
+            <div class="content">
+                <form method = "post" action = "addOwner.php" class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">First name</label>
+                            <input type="text" name = "firstname" class="form-control" id="validationCustom01" required>
                         </div>
 
-                        <div class="input_field">
-                            <label>Last Name</label>
-                            <input type="text" name = "lastname" class="input" required>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last name</label>
+                            <input type="text" name = "lastname" class="form-control" id="validationCustom02" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-9 mb-3">
+                            <label for="validationCustom03">Email</label>
+                            <input type="email" name = "email" class="form-control" id="validationCustom03" required>
+                            <div class = "invalid-feedback"> 
+                                Invalid email address
+                            </div>
+                        </div>
+                        
+
+                        <div class="col-md-3 mb-3">
+                            <label for="validationCustom04">Age</label>
+                            <input type="text" name = "age" pattern = "[0-9]{2}" class="form-control" id="validationCustom04" required>
+                            <div class = "invalid-feedback"> 
+                                Invalid input
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom05">Address</label>
+                            <input type="text" name = "address" class="form-control" id="validationCustom05" required>
                         </div>
 
-                        <div class="input_field">
-                            <label for = "email">Email</label>
-                            <input type="email" name = "email" class="input" required>
-                        </div>
-
-                        <div class="input_field">
-                            <label for = "contact" >Contact</label>
-                            <input type="tel" name = "contact" class="input" pattern="[0-9]*" required>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom06">Contact</label>
+                            <input type="text" name = "contact" pattern = "[0-9]{11}" class="form-control" id="validationCustom06" required>
+                            <div class = "invalid-feedback"> 
+                                Contact must be 11 digits
+                            </div>
                         </div> 
-    
+                    </div>
+
+                        
+
+                        <fieldset class="form-group row">
+                            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Gender</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Male" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Male
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Female">
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom07">Username</label>
+                                <input type="text" name = "username" class="form-control" id="validationCustom07" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom08">Password</label>
+                                <input type="text" name = "password" class="form-control" id="validationCustom08" required>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom09">Confirm Password</label>
+                                <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
+                            </div>
+                        </div>
+
                         <p class="span"> Property <br> Documents </p>  
                         <div class ="dropdown1">
                             <input type="text" class="textBox" name = "documents" placeholder="Property Documents" readonly>
@@ -56,18 +124,22 @@
                                 <div onclick="show('065')"> 065 BIR</div>
                             </div>
                         </div>
-                        
-                        <?php 
-                            if (isset($_GET['error'])): ?>
-                                <p> <?php echo $_GET['error'] ?> </p>
-                            <?php endif ?>
-                        
+
                         <input type="file" name="my_image">
-                            
-                        <div class="button">
-                            <input type="submit" value="Register" name = "submit-owner" class="btn">
+
+                        <div class="form-group">
+                            <div class="form-check">
+                                <label class="form-check-label" for="invalidCheck">
+                                    Already have an account?
+                                </label>
+                                <label class="form-check-label" for="invalidCheck">
+                                    Forgot Password
+                                </label>
                         </div>
-                    </form>
+                    </div>
+                    
+                    <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
+                </form>
 
                         
                     </div>
@@ -89,5 +161,26 @@
                 }
             
             </script>
+
+<script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
     </body>
 </html>

@@ -61,7 +61,20 @@
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
-                                <a href="propertyInclusion.php">Inclusions</a>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="incRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="incKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="incCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
                             </li>
                             <li>
                                 <a href="propertyNP.php">Nearest Place</a>
@@ -130,11 +143,11 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Manage Admin </a>
+					    <a class="navbar-brand" href="#"> Owner Registration </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="material-icons">more_vert</span>
+                            <span class="material-icons"></span>
                         </button>
 
                         <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none" id="navbarSupportedContent">
@@ -154,6 +167,117 @@
                         </div>
 
                     </div>
+
+                    <div class="container-xl">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+                            <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
+                                <h2 class="ml-lg-2">Owner Registration</h2>
+                            </div>
+
+                            <div class="col-sm-6 p-0 d-flex justify-content-lg-end justify-content-center"> </div>
+
+                            <div class="col-sm-4">
+                                <div class="search-box">
+                                    <i class="bx bxs-search-alt-2"></i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Address</th>
+                                    <th>Property Document</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
+
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, userinfo.address, images.image_url, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID AND user.userLevel_ID = 2 JOIN images ON images.user_ID = user.user_ID LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['email'] ?> </td>
+                                        <td> <?php echo $row['address'] ?> </td>
+                                        <td> <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
+                                        <td>
+                                            
+                                        </td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>         
+                        </tbody>    
+                        </table>
+                        <div class="clearfix">
+                
+                        <ul class="pagination">
+                        <?php
+            
+                            $query =  "SELECT COUNT(*) FROM user";
+                            $result_count = mysqli_query($conn, $query);
+                            $records = mysqli_fetch_row($result_count);
+                            $total_records = $records[0];
+
+                            $total_pages = ceil($total_records / $limit);
+                            $link = "";
+
+                        ?>
+        
+
+                        <?php
+                            if ($page >= 2) {
+                                echo "<li class = 'page-item'>
+                                <a class = 'page-link' href = 'manageOwner.php?page=".($page-1)."'> 
+                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                            }
+
+                            for ($counter = 1; $counter <= $total_pages; $counter++){
+                                if ($counter == $page) {
+                                    $link .= "<li class = 'page-item active'>
+                                    <a class = 'page-link' href= 'manageOwner?page="
+                                    .$counter."'>".$counter." </a></li>";
+                                } else {
+                                    $link .= "<li class = 'page-item'>
+                                    <a class = 'page-link' href='manageOwner.php?page=".$counter."'> ".$counter." </a> </li>";
+                                }
+                            };
+
+                            echo $link;
+
+                            if($page < $total_pages) {
+                                echo "<li class = 'page-item'>
+                                <a class = 'page-link' href='manageOwner.php?page=".($page+1)."'>
+                                <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                            }
+                        ?>
+                        </ul>
+                        <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                    </div>
+                </div>
+            </div>
 					
 				<footer class="footer">
                     <div class="container-fluid">

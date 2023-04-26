@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>Nearest Places</title>
+        <title>Property Amenities</title>
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <style>
             <?php
-                include "css/propertyNP.css"
+                include "css/incCR.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -143,7 +143,7 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Nearest Places </a>
+					    <a class="navbar-brand" href="#"> Comfort Room </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -163,7 +163,7 @@
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <form method = "post" action = ""> 
                                 <div class = "form-group"> 
-                                    <label> Add Place </label>
+                                    <label> Add CR Type </label>
                                     <input type = "text" name = "type" id = "type_0" class = "myInput form-control">
                                 </div>
 
@@ -176,23 +176,12 @@
                         </div>
                     </div>
 
-                    <?php
-                        include "dbconn.php";
-
-                        if (isset($_POST['submit-type'])) {
-                            $type = $_POST['type'];
-
-                            $room_sql = "INSERT INTO places(place) VALUES ('$type')";
-                            $result = mysqli_query($conn, $room_sql);    
-                        }
-                    ?>
-
                     <div class="container-xl">
                         <div class="table-wrapper">
                             <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                                <h2 class="ml-lg-2">Nearest Places</h2>
+                                <h2 class="ml-lg-2">Property Category List</h2>
                             </div>
                         </div>
 
@@ -200,7 +189,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Place</th>
+                                    <th>Type</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -220,17 +209,17 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT * FROM places";
+                            $sql = "SELECT * FROM cr";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr class = "data-row"> 
-                                        <td> <?php echo $row['place_ID'] ?> </td>
-                                        <td> <?php echo $row['place'] ?> </td>
+                                        <td> <?php echo $row['cr_ID'] ?> </td>
+                                        <td> <?php echo $row['cr_Type'] ?> </td>
                                         <td>
                                             <?php
-                                                echo '<p> <a href = "deletetype.php?place_ID='.$row['place_ID'].'"> <i class = "bx bxs-trash-alt"> </i> </a> </p>';
+                                                echo '<p> <a href = "deletetype.php?cr_ID='.$row['cr_ID'].'"> <i class = "bx bxs-trash-alt"> </i> </a> </p>';
                                             ?>
                                         </td>
                                     </tr>
@@ -245,7 +234,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM places";
+                            $query =  "SELECT COUNT(*) FROM cr";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];
@@ -259,18 +248,18 @@
                         <?php
                             if ($page >= 2) {
                                 echo "<li class = 'page-item'>
-                                <a class = 'page-link' href = 'propertyNP.php?page=".($page-1)."'> 
+                                <a class = 'page-link' href = 'incCR.php?page=".($page-1)."'> 
                                 <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
                             }
 
                             for ($counter = 1; $counter <= $total_pages; $counter++){
                                 if ($counter == $page) {
                                     $link .= "<li class = 'page-item active'>
-                                    <a class = 'page-link' href= 'propertyNP?page="
+                                    <a class = 'page-link' href= 'incCR?page="
                                     .$counter."'>".$counter." </a></li>";
                                 } else {
                                     $link .= "<li class = 'page-item'>
-                                    <a class = 'page-link' href='propertyNP.php?page=".$counter."'> ".$counter." </a> </li>";
+                                    <a class = 'page-link' href='incCR.php?page=".$counter."'> ".$counter." </a> </li>";
                                 }
                             };
 
@@ -278,7 +267,7 @@
 
                             if($page < $total_pages) {
                                 echo "<li class = 'page-item'>
-                                <a class = 'page-link' href='propertyNP.php?page=".($page+1)."'>
+                                <a class = 'page-link' href='incCR.php?page=".($page+1)."'>
                                 <i class = 'bx bxs-chevron-right'></i> </a></li>";
                             }
                         ?>

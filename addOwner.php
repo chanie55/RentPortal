@@ -6,13 +6,16 @@ if (isset($_POST['submit-owner'])) {
     $last_name = $_POST['lastname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
     $user_name = $_POST['username'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
     
 
-    $sql = "INSERT INTO userinfo(firstname, lastname, email, contact)
-             VALUES ('$first_name', '$last_name', '$email', '$contact')";
+    $sql = "INSERT INTO userinfo(firstname, lastname, email, contact, age, address, gender)
+             VALUES ('$first_name', '$last_name', '$email', '$contact', '$age', '$address', '$gender')";
 
     $result = mysqli_query($conn, $sql);
     $userID = mysqli_insert_id($conn);
