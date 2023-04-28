@@ -1,18 +1,31 @@
-<?php 
-    if (isset($_POST['submit-address'])) {
-        $address = $_POST["address"];
-        ?>
-            
-        <?php
-    } 
-?>
+<doctype html>
+<html> 
+    <head> 
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <title>Map</title>
+	    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+       
 
-<form method = "POST"> 
 
-<iframe width = "100%" height = "500" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d253884.63365545924!2d124.99269969948995!3d6.137769299408479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x32f79cf31aca6663%3A0xcc2a0e32287d6748!2sGeneral%20Santos%20City%2C%20South%20Cotabato!5e0!3m2!1sen!2sph!4v1681799986969!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    <p> 
-        <input type = "text" name = "address" placeholder = "Enter Address">
-    </p>
+    </head>
 
-    <input type = "submit" name = "submit-address">
-</form>
+    <body> 
+        <div id = "map">
+        </div>
+        <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+    <script> 
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            .openPopup()
+    </script>
+    </body>
+
+</html>
