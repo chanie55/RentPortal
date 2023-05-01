@@ -6,10 +6,11 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['ema
     $last_name = $_POST['lastname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
-    $age = $_POST['age'];
+    $age = $_POST['birthdate'];
     $gender = $_POST['gender'];
+    $barangay = $_POST['barangay'];
+    $stpurok = $_POST['stpurok'];
     $address = $_POST['address'];
-    $user_name = $_POST['username'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
     $length = strlen ($contact);
@@ -56,9 +57,8 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['ema
 
         if($result === TRUE) {
             $sql2 = "INSERT INTO user(username, password, userInfo_ID, status, userLevel_ID)
-                VALUES ('$user_name', '$password', '$userID', 1, 3)";
+                VALUES ('$email', '$password', '$userID', 1, 3)";
             $result2 = mysqli_query($conn, $sql2);
-        
             header("Location: registerSeeker.php?msg=Your account has been registered");
         } else {
             echo "Failed" ;

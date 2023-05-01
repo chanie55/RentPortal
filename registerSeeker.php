@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-9 mb-3">
+                        <div class="col-md-8 mb-3">
                             <label for="validationCustom03">Email</label>
                                 <?php if (isset($_GET['email'])) { ?>
                                     <input required type = "email" 
@@ -91,46 +91,81 @@
                         </div>
                         
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationCustom04">Age</label>
-                                <?php if (isset($_GET['age'])) { ?>
-                                    <input required type = "age" 
-                                    name = "age" 
-                                    class="form-control"
-                                    pattern = "[0-9]{2}" 
-                                    id="validationCustom04"
-                                    value = "<?php echo $_GET['age']; ?>"><br>
+                        <div class="col-md-4 mb-3">
+                            <label for="datepicker">Birth Date</label>
+                                <?php if (isset($_GET['birthdate'])) { ?>
+                                    <input required type = "date" 
+                                    name = "birthdate" 
+                                    class="form-control" 
+                                    width = "276"
+                                    id="datepicker"><br>
                                 <?php } else { ?>
-                                    <input required type = "age" 
-                                    name = "age" 
+                                    <input required type = "date" 
+                                    name = "birthdate" 
                                     class="form-control"
-                                    pattern = "[0-9]{2}"
-                                    id="validationCustom04"><br>
+                                    id="datepicker"><br>
                                 <?php } ?>
+                                <script> 
+                                    $('#datepicker').datepicker({
+                                        uiLibrary: 'bootstrap4'
+                                    });
+                                </script>
                             <div class = "invalid-feedback"> 
                                 Invalid input
                             </div>
                         </div>
                     </div>
+                    
 
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationCustom05">Address</label>
-                                <?php if (isset($_GET['age'])) { ?>
-                                    <input required type = "address" 
-                                    name = "address" 
-                                    class="form-control" 
-                                    id="validationCustom05"
-                                    value = "<?php echo $_GET['address']; ?>"><br>
-                                <?php } else { ?>
-                                    <input required type = "address" 
-                                    name = "address" 
-                                    class="form-control"
-                                    id="validationCustom05"><br>
-                                <?php } ?>
+                            <label for="disabledTextInput">City</label>
+                            <input required type = "text" class="form-control" id="disabledTextInput" placeholder = "General Santos" disabled>           
                         </div>
 
                         <div class="col-md-6 mb-3">
+                            <label for="validationCustom05">Barangay</label>
+                            <select class="custom-select" id="validationCustom05" name = "barangay" required> 
+                            <option selected disabled value="">Choose...</option>
+                            <?php
+                            include "dbconn.php";
+                            
+                            $brgy_query = "SELECT barangay FROM useraddress";
+                            $r = mysqli_query($conn, $brgy_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                
+                                <option > <?php echo $row['barangay']; ?></option>
+                            <?php
+                            }
+                            ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a barangay.
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                            <label for="validationCustom06">Street/Purok</label>
+                                <?php if (isset($_GET['stpurok'])) { ?>
+                                    <input required type = "text" 
+                                    name = "stpurok" 
+                                    class="form-control"
+                                    id="validationCustom06"
+                                    value = "<?php echo $_GET['stpurok']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                    name = "stpurok" 
+                                    class="form-control"
+                                    id="stpurok"><br>
+                                <?php } ?>
+                            <div class = "invalid-feedback"> 
+                                Please provide your street or purok
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Contact</label>
                                 <?php if (isset($_GET['contact'])) { ?>
                                     <input required type = "contact" 
@@ -175,24 +210,6 @@
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom07">Username</label>
-                                <?php if (isset($_GET['username'])) { ?>
-                                    <input required type = "username" 
-                                    name = "username" 
-                                    class="form-control" 
-                                    id="validationCustom07"
-                                    value = "<?php echo $_GET['username']; ?>"><br>
-                                <?php } else { ?>
-                                    <input required type = "username" 
-                                    name = "username" 
-                                    class="form-control"
-                                    id="validationCustom07"><br>
-                                <?php } ?>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
                                 <label for="validationCustom08">Password</label>
                                 <input type="text" name = "password" class="form-control" id="validationCustom08" required>
                             </div>
@@ -201,20 +218,22 @@
                                 <label for="validationCustom09">Confirm Password</label>
                                 <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
                             </div>
-                        </div>
+                        </div><br>
 
+                        <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
+                        <br><br>
                         <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label" for="invalidCheck">
                                     Already have an account?
                                 </label>
-                                <label class="form-check-label" for="invalidCheck">
+                                <label class="form-check-label" for="invalidCheck" style = "float: right;">
                                     Forgot Password
                                 </label>
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
+                    
                 </form>
 
                         
