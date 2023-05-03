@@ -1,21 +1,23 @@
 <?php
 include "dbconn.php";
 
-if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['contact']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['password2'])) {
+if (isset($_POST['submit-seeker'])) {
     $first_name = $_POST['firstname'];
     $last_name = $_POST['lastname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
-    $age = $_POST['birthdate'];
+    $dob = $_POST['birthdate'];
+    $dob = explode("/", $dob);
+    $dob = "$dob[2]-$dob[1]-$dob[0]";
+    
     $gender = $_POST['gender'];
     $barangay = $_POST['barangay'];
     $stpurok = $_POST['stpurok'];
-    $address = $_POST['address'];
     $password = $_POST['password'];
     $password2 = $_POST['password2'];
     $length = strlen ($contact);
 
-    $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&age='. $age.  '&gender='. $gender.  '&address='. $address;
+    $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&birthdate='. $dob.  '&gender='. $gender.  '&address='. $address;
 
     $uname = "SELECT username FROM user WHERE username = '$user_name'";
     $uname_query = mysqli_query($conn, $uname);
@@ -49,8 +51,8 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['ema
         header("Location: registerSeeker.php?error=Password already exists&$user_data");
 
     } else {
-        $sql = "INSERT INTO userinfo(firstname, lastname, email, contact, age, address, gender)
-             VALUES ('$first_name', '$last_name', '$email', '$contact', , '$age', , '$address', , '$gender')";
+        $sql = "INSERT INTO userinfo(firstname, lastname, email, contact, dob, gender)
+             VALUES ('$first_name', '$last_name', '$email', '$contact', '$dob', '$gender')";
 
         $result = mysqli_query($conn, $sql);
         $userID = mysqli_insert_id($conn);

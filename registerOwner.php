@@ -29,31 +29,89 @@
         <div class="container">
             <div class="content">
                 <form method = "post" action = "addOwner.php" class="needs-validation" novalidate>
+                    
+                        <?php
+					        if(isset($_GET['error'])) { ?>
+					            <p class = "error">
+						    <?php
+							    echo $_GET['error']; ?>
+				        <?php } ?>
+
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">First name</label>
-                            <input type="text" name = "firstname" class="form-control" id="validationCustom01" required>
+                                <?php if (isset($_GET['lastname'])) { ?>
+                                    <input required type = "text" 
+                                    name = "firstname" 
+                                    class="form-control" 
+                                    id="validationCustom01"
+                                    value = "<?php echo $_GET['lastname']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                    name = "firstname" 
+                                    class="form-control"
+                                    id="validationCustom01"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your first name
+                            </div>
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom02">Last name</label>
-                            <input type="text" name = "lastname" class="form-control" id="validationCustom02" required>
+                                <?php if (isset($_GET['lastname'])) { ?>
+                                    <input required type = "text" 
+                                    name = "lastname" 
+                                    class="form-control" 
+                                    id="validationCustom02"
+                                    value = "<?php echo $_GET['lastname']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                    name = "lastname" 
+                                    class="form-control"
+                                    id="validationCustom02"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your lastname
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-row">
-                        <div class="col-md-9 mb-3">
+                        <div class="col-md-8 mb-3">
                             <label for="validationCustom03">Email</label>
-                            <input type="email" name = "email" class="form-control" id="validationCustom03" required>
+                                <?php if (isset($_GET['email'])) { ?>
+                                    <input required type = "email" 
+                                    name = "email" 
+                                    class="form-control" 
+                                    id="validationCustom03"
+                                    value = "<?php echo $_GET['email']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "email" 
+                                    name = "email" 
+                                    class="form-control"
+                                    id="validationCustom03"><br>
+                                <?php } ?>
                             <div class = "invalid-feedback"> 
                                 Invalid email address
                             </div>
                         </div>
                         
 
-                        <div class="col-md-3 mb-3">
-                            <label for="validationCustom04">Age</label>
-                            <input type="text" name = "age" pattern = "[0-9]{2}" class="form-control" id="validationCustom04" required>
+                        <div class="col-md-4 mb-3">
+                            <label for="datepicker">Birth Date</label>
+                                <?php if (isset($_GET['birthdate'])) { ?>
+                                    <input required type = "date" 
+                                    name = "birthdate" 
+                                    class="form-control" 
+                                    width = "276"
+                                    id="datepicker"><br>
+                                <?php } else { ?>
+                                    <input required type = "date" 
+                                    name = "birthdate" 
+                                    class="form-control"
+                                    id="datepicker"><br>
+                                <?php } ?>
                             <div class = "invalid-feedback"> 
                                 Invalid input
                             </div>
@@ -62,13 +120,68 @@
 
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
-                            <label for="validationCustom05">Address</label>
-                            <input type="text" name = "address" class="form-control" id="validationCustom05" required>
+                            <label for="disabledTextInput">City</label>
+                            <input required type = "text" class="form-control" id="disabledTextInput" placeholder = "General Santos" disabled>           
                         </div>
 
                         <div class="col-md-6 mb-3">
+                            <label for="validationCustom05">Barangay</label>
+                            <select class="custom-select" id="validationCustom05" name = "barangay" required> 
+                            <option selected disabled value="">Choose...</option>
+                            <?php
+                            include "dbconn.php";
+                            
+                            $brgy_query = "SELECT barangay FROM useraddress";
+                            $r = mysqli_query($conn, $brgy_query);
+
+                            while ($row = mysqli_fetch_array($r)) {
+                                ?>
+                                
+                                <option > <?php echo $row['barangay']; ?></option>
+                            <?php
+                            }
+                            ?>
+                            </select>
+                            <div class="invalid-feedback">
+                                Please select a barangay.
+                            </div>
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                            <label for="validationCustom06">Street/Purok</label>
+                                <?php if (isset($_GET['stpurok'])) { ?>
+                                    <input required type = "text" 
+                                    name = "stpurok" 
+                                    class="form-control"
+                                    id="validationCustom06"
+                                    value = "<?php echo $_GET['stpurok']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                    name = "stpurok" 
+                                    class="form-control"
+                                    id="stpurok"><br>
+                                <?php } ?>
+                            <div class = "invalid-feedback"> 
+                                Please provide your street or purok
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Contact</label>
-                            <input type="text" name = "contact" pattern = "[0-9]{11}" class="form-control" id="validationCustom06" required>
+                                <?php if (isset($_GET['contact'])) { ?>
+                                    <input required type = "contact" 
+                                    name = "contact" 
+                                    class="form-control"
+                                    pattern = "[0-9]{11}" 
+                                    id="validationCustom06"
+                                    value = "<?php echo $_GET['contact']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "contact" 
+                                    name = "contact" 
+                                    class="form-control"
+                                    pattern = "[0-9]{11}"
+                                    id="validationCustom06"><br>
+                                <?php } ?>
                             <div class = "invalid-feedback"> 
                                 Contact must be 11 digits
                             </div>
@@ -98,20 +211,19 @@
 
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
-                                <label for="validationCustom07">Username</label>
-                                <input type="text" name = "username" class="form-control" id="validationCustom07" required>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="col-md-6 mb-3">
                                 <label for="validationCustom08">Password</label>
                                 <input type="text" name = "password" class="form-control" id="validationCustom08" required>
+                                <div class = "invalid-feedback"> 
+                                Please enter your password
+                                </div>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom09">Confirm Password</label>
                                 <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
+                                <div class = "invalid-feedback"> 
+                                Please re-enter your password
+                                </div>
                             </div>
                         </div>
 
@@ -125,20 +237,21 @@
                             </div>
                         </div>
 
-                        <input type="file" name="my_image">
+                        <input type="file" name="my_image"> <br><br>
 
+                        <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
+                        <br> <br>
                         <div class="form-group">
                             <div class="form-check">
                                 <label class="form-check-label" for="invalidCheck">
                                     Already have an account?
                                 </label>
-                                <label class="form-check-label" for="invalidCheck">
+                                <label class="form-check-label" for="invalidCheck" style = "float: right;">
                                     Forgot Password
                                 </label>
                         </div>
                     </div>
                     
-                    <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
                 </form>
 
                         

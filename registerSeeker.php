@@ -51,6 +51,9 @@
                                     class="form-control"
                                     id="validationCustom01"><br>
                                 <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your first name
+                                </div>
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -67,6 +70,9 @@
                                     class="form-control"
                                     id="validationCustom02"><br>
                                 <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your last name
+                                </div>
                         </div>
                     </div>
 
@@ -105,11 +111,6 @@
                                     class="form-control"
                                     id="datepicker"><br>
                                 <?php } ?>
-                                <script> 
-                                    $('#datepicker').datepicker({
-                                        uiLibrary: 'bootstrap4'
-                                    });
-                                </script>
                             <div class = "invalid-feedback"> 
                                 Invalid input
                             </div>
@@ -212,15 +213,21 @@
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom08">Password</label>
                                 <input type="text" name = "password" class="form-control" id="validationCustom08" required>
+                                <div class = "invalid-feedback"> 
+                                Please enter your password
+                                </div>
                             </div>
 
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom09">Confirm Password</label>
                                 <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
+                                <div class = "invalid-feedback"> 
+                                Please re-enter your password
+                                </div>
                             </div>
                         </div><br>
 
-                        <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
+                        <button class="btn btn-primary" type="submit" name = "submit-seeker">Register</button>
                         <br><br>
                         <div class="form-group">
                             <div class="form-check">
