@@ -27,7 +27,7 @@
 
                 <ul class="list-unstyled components">
 			        <li  class="active">
-                        <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="#" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">

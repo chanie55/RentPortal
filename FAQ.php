@@ -1,123 +1,136 @@
-<!DOCTYPE>
-<html> 
-    <head> 
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title> FAQ </title>
-        <style>
-            <?php
-                include "css/FAQ.css"
-            ?>
-        </style>
-        <script scr = "richtext/jquery.richtext.js"> </script>
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    </head>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <title>FAQ</title>
+	    <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
 
-    <body> 
-        <div class = "container"> 
-            <div class = "navigation"> 
-                <div class = "logo">
-                <i class='bx bxs-building-house'></i>
-                    <span class = "logo-name"> RENTIN </span>
+        <link rel="stylesheet" href="css/FAQ.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+    
+    <div class="wrapper">
+        <div class="body-overlay"></div>
+
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><i class='bx bxs-building-house'></i><span>Rentin</span></h3>
                 </div>
 
-                <ul class = "nav-links"> 
-                    <li> 
-                        <a href = "ownerDashboard.php"> 
-                        <i class='bx bxs-home'></i>
-                            <span class = "label"> Dashboard </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "ownerDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
+                <ul class="list-unstyled components">
+			        <li>
+                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                    </li>
+		
+		            <div class="small-screen navbar-display">
+                        <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
+				    </div>
+			
+                    <li class="dropdown">
+                        <a href = "ownerProperty.php">
+					    <i class="bx bxs-user"></i><span>Post Property</span></a>
+                    </li>
+                
+                    <li class="dropdown">
+                        <a href = "ownerVisit.php">
+					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
-                    <li> 
-                        <a href = "ownerProperty.php"> 
-                        <i class='bx bxs-building'></i>
-                            <span class = "label"> Post Property </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
+                    <li class="dropdown">
+                    <a href = "#">
+					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
-                    <li> 
-                        <a href = "ownerVisit.php"> 
-                        <i class='bx bxs-edit-location'></i>
-                            <span class = "label"> Visit Schedule </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "#" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
+                    <li class="active">
+                    <a href = "FAQ.php">
+					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
                     </li>
+               </ul>   
+            </nav>
+		
+		
 
-                    <li> 
-                        <a href = "#"> 
-                        <i class='bx bxs-calendar-exclamation'></i>
-                            <span class = "label"> Reservation </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "#" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
-                    </li>
+            <!-- Page Content  -->
+            <div id="content">
+		
+		        <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
+                            <span class="bx bx-menu-alt-left"></span>
+                        </button>
+					    <a class="navbar-brand" href="#"> FAQ </a>
+					
+                        <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
+					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="material-icons">more_vert</span>
+                        </button>
 
-                    <li> 
-                        <a href = "FAQ.php"> 
-                        <i class='bx bxs-message-rounded-add'></i>
-                            <span class = "label"> FAQ </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "#" class = "sub-menu-title"> FAQ </a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-               
-           
+                        <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">   
+                                <li class="dropdown nav-item active">
+                                    <a href="#" class="nav-link" data-toggle="dropdown">
+                                        <span class="bx bx-user-circle"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Edit Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Logout</a>
+                                        </li>      
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                    </nav>
+	            </div>
 
-        <section class = "menu-toggle"> 
-            <div class = "toggle-content"> 
-                <i class = "bx bx-menu"> </i>
-                <span class = "text"> FAQ </span> 
-            </div>
-            <form method = "post" action = "addFAQ.php">
+            <section class="main-content">
+                <form method = "post" action = "addFAQ.php">
                 <div class="form">
                        <div class="input_field">
                              <label> Enter Question</label>
                              <br>
-                             <br>
                             <input type="text" name = "question" class="input" placeholder="" required>
                         </div>
-                        <br>
-                        <br>
                         <div class="input_field">
                              <label> Enter Answer</label>
-                             <br>
                              <br>
                             <textarea name = "answer" id = "answer" class="input" placeholder="" required> </textarea>
                         </div>
                         <button type="submit" name = "add_FAQ" class="add-new"> Add FAQ </button>
                     </div>
                 </form>
-            </div>
-            <div class="container-xl">
+            <div class="container">
                 <div class="table-wrapper">
                     <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-4">
-                            </div>
-                        </div>
-
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Question</th>
-                                <th>Answer</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="row ">
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card" style="min-height: 485px">
+                                <div class="card-header card-header-text">
+                                    <h4 class="card-title">Frequetly Ask Questions</h4>
+                                    <a href = "manageOwner.php"> <p class="category">See Detailed Information</p> </a>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="text-primary">
+                                            <tr>
+                                            <th>Question</th>
+                                            <th>Answer</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
                         <?php
                             include "dbconn.php";
                             
@@ -196,42 +209,49 @@
                 <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
                     </div>
                     </div>
-                </div>  
-            </div>
+                </div> 
+            </div>      
         </section>
-        
+							
+				<footer class="footer">
+                    <div class="container-fluid">
+				        <div class="row">
+				            <div class="col-md-6">
+				                <p class="copyright d-flex justify-content-end"> 
+                                &copy 2023 Design by Rentin Portal | STI College General Santos
+                                </p>
+				            </div>
+				        </div>
+				    </div>
+                </footer>
+					
+			</div>
+        </div>
+    </div>
 
-        
-        <!-- Menu Toggle -->
-        <script> 
-        let arrow = document.querySelectorAll(".arrow");
-        
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=> {
-                let arrowParent = e.target.parentElement.parentElement;
-                console.log(arrowParent);
 
-                arrowParent.classList.toggle("showMenu");
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="js/jquery-3.3.1.slim.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/jquery-3.3.1.min.js"></script>
+  
+  
+  <script type="text/javascript">
+  $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+				$('#content').toggleClass('active');
             });
-        }
-
-        let navigation = document.querySelector(".navigation");
-        let menu = document.querySelector(".menu-toggle");
-        let navigationBtn = document.querySelector(".bx-menu");
-        console.log(navigationBtn);
-
-        navigationBtn.addEventListener("click", ()=>{
-            navigation.classList.toggle("close");
-            menu.classList.toggle("close");
-        });
-
-        </script>  
-        
-        <!-- Initialize rich text library -->
-        <script> 
-            window.addEventListener("load", function () {
-                $("#answer").richText();
+			
+			 $('.more-button,.body-overlay').on('click', function () {
+                $('#sidebar,.body-overlay').toggleClass('show-nav');
             });
-        </script>
-    </body>
+			
+        });      
+   </script>
+  </body>
 </html>
+
+
