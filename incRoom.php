@@ -77,10 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="propertyAmenities.php">Amenities</a>
+                                <a href="propertyNP.php">GPS</a>
                             </li>
                         </ul>
                     </li>
@@ -124,9 +121,6 @@
                             <li>
                                 <a href="propertyList.php">Property List</a>
                             </li>
-                            <li>
-                                <a href="adminAnalytics.php">Analytics</a>
-                            </li>
                         </ul>
                     </li>
                </ul>   
@@ -167,7 +161,7 @@
                                     <input type = "text" name = "type" id = "type_0" class = "myInput form-control">
                                 </div>
 
-                                <button type = "submit" class = "addType" name = "submit-type"> Save </button>
+                                <button type = "submit" class = "btn-primary addType" name = "submit-type"> Save </button>
 
                                 <div id = "hob"> </div>
                             </form>
@@ -181,7 +175,7 @@
                             <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                                <h2 class="ml-lg-2">Property Category List</h2>
+                                <h2 class="ml-lg-2">Types of Room</h2>
                             </div>
                         </div>
 

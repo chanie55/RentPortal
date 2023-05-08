@@ -169,14 +169,14 @@
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Contact</label>
                                 <?php if (isset($_GET['contact'])) { ?>
-                                    <input required type = "contact" 
+                                    <input required type = "number" 
                                     name = "contact" 
                                     class="form-control"
                                     pattern = "[0-9]{11}" 
                                     id="validationCustom06"
                                     value = "<?php echo $_GET['contact']; ?>"><br>
                                 <?php } else { ?>
-                                    <input required type = "contact" 
+                                    <input required type = "number" 
                                     name = "contact" 
                                     class="form-control"
                                     pattern = "[0-9]{11}"

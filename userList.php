@@ -77,10 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="#">Amenities</a>
+                                <a href="propertyNP.php">GPS</a>
                             </li>
                         </ul>
                     </li>
@@ -91,10 +88,10 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu3">
                             <li>
-                                <a href="#">About Us</a>
+                                <a href="adminAboutUs.php">About Us</a>
                             </li>
                             <li>
-                                <a href="#">FAQ</a>
+                                <a href="adminFAQ.php">FAQ</a>
                             </li>
                         </ul>
                     </li>
@@ -123,9 +120,6 @@
                             </li>
                             <li>
                                 <a href="propertyList.php">Property List</a>
-                            </li>
-                            <li>
-                                <a href="#">Analytics</a>
                             </li>
                         </ul>
                     </li>
@@ -176,15 +170,16 @@
                         <h2 class="ml-lg-2">User List</h2>
                     </div>
 
-                    <div class="col-sm-4">
                     
+                 </div>
+                 <div class="col-sm-4">
                         <div class="search-box">
                             <i class="bx bxs-search-alt-2"></i>
                             <input type="text" class="form-control" placeholder="Search&hellip;">
                         </div>
                     </div>
-                 </div>
             <table class="table table-striped table-hover table-bordered">
+                
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -209,7 +204,7 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.id, user.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -231,9 +226,9 @@
                                         <td>
                                             <?php
                                                 if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=0"> active </a> </p>';
+                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
                                                 } else {
-                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=1"> inactive </a> </p>';
+                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
                                                 }
                                             ?>
                                         </td>

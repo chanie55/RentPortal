@@ -77,10 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="propertyAmenities.php">Amenities</a>
+                                <a href="propertyNP.php">GPS</a>
                             </li>
                         </ul>
                     </li>
@@ -123,9 +120,6 @@
                             </li>
                             <li>
                                 <a href="propertyList.php">Property List</a>
-                            </li>
-                            <li>
-                                <a href="adminAnalytics.php">Analytics</a>
                             </li>
                         </ul>
                     </li>
@@ -214,7 +208,7 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID WHERE user.userLevel_ID = 1 LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.id, user.email, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 1 LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -225,9 +219,9 @@
                                         <td>
                                             <?php
                                                 if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=0"> active </a> </p>';
+                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
                                                 } else {
-                                                    echo '<p> <a href = "status.php?userInfo_ID='.$row['userInfo_ID'].'&status=1"> inactive </a> </p>';
+                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
                                                 }
                                             ?>
                                         </td>
@@ -285,41 +279,139 @@
                 </div>
             </div>
 
-        <!-- Edit Modal HTML -->
+<!-- Edit Modal HTML -->
 <div id="addEmployeeModal" class="modal fade">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <form method = "post" action = "addAdmin.php">
-        <div class="modal-header">
-          <h4 class="modal-title">Add Admin</h4>
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label>First Name</label>
-            <input type="text" name = "firstname" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Last Name</label>
-            <input type="text" name = "lastname" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Email</label>
-            <input type="email" name = "email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Username</label>
-            <input type="text" name = "username" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label>Password</label>
-            <input type="password" name = "password" class="form-control" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-          <input type="submit" class="btn btn-success" name = "submit-admin" value="Add">
-        </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method = "post" action = "addAdmin.php">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Admin</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">First name</label>
+                                <?php if (isset($_GET['lastname'])) { ?>
+                                    <input required type = "text" 
+                                        name = "firstname" 
+                                        class="form-control" 
+                                        id="validationCustom01"
+                                        value = "<?php echo $_GET['lastname']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                        name = "firstname" 
+                                        class="form-control"
+                                        id="validationCustom01"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                    Please provide your first name
+                                </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom02">Last name</label>
+                                <?php if (isset($_GET['lastname'])) { ?>
+                                    <input required type = "text" 
+                                        name = "lastname" 
+                                        class="form-control" 
+                                        id="validationCustom02"
+                                        value = "<?php echo $_GET['lastname']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                        name = "lastname" 
+                                        class="form-control"
+                                        id="validationCustom02"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                    Please provide your last name
+                                </div>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="col-md-8 mb-3">
+                            <label for="validationCustom03">Email</label>
+                                <?php if (isset($_GET['email'])) { ?>
+                                    <input required type = "email" 
+                                    name = "email" 
+                                    class="form-control" 
+                                    id="validationCustom03"
+                                    value = "<?php echo $_GET['email']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "email" 
+                                    name = "email" 
+                                    class="form-control"
+                                    id="validationCustom03"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                    Invalid email address
+                        </div>
+                    </div>
+
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom06">Contact</label>
+                                <?php if (isset($_GET['contact'])) { ?>
+                                    <input required type = "contact" 
+                                    name = "contact" 
+                                    class="form-control"
+                                    pattern = "[0-9]{11}" 
+                                    id="validationCustom06"
+                                    value = "<?php echo $_GET['contact']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "contact" 
+                                    name = "contact" 
+                                    class="form-control"
+                                    pattern = "[0-9]{11}"
+                                    id="validationCustom06"><br>
+                                <?php } ?>
+                            <div class = "invalid-feedback"> 
+                                Contact must be 11 digits
+                            </div>
+                        </div>
+
+                        <fieldset class="form-group row">
+                            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Gender</legend>
+                            <div class="col-sm-10">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Male" checked>
+                                    <label class="form-check-label" for="gridRadios1">
+                                        Male
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="gender" id="gridRadios2" value="Female">
+                                    <label class="form-check-label" for="gridRadios2">
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom08">Password</label>
+                                <input type="text" name = "password" class="form-control" id="validationCustom08" required>
+                                <div class = "invalid-feedback"> 
+                                Please enter your password
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="validationCustom09">Confirm Password</label>
+                                <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
+                                <div class = "invalid-feedback"> 
+                                Please re-enter your password
+                                </div>
+                            </div>
+                        </div>
+            </div>
+
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
+                <input type="submit" class="btn btn-success" name = "submit-admin" value="Add">
+            </div>
       </form>
     </div>
   </div>
@@ -343,7 +435,6 @@
 
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
    <script src="js/jquery-3.3.1.slim.min.js"></script>
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
@@ -372,6 +463,27 @@
                 item.style.setProperty('--value', item.dataset.value)
             });
    </script>  
+
+   <script>
+// Example starter JavaScript for disabling form submissions if there are invalid fields
+(function() {
+  'use strict';
+  window.addEventListener('load', function() {
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    var forms = document.getElementsByClassName('needs-validation');
+    // Loop over them and prevent submission
+    var validation = Array.prototype.filter.call(forms, function(form) {
+      form.addEventListener('submit', function(event) {
+        if (form.checkValidity() === false) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  }, false);
+})();
+</script>
   </body>
 </html>
 

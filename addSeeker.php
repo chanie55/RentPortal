@@ -6,23 +6,23 @@ if (isset($_POST['submit-seeker'])) {
     $last_name = $_POST['lastname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
-    $dob = $_POST['birthdate'];
-    $dob = explode("/", $dob);
-    $dob = "$dob[2]-$dob[1]-$dob[0]";
-    
+    $dob = date('Y-m-d', strtotime($_POST['birthdate']));
+    $age = date('Y') - substr($dob, 0 ,4);
+        if (strtotime(date('Y-m-d')) - strtotime(date('Y') . substr($dob, 4, 6)) < 0) {
+            $age--;
+        }
     $gender = $_POST['gender'];
     $barangay = $_POST['barangay'];
     $stpurok = $_POST['stpurok'];
     $password = $_POST['password'];
+    $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
     $password2 = $_POST['password2'];
     $length = strlen ($contact);
 
     $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&birthdate='. $dob.  '&gender='. $gender.  '&address='. $address;
+    $address = $stpurok .', '. $barangay .', '. 'General Santos City';
 
-    $uname = "SELECT username FROM user WHERE username = '$user_name'";
-    $uname_query = mysqli_query($conn, $uname);
-
-    $em = "SELECT email FROM userinfo WHERE email = '$email'";
+    $em = "SELECT email FROM user WHERE email = '$email'";
     $em_query = mysqli_query($conn, $em);
 
     $pw = "SELECT password FROM user WHERE password = '$password'";
@@ -41,9 +41,6 @@ if (isset($_POST['submit-seeker'])) {
     } else if ($_POST["password"] !== $_POST["password2"]) {
         header("Location: registerSeeker.php?error=Password do not match. Try again.&$user_data");
 
-    } else if (mysqli_num_rows($uname_query) > 0) {
-        header("Location: registerSeeker.php?error=Username is already taken&$user_data");
-
     } else if (mysqli_num_rows($em_query) > 0) {
         header("Location: registerSeeker.php?error=Email is already taken&$user_data");
 
@@ -51,20 +48,37 @@ if (isset($_POST['submit-seeker'])) {
         header("Location: registerSeeker.php?error=Password already exists&$user_data");
 
     } else {
-        $sql = "INSERT INTO userinfo(firstname, lastname, email, contact, dob, gender)
-             VALUES ('$first_name', '$last_name', '$email', '$contact', '$dob', '$gender')";
+        $sql = "INSERT INTO userinfo(firstname, lastname, contact, dob, age, address, gender)
+             VALUES ('$first_name', '$last_name', '$contact', '$dob', '$age', '$address', '$gender')";
 
         $result = mysqli_query($conn, $sql);
-        $userID = mysqli_insert_id($conn);
+        if ($result) {
+            $lastid = mysqli_insert_id($conn);
+            if ($lastid) {
+                $userID = "SE-".$lastid;
+                $query = "UPDATE userinfo SET userinfo_ID = '".$userID."' WHERE id = '".$lastid."'";
+                $res = mysqli_query($conn, $query);
 
-        if($result === TRUE) {
-            $sql2 = "INSERT INTO user(username, password, userInfo_ID, status, userLevel_ID)
-                VALUES ('$email', '$password', '$userID', 1, 3)";
-            $result2 = mysqli_query($conn, $sql2);
-            header("Location: registerSeeker.php?msg=Your account has been registered");
-        } else {
-            echo "Failed" ;
+                if($result === TRUE) {
+                    $sql2 = "INSERT INTO user(email, password, userInfo_ID, status, userLevel_ID)
+                        VALUES ('$email', '$hashed_pw', '$userID', 1, 3)";
+                    $result2 = mysqli_query($conn, $sql2);
+                    if ($result2) {
+                        $userlastid = mysqli_insert_id($conn);
+                        if ($userlastid) {
+                            $userid = "UID_00".$userlastid;
+                            $query2 = "UPDATE user SET user_ID = '".$userid."' WHERE id = '".$userlastid."'";
+                            $res2 = mysqli_query($conn, $query2);
+                        }
+                    }
+                    header("Location: registerSeeker.php?msg=Your account has been registered");
+                } else {
+                    echo "Failed" ;
+                }
+            }
         }
+        
+        
     }   
 }
 ?>

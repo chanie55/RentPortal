@@ -40,12 +40,12 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="validationCustom01">First name</label>
-                                <?php if (isset($_GET['lastname'])) { ?>
+                                <?php if (isset($_GET['firstname'])) { ?>
                                     <input required type = "text" 
                                     name = "firstname" 
                                     class="form-control" 
                                     id="validationCustom01"
-                                    value = "<?php echo $_GET['lastname']; ?>"><br>
+                                    value = "<?php echo $_GET['firstname']; ?>"><br>
                                 <?php } else { ?>
                                     <input required type = "text" 
                                     name = "firstname" 
@@ -169,14 +169,14 @@
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Contact</label>
                                 <?php if (isset($_GET['contact'])) { ?>
-                                    <input required type = "contact" 
+                                    <input required type = "number" 
                                     name = "contact" 
                                     class="form-control"
                                     pattern = "[0-9]{11}" 
                                     id="validationCustom06"
                                     value = "<?php echo $_GET['contact']; ?>"><br>
                                 <?php } else { ?>
-                                    <input required type = "contact" 
+                                    <input required type = "number" 
                                     name = "contact" 
                                     class="form-control"
                                     pattern = "[0-9]{11}"
@@ -209,10 +209,13 @@
                             </div>
                         </fieldset>
 
-                        <div class="form-row">
+                        <div class="form-row password" >
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom08">Password</label>
-                                <input type="text" name = "password" class="form-control" id="validationCustom08" required>
+                                <input type="text" name = "password" class="form-control" id="validationCustom08" aria-describedby = "pwd" required>
+                                    <small id = "pwd" class = "form-text text-muted">
+                                        Must be more than 8 characters long, contain atleast one (1) capital letter and numbers
+                                    </small>
                                 <div class = "invalid-feedback"> 
                                 Please enter your password
                                 </div>
@@ -227,18 +230,61 @@
                             </div>
                         </div>
 
-                        <p class="span"> Property <br> Documents </p>  
-                        <div class ="dropdown1">
-                            <input type="text" class="textBox" name = "documents" placeholder="Property Documents" readonly>
-                            <div class="option">
-                                <div onclick="show('Business Permit')"> Business Permit </div>
-                                <div onclick="show('DTI')"> DTI </div>
-                                <div onclick="show('065')"> 065 BIR</div>
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label> <strong> Choose atleast one (1) Property Documents </strong> </label> 
+                      
+                                <div class = "form-group form-check">
+                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <label for = "validationCustom09"> Business Permit </label>
+                                </div>
+
+                                <div class = "form-group form-check">
+                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <label for = "validationCustom09"> DTI </label>
+                                </div>
+
+                                <div class = "form-group form-check">
+                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <label for = "validationCustom09"> 0605 BIR Form </label>
+                                </div>
+
+                                <div class = "form-group form-check">
+                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <label for = "validationCustom09"> Others </label>
+                                </div>
+                                
+                                <!--<label> <strong> Upload Copy: </strong> </label>
+                                    <button class="btn-primary" type="button" name = "upload-image" data-toggle = "modal" data-target = "#addEmployeeModal">Upload Image</button>-->
                             </div>
                         </div>
 
-                        <input type="file" name="my_image"> <br><br>
+                        <!-- Upload Multiple Image-->
+                        <div class = "card"> 
+                            <div class = "top"> 
+                                <p> Upload your documents here </p>
+                            </div>
 
+                            <div class = "drag-area drop-section"> 
+                                <span class = "visible"> Upload your image here
+                                    <span class = "select file-selector" role = "button"> Browse </span> 
+                                </span>
+
+                                <span class = "on-drop"> Drop images here </span>
+                                    <input name = "file" type = "file" class = "file[] file-selector-input" multiple />
+                            </div>
+
+                            <div class="list-section">
+                                <div class="list-title">Uploaded Files</div>
+                                <div class="list"></div>
+                            </div>
+                        </div>
+                        <br>
+
+                        <label> <strong> Upload Valid ID: </strong></label>
+                        <input type = "file" name = "valid-ID"/>
+                        <br>
+                        <br>
                         <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
                         <br> <br>
                         <div class="form-group">
@@ -263,7 +309,8 @@
                    
                  </form>
                 </div>
-         </div>  
+         </div> 
+					
          <script>
             function show(anything){
                 document.querySelector('.textBox') .value = anything;
@@ -275,25 +322,99 @@
             
             </script>
 
-<script>
-// Example starter JavaScript for disabling form submissions if there are invalid fields
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.getElementsByClassName('needs-validation');
-    // Loop over them and prevent submission
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
-</script>
+        <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+        })();
+        </script>
+
+        <!-- Store Image -->
+        <script> 
+            const dragArea = document.querySelector('.drag-area')
+            const listSection = document.querySelector('.list-section')
+            const listContainer = document.querySelector('.list')
+            const fileSelector = document.querySelector('.select')
+            const fileSelectorInput = document.querySelector('.file-selector-input')
+
+            fileSelector.onclick = () => fileSelectorInput.click()
+            fileSelectorInput.onchange = () => {
+                [...fileSelectorInput.files].forEach((file) => {
+                    if(typeValidation(file.type)){
+                        uploadFile(file)
+                    }
+                })
+            }
+
+            function typeValidation(type){
+                var splitType = type.split('/')[0]
+                    if(type == 'application/pdf' || splitType == 'image' || splitType == 'video'){
+                        return true
+                    }
+            }
+
+            function uploadFile(file){
+                listSection.style.display = 'block'
+                var li = document.createElement('li')
+                    li.classList.add('in-prog')
+                    li.innerHTML = `
+                        <div class="col">
+                            <img src="icons/${iconSelector(file.type)}" alt="">
+                        </div>
+                        <div class="col">
+                            <div class="file-name">
+                                <div class="name">${file.name}</div>
+                                <span>0%</span>
+                            </div>
+                        <div class="file-progress">
+                            <span></span>
+                        </div>
+                        <div class="file-size">${(file.size/(1024*1024)).toFixed(2)} MB</div>
+                        </div>
+                        <div class="col">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="cross" height="20" width="20"><path d="m5.979 14.917-.854-.896 4-4.021-4-4.062.854-.896 4.042 4.062 4-4.062.854.896-4 4.062 4 4.021-.854.896-4-4.063Z"/></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="tick" height="20" width="20"><path d="m8.229 14.438-3.896-3.917 1.438-1.438 2.458 2.459 6-6L15.667 7Z"/></svg>
+                        </div>
+                        `
+
+                listContainer.prepend(li)
+                var http = new XMLHttpRequest()
+                var data = new FormData()
+                data.append('file', file)
+                http.onload = () => {
+                    li.classList.add('complete')
+                    li.classList.remove('in-prog')
+                }
+                http.upload.onprogress = (e) => {
+                    var percent_complete = (e.loaded / e.total)*100
+                    li.querySelectorAll('span')[0].innerHTML = Math.round(percent_complete) + '%'
+                    li.querySelectorAll('span')[1].style.width = percent_complete + '%'
+                }
+                http.open('POST', 'addOwner.php', true)
+                http.send(data)
+                li.querySelector('.cross').onclick = () => http.abort()
+                http.onabort = () => li.remove()
+            }
+
+            function iconSelector(type){
+            var splitType = (type.split('/')[0] == 'application') ? type.split('/')[1] : type.split('/')[0];
+            return splitType + '.png'
+            }
+    
+        </script>
     </body>
 </html>

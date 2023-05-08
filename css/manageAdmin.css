@@ -532,6 +532,11 @@ a:focus {
 .modal form label{
     font-weight:normal;
 }
+
+.modal .form-row{
+    padding-left: 10px;
+    padding-right: 10px;
+}
    
    
    

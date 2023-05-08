@@ -77,10 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="propertyAmenities.php">Amenities</a>
+                                <a href="propertyNP.php">GPS</a>
                             </li>
                         </ul>
                     </li>
@@ -123,9 +120,6 @@
                             </li>
                             <li>
                                 <a href="propertyList.php">Property List</a>
-                            </li>
-                            <li>
-                                <a href="adminAnalytics.php">Analytics</a>
                             </li>
                         </ul>
                     </li>
