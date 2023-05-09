@@ -61,7 +61,7 @@
                 <form action="userLogin.php" method="post">
                     <div class="form">
                         <i class='bx bx-user' class="icon"></i>
-                        <input type="text" name="username" id="username" placeholder="Username">
+                        <input type="text" name="email" id="email" placeholder="Email">
                     </div>
                     <br>
 

@@ -77,10 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="propertyAmenities.php">Amenities</a>
+                                <a href="propertyNP.php">GPS</a>
                             </li>
                         </ul>
                     </li>
@@ -123,9 +120,6 @@
                             </li>
                             <li>
                                 <a href="propertyList.php">Property List</a>
-                            </li>
-                            <li>
-                                <a href="adminAnalytics.php">Analytics</a>
                             </li>
                         </ul>
                     </li>
@@ -193,6 +187,7 @@
                                     <th>Email</th>
                                     <th>Address</th>
                                     <th>Property Document</th>
+                                    <th>Valid ID</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -212,7 +207,7 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.userInfo_ID, userinfo.email, userinfo.address, images.image_url, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userInfo_ID AND user.userLevel_ID = 2 JOIN images ON images.user_ID = user.user_ID LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.address, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 2 LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -221,7 +216,11 @@
                                         <td> <?php echo $row['fullName'] ?> </td>
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> <?php echo $row['address'] ?> </td>
-                                        <td> <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
+                                        <td> 
+                                            <button class = "btn btn-primary view-document" type = "button"> View </button> 
+                                        </td>
+                                        <td> 
+                                            <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
                                         <td>
                                             
                                         </td>

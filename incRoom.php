@@ -77,10 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">Nearest Place</a>
-                            </li>
-                            <li>
-                                <a href="propertyAmenities.php">Amenities</a>
+                                <a href="propertyNP.php">GPS</a>
                             </li>
                         </ul>
                     </li>
@@ -124,9 +121,6 @@
                             <li>
                                 <a href="propertyList.php">Property List</a>
                             </li>
-                            <li>
-                                <a href="adminAnalytics.php">Analytics</a>
-                            </li>
                         </ul>
                     </li>
                </ul>   
@@ -162,12 +156,37 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <form method = "post" action = ""> 
-                                <div class = "form-group"> 
+                            <div class = "form-group"> 
                                     <label> Add Room Type </label>
-                                    <input type = "text" name = "type" id = "type_0" class = "myInput form-control">
+                                    <input type = "text" name = "room-type" id = "type_0" class = "myInput form-control">
                                 </div>
 
-                                <button type = "submit" class = "addType" name = "submit-type"> Save </button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm">
+                                    Save
+                                </button>
+
+                                <!-- Confirm Add Modal -->
+                                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to add this property category?</p>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" name = "submit-type">Confirm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div id = "hob"> </div>
                             </form>
@@ -176,12 +195,27 @@
                         </div>
                     </div>
 
+                    <?php
+                        include "dbconn.php";
+
+                        if (isset($_POST['submit-type'])) {
+                            $type = $_POST['room-type'];
+
+                            $cat_sql = "INSERT INTO room(status, room_Type) VALUES (1, '$type')";
+                            $result = mysqli_query($conn, $cat_sql);    
+                            if ($result === TRUE) {
+                                 echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
+                            }
+                           
+                        }
+                    ?>
+
                     <div class="container-xl">
                         <div class="table-wrapper">
                             <div class="table-title">
                         <div class="row">
                             <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
-                                <h2 class="ml-lg-2">Property Category List</h2>
+                                <h2 class="ml-lg-2">Types of Room</h2>
                             </div>
                         </div>
 

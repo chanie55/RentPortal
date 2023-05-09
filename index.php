@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.php" class="nav-item nav-link active">Home</a>
-                        <a href="#" class="nav-item nav-link">About</a>
+                        <a href="aboutUs.php" class="nav-item nav-link">About</a>
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     </div>
                     <div class = "dropdown">
@@ -166,19 +166,6 @@
                             <h1 class="mb-3">Property Listing</h1>
                             <p>Below are some of the available properties for rent.</p>
                         </div>
-                    </div>
-                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
-                            <li class="nav-item me-2">
-                                <a class="btn btn-outline-primary active" data-bs-toggle="pill" href="#tab-1">Featured</a>
-                            </li>
-                            <li class="nav-item me-2">
-                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-2">For Sell</a>
-                            </li>
-                            <li class="nav-item me-0">
-                                <a class="btn btn-outline-primary" data-bs-toggle="pill" href="#tab-3">For Rent</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
                 <div class="tab-content">

@@ -6,24 +6,39 @@ if (isset($_POST['submit-admin'])) {
     $last_name = $_POST['lastname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
-    $user_name = $_POST['username'];
+    $gender = $_POST['gender'];
     $password = $_POST['password'];
     
 
-    $sql = "INSERT INTO userinfo(firstname, lastname, email, contact)
-             VALUES ('$first_name', '$last_name', '$email', '$contact')";
+    $sql = "INSERT INTO userinfo(firstname, lastname, contact, gender)
+             VALUES ('$first_name', '$last_name', '$contact', '$gender')";
 
-    $result = mysqli_query($conn, $sql);
-    $userID = mysqli_insert_id($conn);
+        $result = mysqli_query($conn, $sql);
+        if ($result) {
+            $lastid = mysqli_insert_id($conn);
+            if ($lastid) {
+                $userID = "AD-".$lastid;
+                $query = "UPDATE userinfo SET userinfo_ID = '".$userID."' WHERE id = '".$lastid."'";
+                $res = mysqli_query($conn, $query);
 
-    if($result === TRUE) {
-        $sql2 = "INSERT INTO user(username, password, userInfo_ID, status, userLevel_ID)
-                VALUES ('$user_name', '$password', '$userID', 1, 1)";
-        $result2 = mysqli_query($conn, $sql2);
+                if($result === TRUE) {
+                    $sql2 = "INSERT INTO user(email, password, userInfo_ID, status, userLevel_ID)
+                        VALUES ('$email', '$password', '$userID', 1, 1)";
+                    $result2 = mysqli_query($conn, $sql2);
+                    if ($result2) {
+                        $userlastid = mysqli_insert_id($conn);
+                        if ($userlastid) {
+                            $userid = "UID_00".$userlastid;
+                            $query2 = "UPDATE user SET user_ID = '".$userid."' WHERE id = '".$userlastid."'";
+                            $res2 = mysqli_query($conn, $query2);
+                        }
+                    }
         
         header("Location: manageAdmin.php?msg=User added successfully");
     } else {
         echo "Failed" ;
     }
+}
+        }
 }
 ?>

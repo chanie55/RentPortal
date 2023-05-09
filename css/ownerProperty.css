@@ -459,3 +459,10 @@ footer .copyright {
     border: none;
     color: var(--white);
 }
+
+.containers {
+    min-width: 10%;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
+}

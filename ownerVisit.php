@@ -1,87 +1,139 @@
-<!DOCTYPE>
-<html> 
-    <head> 
-        <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
-        <title> Owner Dashboard </title>
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+        <title>Dashboard</title>
+	    <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+
         <style>
             <?php
                 include "css/ownerVisit.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
     </head>
+    <body>
+    
+    <div class="wrapper">
+        <div class="body-overlay"></div>
 
-    <body> 
-        <div class = "container"> 
-            <div class = "navigation"> 
-                <div class = "logo">
-                <i class='bx bxs-building-house'></i>
-                    <span class = "logo-name"> RENTIN </span>
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3><i class='bx bxs-building-house'></i><span>Rentin</span></h3>
                 </div>
 
-                <ul class = "nav-links"> 
-                    <li> 
-                        <a href = "ownerDashboard.php"> 
-                        <i class='bx bxs-home'></i>
-                            <span class = "label"> Dashboard </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "ownerDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
+                <ul class="list-unstyled components">
+			        <li>
+                        <a href="#" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                    </li>
+		
+		            <div class="small-screen navbar-display">
+                        <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
+				    </div>
+			
+                    <li class="dropdown">
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                            <li>
+                                <a href="ownerProperty.php">Post Property</a>
+                            </li>
+                            <li>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Manage Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="ownerRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="ownerKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="ownerCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
-
-                    <li> 
-                        <a href = "ownerProperty.php"> 
-                        <i class='bx bxs-building'></i>
-                            <span class = "label"> Post Property </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
+                
+                    <li class="active">
+                        <a href = "ownerVisit.php">
+					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
-                    <li> 
-                        <a href = "ownerVisit.php"> 
-                        <i class='bx bxs-edit-location'></i>
-                            <span class = "label"> Visit Schedule </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
+                    <li class="dropdown">
+                    <a href = "#">
+					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
-                    <li> 
-                        <a href = "#"> 
-                        <i class='bx bxs-calendar-exclamation'></i>
-                            <span class = "label"> Reservation </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
+                    <li class="dropdown">
+                    <a href = "FAQ.php">
+					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                            <li>
+                                <a href="#">Property List</a>
+                            </li>
                         </ul>
                     </li>
+               </ul>   
+            </nav>
+		
+		
 
-                    <li> 
-                        <a href = "FAQ.php"> 
-                        <i class='bx bxs-message-rounded-add'></i>
-                            <span class = "label"> FAQ </span>
-                        </a>
-                        <ul class = "sub-menu blank"> 
-                            <li> <a href = "adminDashboard.php" class = "sub-menu-title"> Dashboard </a> </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
+            <!-- Page Content  -->
+            <div id="content">
+		
+		        <div class="top-navbar">
+                    <nav class="navbar navbar-expand-lg">
+                        <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
+                            <span class="bx bx-menu-alt-left"></span>
+                        </button>
+					    <a class="navbar-brand" href="#"> Visit Schedule </a>
+					
+                        <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
+					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="material-icons">more_vert</span>
+                        </button>
 
-        <section class = "menu-toggle"> 
-            <div class = "toggle-content"> 
-                <i class = "bx bx-menu"> </i>
-                <span class = "text"> Visit Schedule </span> 
-            </div>
+                        <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">   
+                                <li class="dropdown nav-item active">
+                                    <a href="#" class="nav-link" data-toggle="dropdown">
+                                        <span class="bx bx-user-circle"></span>
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="#">Edit Profile</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Logout</a>
+                                        </li>      
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                    </nav>
+	            </div>
 
-            <!--Calendar Start-->
+                <!-- calendar -->
 
-            <div class = "calendar-container"> 
+                <div class = "calendar-container"> 
                 <div class = "left"> 
                     <div class = "calendar"> 
                         <div class = "month"> 
@@ -99,11 +151,8 @@
                             <div> fri </div>
                             <div> sat </div>
                         </div>
-
-                        <div class = "days"> 
-                            
+                        <div class = "days">      
                         </div>
-
                         <div class = "goto-today"> 
                             <div class = "goto"> 
                                 <input type = "text" placeholder = "mm/yyyy" class = "date-input"> </input>
@@ -119,42 +168,52 @@
                         <div class = "event-day"> Wed </div>
                         <div class = "event-date"> 19 April 2023</div>
                     </div>
-
-                    <div class = "events"> 
-                        
-                    </div>
-                    
+                    <div class = "events">      
+                    </div>                    
                 </div>
             </div>
 
-        </section>
-        
-        <!-- Menu Toggle -->
-        <script> 
-        let arrow = document.querySelectorAll(".arrow");
-        
-        for (var i = 0; i < arrow.length; i++) {
-            arrow[i].addEventListener("click", (e)=> {
-                let arrowParent = e.target.parentElement.parentElement;
-                console.log(arrowParent);
+							
+				<footer class="footer">
+                    <div class="container-fluid">
+				        <div class="row">
+				            <div class="col-md-6">
+				                <p class="copyright d-flex justify-content-end"> 
+                                &copy 2023 Design by Rentin Portal | STI College General Santos
+                                </p>
+				            </div>
+				        </div>
+				    </div>
+                </footer>
+					
+			</div>
+        </div>
+    </div>
 
-                arrowParent.classList.toggle("showMenu");
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="js/jquery-3.3.1.slim.min.js"></script>
+   <script src="js/popper.min.js"></script>
+   <script src="js/bootstrap.min.js"></script>
+   <script src="js/jquery-3.3.1.min.js"></script>
+  
+  
+  <script type="text/javascript">
+  $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+				$('#content').toggleClass('active');
             });
-        }
+			
+			 $('.more-button,.body-overlay').on('click', function () {
+                $('#sidebar,.body-overlay').toggleClass('show-nav');
+            });
+			
+        });      
+   </script>
 
-        let navigation = document.querySelector(".navigation");
-        let menu = document.querySelector(".menu-toggle");
-        let navigationBtn = document.querySelector(".bx-menu");
-        console.log(navigationBtn);
-
-        navigationBtn.addEventListener("click", ()=>{
-            navigation.classList.toggle("close");
-            menu.classList.toggle("close");
-        });
-        </script>
-
-        <!--Calendar Days-->
-        <script> 
+<script> 
             const calendar = document.querySelector(".calendar"),
                 date = document.querySelector(".date"),
                 daysContainer = document.querySelector(".days"),
@@ -288,6 +347,7 @@
                 alert("Invalid date");
             }
         </script>
-        
-    </body>
+  </body>
 </html>
+
+

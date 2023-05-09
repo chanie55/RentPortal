@@ -8,7 +8,11 @@
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="css/ownerProperty.css">
+        <style>
+            <?php
+                include "css/ownerProperty.css"
+            ?>
+        </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,16 +31,38 @@
 
                 <ul class="list-unstyled components">
 			        <li>
-                        <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
                         <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
 				    </div>
 			
-                    <li class="active">
-                        <a href = "ownerProperty.php">
-					    <i class="bx bxs-user"></i><span>Post Property</span></a>
+                    <li class="dropdown">
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                            <li>
+                                <a href="ownerProperty.php">Post Property</a>
+                            </li>
+                            <li>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Manage Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="ownerRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="ownerKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="ownerCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 
                     <li>
@@ -52,6 +78,16 @@
                     <li>
                     <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                            <li>
+                                <a href="#">Property List</a>
+                            </li>
+                        </ul>
                     </li>
                </ul>   
             </nav>
@@ -95,138 +131,141 @@
                     </nav>
 	            </div>
 
-                <!--- Form -->
-                <form class="needs-validation" novalidate>
-                <div class="container">
-            <div class="content">
-                <div class="form-row">
-                <div class="form-row col-md-7 mb-3">
-                            <label for="validationCustom"> Property Name </label>
-                            <input type="text" name = "propertyname" class="form-control" id="validationCustom" required>
+                <div class = "main-content">
+
+                    <div class = "containers" style = "margin-top: 10px;">
+                        <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
+                            <h4 class = "text-left"> Add Property Details </h4>
+                            <br>
+                            <br>
                         </div>
+                        <!--- Form -->
+                        <form class="needs-validation" novalidate>
+                            <div class="container">
+                                <div class="content">
+                                    <div class="form-row">
+                                        <div class="form-row col-md-7 mb-3">
+                                            <label for="validationCustom"> Property Name </label>
+                                            <input type="text" name = "propertyname" class="form-control" id="validationCustom" required>
+                                        </div>
                         
-                        <div class="col">
-                            <label for="validationCustom00">Property Type</label>
-                            <select class="form-control">
-                            <option>Residential</option>
-                            <option>Commercial</option>
-                        <?php
-                            include "dbconn.php";
+                                        <div class="col">
+                                            <label for="validationCustom00">Property Type</label>
+                                            <select class="form-control">
+                                                <?php
+                                                    include "dbconn.php";
                             
-                            $name_query = "SELECT property FROM propertytype";
-                            $r = mysqli_query($conn, $name_query);
+                                                    $name_query = "SELECT property FROM propertytype";
+                                                    $r = mysqli_query($conn, $name_query);
 
-                            while ($row = mysqli_fetch_array($r)) {
-                                ?>
-                                <option> <?php echo $row['property']; ?></option>
-                            <?php
-                            }
-                            ?>
-                    </select>
-                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                        </div>
-                </div>
+                                                    while ($row = mysqli_fetch_array($r)) {
+                                                    ?>
+                                                    <option> <?php echo $row['property']; ?></option>
+                                                    <?php
+                                                    }
+                                                ?>
+                                            </select>
+                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
+                                        </div>
+                                    </div>
                         
 
-                    <div class="form-row">
-                        <div class="col mb-3">
-                            <label for="validationCustom01"> Address </label>
-                            <a href = "viewmap.php"><i class = "bx bxs-edit-location"> </i></a>
-                            <input type="text" name = "address" class="form-control" id="validationCustom01" required>
+                                    <div class="form-row">
+                                        <div class="col mb-3">
+                                            <label for="validationCustom01"> Address </label>
+                                            <a href = "viewmap.php"><i class = "bx bxs-edit-location"> </i></a>
+                                            <input type="text" name = "address" class="form-control" id="validationCustom01" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="validationCustom02">Email</label>
+                                            <input type="email" name = "email" class="form-control" id="validationCustom02" required>
+                                            <div class = "invalid-feedback"> 
+                                                Invalid email address
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="validationCustom03">Contact</label>
+                                            <input type="number" name = "contact" pattern = "[0-9]{11}" class="form-control" id="validationCustom03" required>
+                                            <div class = "invalid-feedback"> 
+                                                Contact must be 11 digits
+                                            </div>
+                                        </div> 
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label for="validationCustom04">Montly Rate</label>
+                                            <input type="text" name = "monthlyrate" class="form-control" id="validationCustom04" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label for="validationCustom05">Total Rooms</label>
+                                            <input type="text" name = "totalrooms" pattern = "[0-9]{11}" class="form-control" id="validationCustom05" required>
+                                        </div> 
+
+                                        <div class="col">
+                                            <label>Room Type</label>
+                                            <select class="form-control">
+                                                <option>...</option>
+                                                <option>...</option>
+                                            </select>
+                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-3">
+                                            <label>Bed Type</label>
+                                            <select class="form-control">
+                                                <option>...</option>
+                                                <option>...</option>
+                                            </select>
+                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label>Kitchen Type</label>
+                                            <select class="form-control">
+                                                <option>...</option>
+                                                <option>...</option>
+                                            </select>
+                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
+                                        </div>
+
+                                        <div class="col">
+                                            <label>Comfort Room Type</label>
+                                            <select class="form-control">
+                                                <option>...</option>
+                                                <option>...</option>
+                                            </select>
+                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="col-md-12 mb-3">
+                                            <label for="validationCustom07"> Description </label>
+                                            <textarea type="text" name = "description" class="form-control" id="validationCustom07" required></textarea>
+                                        </div>
+                                    </div>
+
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlFile1"> Photos of Property </label>
+                                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                                        </div>
+                                    </form>
+                            </form>
+
+                            <button class="form-btn btn btn-cancel cancel" onclick="closeAdd()">Cancel</button>
+                            <button class="form-btn btn btn-primary" onclick="" name = "submit-tenant">Add</button>
                         </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom02">Email</label>
-                            <input type="email" name = "email" class="form-control" id="validationCustom02" required>
-                        <div class = "invalid-feedback"> 
-                                Invalid email address
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-                            <label for="validationCustom03">Contact</label>
-                            <input type="number" name = "contact" pattern = "[0-9]{11}" class="form-control" id="validationCustom03" required>
-                            <div class = "invalid-feedback"> 
-                                Contact must be 11 digits
-                            </div>
-                        </div> 
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                            <label for="validationCustom04">Montly Rate</label>
-                            <input type="text" name = "monthlyrate" class="form-control" id="validationCustom04" required>
-                        </div>
-
-                        <div class="col">
-                            <label for="validationCustom05">Total Rooms</label>
-                            <input type="text" name = "totalrooms" pattern = "[0-9]{11}" class="form-control" id="validationCustom05" required>
-                        </div> 
-
-                        <div class="col">
-                            <label>Room Type</label>
-                            <select class="form-control">
-                            <option>...</option>
-                            <option>...</option>
-                            </select>
-                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-md-4 mb-3">
-                        <label>Bed Type</label>
-                            <select class="form-control">
-                            <option>...</option>
-                            <option>...</option>
-                            </select>
-                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                        </div>
-
-                        <div class="col">
-                        <label>Kitchen Type</label>
-                            <select class="form-control">
-                            <option>...</option>
-                            <option>...</option>
-                            </select>
-                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                        </div>
-
-                        <div class="col">
-                        <label>Comfortroom Type</label>
-                            <select class="form-control">
-                            <option>...</option>
-                            <option>...</option>
-                            </select>
-                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                        </div>
-                        
-                        <div class="col">
-                        <label for="validationCustom06">Landmark</label>
-                        <input type="text" name = "landmark"  class="form-control" id="validationCustom06" required>
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="col-md-12 mb-3">
-                            <label for="validationCustom07"> Description </label>
-                            <textarea type="text" name = "description" class="form-control" id="validationCustom07" required></textarea>
-                        </div>
-                    </div>
-
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1"> Photos of Property </label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                    </form>
-                        </form>
-
-                    <button class="form-btn btn btn-cancel cancel" onclick="closeAdd()">Cancel</button>
-                <button class="form-btn btn btn-primary" onclick="" name = "submit-tenant">Add</button>
-
+                    </div>   
+                </div>             
 							
 				<footer class="footer">
                     <div class="container-fluid">
