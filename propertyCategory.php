@@ -182,7 +182,7 @@
 
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary addType" name = "submit-type">Confirm</button>
+                                                <button type="submit" class="btn btn-primary" name = "submit-type">Confirm</button>
                                             </div>
                                         </div>
                                     </div>
@@ -201,9 +201,12 @@
                         if (isset($_POST['submit-type'])) {
                             $type = $_POST['type'];
 
-                            $room_sql = "INSERT INTO propertytype(property) VALUES ('$type')";
-                            $result = mysqli_query($conn, $room_sql);    
-                            echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
+                            $cat_sql = "INSERT INTO propertytype(property) VALUES ('$type')";
+                            $result = mysqli_query($conn, $cat_sql);    
+                            if ($result === TRUE) {
+                                 echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
+                            }
+                           
                         }
                     ?>
 

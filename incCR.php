@@ -161,7 +161,32 @@
                                     <input type = "text" name = "type" id = "type_0" class = "myInput form-control">
                                 </div>
 
-                                <button type = "submit" class = "addType" name = "submit-type"> Save </button>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm">
+                                    Save
+                                </button>
+
+                                <!-- Confirm Add Modal -->
+                                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to add this property category?</p>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <button type="submit" class="btn btn-primary" name = "submit-type">Confirm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div id = "hob"> </div>
                             </form>
@@ -169,6 +194,21 @@
                             <div class="card card-stats"> </div>
                         </div>
                     </div>
+
+                    <?php
+                        include "dbconn.php";
+
+                        if (isset($_POST['submit-type'])) {
+                            $type = $_POST['type'];
+
+                            $cat_sql = "INSERT INTO cr(cr_type) VALUES ('$type')";
+                            $result = mysqli_query($conn, $cat_sql);    
+                            if ($result === TRUE) {
+                                 echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
+                            }
+                           
+                        }
+                    ?>
 
                     <div class="container-xl">
                         <div class="table-wrapper">

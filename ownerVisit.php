@@ -8,7 +8,11 @@
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="css/adminDashboard.css">
+        <style>
+            <?php
+                include "css/ownerVisit.css"
+            ?>
+        </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,8 +39,30 @@
 				    </div>
 			
                     <li class="dropdown">
-                        <a href = "ownerProperty.php">
-					    <i class="bx bxs-user"></i><span>Post Property</span></a>
+                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                            <li>
+                                <a href="ownerProperty.php">Post Property</a>
+                            </li>
+                            <li>
+                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					            <i class=""></i><span>Manage Inclusions</span></a>
+
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                    <li>
+                                        <a href="ownerRoom.php">Room</a>
+                                    </li> 
+                                    <li>
+                                        <a href="ownerKitchen.php">Kitchen</a>
+                                    </li>
+                                    <li>
+                                        <a href="ownerCR.php">Comfort Room</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 
                     <li class="active">
@@ -52,6 +78,16 @@
                     <li class="dropdown">
                     <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
+
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                            <li>
+                                <a href="#">Property List</a>
+                            </li>
+                        </ul>
                     </li>
                </ul>   
             </nav>

@@ -4,13 +4,13 @@
         <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
         <title> Register </title>
         <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-<style>
-    <?php
-        include "css/registerOwner.css"
-    ?>
-</style>
+        <style>
+            <?php
+                include "css/registerOwner.css"
+            ?>
+        </style>
     </head>
 
     <body> 
@@ -28,7 +28,7 @@
 
         <div class="container">
             <div class="content">
-                <form method = "post" action = "addOwner.php" class="needs-validation" novalidate>
+                <form method = "post" action = "addOwner.php" class="needs-validation" enctype = "multipart/form-data" novalidate>
                     
                         <?php
 					        if(isset($_GET['error'])) { ?>
@@ -232,57 +232,30 @@
 
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
-                                <label> <strong> Choose atleast one (1) Property Documents </strong> </label> 
+                                <label> <strong> Provide only one (1) Property Document </strong> </label> 
                       
                                 <div class = "form-group form-check">
-                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <input type="radio" name = "document" class="form-check-input" id="validationCustom09" value = "Business Permit">
                                     <label for = "validationCustom09"> Business Permit </label>
                                 </div>
 
                                 <div class = "form-group form-check">
-                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <input type="radio" name = "document" class="form-check-input" id="validationCustom09" value = "DTI">
                                     <label for = "validationCustom09"> DTI </label>
                                 </div>
 
                                 <div class = "form-group form-check">
-                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
+                                    <input type="radio" name = "document" class="form-check-input" id="validationCustom09" value = "0605 BIR Form">
                                     <label for = "validationCustom09"> 0605 BIR Form </label>
                                 </div>
-
-                                <div class = "form-group form-check">
-                                    <input type="checkbox" name = "document[]" class="form-check-input" id="validationCustom09">
-                                    <label for = "validationCustom09"> Others </label>
-                                </div>
                                 
-                                <!--<label> <strong> Upload Copy: </strong> </label>
-                                    <button class="btn-primary" type="button" name = "upload-image" data-toggle = "modal" data-target = "#addEmployeeModal">Upload Image</button>-->
+                                <label> Upload Document Here:</label>
+                                <input type = "file" name = "document-image"/>
                             </div>
                         </div>
-
-                        <!-- Upload Multiple Image-->
-                        <div class = "card"> 
-                            <div class = "top"> 
-                                <p> Upload your documents here </p>
-                            </div>
-
-                            <div class = "drag-area drop-section"> 
-                                <span class = "visible"> Upload your image here
-                                    <span class = "select file-selector" role = "button"> Browse </span> 
-                                </span>
-
-                                <span class = "on-drop"> Drop images here </span>
-                                    <input name = "file" type = "file" class = "file[] file-selector-input" multiple />
-                            </div>
-
-                            <div class="list-section">
-                                <div class="list-title">Uploaded Files</div>
-                                <div class="list"></div>
-                            </div>
-                        </div>
-                        <br>
 
                         <label> <strong> Upload Valid ID: </strong></label>
-                        <input type = "file" name = "valid-ID"/>
+                        <input type = "file" name = "valid-id"/>
                         <br>
                         <br>
                         <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
@@ -341,80 +314,6 @@
             });
         }, false);
         })();
-        </script>
-
-        <!-- Store Image -->
-        <script> 
-            const dragArea = document.querySelector('.drag-area')
-            const listSection = document.querySelector('.list-section')
-            const listContainer = document.querySelector('.list')
-            const fileSelector = document.querySelector('.select')
-            const fileSelectorInput = document.querySelector('.file-selector-input')
-
-            fileSelector.onclick = () => fileSelectorInput.click()
-            fileSelectorInput.onchange = () => {
-                [...fileSelectorInput.files].forEach((file) => {
-                    if(typeValidation(file.type)){
-                        uploadFile(file)
-                    }
-                })
-            }
-
-            function typeValidation(type){
-                var splitType = type.split('/')[0]
-                    if(type == 'application/pdf' || splitType == 'image' || splitType == 'video'){
-                        return true
-                    }
-            }
-
-            function uploadFile(file){
-                listSection.style.display = 'block'
-                var li = document.createElement('li')
-                    li.classList.add('in-prog')
-                    li.innerHTML = `
-                        <div class="col">
-                            <img src="icons/${iconSelector(file.type)}" alt="">
-                        </div>
-                        <div class="col">
-                            <div class="file-name">
-                                <div class="name">${file.name}</div>
-                                <span>0%</span>
-                            </div>
-                        <div class="file-progress">
-                            <span></span>
-                        </div>
-                        <div class="file-size">${(file.size/(1024*1024)).toFixed(2)} MB</div>
-                        </div>
-                        <div class="col">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="cross" height="20" width="20"><path d="m5.979 14.917-.854-.896 4-4.021-4-4.062.854-.896 4.042 4.062 4-4.062.854.896-4 4.062 4 4.021-.854.896-4-4.063Z"/></svg>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="tick" height="20" width="20"><path d="m8.229 14.438-3.896-3.917 1.438-1.438 2.458 2.459 6-6L15.667 7Z"/></svg>
-                        </div>
-                        `
-
-                listContainer.prepend(li)
-                var http = new XMLHttpRequest()
-                var data = new FormData()
-                data.append('file', file)
-                http.onload = () => {
-                    li.classList.add('complete')
-                    li.classList.remove('in-prog')
-                }
-                http.upload.onprogress = (e) => {
-                    var percent_complete = (e.loaded / e.total)*100
-                    li.querySelectorAll('span')[0].innerHTML = Math.round(percent_complete) + '%'
-                    li.querySelectorAll('span')[1].style.width = percent_complete + '%'
-                }
-                http.open('POST', 'addOwner.php', true)
-                http.send(data)
-                li.querySelector('.cross').onclick = () => http.abort()
-                http.onabort = () => li.remove()
-            }
-
-            function iconSelector(type){
-            var splitType = (type.split('/')[0] == 'application') ? type.split('/')[1] : type.split('/')[0];
-            return splitType + '.png'
-            }
-    
         </script>
     </body>
 </html>

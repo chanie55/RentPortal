@@ -216,8 +216,11 @@
                                         <td> <?php echo $row['fullName'] ?> </td>
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> <?php echo $row['address'] ?> </td>
-                                        <td> <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
-                                        <td> <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
+                                        <td> 
+                                            <button class = "btn btn-primary view-document" type = "button"> View </button> 
+                                        </td>
+                                        <td> 
+                                            <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
                                         <td>
                                             
                                         </td>

@@ -18,7 +18,6 @@ if (isset($_POST['submit-owner'])) {
     $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
     $password2 = $_POST['password2'];
     $docu = $_POST['document'];
-    $allDocument = implode(",", $docu);
     $length = strlen ($contact);
 
     $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&birthdate='. $dob.  '&gender='. $gender.  '&address='. $address;
@@ -63,7 +62,7 @@ if (isset($_POST['submit-owner'])) {
 
                 if($result === TRUE) {
                     $sql2 = "INSERT INTO user(email, password, userInfo_ID, status, userLevel_ID)
-                        VALUES ('$email', '$password', '$userID', 0, 2)";
+                        VALUES ('$email', '$hashed_pw', '$userID', 0, 2)";
                     $result2 = mysqli_query($conn, $sql2);
                     if ($result2) {
                         $userlastid = mysqli_insert_id($conn);
@@ -71,78 +70,90 @@ if (isset($_POST['submit-owner'])) {
                             $userid = "UID_00".$userlastid;
                             $query2 = "UPDATE user SET user_ID = '".$userid."' WHERE id = '".$userlastid."'";
                             $res2 = mysqli_query($conn, $query2);
-                        }
 
-                        if (isset($_FILES['file']['name'])) {
-                            $totalFiles = count($_FILES['file']['name']);
-                            $userID = mysqli_insert_id($conn);
-                            $filesArray = array();
+                            //documents
+                            if (isset($_FILES['document-image'])) {
+                                $img_name = $_FILES['document-image']['name'];
+                                $img_size = $_FILES['document-image']['size'];
+                                $tmp_name = $_FILES['document-image']['tmp_name'];
+                                $error = $_FILES['document-image']['error'];
             
-                            for($i = 0; $i < $totalFiles; $i++) {
-                                $fileName = $_FILES['file']['name'][$i];
-                                $fileTmpName = $_FILES['file']['tmp_name'][$i];
+                                if ($error === 0) {
+                                    if ($img_size > 125000) {
+                                        $message = "Sorry, your file is too large";
+                                        header("Location: registerOwner.php?error=$message");
+                                    } else {
+                                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                                        $img_ex_loc = strtolower($img_ex);
             
-                                $imageExtension = explode('.', $fileName);
+                                        $allowed_ex = array ("jpg", "jpeg", "png", "pdf");
             
-                                $name = $imageExtension[0];
-                                $imageExtension = strtolower(end($imageExtension));
+                                        if (in_array($img_ex_loc, $allowed_ex)) {
+                                            $new_img_name = uniqid("IMG-", true).'.'.$img_ex_loc;
+                                            $img_upload_path = './images/'.$new_img_name;
+                                            move_uploaded_file($tmp_name, $img_upload_path);
             
-                                $newFileName = $name . " - " . uniqid();
-                                $newFileName .= '.' . $imageExtension;
+                                            //into the database
+                                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', '$docu', '$userid')";
+                                            $image_result = mysqli_query($conn, $image_query);
+                                            
+                                            if ($result2 === TRUE) {
+                                                //valid-id
+                            if (isset($_FILES['valid-id'])) {
+                                $img_name = $_FILES['valid-id']['name'];
+                                $img_size = $_FILES['valid-id']['size'];
+                                $tmp_name = $_FILES['valid-id']['tmp_name'];
+                                $error = $_FILES['valid-id']['error'];
             
-                                move_uploaded_file($fileTmpName, './images/' . $newFileName);
-                                $filesArray[] = $newFileName;
+                                if ($error === 0) {
+                                    if ($img_size > 125000) {
+                                        $message = "Sorry, your file is too large";
+                                        header("Location: registerOwner.php?error=$message");
+                                    } else {
+                                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                                        $img_ex_loc = strtolower($img_ex);
+            
+                                        $allowed_ex = array ("jpg", "jpeg", "png", "pdf");
+            
+                                        if (in_array($img_ex_loc, $allowed_ex)) {
+                                            $new_img_name = uniqid("ID-", true).'.'.$img_ex_loc;
+                                            $img_upload_path = './images/'.$new_img_name;
+                                            move_uploaded_file($tmp_name, $img_upload_path);
+            
+                                            //into the database
+                                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
+                                            mysqli_query($conn, $image_query);
+                                            header("Location: registerOwner.php?Successfully added");
+                                        } else {
+                                            $message = "You cannot upload files of this type";
+                                            header("Location: registerOwner.php?error=$message");
+                                        }
+                                    }
+                                } else {
+                                    $message = "unknown error occured";
+                                    header("Location: registerOwner.php?error=$message");
+                                }
+                            } else {
+                                header("Location: registerOwner.php?failed");
                             }
-            
-                            $filesArray = json_encode($filesArray);
-                            $query = "INSERT INTO images(image_url, type, user_ID) 
-                                        VALUES ('$fileNameNew', '$allDocument', '$userID')";
-                            mysqli_query($conn, $sql);
-                            header ("Location: registerOwner.php?uploadsuccess");
-                    }
-            
-            
+                                            }
+                                        } else {
+                                            $message = "You cannot upload files of this type";
+                                            header("Location: registerOwner.php?error=$message");
+                                        }
+                                    }
+                                } else {
+                                    $message = "unknown error occured";
+                                    header("Location: registerOwner.php?error=$message");
+                                }
+                            } else {
+                                header("Location: registerOwner.php?failed");
+                            }
 
-                
-                /*
-                $fileSize = $_FILES['file']['size'];
-                $fileError = $_FILES['file']['error'];
-                $fileType = $_FILES['file']['type'];
-                $userID = mysqli_insert_id($conn);
-                $documents = $_POST['documents'];
-        
-                $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
-                $fileActualExt = strtolower($fileExt);
-        
-                $allowed = array('jpg', 'jpeg', 'png', 'pdf');
-        
-                if (in_array($fileActualExt, $allowed)){
-                    if($fileError === 0){
-                        if ($fileSize < 1000000){
-                            $fileNameNew = uniqid($user_name, true).'.'.$fileActualExt;
-                            $fileDestination = './images/'.$fileNameNew;
-                            move_uploaded_file($fileTmpName, $fileDestination);
-                            $image_base64 = base64_encode(file_get_contents($fileName));
-                            $image = 'data:image/'.$fileActualExt.';base64,'.$image_base64;
-        
-                            $sql = "INSERT INTO images(image_url, type, user_ID) 
-                                VALUES ('$fileNameNew', '$allDocument', '$userID')";
-                            mysqli_query($conn, $sql);
-                            header ("Location: registerOwner.php?uploadsuccess");
-                           
-                        }
-                        else{
-                            echo "Your file is to big!";
+                            
+
                         }
                     }
-                    else{
-                        echo "There was an error uploading your file!";
-                    }
-                }
-                else
-                {
-                    echo "You cannot upload  files of this type!";
-                }*/
             } 
             header("Location: registerOwner.php?msg=Personal Data has been saved");
         
@@ -152,5 +163,5 @@ if (isset($_POST['submit-owner'])) {
     }
 }
 }
-}
+
 ?>
