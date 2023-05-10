@@ -4,11 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>Dashboard</title>
+        <title>Reservation</title>
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="css/adminDashboard.css">
+        <style>
+            <?php
+                include "css/FAQ.css"
+            ?>
+        </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +30,7 @@
                 </div>
 
                 <ul class="list-unstyled components">
-			        <li  class="active">
+			        <li>
                         <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
@@ -61,21 +65,20 @@
                         </ul>
                     </li>
                 
-                    <li class="dropdown">
+                    <li>
                         <a href = "ownerVisit.php">
 					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
-                    <li class="dropdown">
+                    <li>
                     <a href = "reservation.php">
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
-                    <li class="dropdown">
+                    <li>
                     <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
                     </li>
-
                     <li class="dropdown">
                         <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
@@ -88,6 +91,8 @@
                     </li>
                </ul>   
             </nav>
+
+            
 		
 		
 
@@ -100,15 +105,14 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Dashboard </a>
+					    <a class="navbar-brand" href="#"> Reservation </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="material-icons">more_vert</span>
                         </button>
-
                         <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none" id="navbarSupportedContent">
-                            <ul class="nav navbar-nav ml-auto">   
+                        <ul class="nav navbar-nav ml-auto">   
                                 <li class="dropdown nav-item active">
                                     <a href="#" class="nav-link" data-toggle="dropdown">
                                         <span class="bx bx-user-circle"></span>
@@ -123,11 +127,66 @@
                                     </ul>
                                 </li>
                             </ul>
-                        </div>
+                    </div>
                         </div>
                     </nav>
 	            </div>
-							
+			
+			
+			    <div class="main-content">
+                    <div class = "container" style = "margin-top: 10px"> 
+                        <div class = "row"> 
+                            <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
+                                <h3 class = "text-left"> Reservation </h3>
+                            </div>
+                        </div>
+                    
+
+                    <!--Table Display Reservation-->
+                    <div class="container-xl">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <div class="search-box">
+                                    <i class="bx bxs-search-alt-2"></i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Category</th>
+                                    <th>Room</th>
+                                    <th>Name</th>
+                                    <th>Date</th>
+                                    <th>Contact Number</th>
+                                    <th>Proof of Payment</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                        <tbody>
+                       
+                                        </td>
+                                    </tr>
+                        </tbody>    
+                        </table>
+                        <div class="clearfix">
+                
+                        <ul class="pagination">
+                        
+                        </ul>
+                        <!-- <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div> -->
+                    </div>
+                </div>
+            </div>
+            </div>
+                        </div>
+					
 				<footer class="footer">
                     <div class="container-fluid">
 				        <div class="row">
