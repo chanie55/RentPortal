@@ -31,7 +31,7 @@
 
                 <ul class="list-unstyled components">
 			        <li>
-                        <a href="#" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -51,13 +51,13 @@
 					            <i class=""></i><span>Manage Inclusions</span></a>
 
                                 <ul class="collapse list-unstyled menu" id="pageSubmenu3">
-                                    <li>
+                                    <li class="active">
                                         <a href="ownerRoom.php">Room</a>
                                     </li> 
                                     <li>
                                         <a href="ownerKitchen.php">Kitchen</a>
                                     </li>
-                                    <li>
+                                    <li  class="active">
                                         <a href="ownerCR.php">Comfort Room</a>
                                     </li>
                                 </ul>
@@ -65,13 +65,13 @@
                         </ul>
                     </li>
                 
-                    <li class="active">
+                    <li>
                         <a href = "ownerVisit.php">
 					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
                     <li class="dropdown">
-                    <a href = "#">
+                    <a href = "reservation.php">
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 

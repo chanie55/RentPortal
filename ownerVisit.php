@@ -31,7 +31,7 @@
 
                 <ul class="list-unstyled components">
 			        <li>
-                        <a href="#" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -71,7 +71,7 @@
                     </li>
 
                     <li class="dropdown">
-                    <a href = "#">
+                    <a href = "reservation.php">
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
