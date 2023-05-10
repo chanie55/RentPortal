@@ -45,5 +45,5 @@
         var popup = singleMarker.bindPopup('This is my location. ' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);
 
-        //var pointData = L.geoJSON(pointJson).addTo(map);
+        var pointData = L.geoJSON(pointJson).addTo(map);
     </script>

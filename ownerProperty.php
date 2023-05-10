@@ -140,18 +140,35 @@
                             <br>
                         </div>
                         <!--- Form -->
-                        <form class="needs-validation" novalidate>
-                            <div class="container">
-                                <div class="content">
-                                    <div class="form-row">
-                                        <div class="form-row col-md-7 mb-3">
-                                            <label for="validationCustom"> Property Name </label>
-                                            <input type="text" name = "propertyname" class="form-control" id="validationCustom" required>
-                                        </div>
                         
-                                        <div class="col">
-                                            <label for="validationCustom00">Property Type</label>
-                                            <select class="form-control">
+                            <div class="container">
+            <div class="content">
+                <form method = "post" action = "addProperty.php" class="needs-validation" novalidate>
+
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Property Name</label>
+                                <?php if (isset($_GET['propertyname'])) { ?>
+                                    <input required type = "text" 
+                                    name = "propertyname" 
+                                    class="form-control" 
+                                    id="validationCustom01"
+                                    value = "<?php echo $_GET['propertyname']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                    name = "propertyname" 
+                                    class="form-control"
+                                    id="validationCustom01"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your property name
+                                </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">    
+                            <label for="validationCustom02">Property Type </label>
+                            <select class="custom-select" id="validationCustom02" name = "property" required> 
+                            <option selected disabled value="">Choose...</option>
                                                 <?php
                                                     include "dbconn.php";
                             
@@ -165,104 +182,183 @@
                                                     }
                                                 ?>
                                             </select>
-                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                                        </div>
-                                    </div>
-                        
+                                <div class = "invalid-feedback"> 
+                                Please select a property type
+                                </div>
+                        </div>
+                    </div>
 
-                                    <div class="form-row">
-                                        <div class="col mb-3">
-                                            <label for="validationCustom01"> Address </label>
-                                            <a href = "viewmap.php"><i class = "bx bxs-edit-location"> </i></a>
-                                            <input type="text" name = "address" class="form-control" id="validationCustom01" required>
-                                        </div>
-                                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12 mb-3">
+                            <label for="validationCustom03">Address</label>
+                            <a href = "viewmap.php"><i class = "bx bxs-edit-location"> </i></a>
+                                <?php if (isset($_GET['address'])) { ?>
+                                    <input required type = "text" 
+                                    name = "address" 
+                                    class="form-control" 
+                                    id="validationCustom03"
+                                    value = "<?php echo $_GET['address']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "text" 
+                                    name = "address" 
+                                    class="form-control"
+                                    id="validationCustom03"><br>
+                                <?php } ?>
+                            <div class = "invalid-feedback"> 
+                                Please provide your property address
+                            </div>
+                        </div>
+                    </div>
+                    
 
-                                    <div class="form-row">
-                                        <div class="col-md-6 mb-3">
-                                            <label for="validationCustom02">Email</label>
-                                            <input type="email" name = "email" class="form-control" id="validationCustom02" required>
-                                            <div class = "invalid-feedback"> 
-                                                Invalid email address
-                                            </div>
-                                        </div>
+                    <div class="form-row">
+                    <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Email</label>
+                                <?php if (isset($_GET['email'])) { ?>
+                                    <input required type = "email" 
+                                    name = "email" 
+                                    class="form-control" 
+                                    id="validationCustom01"
+                                    value = "<?php echo $_GET['email']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "email" 
+                                    name = "email" 
+                                    class="form-control"
+                                    id="validationCustom01"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your email
+                                </div>
+                        </div>
 
-                                        <div class="col-md-6 mb-3">
-                                            <label for="validationCustom03">Contact</label>
-                                            <input type="number" name = "contact" pattern = "[0-9]{11}" class="form-control" id="validationCustom03" required>
-                                            <div class = "invalid-feedback"> 
-                                                Contact must be 11 digits
-                                            </div>
-                                        </div> 
-                                    </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="validationCustom01">Contact</label>
+                                <?php if (isset($_GET['contact'])) { ?>
+                                    <input required type = "number"
+                                    name = "contact"
+                                    pattern = "[0-9]{11}" 
+                                    class="form-control" 
+                                    id="validationCustom01"
+                                    value = "<?php echo $_GET['contact']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "number" 
+                                    name = "contact" 
+                                    pattern = "[0-9]{11}" 
+                                    class="form-control"
+                                    id="validationCustom01"><br>
+                                <?php } ?>
+                                <div class = "invalid-feedback"> 
+                                Please provide your property name
+                                </div>
+                        </div> 
+                    </div>
 
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <label for="validationCustom04">Montly Rate</label>
-                                            <input type="text" name = "monthlyrate" class="form-control" id="validationCustom04" required>
-                                        </div>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom06">Monthly Rate</label>
+                                <?php if (isset($_GET['rate'])) { ?>
+                                    <input required type = "number" 
+                                    name = "rate" 
+                                    class="form-control"
+                                    id="validationCustom06"
+                                    value = "<?php echo $_GET['rate']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "number" 
+                                    name = "rate" 
+                                    class="form-control"
+                                    id="stpurok"><br>
+                                <?php } ?>
+                            <div class = "invalid-feedback"> 
+                                Please provide the monthly rate
+                            </div>
+                        </div>
 
-                                        <div class="col">
-                                            <label for="validationCustom05">Total Rooms</label>
-                                            <input type="text" name = "totalrooms" pattern = "[0-9]{11}" class="form-control" id="validationCustom05" required>
-                                        </div> 
+                        <div class="col-md-4 mb-3">
+                            <label for="validationCustom06">Total Rooms</label>
+                                <?php if (isset($_GET['totalrooms'])) { ?>
+                                    <input required type = "number" 
+                                    name = "totalrooms" 
+                                    class="form-control"
+                                    id="validationCustom06"
+                                    value = "<?php echo $_GET['totalrooms']; ?>"><br>
+                                <?php } else { ?>
+                                    <input required type = "number" 
+                                    name = "totalrooms" 
+                                    class="form-control"
+                                    id="validationCustom06"><br>
+                                <?php } ?>
+                            <div class = "invalid-feedback"> 
+                                Contact must be 11 digits
+                            </div>
+                        </div> 
 
-                                        <div class="col">
-                                            <label>Room Type</label>
-                                            <select class="form-control">
-                                                <option>...</option>
-                                                <option>...</option>
+                        <div class="col-md-4 mb-3">    
+                            <label for="validationCustom02">Room Type </label>
+                            <select class="custom-select" id="validationCustom02" name = "roomtype" required> 
+                            <option selected disabled value="">Choose...</option>
                                             </select>
-                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                                        </div>
-                                    </div>
+                                <div class = "invalid-feedback"> 
+                                Please select a room type
+                                </div>
+                        </div>
+                    </div>
 
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-3">
-                                            <label>Bed Type</label>
-                                            <select class="form-control">
-                                                <option>...</option>
-                                                <option>...</option>
+                        <div class="form-row">
+                        <div class="col-md-4 mb-3">    
+                            <label for="validationCustom02">Bed Type </label>
+                            <select class="custom-select" id="validationCustom02" name = "bedtype" required> 
+                            <option selected disabled value="">Choose...</option>
                                             </select>
-                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                                        </div>
+                                <div class = "invalid-feedback"> 
+                                Please select a bed type
+                                </div>
+                        </div>
 
-                                        <div class="col">
-                                            <label>Kitchen Type</label>
-                                            <select class="form-control">
-                                                <option>...</option>
-                                                <option>...</option>
+                        <div class="col-md-4 mb-3">    
+                            <label for="validationCustom02">Kitchen Inclusion </label>
+                            <select class="custom-select" id="validationCustom02" name = "kitchentype" required> 
+                            <option selected disabled value="">Choose...</option>
                                             </select>
-                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                                        </div>
+                                <div class = "invalid-feedback"> 
+                                Please choose kitchen inclusion
+                                </div>
+                        </div>
 
-                                        <div class="col">
-                                            <label>Comfort Room Type</label>
-                                            <select class="form-control">
-                                                <option>...</option>
-                                                <option>...</option>
+                        <div class="col-md-4 mb-3">    
+                            <label for="validationCustom02">Comfort Room Inclusion </label>
+                            <select class="custom-select" id="validationCustom02" name = "crtype" required> 
+                            <option selected disabled value="">Choose...</option>
                                             </select>
-                                            <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" required>
-                                        </div>
-                                    </div>
+                                <div class = "invalid-feedback"> 
+                                Please choose comfort room inclusion
+                                </div>
+                        </div>
+                        </div>
 
-                                    <div class="form-row">
+                        <div class="form-row">
                                         <div class="col-md-12 mb-3">
                                             <label for="validationCustom07"> Description </label>
                                             <textarea type="text" name = "description" class="form-control" id="validationCustom07" required></textarea>
                                         </div>
                                     </div>
 
-                                    <form>
+                                   
                                         <div class="form-group">
                                             <label for="exampleFormControlFile1"> Photos of Property </label>
                                             <input type="file" class="form-control-file" id="exampleFormControlFile1">
                                         </div>
-                                    </form>
-                            </form>
 
-                            <button class="form-btn btn btn-cancel cancel" onclick="closeAdd()">Cancel</button>
-                            <button class="form-btn btn btn-primary" onclick="" name = "submit-tenant">Add</button>
+                        <button class="btn btn-primary" type="submit" name = "submit-property">Add</button>
+                        <br><br>
+                    </div>
+                    
+                    
+                </form>
+
+
+                            
+
+                            
                         </div>
                     </div>   
                 </div>             

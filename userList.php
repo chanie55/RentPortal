@@ -58,7 +58,7 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu2">
                             <li>
-                                <a href="#">Category</a>
+                                <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
                                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -77,7 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">GPS</a>
+                                <a href="propertyMap.php">Map</a>
                             </li>
                         </ul>
                     </li>
@@ -102,10 +102,10 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu4">
                             <li>
-                                <a href="#">Visit</a>
+                                <a href="visitRecord.php">Visit</a>
                             </li>
                             <li>
-                                <a href="#">Reservation</a>
+                                <a href="reservationRecord.php">Reservation</a>
                             </li>
                         </ul>
                     </li>

@@ -77,7 +77,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="propertyNP.php">GPS</a>
+                                <a href="propertyMap.php">Map</a>
                             </li>
                         </ul>
                     </li>
