@@ -121,7 +121,7 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="disabledTextInput">City</label>
-                            <input required type = "text" class="form-control" id="disabledTextInput" placeholder = "General Santos" disabled>           
+                            <input required type = "text" class="form-control" id="disabledTextInput" placeholder = "General Santos">           
                         </div>
 
                         <div class="col-md-6 mb-3">

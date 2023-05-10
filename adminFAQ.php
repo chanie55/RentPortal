@@ -159,12 +159,31 @@
                                         <textarea name = "answer" id = "answer" class = "form-control" required> </textarea>
                                     </div>
 
-                                    <input type = "submit" name = "submit-faq" class = "btn btn-info" value = "Add FAQ"/>
+                                    <input type = "submit" name = "add_FAQ" class = "btn btn-info" value = "Add FAQ"/>
                                 </form>
                             </div>
                         </div>
                         <br>
                         <br>
+
+                        <?php 
+                            include "dbconn.php";
+
+                            if(isset($_POST['add_FAQ'])) {
+                                $question = $_POST['question'];
+                                $answer = $_POST['answer'];
+
+                                $sql = "INSERT INTO faq (question, answer)
+                                            VALUES ('$question', '$answer')";
+                                $result = mysqli_query($conn, $sql);
+
+                                if ($result === TRUE) {
+                                    
+                                } else {
+                                    echo "Failed";
+                                }
+                            }
+                        ?>
                     
 
                     <!--Table Display FAQ-->
@@ -206,23 +225,17 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.id, user.email, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 1 LIMIT $offset, $limit";
+                            $sql = "SELECT * FROM faq LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr class = "data-row"> 
-                                        <td> <?php echo $row['fullName'] ?> </td>
-                                        <td> <?php echo $row['email'] ?> </td>
-                                        <td> <?php echo $row['email'] ?> </td>
+                                        <td> <?php echo $row['id'] ?> </td>
+                                        <td> <?php echo $row['question'] ?> </td>
+                                        <td> <?php echo $row['answer'] ?> </td>
                                         <td>
-                                            <?php
-                                                if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
-                                                } else {
-                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
-                                                }
-                                            ?>
+                                            
                                         </td>
                                     </tr>
                                 <?php
@@ -235,7 +248,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM user";
+                            $query =  "SELECT COUNT(*) FROM faq";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];
@@ -249,18 +262,18 @@
                         <?php
                             if ($page >= 2) {
                                 echo "<li class = 'page-item'>
-                                <a class = 'page-link' href = 'manageAdmin.php?page=".($page-1)."'> 
+                                <a class = 'page-link' href = 'adminFAQ.php?page=".($page-1)."'> 
                                 <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
                             }
 
                             for ($counter = 1; $counter <= $total_pages; $counter++){
                                 if ($counter == $page) {
                                     $link .= "<li class = 'page-item active'>
-                                    <a class = 'page-link' href= 'manageAdmin?page="
+                                    <a class = 'page-link' href= 'adminFAQ?page="
                                     .$counter."'>".$counter." </a></li>";
                                 } else {
                                     $link .= "<li class = 'page-item'>
-                                    <a class = 'page-link' href='manageAdmin.php?page=".$counter."'> ".$counter." </a> </li>";
+                                    <a class = 'page-link' href='adminFAQ.php?page=".$counter."'> ".$counter." </a> </li>";
                                 }
                             };
 
@@ -268,7 +281,7 @@
 
                             if($page < $total_pages) {
                                 echo "<li class = 'page-item'>
-                                <a class = 'page-link' href='manageAdmin.php?page=".($page+1)."'>
+                                <a class = 'page-link' href='adminFAQ.php?page=".($page+1)."'>
                                 <i class = 'bx bxs-chevron-right'></i> </a></li>";
                             }
                         ?>

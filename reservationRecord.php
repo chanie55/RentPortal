@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>Reservation</title>
+        <title>Scheduled Visit</title>
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <style>
             <?php
-                include "css/reservationRecord.css"
+                include "css/visitRecord.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -137,7 +137,7 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Reservations </a>
+					    <a class="navbar-brand" href="#"> Reservation </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -161,18 +161,134 @@
                         </div>
 
                     </div>
-					
-				<footer class="footer">
-                    <div class="container-fluid">
-				        <div class="row">
-				            <div class="col-md-6">
-				                <p class="copyright d-flex justify-content-end"> 
-                                &copy 2023 Design by Rentin Portal | STI College General Santos
-                                </p>
+
+                    <div class="container-xl">
+                        <div class="table-wrapper">
+                            <div class="table-title">
+                                <div class="row">
+                                    <div class="col-sm-6 p-0 d-flex justify-content-lg-start justify-content-center">
+                                        <h2 class="ml-lg-2">User Reservations</h2>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="search-box">
+                                        <i class="bx bxs-search-alt-2"></i>
+                                        <input type="text" class="form-control" placeholder="Search&hellip;">
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-hover table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Reservation ID</th>
+                                            <th>Date</th>
+                                            <th>Seeker Name</th>
+                                            <th>Property Name</th>
+                                            <th>Owner Name</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                            include "dbconn.php";
+                            
+                                                if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                                    $page = $_GET['page'];
+                                                } else {
+                                                    $page = 1;
+                                                }
+
+                                                $limit = 6;
+                                                $offset = ($page - 1) * $limit;
+
+                                                $previous = $page - 1;
+                                                $next = $page + 1;
+
+                                                $sql = "SELECT userinfo.id, user.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id LIMIT $offset, $limit";
+                                                $result = mysqli_query($conn, $sql);
+
+                                                while ($row = mysqli_fetch_assoc($result)) {
+                                                    ?>
+                                                    <tr class = "data-row"> 
+                                                        <td> 12 </td>
+                                                        <td> 05-12-23 </td>
+                                                        <td> <?php echo $row['fullName'] ?> </td>
+                                                        <td> Golden Urban House For Rent </td>
+                                                        <td> Owner One </td>
+                                                        <td>
+                                                            <?php
+                                                                if ($row['status'] == 1) {
+                                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
+                                                                } else {
+                                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
+                                                                }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                        ?>                
+                                    </tbody>    
+                                </table>
+                                <div class="clearfix">
+                
+                                    <ul class="pagination">
+                                    <?php
+            
+                                        $query =  "SELECT COUNT(*) FROM user";
+                                        $result_count = mysqli_query($conn, $query);
+                                        $records = mysqli_fetch_row($result_count);
+                                        $total_records = $records[0];
+
+                                        $total_pages = ceil($total_records / $limit);
+                                        $link = "";
+
+                                    ?>
+        
+
+                                    <?php
+                                        if ($page >= 2) {
+                                            echo "<li class = 'page-item'>
+                                                <a class = 'page-link' href = 'reservationRecord.php?page=".($page-1)."'> 
+                                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                                        }
+
+                                        for ($counter = 1; $counter <= $total_pages; $counter++){
+                                            if ($counter == $page) {
+                                                $link .= "<li class = 'page-item active'>
+                                                <a class = 'page-link' href= 'reservationRecord?page="
+                                                .$counter."'>".$counter." </a></li>";
+                                            } else {
+                                                $link .= "<li class = 'page-item'>
+                                                <a class = 'page-link' href='reservationRecord.php?page=".$counter."'> ".$counter." </a> </li>";
+                                            }
+                                        };
+
+                                        echo $link;
+
+                                        if($page < $total_pages) {
+                                            echo "<li class = 'page-item'>
+                                            <a class = 'page-link' href='reservationRecord.php?page=".($page+1)."'>
+                                            <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                                        }
+                                    ?>
+                                    </ul>
+                                    <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                                </div>
+                            </div>
+                        </div>
+                        <footer class="footer">
+                            <div class="container-fluid">
+				                <div class="row">
+				                    <div class="col-md-6">
+				                        <p class="copyright d-flex justify-content-end"> 
+                                            &copy 2023 Design by Rentin Portal | STI College General Santos
+                                        </p>
+				                    </div>
+				                </div>
 				            </div>
-				        </div>
-				    </div>
-                </footer>
+                        </footer>
 					
 			</div>
         </div>

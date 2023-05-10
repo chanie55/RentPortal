@@ -155,18 +155,18 @@
                             </div>
 
                             <div class = "offset-md-1 col-md-10">
-                                <form method = "POST" action = ""> 
+                                <form method = "POST" action = "addAbout.php"> 
                                     <div class = "form-group">
                                         <label> Title </label>
-                                        <input type = "text" name = "question" class = "form-control" required/>
+                                        <input type = "text" name = "title" class = "form-control" required/>
                                     </div>
 
                                     <div class = "form-group"> 
                                         <label> Content </label>
-                                        <textarea name = "answer" id = "answer" class = "form-control" required> </textarea>
+                                        <textarea name = "content" id = "answer" class = "form-control" required> </textarea>
                                     </div>
 
-                                    <input type = "submit" name = "submit-faq" class = "btn btn-info" value = "Save"/>
+                                    <input type = "submit" name = "submit-about" class = "btn btn-info" value = "Save"/>
                                 </form>
                             </div>
                         </div>
@@ -213,23 +213,17 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.id, user.email, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 1 LIMIT $offset, $limit";
+                            $sql = "SELECT * FROM aboutus LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr class = "data-row"> 
-                                        <td> <?php echo $row['fullName'] ?> </td>
-                                        <td> <?php echo $row['email'] ?> </td>
-                                        <td> <?php echo $row['email'] ?> </td>
+                                        <td> <?php echo $row['id'] ?> </td>
+                                        <td> <?php echo $row['title'] ?> </td>
+                                        <td> <?php echo $row['content'] ?> </td>
                                         <td>
-                                            <?php
-                                                if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
-                                                } else {
-                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
-                                                }
-                                            ?>
+                                            
                                         </td>
                                     </tr>
                                 <?php
@@ -242,7 +236,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM user";
+                            $query =  "SELECT COUNT(*) FROM aboutus";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];

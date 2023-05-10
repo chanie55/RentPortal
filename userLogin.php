@@ -32,12 +32,19 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                 } else {
                     if (password_verify($pass, $hashed_pw)) {
                         $_SESSION['email'] = $row['email'];
-                        header("Location: seekerPage.php");
-                        exit();
+                        if ($row['userLevel_ID'] == 1 && $row['status'] == 1) {
+                            header("Location: adminDashboard.php");
+                            exit();
+                        } else if ($row['userLevel_ID'] == 2 && $row['status'] == 1) {
+                            header("Location: ownerDashboard.php");
+                            exit();
+                        } else if ($row['userLevel_ID'] == 3 && $row['status'] == 1) {
+                            header("Location: seekerPage.php");
+                            exit();
+                        }
+                        
                     }
                 }
-                
-
             } else {
             header("Location: login.php?error=Incorrect email or password");
             exit();

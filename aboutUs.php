@@ -47,7 +47,6 @@
 
     <div class = "heading"> 
         <h1> About Us </h1>
-        <p> Some Text Here </p>
     </div>
 
     <div class = "container"> 
@@ -57,8 +56,8 @@
             </div>
             
             <div class = "about-content"> 
-                <h2> Title Here </h2>
-                <p> Some Content Here </p>
+                <h2 name = "title"> Title Here </h2>
+                <p name = "content"> Some Content Here </p>
             </div>
         </section>
     </div>

@@ -253,8 +253,32 @@
                                         <td> <?php echo $row['cr_Type'] ?> </td>
                                         <td>
                                             <?php
-                                                echo '<p> <a href = "deletetype.php?cr_ID='.$row['cr_ID'].'"> <i class = "bx bxs-trash-alt"> </i> </a> </p>';
+                                                echo '<p> <a href = "#delete" data-toggle="modal"> <i class = "bx bxs-trash-alt"> </i> </a> </p>';
+                                                //echo '<p> <a href = "deletetype.php?cr_ID='.$row['cr_ID'].'"> <i class = "bx bxs-trash-alt"> </i> </a> </p>';
                                             ?>
+                                            <!-- Confirm Delete Modal -->
+                                            <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p>Delete this category?</p>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                            <?php
+                                                                echo '<a href = "deletetype.php?cr_ID='.$row['cr_ID'].'"> <button type="button" class="btn btn-primary" name = "">Confirm</button> </a>';
+                                                            ?>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
