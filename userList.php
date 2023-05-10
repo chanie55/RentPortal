@@ -162,7 +162,7 @@
 
                     </div>
 
-                    <div class="container-xl">
+    <div class="container-xl">
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="row">

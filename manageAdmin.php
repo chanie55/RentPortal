@@ -236,7 +236,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM user";
+                            $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 1";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];

@@ -207,7 +207,7 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.address, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 2 LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.address, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id AND user.userLevel_ID = 2 LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -217,17 +217,59 @@
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> <?php echo $row['address'] ?> </td>
                                         <td> 
-                                            <button class = "btn btn-primary view-document" type = "button"> View </button> 
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#viewDocu">
+                                                View
+                                            </button>
+
+                                            <!-- Confirm Add Modal -->
+                                            <div class="modal fade" id="viewDocu" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p><img src = "<?php echo "./images/".$row['image_url']; ?>" width = "550px" height = "520px"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </td>
                                         <td> 
-                                            <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#viewID">
+                                                View
+                                            </button>
+
+                                            <!-- Confirm Add Modal -->
+                                            <div class="modal fade" id="viewID" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <p><img src = "<?php echo "./images/".$row['image_url']; ?>" width = "350px" height = "320px"></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <td>
                                             
                                         </td>
                                     </tr>
                                 <?php
                             }
-                        ?>         
+                        ?>   
+                        
+                        
                         </tbody>    
                         </table>
                         <div class="clearfix">
@@ -235,7 +277,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM user";
+                            $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];
