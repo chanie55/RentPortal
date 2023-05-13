@@ -260,7 +260,7 @@ body{
 .lsd_list {
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(235, 235, 235);
-    padding: 30px;
+    padding: 10px;
     position: relative;
 
 }
@@ -270,8 +270,8 @@ body{
     border: 1px solid rgb(235, 235, 235);
     padding: 10px 20px;
     position: relative;
-    margin-left: 20px;
-    border-radius: 10px;    
+    border-radius: 10px;  
+    margin-top: 20px;  
 }
 
 #ch{
@@ -314,5 +314,17 @@ label{
     border: 1px solid rgb(235, 235, 235);
     position: relative;
 }
+
+.more{
+    margin-top: 133px;
+    margin-left: 5px;
+    border: 1px solid rgb(235, 235, 235);
+}
+
+input{
+    margin-bottom: 15px;
+}
+
+
 
 

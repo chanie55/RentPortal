@@ -86,7 +86,7 @@
                     <div class="col-lg-5 col-xl-4">
                       <div class="single_property_title mt30-767">
                       <div class="price float-left fn-400">
-                        <h2> ₱000000 </h2>
+                        <h2> ₱00,000.00 </h2>
                       </div>
                       </div>
                     </div>
@@ -158,7 +158,7 @@
 
 <div class="container">
                 <div class="row">
-                  <div class="col-md-12 col-lg-12 mt50">
+                  <div class="col-md-12 col-lg-8 mt50">
                     <div class="row">
                       <div class="col-lg-12">
                         <div class="listing_single_description2 mt30-767 mb-767">
@@ -168,7 +168,7 @@
                           </div>
                           <div class="single_property_social_share style2">
                             <div class="price">
-                              <h2> ₱000000 </h2>
+                              <h2> ₱00,000.00 </h2>
                             </div>
                           </div>
                         </div>
@@ -265,8 +265,39 @@
                       <h4> Location </h4>
                       </div>
                     </div>
+                    </div>
+                    </div>
+                  </div>
+
+                  <div class="col-lg-4 col-xl-4 mt50">
+                    <div class="row">
+                      <div class="more">
+                      <h4> Reservation </h4>
+                      <input id ="" type="label" placeholder>
+                      <input id ="" type="label" placeholder>
+                      <input id ="" type="label" placeholder>
+                      <br>
+                      <button class="btn-reserve"> Reservation</button>
+                      <br>
+                    </div> 
+                  </div>
+                  <div class="col-lg-12">
+                      <div class="map">
+                      <h4> Visit </h4>
+                      
+                      <button class="vicit">Visit </button>
+                </div>
+                </div>
+
+                
+</div> 
+</div>
+<div>
+                    
                   
 </div>
+
+
 
 
 
@@ -279,9 +310,7 @@
                     <div class="row">
                         <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
                             &copy; <a class="border-bottom" href="#">Rentin Portal</a>, All Right Reserved. 
-							
-
-							Designed By <a class="border-bottom" href="">Rentin Portal</a>
+                        Designed By <a class="border-bottom" href="">Rentin Portal</a>
                         </div>
                     </div>
                 </div>
