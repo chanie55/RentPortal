@@ -42,7 +42,7 @@
                         <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-user"></i><span>Manage User</span></a>
                     
-                        <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+                        <ul class="collapse list-unstyled menu" id="homeSubmenu1" style = "margin-left: 10px;">
                             <li>
                                 <a href="manageAdmin.php">Admin</a>
                             </li>
@@ -56,15 +56,18 @@
                         <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
                             <li>
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
+                                <a href="propertyMap.php">Map</a>
+                            </li>
+                            <li>
                                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <i class=""></i><span>Inclusions</span></a>
+					            <span>Inclusions</span></a>
 
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
                                     <li>
                                         <a href="incRoom.php">Room</a>
                                     </li> 
@@ -76,9 +79,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="propertyMap.php">Map</a>
-                            </li>
                         </ul>
                     </li>
 				
@@ -86,7 +86,7 @@
                         <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-message-detail"></i><span>Pages</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
                             <li>
                                 <a href="adminAboutUs.php">About Us</a>
                             </li>
@@ -100,7 +100,7 @@
                         <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-notepad"></i><span>Activities</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu4" style = "margin-left: 10px;">
                             <li>
                                 <a href="visitRecord.php">Visit</a>
                             </li>
@@ -114,7 +114,7 @@
                         <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
                                 <a href="userList.php">User List</a>
                             </li>
@@ -207,7 +207,7 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.address, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id AND user.userLevel_ID = 2 LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.address, user.email, images.image_url, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id AND user.userLevel_ID = 2 JOIN images ON user.user_ID = images.user_ID LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -217,52 +217,13 @@
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> <?php echo $row['address'] ?> </td>
                                         <td> 
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#viewDocu">
-                                                View
-                                            </button>
-
-                                            <!-- Confirm Add Modal -->
-                                            <div class="modal fade" id="viewDocu" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <p><img src = "<?php echo "./images/".$row['image_url']; ?>" width = "550px" height = "520px"></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
                                         </td>
                                         <td> 
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#viewID">
-                                                View
-                                            </button>
-
-                                            <!-- Confirm Add Modal -->
-                                            <div class="modal fade" id="viewID" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered modal-lg">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
-                                                        </div>
-
-                                                        <div class="modal-body">
-                                                            <p><img src = "<?php echo "./images/".$row['image_url']; ?>" width = "350px" height = "320px"></p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
                                         <td>
-                                            
+                                            <a href="#" class="edit" title="Edit"><i class="bx bxs-user-check"></i></a>
+                                            <a href="#" class="delete" title="Delete"><i class="bx bxs-user-x"></i></a>
                                         </td>
                                     </tr>
                                 <?php
@@ -369,5 +330,3 @@
    </script>  
   </body>
 </html>
-
-

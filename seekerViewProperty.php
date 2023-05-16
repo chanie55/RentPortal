@@ -16,7 +16,8 @@
             include "css/seekerViewProperty.css"
         ?>
     </style>
-
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 
 <body>
@@ -50,10 +51,19 @@
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-2 py-3">
-                                    <option selected>Property Type</option>
-                                    <option value="1">Property Type 1</option>
-                                    <option value="2">Property Type 2</option>
-                                    <option value="3">Property Type 3</option>
+                                <option selected disabled value="">Choose...</option>
+                                                        <?php
+                                                        include "dbconn.php";
+                            
+                                                        $name_query = "SELECT property FROM propertytype";
+                                                        $r = mysqli_query($conn, $name_query);
+
+                                                        while ($row = mysqli_fetch_array($r)) {
+                                                        ?>
+                                                        <option> <?php echo $row['property']; ?></option>
+                                                        <?php
+                                                        }
+                                                         ?>
                                 </select>
                             </div>
                             <div class="col-md-4">
@@ -67,7 +77,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn border-0 w-100 py-3" style = "background: #402950; color: white;">Search</button>
+                        <button class="btn border-0 w-100 py-3" style = "background: #5D59AF; color: white;">Search</button>
                     </div>
                 </div>
             </div>
@@ -79,17 +89,11 @@
                   <div class="row mb30">
                     <div class="col-lg-7 col-xl-8">
                       <div class="single_property_title mt30-767">
-                        <h2> Laban lng </h2>
+                        <h2> Golden Urban House For Rent </h2>
                         <p> go lang </p>
                       </div>
                     </div>
-                    <div class="col-lg-5 col-xl-4">
-                      <div class="single_property_title mt30-767">
-                      <div class="price float-left fn-400">
-                        <h2> ₱00,000.00 </h2>
-                      </div>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
         </section>
@@ -263,6 +267,8 @@
                     <div class="col-lg-12">
                       <div class="map">
                       <h4> Location </h4>
+                      <div id = "map">
+                      </div>
                       </div>
                     </div>
                     </div>
@@ -272,38 +278,35 @@
                   <div class="col-lg-4 col-xl-4 mt50">
                     <div class="row">
                       <div class="more">
-                      <h4> Reservation </h4>
-                      <input id ="" type="label" placeholder>
-                      <input id ="" type="label" placeholder>
-                      <input id ="" type="label" placeholder>
+                      <h4 id="h4"> Reservation </h4>
+                      <input id ="input" type="label" placeholder>
+                      <input id ="input" type="label" placeholder>
+                      <input id ="input" type="label" placeholder>
                       <br>
-                      <button class="btn-reserve"> Reservation</button>
+                      <button class="btn-reserve"> Reserve </button>
                       <br>
                     </div> 
                   </div>
+                  <div class="visit">
                   <div class="col-lg-12">
                       <div class="map">
-                      <h4> Visit </h4>
-                      
-                      <button class="vicit">Visit </button>
+                        
+                      <h4 class="input1"> Schedule Visit  </h4>
+                      <p class="input1"> Date to Visit </p>
+                      <input type="date" class="input1" style="width: 60%">
+                      <p class="visit"> Time to Visit </p>
+                      <input type="time" class="input1" style="width: 60%">
+                      <br class="input1">
+                      <button class="btn-visit">Visit </button>
                 </div>
                 </div>
+                  </div>
 
                 
 </div> 
 </div>
 <div>
-                    
-                  
-</div>
-
-
-
-
-
-
-
-<!-- Footer Start -->
+      <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
                 <div class="copyright">
@@ -316,7 +319,17 @@
                 </div>
             </div>
         </div>
-        <!-- Footer End -->
+        <!-- Footer End -->              
+                  
+</div>
+
+
+
+
+
+
+
+
 
 </body>
 </html>
@@ -355,3 +368,31 @@ function showSlides(n) {
 }
 
 </script>
+
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<script src="./leaflet_data/point.js"> </script>
+
+    <script> 
+        var map = L.map('map').setView([6.1164, 125.1716], 16);
+
+        var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        });
+        osm.addTo(map);
+
+        var myMarker = L.icon({
+            iconUrl: 'images/red_marker.png',
+            iconSize: [40,40]
+        });
+
+        /*
+        var singleMarker = L.marker([6.1164, 125.1716], { icon: myMarker, draggable: true });
+        var popup = singleMarker.bindPopup('This is my location. ' + singleMarker.getLatLng()).openPopup();
+        popup.addTo(map);*/
+
+        var pointData = L.geoJSON(pointJson).addTo(map);
+        var popuploc = pointData.bindPopup('Property Location').openPopup();
+        popuploc.addTo(map);
+        L.Control.geocoder().addTo(map);
+    </script>

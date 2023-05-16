@@ -38,15 +38,15 @@
                         <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
                             <li>
                                 <a href="ownerProperty.php">Post Property</a>
                             </li>
                             <li>
                                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <i class=""></i><span>Manage Inclusions</span></a>
+					            <span>Manage Inclusions</span></a>
 
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
                                     <li>
                                         <a href="ownerRoom.php">Room</a>
                                     </li> 
@@ -80,7 +80,7 @@
                         <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
                                 <a href="#">Property List</a>
                             </li>
@@ -168,5 +168,3 @@
    </script>
   </body>
 </html>
-
-

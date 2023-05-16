@@ -42,15 +42,15 @@
                         <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
                             <li>
                                 <a href="ownerProperty.php">Post Property</a>
                             </li>
                             <li  class="active">
                                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <i class=""></i><span>Manage Inclusions</span></a>
+					            <span>Manage Inclusions</span></a>
 
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
                                     <li  class="active">
                                         <a href="ownerRoom.php">Room</a>
                                     </li> 
@@ -83,7 +83,7 @@
                         <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
                                 <a href="#">Property List</a>
                             </li>
@@ -118,152 +118,223 @@
 			
 			
 			    <div class="main-content">
-			
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <form method = "post" action = ""> 
-                            <div class = "form-group"> 
-                                    <label> Add Room Type </label>
-                                    <input type = "text" name = "room-type" id = "type_0" class = "myInput form-control">
-                                </div>
+                    <div class = "container my-5"> 
+                        <nav class = "nav nav-tabs"> 
+                            <button type = "button" class = "nav-link active" data-toggle = "tab" data-target = "#tab-type"> 
+                                Room Type 
+                            </button>
+                            <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-table"> 
+                                Manage Room
+                            </button>
+                        </nav>
 
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm">
-                                    Save
-                                </button>
-
-                                <!-- Confirm Add Modal -->
-                                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+                        <div class = "tab-content">
+                            <div class = "tab-pane active show fade" id = "tab-type"> 
+                                <div class="containers">
+                                    <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <form method = "post" action = ""> 
+                                            <div class = "form-group"> 
+                                                <label> Add Room Type </label>
+                                                <input type = "text" name = "room-type" id = "type_0" class = "myInput form-control">
                                             </div>
 
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to add this property category?</p>
-                                            </div>
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm">
+                                                Save
+                                            </button>
 
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary" name = "submit-type">Confirm</button>
+                                            <!-- Confirm Add Modal -->
+                                            <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="modal-body">
+                                                        <p>Are you sure you want to add this property category?</p>
+                                                    </div>
+
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary" name = "submit-type">Confirm</button>
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
+                                            </div>
+                                            <div id = "hob"> </div>
+                                        </form>
+
+                                        <div class="card card-stats"> </div>
                                     </div>
+
+                                    <?php
+                                        include "dbconn.php";
+
+                                        if (isset($_POST['submit-type'])) {
+                                            $type = $_POST['room-type'];
+
+                                            $cat_sql = "INSERT INTO roomtype(status, room_Type) VALUES (1, '$type')";
+                                            $result = mysqli_query($conn, $cat_sql);    
+                                        if ($result === TRUE) {
+                                            echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
+                                        }
+                                        }
+                                    ?>
+
+                                    <div class="container-xl">
+                                        <div class="table-wrapper">
+                                            <div class="table-title"> 
+                                                <table class="table table-striped table-hover table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Type</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php
+                                                            include "dbconn.php";
+                            
+                                                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                                                $page = $_GET['page'];
+                                                            } else {
+                                                                $page = 1;
+                                                            }
+
+                                                            $limit = 6;
+                                                            $offset = ($page - 1) * $limit;
+
+                                                            $previous = $page - 1;
+                                                            $next = $page + 1;
+
+                                                            $sql = "SELECT * FROM roomtype";
+                                                            $result = mysqli_query($conn, $sql);
+
+                                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                            ?>
+                                                                <tr class = "data-row"> 
+                                                                    <td> <?php echo $row['room_Type'] ?> </td>
+                                                                </tr>
+                                                            <?php
+                                                            }
+                                                        ?> 
+                        
+                                                    </tbody>    
+                                                </table>
+
+                                                <div class="clearfix">
+                                                    <ul class="pagination">
+                                                        <?php
+            
+                                                        $query =  "SELECT COUNT(*) FROM roomtype";
+                                                        $result_count = mysqli_query($conn, $query);
+                                                        $records = mysqli_fetch_row($result_count);
+                                                        $total_records = $records[0];
+
+                                                        $total_pages = ceil($total_records / $limit);
+                                                        $link = "";
+
+                                                        ?>
+        
+
+                                                        <?php
+                                                            if ($page >= 2) {
+                                                                echo "<li class = 'page-item'>
+                                                                <a class = 'page-link' href = 'incRoom.php?page=".($page-1)."'> 
+                                                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                                                            }
+
+                                                            for ($counter = 1; $counter <= $total_pages; $counter++){
+                                                                if ($counter == $page) {
+                                                                    $link .= "<li class = 'page-item active'>
+                                                                        <a class = 'page-link' href= 'incRoom?page="
+                                                                        .$counter."'>".$counter." </a></li>";
+                                                                } else {
+                                                                    $link .= "<li class = 'page-item'>
+                                                                        <a class = 'page-link' href='incRoom.php?page=".$counter."'> ".$counter." </a> </li>";
+                                                                }
+                                                            };
+
+                                                            echo $link;
+
+                                                            if($page < $total_pages) {
+                                                                echo "<li class = 'page-item'>
+                                                                    <a class = 'page-link' href='incRoom.php?page=".($page+1)."'>
+                                                                    <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                                                            }
+                                                        ?>
+                                                    </ul>
+                                                    <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                                                </div>
+
+                                            </div> 
+                                        </div> 
+                                    </div>
+
                                 </div>
+                            </div>
 
-                                <div id = "hob"> </div>
-                            </form>
-
-                            <div class="card card-stats"> </div>
+                            <div class = "tab-pane fade" id = "tab-table"> 
+                                
+                                
+                    <div class = "containers"> 
+                        <div class = "row"> 
+                            <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
+                                <legend class = "text-left"> Room </legend>
+                            </div>
                         </div>
-                    </div>
-
-                    <?php
-                        include "dbconn.php";
-
-                        if (isset($_POST['submit-type'])) {
-                            $type = $_POST['room-type'];
-
-                            $cat_sql = "INSERT INTO room(status, room_Type) VALUES (1, '$type')";
-                            $result = mysqli_query($conn, $cat_sql);    
-                            if ($result === TRUE) {
-                                 echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
-                            }
-                           
-                        }
-                    ?>
                     
+
+                    <!--Table Display Reservation-->
                     <div class="container-xl">
-                        <div class="table-wrapper">
-                            <div class="table-title">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <div class="search-box">
+                                    <i class="bx bxs-search-alt-2"></i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                                </div>
+                            </div>
+                        </div>
 
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Type</th>
+                                    <th>Room Number</th>
+                                    <th>Room Type</th>
+                                    <th>Monthly Rate</th>
+                                    <th>Kitchen</th>
+                                    <th>Bathroom</th>
+                                    <th>Air Conditioner</th>
+                                    <th>Status</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                         <tbody>
-                        <?php
-                            include "dbconn.php";
-                            
-                            if(isset($_GET['page']) && $_GET['page'] !== "") {
-                                $page = $_GET['page'];
-                            } else {
-                                $page = 1;
-                            }
-
-                            $limit = 6;
-                            $offset = ($page - 1) * $limit;
-
-                            $previous = $page - 1;
-                            $next = $page + 1;
-
-                            $sql = "SELECT * FROM room";
-                            $result = mysqli_query($conn, $sql);
-
-                            while ($row = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <tr class = "data-row"> 
-                                        <td> <?php echo $row['room_Type'] ?> </td>
+                       
+                                        </td>
                                     </tr>
-                                <?php
-                            }
-                        ?> 
-                        
                         </tbody>    
                         </table>
                         <div class="clearfix">
                 
                         <ul class="pagination">
-                        <?php
-            
-                            $query =  "SELECT COUNT(*) FROM room";
-                            $result_count = mysqli_query($conn, $query);
-                            $records = mysqli_fetch_row($result_count);
-                            $total_records = $records[0];
-
-                            $total_pages = ceil($total_records / $limit);
-                            $link = "";
-
-                        ?>
-        
-
-                        <?php
-                            if ($page >= 2) {
-                                echo "<li class = 'page-item'>
-                                <a class = 'page-link' href = 'incRoom.php?page=".($page-1)."'> 
-                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
-                            }
-
-                            for ($counter = 1; $counter <= $total_pages; $counter++){
-                                if ($counter == $page) {
-                                    $link .= "<li class = 'page-item active'>
-                                    <a class = 'page-link' href= 'incRoom?page="
-                                    .$counter."'>".$counter." </a></li>";
-                                } else {
-                                    $link .= "<li class = 'page-item'>
-                                    <a class = 'page-link' href='incRoom.php?page=".$counter."'> ".$counter." </a> </li>";
-                                }
-                            };
-
-                            echo $link;
-
-                            if($page < $total_pages) {
-                                echo "<li class = 'page-item'>
-                                <a class = 'page-link' href='incRoom.php?page=".($page+1)."'>
-                                <i class = 'bx bxs-chevron-right'></i> </a></li>";
-                            }
-                        ?>
+                        
                         </ul>
-                        <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                        <!-- <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div> -->
                     </div>
                 </div>
             </div>
-					
+            </div>
+                        </div>
+                            </div>
+                        </div>
+                        
+                  
 				<footer class="footer">
                     <div class="container-fluid">
 				        <div class="row">
@@ -313,5 +384,3 @@
    </script>  
   </body>
 </html>
-
-

@@ -10,7 +10,7 @@
 
         <style>
             <?php
-                include "css/FAQ.css"
+                include "css/reservation.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -227,5 +227,3 @@
    </script>
   </body>
 </html>
-
-
