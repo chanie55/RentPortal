@@ -118,7 +118,7 @@
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href="viewProperty.php"><img class="img-fluid" src="images/sample.jpg" alt=""></a>
+                                        <a href="seekerViewProperty.php"><img class="img-fluid" src="images/sample.jpg" alt=""></a>
                                         <div class="rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style = "background: #5D59AF;">For Rent</div>
                                         <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;">Apartment</div>
                                     </div>

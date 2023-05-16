@@ -46,22 +46,6 @@
                             <li>
                                 <a href="ownerProperty.php">Post Property</a>
                             </li>
-                            <li>
-                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <span>Manage Inclusions</span></a>
-
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
-                                    <li>
-                                        <a href="ownerRoom.php">Room</a>
-                                    </li> 
-                                    <li>
-                                        <a href="ownerKitchen.php">Kitchen</a>
-                                    </li>
-                                    <li>
-                                        <a href="ownerCR.php">Comfort Room</a>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
                 
