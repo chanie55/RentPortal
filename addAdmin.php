@@ -8,6 +8,7 @@ if (isset($_POST['submit-admin'])) {
     $contact = $_POST['contact'];
     $gender = $_POST['gender'];
     $password = $_POST['password'];
+    $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
     
 
     $sql = "INSERT INTO userinfo(firstname, lastname, contact, gender)
@@ -23,7 +24,7 @@ if (isset($_POST['submit-admin'])) {
 
                 if($result === TRUE) {
                     $sql2 = "INSERT INTO user(email, password, userInfo_ID, status, userLevel_ID)
-                        VALUES ('$email', '$password', '$userID', 1, 1)";
+                        VALUES ('$email', '$hashed_pw', '$userID', 1, 1)";
                     $result2 = mysqli_query($conn, $sql2);
                     if ($result2) {
                         $userlastid = mysqli_insert_id($conn);
