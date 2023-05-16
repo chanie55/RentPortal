@@ -69,6 +69,40 @@ if (isset($_POST['submit-seeker'])) {
                             $userid = "UID_00".$userlastid;
                             $query2 = "UPDATE user SET user_ID = '".$userid."' WHERE id = '".$userlastid."'";
                             $res2 = mysqli_query($conn, $query2);
+
+                            if (isset($_FILES['id'])) {
+                                foreach ($_FILES['id']['tmp_name'] as $key => $value) {
+                                    $img_name = $_FILES['id']['name'][$key];
+                                    $tmp_name = $_FILES['id']['tmp_name'][$key];
+                
+                                    $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                                    $img_ex_loc = strtolower($img_ex);
+                    
+
+                                    //MODIFY
+                                    $allowed_ex = array ("jpg", "jpeg", "png", "gif");
+                
+                                    if (in_array($img_ex_loc, $allowed_ex)) {
+                                        $new_img_name = uniqid("ID-", true).'.'.$img_ex_loc;
+                                        $img_upload_path = './images/'.$new_img_name;
+                                        move_uploaded_file($tmp_name, $img_upload_path);
+                
+                                        //into the database
+                                        $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
+                                        mysqli_query($conn, $image_query);
+                                        header("Location: ownerProperty.php?Successfully added");
+                                    } else {
+                                        $message = "You cannot upload files of this type";
+                                        header("Location: ownerProperty.php?error=$message");
+                                    }
+                            }   
+                            header ("Location: ownerProperty.php?saved");
+                            } else {
+                            echo "failed";
+                            }
+                            } else {
+                                header("Location: registerSeeker.php?failed");
+                            }
                         }
                     }
                     header("Location: registerSeeker.php?msg=Your account has been registered");
@@ -80,5 +114,4 @@ if (isset($_POST['submit-seeker'])) {
         
         
     }   
-}
 ?>

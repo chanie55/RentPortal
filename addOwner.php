@@ -33,6 +33,8 @@ if (isset($_POST['submit-owner'])) {
     $lowercase = preg_match('@[a-z]@', $password);
     $number = preg_match('@[0-9]@', $password);
 
+    //some text here
+
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header("Location: registerOwner.php?error=Invalid email address&$user_data");
 
@@ -94,48 +96,39 @@ if (isset($_POST['submit-owner'])) {
                                             move_uploaded_file($tmp_name, $img_upload_path);
             
                                             //into the database
-                                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', '$docu', '$userid')";
+                                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Business Permit', '$userid')";
                                             $image_result = mysqli_query($conn, $image_query);
                                             
                                             if ($result2 === TRUE) {
                                                 //valid-id
-                            if (isset($_FILES['valid-id'])) {
-                                $img_name = $_FILES['valid-id']['name'];
-                                $img_size = $_FILES['valid-id']['size'];
-                                $tmp_name = $_FILES['valid-id']['tmp_name'];
-                                $error = $_FILES['valid-id']['error'];
-            
-                                if ($error === 0) {
-                                    if ($img_size > 125000) {
-                                        $message = "Sorry, your file is too large";
-                                        header("Location: registerOwner.php?error=$message");
-                                    } else {
-                                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-                                        $img_ex_loc = strtolower($img_ex);
-            
-                                        $allowed_ex = array ("jpg", "jpeg", "png", "pdf");
-            
-                                        if (in_array($img_ex_loc, $allowed_ex)) {
-                                            $new_img_name = uniqid("ID-", true).'.'.$img_ex_loc;
-                                            $img_upload_path = './images/'.$new_img_name;
-                                            move_uploaded_file($tmp_name, $img_upload_path);
-            
-                                            //into the database
-                                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
-                                            mysqli_query($conn, $image_query);
-                                            header("Location: registerOwner.php?Successfully added");
-                                        } else {
-                                            $message = "You cannot upload files of this type";
-                                            header("Location: registerOwner.php?error=$message");
-                                        }
-                                    }
-                                } else {
-                                    $message = "unknown error occured";
-                                    header("Location: registerOwner.php?error=$message");
-                                }
-                            } else {
-                                header("Location: registerOwner.php?failed");
-                            }
+                                                if (isset($_FILES['id'])) {
+                                                    foreach ($_FILES['id']['tmp_name'] as $key => $value) {
+                                                        $img_name = $_FILES['id']['name'][$key];
+                                                        $tmp_name = $_FILES['id']['tmp_name'][$key];
+                                    
+                                                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                                                        $img_ex_loc = strtolower($img_ex);
+                                        
+                                                        $allowed_ex = array ("jpg", "jpeg", "png", "gif");
+                                    
+                                                        if (in_array($img_ex_loc, $allowed_ex)) {
+                                                            $new_img_name = uniqid("ID-", true).'.'.$img_ex_loc;
+                                                            $img_upload_path = './images/'.$new_img_name;
+                                                            move_uploaded_file($tmp_name, $img_upload_path);
+                                    
+                                                            //into the database
+                                                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
+                                                            mysqli_query($conn, $image_query);
+                                                            header("Location: ownerProperty.php?Successfully added");
+                                                        } else {
+                                                            $message = "You cannot upload files of this type";
+                                                            header("Location: ownerProperty.php?error=$message");
+                                                        }
+                                                }   
+                                                header ("Location: ownerProperty.php?saved");
+                                                } else {
+                                                echo "failed";
+                                                }
                                             }
                                         } else {
                                             $message = "You cannot upload files of this type";

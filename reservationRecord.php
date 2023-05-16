@@ -42,7 +42,7 @@
                         <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-user"></i><span>Manage User</span></a>
                     
-                        <ul class="collapse list-unstyled menu" id="homeSubmenu1">
+                        <ul class="collapse list-unstyled menu" id="homeSubmenu1" style = "margin-left: 10px;">
                             <li>
                                 <a href="manageAdmin.php">Admin</a>
                             </li>
@@ -56,15 +56,18 @@
                         <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu2">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
                             <li>
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
+                                <a href="propertyMap.php">Map</a>
+                            </li>
+                            <li>
                                 <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <i class=""></i><span>Inclusions</span></a>
+					            <span>Inclusions</span></a>
 
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
                                     <li>
                                         <a href="incRoom.php">Room</a>
                                     </li> 
@@ -76,9 +79,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <li>
-                                <a href="propertyMap.php">Map</a>
-                            </li>
                         </ul>
                     </li>
 				
@@ -86,7 +86,7 @@
                         <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-message-detail"></i><span>Pages</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
                             <li>
                                 <a href="adminAboutUs.php">About Us</a>
                             </li>
@@ -100,7 +100,7 @@
                         <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-notepad"></i><span>Activities</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu4" style = "margin-left: 10px;">
                             <li>
                                 <a href="visitRecord.php">Visit</a>
                             </li>
@@ -114,7 +114,7 @@
                         <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
 
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu5">
+                        <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
                                 <a href="userList.php">User List</a>
                             </li>
@@ -327,5 +327,3 @@
    </script>  
   </body>
 </html>
-
-

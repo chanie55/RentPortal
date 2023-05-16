@@ -105,11 +105,13 @@
                                     name = "birthdate" 
                                     class="form-control" 
                                     width = "276"
+                                    max = "2005-01-01"
                                     id="datepicker"><br>
                                 <?php } else { ?>
                                     <input required type = "date" 
                                     name = "birthdate" 
                                     class="form-control"
+                                    max = "2005-01-01"
                                     id="datepicker"><br>
                                 <?php } ?>
                             <div class = "invalid-feedback"> 
@@ -121,7 +123,7 @@
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="disabledTextInput">City</label>
-                            <input required type = "text" class="form-control" id="disabledTextInput" placeholder = "General Santos">           
+                            <input required type = "text" class="form-control" id="disabledTextInput" value = "General Santos">           
                         </div>
 
                         <div class="col-md-6 mb-3">
@@ -173,6 +175,7 @@
                                     name = "contact" 
                                     class="form-control"
                                     pattern = "[0-9]{11}" 
+                                    max = "11"
                                     id="validationCustom06"
                                     value = "<?php echo $_GET['contact']; ?>"><br>
                                 <?php } else { ?>
@@ -180,6 +183,7 @@
                                     name = "contact" 
                                     class="form-control"
                                     pattern = "[0-9]{11}"
+                                    max = "11"
                                     id="validationCustom06"><br>
                                 <?php } ?>
                             <div class = "invalid-feedback"> 
@@ -232,32 +236,24 @@
 
                         <div class="form-row">
                             <div class="col-md-12 mb-3">
-                                <label> <strong> Provide only one (1) Property Document </strong> </label> 
-                      
-                                <div class = "form-group form-check">
-                                    <input type="radio" name = "document" class="form-check-input" id="validationCustom09" value = "Business Permit">
-                                    <label for = "validationCustom09"> Business Permit </label>
-                                </div>
-
-                                <div class = "form-group form-check">
-                                    <input type="radio" name = "document" class="form-check-input" id="validationCustom09" value = "DTI">
-                                    <label for = "validationCustom09"> DTI </label>
-                                </div>
-
-                                <div class = "form-group form-check">
-                                    <input type="radio" name = "document" class="form-check-input" id="validationCustom09" value = "0605 BIR Form">
-                                    <label for = "validationCustom09"> 0605 BIR Form </label>
-                                </div>
+                                <label> <strong> Provide only one Property Document </strong> </label> <br>
                                 
-                                <label> Upload Document Here:</label>
+                                <label> Business Permit:</label>
                                 <input type = "file" name = "document-image"/>
+                            </div>
+                        </div><br>
+
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label> <strong> Please provide any Valid ID applicable </strong> </label> <br>
+                                
+                                <label> Front:</label>
+                                <input type = "file" name = "id[]"/><br><br>
+                                <label> Back:</label>
+                                <input type = "file" name = "id[]"/><br><br>
                             </div>
                         </div>
 
-                        <label> <strong> Upload Valid ID: </strong></label>
-                        <input type = "file" name = "valid-id"/>
-                        <br>
-                        <br>
                         <button class="btn btn-primary" type="submit" name = "submit-owner">Register</button>
                         <br> <br>
                         <div class="form-group">

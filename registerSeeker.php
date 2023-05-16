@@ -28,7 +28,7 @@
 
         <div class="container">
             <div class="content">
-                <form method = "post" action = "addSeeker.php" class="needs-validation" novalidate>
+                <form method = "post" action = "addSeeker.php" class="needs-validation" enctype = "multipart/form-data" novalidate>
                         <?php
 					        if(isset($_GET['error'])) { ?>
 					            <p class = "error">
@@ -104,11 +104,13 @@
                                     name = "birthdate" 
                                     class="form-control" 
                                     width = "276"
+                                    max = "2005-01-01"
                                     id="datepicker"><br>
                                 <?php } else { ?>
                                     <input required type = "date" 
                                     name = "birthdate" 
                                     class="form-control"
+                                    max = "2005-01-01"
                                     id="datepicker"><br>
                                 <?php } ?>
                             <div class = "invalid-feedback"> 
@@ -225,7 +227,18 @@
                                 Please re-enter your password
                                 </div>
                             </div>
-                        </div><br>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="col-md-12 mb-3">
+                                <label> <strong> Please provide any Valid ID applicable </strong> </label> <br>
+                                
+                                <label> Front:</label>
+                                <input type = "file" name = "id[]"/><br><br>
+                                <label> Back:</label>
+                                <input type = "file" name = "id[]"/><br><br>
+                            </div>
+                        </div>
 
                         <button class="btn btn-primary" type="submit" name = "submit-seeker">Register</button>
                         <br><br>
