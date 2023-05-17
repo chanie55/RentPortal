@@ -131,10 +131,10 @@ if (isset($_POST['submit-owner'])) {
                                                             header("Location: ownerProperty.php?Successfully added");
                                                         } else {
                                                             $message = "You cannot upload files of this type";
-                                                            header("Location: ownerProperty.php?error=$message");
+                                                            
                                                         }
                                                 }   
-                                                header ("Location: ownerProperty.php?saved");
+                                                header ("Location: verifyOwner.php?saved");
                                                 } else {
                                                 echo "failed";
                                                 }
@@ -181,7 +181,7 @@ if (isset($_POST['submit-owner'])) {
 
                             $mail->send();
 
-                            echo " <script> alert ('Email Verification has been sent'); document.location.href = 'pendingOwner.php'; </script>";  
+                            echo " <script> alert ('Email Verification has been sent'); document.location.href = 'verifyOwner.php'; </script>";  
 
                         }
                     }
@@ -211,7 +211,6 @@ if (isset($_POST['submit-owner'])) {
 
 ?>
 
-<script src="js/sweetalert.min.js"></script>
 
 
 

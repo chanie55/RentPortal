@@ -10,7 +10,7 @@
         $result = mysqli_query($conn, $sql);
 
         if ($result === TRUE) {
-            header("Location: adminAboutUs.php?msg=Successfully added!");
+            header("Location: ownerAboutUs.php?msg=Successfully added!");
         } else {
             echo "Failed";
         }

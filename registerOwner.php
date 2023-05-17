@@ -216,7 +216,7 @@
                         <div class="form-row password" >
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom08">Password</label>
-                                <input type="text" name = "password" class="form-control" id="validationCustom08" aria-describedby = "pwd" required>
+                                <input type="password" name = "password" class="form-control" id="validationCustom08" aria-describedby = "pwd" required>
                                     <small id = "pwd" class = "form-text text-muted">
                                         Must be more than 8 characters long, contain atleast one (1) capital letter and numbers
                                     </small>
@@ -227,7 +227,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom09">Confirm Password</label>
-                                <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
+                                <input type="password" name = "password2" class="form-control" id="validationCustom09" required>
                                 <div class = "invalid-feedback"> 
                                 Please re-enter your password
                                 </div>

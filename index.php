@@ -39,7 +39,6 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.php" class="nav-item nav-link active">Home</a>
-                        <a href="aboutUs.php" class="nav-item nav-link">About</a>
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     </div>
                     <div class = "dropdown">

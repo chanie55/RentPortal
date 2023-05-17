@@ -53,12 +53,12 @@
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
-                    <li class="active">
+                    <li class="dropdown">
                     <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
                     </li>
 
-                    <li class="active">
+                    <li class="dropdown">
                     <a href = "ownerAboutUs.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>About Us</span></a>
                     </li>

@@ -99,13 +99,13 @@ if (isset($_POST['submit-seeker'])) {
                                         //into the database
                                         $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
                                         mysqli_query($conn, $image_query);
-                                        header("Location: ownerProperty.php?Successfully added");
+                                        header("Location: registerSeeker.php?Successfully added");
                                     } else {
                                         $message = "You cannot upload files of this type";
-                                        header("Location: ownerProperty.php?error=$message");
+                                        header("Location: registerSeeker.php?error=$message");
                                     }
                                 }   
-                                header ("Location: ownerProperty.php?saved");
+                                header ("Location: verifyemail.php?saved");
                             } else {
                             echo "failed";
                             }
@@ -136,7 +136,7 @@ if (isset($_POST['submit-seeker'])) {
 
                             $mail->send();
 
-                            echo " <script> alert ('Sent Email'); document.location.href = 'manageOwner.php'; </script>";
+                            echo " <script> alert ('Sent Email'); document.location.href = 'verifyemail.php'; </script>";
 
                             } else {
                                 header("Location: registerSeeker.php?failed");
