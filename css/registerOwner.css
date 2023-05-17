@@ -504,4 +504,13 @@ body{
 .list-section li.in-prog svg.tick{
     display: none;
 }
+.error{
+    opacity: 0;
+    visibility: hidden;
+    width: 400px;
+    height: 350px;
+    transition: .3s ease-in;
+    background: white;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .4); 
+}
 
