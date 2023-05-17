@@ -60,7 +60,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    height: 600px;
+    height: 200px;
     border-top:solid rgba(0, 0, 0, .1) 5px;
     border-bottom:solid rgba(0, 0, 0, .1) 5px;
 }

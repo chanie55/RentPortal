@@ -57,7 +57,7 @@
 
         <!-- Search Start -->
         <div class="container-xxl search">
-            <div class="container wow fadeIn" data-wow-delay="0.1s" style="padding: 35px; margin-top: 15%; opacity: 0.98">
+            <div class="container wow fadeIn" data-wow-delay="0.1s" style="padding: 10px; margin-top: 5%; opacity: 0.98">
                 <div class="row g-2">
                     <div class="col-md-10">
                         <div class="row g-2">
