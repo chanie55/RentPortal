@@ -35,30 +35,8 @@
 				    </div>
 			
                     <li class="dropdown">
-                        <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
-
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
-                            <li>
-                                <a href="ownerProperty.php">Post Property</a>
-                            </li>
-                            <li>
-                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <span>Manage Inclusions</span></a>
-
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
-                                    <li>
-                                        <a href="ownerRoom.php">Room</a>
-                                    </li> 
-                                    <li>
-                                        <a href="ownerKitchen.php">Kitchen</a>
-                                    </li>
-                                    <li>
-                                        <a href="ownerCR.php">Comfort Room</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <a href = "ownerProperty.php">
+					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
                     </li>
                 
                     <li class="dropdown">
@@ -74,6 +52,11 @@
                     <li class="dropdown">
                     <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href = "ownerAboutUs.php">
+					    <i class="bx bxs-edit-location"></i><span>About Us</span></a>
                     </li>
 
                     <li class="dropdown">
