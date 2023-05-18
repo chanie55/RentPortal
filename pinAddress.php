@@ -9,7 +9,7 @@
         $result = mysqli_query($conn, $query);
 
         if ($result) {
-            header("Location: viewmap.php?saved");
+            header("Location: ownerProperty.php?saved");
         } else {
             echo "failed";
         }

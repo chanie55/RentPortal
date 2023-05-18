@@ -4,7 +4,7 @@
         <meta name = "viewport" content = "width = device-width, initial-scale=1.0">
         <title> Register </title>
         <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
 <style>
     <?php
@@ -35,6 +35,8 @@
 						    <?php
 							    echo $_GET['error']; ?>
 				        <?php } ?>
+
+                        
 
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
@@ -214,7 +216,7 @@
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom08">Password</label>
-                                <input type="text" name = "password" class="form-control" id="validationCustom08" required>
+                                <input type="password" name = "password" class="form-control" id="validationCustom08" required>
                                 <div class = "invalid-feedback"> 
                                 Please enter your password
                                 </div>
@@ -222,7 +224,7 @@
 
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom09">Confirm Password</label>
-                                <input type="text" name = "password2" class="form-control" id="validationCustom09" required>
+                                <input type="password" name = "password2" class="form-control" id="validationCustom09" required>
                                 <div class = "invalid-feedback"> 
                                 Please re-enter your password
                                 </div>

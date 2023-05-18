@@ -13,6 +13,7 @@
                 include "css/userList.css"
             ?>
         </style>
+        <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -63,50 +64,6 @@
                             <li>
                                 <a href="propertyMap.php">Map</a>
                             </li>
-                            <li>
-                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <span>Inclusions</span></a>
-
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
-                                    <li>
-                                        <a href="incRoom.php">Room</a>
-                                    </li> 
-                                    <li>
-                                        <a href="incKitchen.php">Kitchen</a>
-                                    </li>
-                                    <li>
-                                        <a href="incCR.php">Comfort Room</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-				
-				    <li class="dropdown">
-                        <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					    <i class="bx bxs-message-detail"></i><span>Pages</span></a>
-
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
-                            <li>
-                                <a href="adminAboutUs.php">About Us</a>
-                            </li>
-                            <li>
-                                <a href="adminFAQ.php">FAQ</a>
-                            </li>
-                        </ul>
-                    </li>
-
-				    <li class="dropdown">
-                        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					    <i class="bx bxs-notepad"></i><span>Activities</span></a>
-
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu4" style = "margin-left: 10px;">
-                            <li>
-                                <a href="visitRecord.php">Visit</a>
-                            </li>
-                            <li>
-                                <a href="reservationRecord.php">Reservation</a>
-                            </li>
                         </ul>
                     </li>
 				
@@ -120,6 +77,12 @@
                             </li>
                             <li>
                                 <a href="propertyList.php">Property List</a>
+                            </li>
+                            <li>
+                                <a href="visitRecord.php">Visit</a>
+                            </li>
+                            <li>
+                                <a href="reservationRecord.php">Reservation</a>
                             </li>
                         </ul>
                     </li>
@@ -175,9 +138,10 @@
                  <div class="col-sm-4">
                         <div class="search-box">
                             <i class="bx bxs-search-alt-2"></i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">
+                            <input type="text" class="form-control" placeholder="Search&hellip;">                
                         </div>
                     </div>
+                    <a href="report.php" class="btn btn-primary btn-lg" id="print"><span> Print </span></a>
             <table class="table table-striped table-hover table-bordered">
                 
                 <thead>
@@ -209,7 +173,7 @@
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <tr class = "data-row"> 
+                                    <tr> 
                                         <td> <?php echo $row['fullName'] ?> </td>
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> 
@@ -307,15 +271,6 @@
             });
 			
         });      
-   </script>
-  
-   <!-- Progress Bar -->
-   <script> 
-     const allProgress = document.querySelectorAll('.card .progress');
-
-            allProgress.forEach(item => {
-                item.style.setProperty('--value', item.dataset.value)
-            });
    </script>  
   </body>
 </html>

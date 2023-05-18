@@ -57,51 +57,7 @@
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>
-                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <i class=""></i><span>Inclusions</span></a>
-
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3">
-                                    <li>
-                                        <a href="incRoom.php">Room</a>
-                                    </li> 
-                                    <li>
-                                        <a href="incKitchen.php">Kitchen</a>
-                                    </li>
-                                    <li>
-                                        <a href="incCR.php">Comfort Room</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
                                 <a href="propertyMap.php">Map</a>
-                            </li>
-                        </ul>
-                    </li>
-				
-				    <li class="dropdown">
-                        <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					    <i class="bx bxs-message-detail"></i><span>Pages</span></a>
-
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu3">
-                            <li>
-                                <a href="adminAboutUs.php">About Us</a>
-                            </li>
-                            <li>
-                                <a href="adminFAQ.php">FAQ</a>
-                            </li>
-                        </ul>
-                    </li>
-
-				    <li class="dropdown">
-                        <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					    <i class="bx bxs-notepad"></i><span>Activities</span></a>
-
-                        <ul class="collapse list-unstyled menu" id="pageSubmenu4">
-                            <li>
-                                <a href="visitRecord.php">Visit</a>
-                            </li>
-                            <li>
-                                <a href="reservationRecord.php">Reservation</a>
                             </li>
                         </ul>
                     </li>
@@ -116,6 +72,12 @@
                             </li>
                             <li>
                                 <a href="propertyList.php">Property List</a>
+                            </li>
+                            <li>
+                                <a href="visitRecord.php">Visit</a>
+                            </li>
+                            <li>
+                                <a href="reservationRecord.php">Reservation</a>
                             </li>
                         </ul>
                     </li>
