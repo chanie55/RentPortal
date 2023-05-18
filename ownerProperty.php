@@ -119,7 +119,13 @@
                     <div class = "container my-5"> 
                         <nav class = "nav nav-tabs"> 
                             <button type = "button" class = "nav-link active" data-toggle = "tab" data-target = "#tab-residential"> 
-                                For Residential Property 
+                                Apartment
+                            </button>
+                            <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-commercial"> 
+                                Boarding House
+                            </button>
+                            <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-commercial"> 
+                                House Rent
                             </button>
                             <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-commercial"> 
                                 For Commercial Property 
@@ -178,18 +184,6 @@
                                                     </select>
                                                     <div class = "invalid-feedback"> 
                                                         Please select a property type
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3 mb-3">    
-                                                    <label for="validationCustom02">Availability </label>
-                                                    <select class="custom-select" id="validationCustom02" name = "availability" required> 
-                                                        <option selected disabled value="">Choose...</option>
-                                                        <option value="available" name = "availability">Available</option>
-                                                        <option value="full" name = "availability">Full</option>
-                                                    </select>
-                                                    <div class = "invalid-feedback"> 
-                                                        Please select a room type
                                                     </div>
                                                 </div>
                                             </div>
@@ -310,47 +304,65 @@
                                             <h5 class = "text-secondary"> Inclusions </h5>
                                             <div class="form-row">
                                                 
-                                                <div class="col-md-4 mb-3">    
-                                                    <label for="validationCustom02">Kitchen</label>
-                                                        <select class="custom-select" id="validationCustom02" name = "kitchentype" required> 
-                                                            <option selected disabled value="">Choose...</option>
-                                                            <?php
-                                                                include "dbconn.php";
-                            
-                                                                $name_query = "SELECT kitchen_Type FROM kitchen";
-                                                                $r = mysqli_query($conn, $name_query);
+                                            <div class="col-sm-4">
+                                                    <label> Kitchen </label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios1" value="Provided" checked>
+                                                        <label class="form-check-label" for="gridRadios1">
+                                                            Per room
+                                                        </label>
+                                                    </div>
 
-                                                                while ($row = mysqli_fetch_array($r)) {
-                                                                ?>
-                                                                <option> <?php echo $row['kitchen_Type']; ?></option>
-                                                                <?php
-                                                                }
-                                                            ?>
-                                                        </select>
-                                                        <div class = "invalid-feedback"> 
-                                                            Please choose kitchen inclusion
-                                                        </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Not Provided">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Common
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Optional">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Not Provided
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Optional">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Others
+                                                        </label>
+                                                    </div>
                                                 </div>
 
-                                                <div class="col-md-4 mb-3">    
-                                                    <label for="validationCustom02">Comfort Room</label>
-                                                    <select class="custom-select" id="validationCustom02" name = "bathtype" required> 
-                                                        <option selected disabled value="">Choose...</option>
-                                                        <?php
-                                                        include "dbconn.php";
-                            
-                                                        $name_query = "SELECT bath_Type FROM baths";
-                                                        $r = mysqli_query($conn, $name_query);
+                                                <div class="col-sm-4">
+                                                    <label> Bathroom </label>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios1" value="Provided" checked>
+                                                        <label class="form-check-label" for="gridRadios1">
+                                                            Per room
+                                                        </label>
+                                                    </div>
 
-                                                        while ($row = mysqli_fetch_array($r)) {
-                                                        ?>
-                                                        <option> <?php echo $row['bath_Type']; ?></option>
-                                                        <?php
-                                                        }
-                                                         ?>
-                                                    </select>
-                                                    <div class = "invalid-feedback"> 
-                                                        Please choose comfort room inclusion
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Not Provided">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Common
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Optional">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Not Provided
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Optional">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Others
+                                                        </label>
                                                     </div>
                                                 </div>
 
@@ -373,10 +385,17 @@
                                                     <div class="form-check">
                                                         <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Optional">
                                                         <label class="form-check-label" for="gridRadios2">
-                                                            Optional test
+                                                            Optional
                                                         </label>
                                                     </div>
-                                            </div>
+
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="aircon" id="gridRadios2" value="Optional">
+                                                        <label class="form-check-label" for="gridRadios2">
+                                                            Others
+                                                        </label>
+                                                    </div>
+                                                </div>
                                                            
                                             </div><br>
 
@@ -390,22 +409,8 @@
 
                                             <div class="form-group">
                                                 <label>Property Image:</label>
-                                                <input type = "file" name = "image[]"/>
-
-                                                <label>Room Image:</label>
-                                                <input type = "file" name = "image[]"/>
-
-                                                <label>Landmark Image:</label>
-                                                <input type = "file" name = "image[]"/>
-
-                                                <label>Bathroom Image:</label>
-                                                <input type = "file" name = "image[]"/>
-
-                                                <label>Other Image:</label>
-                                                <input type = "file" name = "image[]"/>
-
-                                                <label>Kitchen Image:</label>
-                                                <input type = "file" name = "image[]"/>
+                                                <input type = "file" name = "image[]" multiple/>
+    
                                             </div>
 
                                             <button class="btn btn-primary" type="submit" name = "submit-property">POST</button>
