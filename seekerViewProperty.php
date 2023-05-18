@@ -164,6 +164,12 @@
                 <div class="row">
                   <div class="col-md-12 col-lg-8 mt50">
                     <div class="row">
+                    <?php
+						          $id=$_REQUEST['pid']; 
+						          $query=mysqli_query($conn,"SELECT * FROM property");
+						          while($row=mysqli_fetch_array($query))
+						          {
+					          ?>
                       <div class="col-lg-12">
                         <div class="listing_single_description2 mt30-767 mb-767">
                           <div class="single_property_title">
@@ -306,6 +312,7 @@
 </div> 
 </div>
 <div>
+<?php } ?>
       <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
