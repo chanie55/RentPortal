@@ -1,35 +1,43 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");
+if(!isset($_SESSION['email']))
+{
+	header("location:userLogin.php");
+} 
+?>
+
 <?php
 include "dbconn.php";
+
 
     if (isset($_POST['submit-property'])) {
         $name = $_POST['propertyname'];
         $type = $_POST['property'];
-        $availability = $_POST['availability'];
         $description = $_POST['description'];
-        $lat = $_POST['lat'];
-        $lng = $_POST['lng'];
         $total = $_POST['totalrooms'];
         $available = $_POST['availablerooms'];
         $monthlyrate = $_POST['rate'];
+        $dailyrate = $_POST['drate'];
         $aircon = $_POST['aircon'];
+        $user_ID = $_SESSION['user_ID'];
         $roomtype = $_POST['roomtype'];
-        $kitchentype = $_POST['kitchentype'];
-        $bathtype = $_POST['bathtype'];
-        $userid = $_POST['id'];
+        $kitchentype = $_POST['kitchen'];
+        $bathtype = $_POST['bath'];
+        $bed = $_POST['bed'];
 
         $code = rand(1, 99999);
         $prop_ID = "PROP_".$code;
 
-        $query = "INSERT INTO property(property_ID, propertyname, description, availability, propertytype)
-                    VALUES ('$prop_ID', '$name', '$description', '$availability', '$type')";
+        $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, user_ID)
+                    VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$bed', '$kitchentype', '$bathtype', '$aircon', '$user_ID')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
-                $roomquery = "INSERT INTO room (roomtype, totalrooms, availablerooms, monthlyrate, kitchen, bathroom, aircon, property_ID)
-                                VALUES ('$roomtype', '$total', '$available', '$monthlyrate', '$kitchentype', '$bathtype', '$aircon', '$prop_ID')";
-                $result3 = mysqli_query($conn, $roomquery);
 
-            //Property Images
+            //Room Images
 
             if (isset($_FILES['image'])) {
                 foreach ($_FILES['image']['tmp_name'] as $key => $value) {

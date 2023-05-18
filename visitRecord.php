@@ -63,22 +63,6 @@
                             <li>
                                 <a href="propertyMap.php">Map</a>
                             </li>
-                            <li>
-                                <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-					            <span>Inclusions</span></a>
-
-                                <ul class="collapse list-unstyled menu" id="pageSubmenu3" style = "margin-left: 10px;">
-                                    <li>
-                                        <a href="incRoom.php">Room</a>
-                                    </li> 
-                                    <li>
-                                        <a href="incKitchen.php">Kitchen</a>
-                                    </li>
-                                    <li>
-                                        <a href="incCR.php">Comfort Room</a>
-                                    </li>
-                                </ul>
-                            </li>
                         </ul>
                     </li>
 

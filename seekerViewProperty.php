@@ -1,3 +1,11 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");
+								
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -87,10 +95,16 @@
         <section class="listing-title-area mt-2">
                 <div class="container mt50">
                   <div class="row mb30">
+                  <?php
+                    $id=$_REQUEST['property_ID'];
+						          $query=mysqli_query($conn,"SELECT * FROM property");
+						          while($row=mysqli_fetch_array($query))
+						          {
+					          ?>
                     <div class="col-lg-7 col-xl-8">
                       <div class="single_property_title mt30-767">
-                        <h2> Golden Urban House For Rent </h2>
-                        <p> go lang </p>
+                        <h2> <?php echo $row['propertyname'];?> </h2>
+                        
                       </div>
                     </div>
                     
@@ -164,15 +178,16 @@
                 <div class="row">
                   <div class="col-md-12 col-lg-8 mt50">
                     <div class="row">
+                    
                       <div class="col-lg-12">
                         <div class="listing_single_description2 mt30-767 mb-767">
                           <div class="single_property_title">
-                            <h2> Laban lang </h2>
-                            <p> go lang </p>
+                            <h2> <?php echo $row['propertyname'];?> </h2>
+                            
                           </div>
                           <div class="single_property_social_share style2">
                             <div class="price">
-                              <h2> ₱00,000.00 </h2>
+                              <h2> &#8369 <?php echo $row['monthlyrate'];?> </h2>
                             </div>
                           </div>
                         </div>
@@ -204,28 +219,9 @@
                           <!--<div class="collapse show" id="collapseExample" style="" w-100>
                             <div class="card card-body"> 
                               <p class="mt10 mb10"></p> -->
-                                <div>The Rise Makati By Shang Properties</div>
+                                <div><?php echo $row['propertyname'];?></div>
                                 <div>&nbsp;</div>
-                                <div>&nbsp;For Rent&nbsp;</div>
-                                <div>&nbsp;</div>
-                                <p>THE RISE MAKATI BY SHANGRI-LA&nbsp;</p>
-                                  <p>📍 7248 Malugay St., Makati City&nbsp;</p>
-                                  <p>&nbsp;</p>
-                                  <p>• The Rise Makati&nbsp;</p>
-                                  <p>• 28sqm&nbsp; Floor Area&nbsp;</p>
-                                  <p>• Fully Furnished&nbsp;</p>
-                                  <p>• 30th Floor Level&nbsp;</p>
-                                  <p>•&nbsp; Amenities View&nbsp;</p>
-                                  <p>&nbsp;</p>
-                                  <p>Php26,000.00 monthly&nbsp;</p>
-                                  <p>2 months deposit&nbsp;</p>
-                                  <p>1 month advance&nbsp;</p>
-                                  <p>Minimum of 1 year&nbsp;</p>
-                                  <p>Maximum of 2 occupants only&nbsp;</p>
-                                  <p>&nbsp;</p>
-                                  <p>#TheRiseMakati</p>
-                                  <p>#TheRiseMakariShangrila</p>
-                                  <p>#ShangProperties</p>
+                                <p><?php echo $row['description'];?></p>
                                   
                                   <label for="ch"> Show less </label>
                             </div>
@@ -242,17 +238,17 @@
                     <div class="col-md-6 col-lg-6 col-xl-6">
                     <dl class="inline">
                     <dt> <p> Bedrooms :</p></dt>
-                    <dd><p> 1 </p> </dd>
+                    <dd> <?php echo $row['bed'];?> </dd>
                     <dt><p>Bathrooms :</p></dt>
-                    <dd><p>1</p></dd>
+                    <dd><?php echo $row['bathroom'];?></dd>
                     <dt><p>Kitchen :</p></dt>
-                    <dd><p>1</p></dd>
+                    <dd><?php echo $row['kitchen'];?></dd>
                     </dl>
                     </div>
                     <div class="col-md-6 col-lg-6 col-xl-6">
                     <dl class="inline">
                     <dt><p>Property Type :</p></dt>
-                    <dd><p>Condominium</p></dd>
+                    <dd><?php echo $row['propertytype'];?></dd>
                     <dt><p>Property Size :</p></dt>
                     <dd><p>301 sqft</p></dd>
 
@@ -306,6 +302,7 @@
 </div> 
 </div>
 <div>
+<?php } ?>
       <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
