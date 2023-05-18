@@ -13,6 +13,7 @@
                 include "css/userList.css"
             ?>
         </style>
+        <link rel="stylesheet" type="text/css" href="css/print.css" media="print">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -153,9 +154,10 @@
                  <div class="col-sm-4">
                         <div class="search-box">
                             <i class="bx bxs-search-alt-2"></i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">
+                            <input type="text" class="form-control" placeholder="Search&hellip;">                
                         </div>
                     </div>
+                    <a href="report.php" class="btn btn-primary btn-lg" id="print"><span> Print </span></a>
             <table class="table table-striped table-hover table-bordered">
                 
                 <thead>
@@ -187,7 +189,7 @@
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
-                                    <tr class = "data-row"> 
+                                    <tr> 
                                         <td> <?php echo $row['fullName'] ?> </td>
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> 
@@ -285,15 +287,6 @@
             });
 			
         });      
-   </script>
-  
-   <!-- Progress Bar -->
-   <script> 
-     const allProgress = document.querySelectorAll('.card .progress');
-
-            allProgress.forEach(item => {
-                item.style.setProperty('--value', item.dataset.value)
-            });
    </script>  
   </body>
 </html>
