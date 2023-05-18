@@ -7,7 +7,7 @@
         $code_res = mysqli_query($conn, $check_code);
         if ($code_res) {
             $update_status = mysqli_query($conn, "UPDATE user SET is_verified = 1 WHERE verificationcode = $code");
-            echo " <script> alert ('Email has been verified'); document.location.href = 'seekerPage.php'; </script>";
+            echo " <script> alert ('Email has been verified'); document.location.href = 'login.php'; </script>";
         } else 
             echo "Failed";
     } else {

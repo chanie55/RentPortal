@@ -46,7 +46,7 @@
         map.on('click', function(e) {
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;
-            var popup = `<form action = "addProperty.php" method = "POST">
+            var popup = `<form action = "pinAddress.php" method = "POST">
                             <div class = "form-group"> 
                                 <label for = "name"> Property Name </label>
                                 <input type = "text" name = "name" class = "form-control" placeholder = "">

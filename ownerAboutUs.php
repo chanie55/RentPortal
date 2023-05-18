@@ -4,13 +4,13 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-        <title>Property Amenities</title>
+        <title>About Us Page</title>
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
         <style>
             <?php
-                include "css/ownerKitchen.css"
+                include "css/ownerAboutUs.css"
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -23,8 +23,8 @@
     <div class="wrapper">
         <div class="body-overlay"></div>
 
-           <!-- Sidebar  -->
-           <nav id="sidebar">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3><i class='bx bxs-building-house'></i><span>Rentin</span></h3>
                 </div>
@@ -43,7 +43,7 @@
 					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
                     </li>
                 
-                    <li>
+                    <li class="dropdown">
                         <a href = "ownerVisit.php">
 					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
@@ -59,8 +59,8 @@
                     </li>
 
                     <li class="dropdown">
-                        <a href = "ownerAboutUs.php">
-					    <i class="bx bxs-edit-location"></i><span>About Us</span></a>
+                    <a href = "ownerAboutUs.php">
+					    <i class="bx bxs-message-rounded-add"></i><span>About Us</span></a>
                     </li>
 
                     <li class="dropdown">
@@ -87,7 +87,7 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Kitchen </a>
+					    <a class="navbar-brand" href="#"> About Us Page </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -103,71 +103,61 @@
 			
 			    <div class="main-content">
 			
-                    <div class="row">
+			        <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
-                            <form method = "post" action = ""> 
-                            <div class = "form-group"> 
-                                    <label> Add Kitchen Type </label>
-                                    <input type = "text" name = "kitchen-type" id = "type_0" class = "myInput form-control">
-                                </div>
-
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm">
-                                    Save
-                                </button>
-
-                                <!-- Confirm Add Modal -->
-                                <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to add this property category?</p>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                <button type="submit" class="btn btn-primary" name = "submit-type">Confirm</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div id = "hob"> </div>
-                            </form>
-
-                            <div class="card card-stats"> </div>
+                            <div class="card card-stats">
+                                
+                            </div>
                         </div>
-                    </div>
 
-                    <?php
-                        include "dbconn.php";
+                    <!--About Us Form-->
+                    <div class = "container" style = "margin-top: 10px"> 
+                        <div class = "row"> 
+                            <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
+                                <h3 class = "text-left"> Add About Us </h3>
+                            </div>
 
-                        if (isset($_POST['submit-type'])) {
-                            $type = $_POST['kitchen-type'];
+                            <div class = "offset-md-1 col-md-10">
+                                <form method = "POST" action = "addAbout.php"> 
+                                    <div class = "form-group">
+                                        <label> Title </label>
+                                        <input type = "text" name = "title" class = "form-control" required/>
+                                    </div>
 
-                            $cat_sql = "INSERT INTO kitchen(kitchen_Type) VALUES ('$type')";
-                            $result = mysqli_query($conn, $cat_sql);    
-                            if ($result === TRUE) {
-                                 echo '<div class = "alert alert-success" role = "alert"> Added successfully! </div>';
-                            }
-                           
-                        }
-                    ?>
+                                    <div class = "form-group"> 
+                                        <label> Content </label>
+                                        <textarea name = "content" id = "answer" class = "form-control" required> </textarea>
+                                    </div>
 
+                                    <input type = "submit" name = "submit-about" class = "btn btn-info" value = "Save"/>
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    
+
+                    <!--Table Display FAQ-->
                     <div class="container-xl">
-                        <div class="table-wrapper">
-                            <div class="table-title">
+                <div class="table-wrapper">
+                    <div class="table-title">
+                        <div class="row">
+
+                            <div class="col-sm-4">
+                                <div class="search-box">
+                                    <i class="bx bxs-search-alt-2"></i>
+                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                                </div>
+                            </div>
+                        </div>
 
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Type</th>
+                                    <th>ID</th>
+                                    <th>Title</th>
+                                    <th>Content</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                         <tbody>
@@ -186,18 +176,22 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT * FROM kitchen";
+                            $sql = "SELECT * FROM aboutus LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr class = "data-row"> 
-                                        <td> <?php echo $row['kitchen_Type'] ?> </td>
+                                        <td> <?php echo $row['id'] ?> </td>
+                                        <td> <?php echo $row['title'] ?> </td>
+                                        <td> <?php echo $row['content'] ?> </td>
+                                        <td>
+                                            
+                                        </td>
                                     </tr>
                                 <?php
                             }
-                        ?> 
-                        
+                        ?>         
                         </tbody>    
                         </table>
                         <div class="clearfix">
@@ -205,7 +199,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM kitchen";
+                            $query =  "SELECT COUNT(*) FROM aboutus";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];
@@ -219,18 +213,18 @@
                         <?php
                             if ($page >= 2) {
                                 echo "<li class = 'page-item'>
-                                <a class = 'page-link' href = 'ncKitchen.php?page=".($page-1)."'> 
+                                <a class = 'page-link' href = 'manageAdmin.php?page=".($page-1)."'> 
                                 <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
                             }
 
                             for ($counter = 1; $counter <= $total_pages; $counter++){
                                 if ($counter == $page) {
                                     $link .= "<li class = 'page-item active'>
-                                    <a class = 'page-link' href= 'ncKitchen?page="
+                                    <a class = 'page-link' href= 'manageAdmin?page="
                                     .$counter."'>".$counter." </a></li>";
                                 } else {
                                     $link .= "<li class = 'page-item'>
-                                    <a class = 'page-link' href='ncKitchen.php?page=".$counter."'> ".$counter." </a> </li>";
+                                    <a class = 'page-link' href='manageAdmin.php?page=".$counter."'> ".$counter." </a> </li>";
                                 }
                             };
 
@@ -238,7 +232,7 @@
 
                             if($page < $total_pages) {
                                 echo "<li class = 'page-item'>
-                                <a class = 'page-link' href='incKitchen.php?page=".($page+1)."'>
+                                <a class = 'page-link' href='manageAdmin.php?page=".($page+1)."'>
                                 <i class = 'bx bxs-chevron-right'></i> </a></li>";
                             }
                         ?>
@@ -247,6 +241,8 @@
                     </div>
                 </div>
             </div>
+            </div>
+                        </div>
 					
 				<footer class="footer">
                     <div class="container-fluid">
@@ -297,3 +293,5 @@
    </script>  
   </body>
 </html>
+
+

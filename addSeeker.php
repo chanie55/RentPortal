@@ -42,6 +42,7 @@ if (isset($_POST['submit-seeker'])) {
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         header("Location: registerSeeker.php?error=Invalid email address&$user_data");
+        
 
     } else if (!$uppercase || !$lowercase || !$number || strlen($password) < 8) {
         header("Location: registerSeeker.php?error=Your password is weak. Try again.&$user_data");
@@ -98,13 +99,13 @@ if (isset($_POST['submit-seeker'])) {
                                         //into the database
                                         $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
                                         mysqli_query($conn, $image_query);
-                                        header("Location: ownerProperty.php?Successfully added");
+                                        header("Location: registerSeeker.php?Successfully added");
                                     } else {
                                         $message = "You cannot upload files of this type";
-                                        header("Location: ownerProperty.php?error=$message");
+                                        header("Location: registerSeeker.php?error=$message");
                                     }
                                 }   
-                                header ("Location: ownerProperty.php?saved");
+                                header ("Location: verifyemail.php?saved");
                             } else {
                             echo "failed";
                             }
@@ -117,32 +118,32 @@ if (isset($_POST['submit-seeker'])) {
 				                <br>
 				                </div>';
 
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = "anya.sc30@gmail.com";
-        $mail->Password = "igicgkctmoucexit";
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port= 465;
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.gmail.com';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = "anya.sc30@gmail.com";
+                            $mail->Password = "igicgkctmoucexit";
+                            $mail->SMTPSecure = 'ssl';
+                            $mail->Port= 465;
 
-        $mail->setFrom('anya.sc30@gmail.com');
+                            $mail->setFrom('anya.sc30@gmail.com');
 
-        $mail->addAddress($email);
+                            $mail->addAddress($email);
 
-        $mail->isHTML(true);
-        $mail->Subject = "Rentin Registration";
-        $mail->Body = $message;
+                            $mail->isHTML(true);
+                            $mail->Subject = "Rentin Registration";
+                            $mail->Body = $message;
 
-        $mail->send();
+                            $mail->send();
 
-        echo " <script> alert ('Sent Email'); document.location.href = 'manageOwner.php'; </script>";
+                            echo " <script> alert ('Sent Email'); document.location.href = 'verifyemail.php'; </script>";
 
                             } else {
                                 header("Location: registerSeeker.php?failed");
                             }
                         }
                     }
-                    header("Location: verifyemail.php?msg=Your account has been registered");
+                    echo " <script> alert ('Sent Email'); document.location.href = 'verifyemail.php'; </script>";
                 } else {
                     echo "Failed" ;
                 }
@@ -157,7 +158,7 @@ if (isset($_POST['submit-seeker'])) {
         $check_code = "SELECT * FROM user WHERE code = $otp_code";
         $code_res = mysqli_query($conn, $check_code);
         if ($code_res) {
-            $update_status = mysqli_query($conn, "UPDATE user SET status = 1 WHERE code = $code");
+            $update_status = mysqli_query($conn, "UPDATE user SET status = 1 WHERE code = $check_code");
             echo " <script> alert ('Email has been verified'); document.location.href = 'seekerPage.php'; </script>";
         }
     }

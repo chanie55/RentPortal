@@ -190,6 +190,11 @@ li a:hover {
 
 .error {
 	color: #C62828;
+	background: rgba(255, 0, 0 ,0.1);
+	padding: 10px;
+	width: 100%;
+	border-radius: 5px;
+    text-align: center;
 }
 
 .image {

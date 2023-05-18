@@ -1,6 +1,13 @@
 <?php
 include "dbconn.php";
 
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+
+    require 'phpmailer/src/Exception.php';
+    require 'phpmailer/src/PHPMailer.php';
+    require 'phpmailer/src/SMTP.php';
+
 if (isset($_POST['submit-owner'])) {
     $first_name = $_POST['firstname'];
     $last_name = $_POST['lastname'];
@@ -19,6 +26,8 @@ if (isset($_POST['submit-owner'])) {
     $password2 = $_POST['password2'];
     $docu = $_POST['document'];
     $length = strlen ($contact);
+    $code = rand(999999, 111111);
+    $is_verified = 0;
 
     $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&birthdate='. $dob.  '&gender='. $gender.  '&address='. $address;
     $address = $stpurok .', '. $barangay .', '. 'General Santos City';
@@ -122,13 +131,16 @@ if (isset($_POST['submit-owner'])) {
                                                             header("Location: ownerProperty.php?Successfully added");
                                                         } else {
                                                             $message = "You cannot upload files of this type";
-                                                            header("Location: ownerProperty.php?error=$message");
+                                                            
                                                         }
                                                 }   
-                                                header ("Location: ownerProperty.php?saved");
+                                                header ("Location: verifyOwner.php?saved");
                                                 } else {
                                                 echo "failed";
                                                 }
+
+                                                
+                                                
                                             }
                                         } else {
                                             $message = "You cannot upload files of this type";
@@ -143,12 +155,39 @@ if (isset($_POST['submit-owner'])) {
                                 header("Location: registerOwner.php?failed");
                             }
 
-                            
+                            $mail = new PHPMailer(true);
+
+                            $message = '<div>
+				                <p><b> Hello! </b> </p>
+				                <p> Your verification code is '.$code.' </p>
+				                <br>
+				                </div>';
+
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.gmail.com';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = "anya.sc30@gmail.com";
+                            $mail->Password = "igicgkctmoucexit";
+                            $mail->SMTPSecure = 'ssl';
+                            $mail->Port= 465;
+
+                            $mail->setFrom('anya.sc30@gmail.com');
+
+                            $mail->addAddress($email);
+
+                            $mail->isHTML(true);
+                            $mail->Subject = "Rent.in Email Verification";
+                            $mail->Body = $message;
+
+                            $mail->send();
+
+                            echo " <script> alert ('Email Verification has been sent'); document.location.href = 'verifyOwner.php'; </script>";  
 
                         }
                     }
+                    
             } 
-            header("Location: registerOwner.php?msg=Personal Data has been saved");
+            echo " <script> alert ('Email Verification has been sent'); document.location.href = 'verifyOwner.php'; </script>";
         
         } else {
             echo "Failed" ;
@@ -157,4 +196,21 @@ if (isset($_POST['submit-owner'])) {
 }
 }
 
+    if(isset($_POST['check-otp'])) {
+        $otp_code = $_POST['otp'];
+        $check_code = "SELECT * FROM user WHERE verificationcode = $otp_code";
+        $code_res = mysqli_query($conn, $check_code);
+        if ($code_res) {
+            $update_status = mysqli_query($conn, "UPDATE user SET is_verified = 1 WHERE verificationcode = $check_code");
+            echo " <script> alert ('Email has been verified'); document.location.href = 'pendingOwner.php'; </script>";
+        } else 
+            echo "Failed";
+    } else {
+        echo "Failed";
+    }
+
 ?>
+
+
+
+

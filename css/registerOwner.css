@@ -45,6 +45,15 @@ a {
     background-color: #6762b6;
 }
 
+.error {
+	color: #C62828;
+	background: rgba(255, 0, 0 ,0.1);
+	padding: 10px;
+	width: 100%;
+	border-radius: 5px;
+    text-align: center;
+}
+
 ul.dropdown {
     width: 100%;
     background-color:  #aaa7ee;
@@ -494,5 +503,14 @@ body{
 .list-section li.in-prog .file-size,
 .list-section li.in-prog svg.tick{
     display: none;
+}
+.error{
+    opacity: 0;
+    visibility: hidden;
+    width: 400px;
+    height: 350px;
+    transition: .3s ease-in;
+    background: white;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .4); 
 }
 
