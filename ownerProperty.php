@@ -301,7 +301,7 @@
                                                 </div>
                                             </div>
                                             
-                                            <h5 class = "text-secondary"> Inclusions </h5>
+                                            <h5 class = "text-secondary"> Common Inclusions </h5>
                                             <div class="form-row">
                                                 
                                             <div class="col-sm-4">
