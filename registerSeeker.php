@@ -237,7 +237,10 @@
                                 
                                 <label> Front:</label>
                                 <input type = "file" name = "id[]"/><br><br>
-                                <label> Back:</label>
+                                <lab
+                                
+                                
+                                el> Back:</label>
                                 <input type = "file" name = "id[]"/><br><br>
                             </div>
                         </div>
@@ -246,9 +249,9 @@
                         <br><br>
                         <div class="form-group">
                             <div class="form-check">
-                                <label class="form-check-label" for="invalidCheck">
+                                <a href="login.php" class="form-check-label">
                                     Already have an account?
-                                </label>
+                                </a>
                                 <label class="form-check-label" for="invalidCheck" style = "float: right;">
                                     Forgot Password
                                 </label>
