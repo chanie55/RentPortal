@@ -122,6 +122,7 @@ include("dbconn.php");
 
         <!-- Container for the image gallery -->
         <div class="container">
+                        
 
             <!-- Full-width images with number text -->
             <div class="img">
@@ -151,8 +152,8 @@ include("dbconn.php");
             </div>
 
             <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)" >&#10095;</a>
+            <a class="prev" onclick="plusSlides(-1)" style="width: 39px;">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)" style="width: 39px;" >&#10095;</a>
 
 
             <!-- Thumbnail images -->

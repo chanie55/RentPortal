@@ -142,7 +142,7 @@ body{
     cursor: pointer;
     position: absolute;
     top: 40%;
-    width: auto;
+    width: 45%;
     padding: 16px;
     margin-top: -50px;
     color: white;
@@ -157,6 +157,12 @@ body{
   .next {
     right: 0;
     border-radius: 3px 0 0 3px;
+    margin-right: 41%;
+  }
+  .prev{
+    right: 0;
+    border-radius: 3px 0 0 3px;
+    margin-right: 95%;
   }
   
   /* On hover, add a black background color with a little bit see-through */
