@@ -3,8 +3,8 @@ ini_set('session.cache_limiter','public');
 session_cache_limiter(false);
 session_start();
 include("dbconn.php");
-								
 ?>
+		
 
 <!DOCTYPE html>
 <html lang="en">
@@ -96,8 +96,8 @@ include("dbconn.php");
                 <div class="container mt50">
                   <div class="row mb30">
                   <?php
-                    $id=$_REQUEST['property_ID'];
-						          $query=mysqli_query($conn,"SELECT * FROM property");
+                      $pid = $_REQUEST['property_ID']; 
+						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
 						          while($row=mysqli_fetch_array($query))
 						          {
 					          ?>

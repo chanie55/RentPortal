@@ -34,6 +34,7 @@ include "dbconn.php";
         $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, user_ID)
                     VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$bed', '$kitchentype', '$bathtype', '$aircon', '$user_ID')";
         $result = mysqli_query($conn, $query);
+        $pid = $_SESSION[$prop_ID]; 
 
         if ($result) {
 
