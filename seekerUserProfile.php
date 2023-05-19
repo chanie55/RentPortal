@@ -4,10 +4,6 @@
     
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,24 +31,9 @@
                 <div class="profile-usertitle-job"> james.aldrin0@gmail.com </div>
             </div>
             <div class="profile-userbuttons">
-                <button type="button" class="btn btn-info  btn-sm">Follow</button>
-                <button type="button" class="btn btn-info  btn-sm">Message</button>
+                <button type="button" class="btn btn-info  btn-sm" href="index.php">Logout</button>
             </div>
             <div class="profile-usermenu">
-                <ul class="nav">
-                    <li class="active">
-                        <a href="#">
-                            <i class="icon-home"></i> Ticket List </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-settings"></i> Support Staff </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="icon-info"></i> Configurations </a>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -61,7 +42,7 @@
             <div class="portlet-title tabbable-line">
                 <div class="caption caption-md">
                     <i class="icon-globe theme-font hide"></i>
-                    <span class="caption-subject font-blue-madison bold uppercase">Your info</span>
+                    <span class="caption-subject font-blue-madison bold uppercase"><b>My Information</b></span>
                 </div>
             </div>
             <div class="portlet-body">
@@ -69,15 +50,42 @@
                 
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li id="homeTab" role="presentation" class="active"><a onclick="homeActive()" aria-controls="home" role="tab" data-toggle="tab">Update</a></li>
-                        <li id="profileTab"  role="presentation"><a onclick="profileActive()" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
-                        <li id="messageTab"  role="presentation"><a onclick="messageActive()" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>
-                        <li id="settingTab"  role="presentation"><a onclick="settingActive()" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>
+                        <li id="profileTab"  role="presentation" class="active"><a onclick="profileActive()" aria-controls="profile" role="tab" data-toggle="tab">Profile</a></li>
+                        <li id="homeTab" role="presentation"><a onclick="homeActive()" aria-controls="home" role="tab" data-toggle="tab">Update</a></li>
+                        <li id="historyTab"  role="presentation"><a onclick="historyActive()" aria-controls="messages" role="tab" data-toggle="tab">History</a></li>
                     </ul>
                 
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="home">
+                    <div role="tabpanel" class="tab-pane active" id="profile">
+                        <form class="frm">
+                              <div class="form-group">
+                                <label for="inputName">First Name</label>
+                                <h5>James</h5>
+                              </div>
+                                <div class="form-group">
+                                <label for="inputLastName">Last Name</label>
+                                <h5>Aldrino</h5>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputLastName">Contact</label>
+                                <h5>090876353</h5>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputLastName">Date of Birth</label>
+                                <h5>April 17, 2001</h5>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <h5>james.aldrin0@gmail.com</h5>
+                              </div>
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <h5>secret</h5>
+                              </div>
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane" id="home">
                             <form>
                               <div class="form-group">
                                 <label for="inputName">First Name</label>
@@ -124,38 +132,12 @@
                              </fieldset>
 
                               <button type="submit" class="btn btn-default">Submit</button>
+                              <button type="submit" class="btn btn-default">Cancel</button>
                             </form>
                         </div>
-                        <div role="tabpanel" class="tab-pane" id="profile">
-                        <form>
-                              <div class="form-group">
-                                <label for="inputName">First Name</label>
-                                <h5>James</h5>
-                              </div>
-                                <div class="form-group">
-                                <label for="inputLastName">Last Name</label>
-                                <h5>Aldrino</h5>
-                              </div>
-                              <div class="form-group">
-                                <label for="inputLastName">Contact</label>
-                                <h5>090876353</h5>
-                              </div>
-                              <div class="form-group">
-                                <label for="inputLastName">Date of Birth</label>
-                                <h5>April 17, 2001</h5>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <h5>james.aldrin0@gmail.com</h5>
-                              </div>
-                              <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <h5>secret</h5>
-                              </div>
-
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="messages"><?php echo"$message" ?> </div>
-                        <div role="tabpanel" class="tab-pane" id="settings">Settings</div>
+                        
+                        
+                        <div role="tabpanel" class="tab-pane" id="history"><?php echo"$message" ?> </div>
                     </div>
                 
                 </div>
@@ -167,37 +149,32 @@
 
 <script type="text/javascript">
 
+    function profileActive() {
+		removeActive();
+        document.getElementById("profileTab").classList.add("active");
+		document.getElementById("profile").classList.add("active");
+    }
+
 	function homeActive() {
 		removeActive();
         document.getElementById("homeTab").classList.add("active");
 		document.getElementById("home").classList.add("active");
 	}
-    function profileActive() {
+
+    function historyActive() {
 		removeActive();
-        document.getElementById("profileTab").classList.add("active");
-		document.getElementById("profile").classList.add("active");
-	}
-    function messageActive() {
-		removeActive();
-        document.getElementById("messageTab").classList.add("active");
-		document.getElementById("messages").classList.add("active");
-	}
-    function settingActive() {
-		removeActive();
-        document.getElementById("settingTab").classList.add("active");
-		document.getElementById("settings").classList.add("active");
+        document.getElementById("historyTab").classList.add("active");
+		document.getElementById("history").classList.add("active");
 	}
 
 	
 	function removeActive(){
+        document.getElementById("profile").classList.remove("active");
 		document.getElementById("home").classList.remove("active");
-		document.getElementById("profile").classList.remove("active");
-		document.getElementById("messages").classList.remove("active");
-		document.getElementById("settings").classList.remove("active");
+		document.getElementById("history").classList.remove("active");
         document.getElementById("homeTab").classList.remove("active");
 		document.getElementById("profileTab").classList.remove("active");
-		document.getElementById("messageTab").classList.remove("active");
-		document.getElementById("settingTab").classList.remove("active");
+		document.getElementById("historyTab").classList.remove("active");
 	}
 
 </script>
