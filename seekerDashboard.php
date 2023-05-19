@@ -77,7 +77,7 @@ include("dbconn.php");
                                     <?php
                                         include "dbconn.php";
                             
-                                        $name_query = "SELECT property FROM propertytype";
+                                        $name_query = "SELECT property FROM propertytype JOIN user ON property.user_ID = user.user_ID";
                                         $r = mysqli_query($conn, $name_query);
 
                                         while ($row = mysqli_fetch_array($r)) {

@@ -96,8 +96,8 @@ include("dbconn.php");
                 <div class="container mt50">
                   <div class="row mb30">
                   <?php
-						          $id=$_REQUEST['property_ID']; 
-						          $query=mysqli_query($conn,"SELECT * FROM property, user WHERE property.user_ID = user.user_ID");
+                    $id=$_REQUEST['property_ID'];
+						          $query=mysqli_query($conn,"SELECT * FROM property");
 						          while($row=mysqli_fetch_array($query))
 						          {
 					          ?>

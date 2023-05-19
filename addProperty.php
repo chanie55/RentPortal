@@ -32,7 +32,7 @@ include "dbconn.php";
         $prop_ID = "PROP_".$code;
 
         $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, user_ID)
-                    VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$kitchentype', '$bed', '$bathtype', '$aircon', '$user_ID')";
+                    VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$bed', '$kitchentype', '$bathtype', '$aircon', '$user_ID')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
