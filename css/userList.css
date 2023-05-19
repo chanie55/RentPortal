@@ -813,7 +813,16 @@ table.table td i {
     font-size: 95%;
     margin-left: 25px;
 }
-
+.btn-lg{
+    position: inherit;
+    margin-left: 300px;
+    width: 100px;
+}
+.btn-lg span{
+    padding-left: 18px;
+    font-size: 15px;
+    font-weight: bold;
+}
 
 
 
