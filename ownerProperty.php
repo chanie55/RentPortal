@@ -620,6 +620,25 @@
                                                         Please provide the monthly rate
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom06">Dimension</label>
+                                                    <?php if (isset($_GET['dimension'])) { ?>
+                                                        <input required type = "number" 
+                                                                name = "dimension" 
+                                                                class="form-control"
+                                                                id="validationCustom06"
+                                                                value = "<?php echo $_GET['dimension']; ?>"><br>
+                                                    <?php } else { ?>
+                                                        <input required type = "number" 
+                                                                name = "dimension" 
+                                                                class="form-control"
+                                                                id="stpurok"><br>
+                                                    <?php } ?>
+                                                    <div class = "invalid-feedback"> 
+                                                        Please provide the monthly rate
+                                                    </div>
+                                                </div>
                                             </div><br>
                                             
 
