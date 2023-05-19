@@ -50,12 +50,29 @@ include("dbconn.php");
                         <a href="#" class="nav-item nav-link">About</a>
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     </div>
-                    <div class = "dropdown">
-                        <button class="btn btn-secondary dropdown-toggle" type = "button" data-bs-toggle = "dropdown" id = "dropdownMenuButton1" aria-expanded = "false" style = "background: #5D59AF; color: white;">Register</button>
-                        <ul class = "dropdown-menu" aria-labelledby = "dropdownMenuButton1">
-                            <li> <a class = "dropdown-item" href = "registerSeeker.php"> Seeker </a></li>
-                            <li> <a class = "dropdown-item" href = "registerOwner.php"> Owner </a></li>
-                        </ul>
+                    <div class = "profile-user">
+                        <img src="images/user1.png" class="user-pic" onclick="toggleMenu()">
+
+                        <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <img src="images/user1.png">
+                                <h4>James Aldrino</h4>
+                            </div> 
+                            <hr>
+                             
+                            <a href="#" class="sub-menu-link">
+                                <img src="images/profile.png">
+                                <p>Edit Profile</p>
+                                <span>></span>
+                            </a>
+                            <a href="index.php" class="sub-menu-link">
+                                <img src="images/logout1.png">
+                                <p>Logout</p>
+                                <span>></span>
+                            </a>
+                        </div>
+                        </div>
                     </div>      
                 </div>
             </nav>
@@ -64,7 +81,9 @@ include("dbconn.php");
 
         <!-- Search Start -->
         <div class="container-xxl search">
-            <div class="container wow fadeIn" data-wow-delay="0.1s" style="padding: 10px; margin-top: 5%; opacity: 0.98">
+            <div class="container wow fadeIn" data-wow-delay="0.1s" style="padding: 20px; margin-top: 8%; opacity: 0.98">
+                    <h2 class="first">Find A</h2>
+                    <h2 class="second">Property Today!</h2>
                 <div class="row g-2">
                     <div class="col-md-10">
                         <div class="row g-2">
@@ -202,6 +221,15 @@ include("dbconn.php");
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <script>
+        let subMenu = document.getElementById("subMenu");
+
+        function toggleMenu(){
+            subMenu.classList.toggle("open-menu");
+        }
+
+    </script>
 </body>
 
 </html>
