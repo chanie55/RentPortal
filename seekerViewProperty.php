@@ -100,6 +100,7 @@ include("dbconn.php");
                 </div>
             </div>
         </div>
+  
         <!-- Search End -->
 
         <div class="full-row">
@@ -109,7 +110,7 @@ include("dbconn.php");
                 <?php
                       $pid = $_REQUEST['property_ID']; 
 						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
-						          while($row=mysqli_fetch_array($query)) {
+					          while($row=mysqli_fetch_array($query)) {
 					        ?>
 				  
                     <div class="col-lg-8">
@@ -258,10 +259,14 @@ include("dbconn.php");
                   </div>
               </div>    
             </div>	
+                </div>
+            </div>
+        </div>
+    </div>  
 					<?php } ?>
 					
-                    <div class="col-lg-4" style = "background-color: green;">
-                        <div class="row">
+                    <div class="col-lg-4" style = "background-color: green; margin-left:65%; margin-top:-67.7%">
+                        <div class="row1">
                             <div class="more">
                                 <h4 id="h4"> Reservation </h4>
                                 <input id ="input" type="label" placeholder>
@@ -311,7 +316,9 @@ include("dbconn.php");
         <section class="listing-title-area mt-2">
           <div class="container mt50">
               <div class="row mb30">
-                  <?php
+
+                
+                  <?php 
                       $pid = $_REQUEST['property_ID']; 
 						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
 						          while($row=mysqli_fetch_array($query)) {
@@ -321,13 +328,58 @@ include("dbconn.php");
               </div>
           </div>
         </section>
-        </div>
-        </div>
-    </div>
+        
                      
 
 <?php } ?>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
       <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
@@ -343,7 +395,7 @@ include("dbconn.php");
         </div>
         <!-- Footer End -->              
                   
-</div>
+
 
 
 </body>
