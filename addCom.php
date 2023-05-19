@@ -20,20 +20,17 @@ include "dbconn.php";
         $total = $_POST['totalrooms'];
         $available = $_POST['availablerooms'];
         $monthlyrate = $_POST['rate'];
-        $dailyrate = $_POST['drate'];
         $aircon = $_POST['aircon'];
         $user_ID = $_SESSION['user_ID'];
-        $roomtype = $_POST['roomtype'];
         $kitchentype = $_POST['kitchen'];
         $bathtype = $_POST['bath'];
-        $bed = $_POST['bed'];
         $dimension = $_POST['dimension'];
 
         $code = rand(1, 99999);
-        $prop_ID = "RES_".$code;
+        $prop_ID = "COM_".$code;
 
-        $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, dimension, user_ID)
-                    VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$bed', '$kitchentype', '$bathtype', '$aircon', '$dimension', '$user_ID')";
+        $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, totalrooms, availablerooms, monthlyrate, kitchen, bathroom, aircon, dimension, user_ID)
+                    VALUES ('$prop_ID', '$name', '$description', '$type', '$total', '$available', '$monthlyrate', '$kitchentype', '$bathtype', '$aircon', '$dimension', '$user_ID')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
