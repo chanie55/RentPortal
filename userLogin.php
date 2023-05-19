@@ -1,7 +1,8 @@
 <?php
+session_start();
 include "dbconn.php";
 
-if(isset($_POST['email']) && isset($_POST['password'])){
+if(isset($_REQUEST['email']) && isset($_POST['password'])){
 
     function validate($data) {
         $data = trim($data);
@@ -10,7 +11,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
         return $data;
     }
 
-    $email = validate($_POST['email']);
+    $email = validate($_REQUEST['email']);
     $pass = validate($_POST['password']);
     $hashed_pw = password_hash($pass, PASSWORD_DEFAULT);
 
@@ -31,6 +32,7 @@ if(isset($_POST['email']) && isset($_POST['password'])){
                     header("Location: login.php?error=No Permission to Login");
                 } else {
                     if (password_verify($pass, $hashed_pw)) {
+                        $_SESSION['user_ID'] = $row['user_ID'];
                         $_SESSION['email'] = $row['email'];
                         if ($row['userLevel_ID'] == 1 && $row['status'] == 1) {
                             header("Location: adminDashboard.php");

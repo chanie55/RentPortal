@@ -1,3 +1,10 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");							
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +21,7 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min5.css" rel="stylesheet">
-
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <style>
         <?php
             include "css/seekerDashboard.css"
@@ -66,18 +73,36 @@
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-0 py-3">
-                                    <option selected>Property Type</option>
-                                    <option value="1">Property Type 1</option>
-                                    <option value="2">Property Type 2</option>
-                                    <option value="3">Property Type 3</option>
+                                <option selected disabled value="">Property Type</option>
+                                    <?php
+                                        include "dbconn.php";
+                            
+                                        $name_query = "SELECT property FROM propertytype";
+                                        $r = mysqli_query($conn, $name_query);
+
+                                        while ($row = mysqli_fetch_array($r)) {
+                                            ?>
+                                                <option> <?php echo $row['property']; ?></option>
+                                            <?php
+                                        }
+                                    ?>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-0 py-3">
-                                    <option selected>Location</option>
-                                    <option value="1">Location 1</option>
-                                    <option value="2">Location 2</option>
-                                    <option value="3">Location 3</option>
+                                <option selected disabled value="">Location</option>
+                                    <?php
+                                        include "dbconn.php";
+                            
+                                        $name_query = "SELECT barangay FROM useraddress";
+                                        $r = mysqli_query($conn, $name_query);
+
+                                        while ($row = mysqli_fetch_array($r)) {
+                                            ?>
+                                                <option> <?php echo $row['barangay']; ?></option>
+                                            <?php
+                                        }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -123,11 +148,11 @@
                                     <div class="p-4 pb-0">
                                         <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
                                         <a class="d-block h5 mb-2" href=""><?php echo $row['propertyname'];?></a>
-                                        <p><i class="fa fa-map-marker-alt text-primary me-2"></i>123 Street, New York, USA</p>
+                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</p>
                                     </div>
                                     <div class="d-flex border-top">
                                         <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?php echo $row['availablerooms'];?> Available Room/s</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i> Bed</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i><?php echo $row['bed'];?> Bed</small>
                                         <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>Bath - <?php echo $row['bathroom'];?></small>
                                     </div>
                                 </div>

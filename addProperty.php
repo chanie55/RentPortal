@@ -5,7 +5,7 @@ session_start();
 include("dbconn.php");
 if(!isset($_SESSION['email']))
 {
-	header("location:login.php");
+	header("location:userLogin.php");
 } 
 ?>
 
@@ -17,8 +17,6 @@ include "dbconn.php";
         $name = $_POST['propertyname'];
         $type = $_POST['property'];
         $description = $_POST['description'];
-        $lat = $_POST['lat'];
-        $lng = $_POST['lng'];
         $total = $_POST['totalrooms'];
         $available = $_POST['availablerooms'];
         $monthlyrate = $_POST['rate'];
@@ -28,13 +26,13 @@ include "dbconn.php";
         $roomtype = $_POST['roomtype'];
         $kitchentype = $_POST['kitchen'];
         $bathtype = $_POST['bath'];
-        $userid = $_POST['id'];
+        $bed = $_POST['bed'];
 
         $code = rand(1, 99999);
         $prop_ID = "PROP_".$code;
 
-        $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, kitchen, bathroom, aircon, user_ID)
-                    VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$kitchentype', '$bathtype', '$aircon', '$user_ID')";
+        $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, user_ID)
+                    VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$kitchentype', '$bed', '$bathtype', '$aircon', '$user_ID')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
