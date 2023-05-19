@@ -145,7 +145,7 @@
                                             <div class="row">
 											    <div class="col-xl-12">
 												<div class="form-group row">
-													<label class="col-lg-2 col-form-label">Name</label>
+													<label class="col-lg-2 col-form-label">Trade Name</label>
 													<div class="col-lg-9">
 														<?php if (isset($_GET['propertyname'])) { ?>
                                                             <input required type = "text" 
@@ -509,11 +509,11 @@
 
                                     <div class="container">
                                         <div class="content"> 
-                                            <form method = "post" action = "addProperty.php" class="needs-validation" enctype = "multipart/form-data" novalidate>
+                                            <form method = "post" action = "addCom.php" class="needs-validation" enctype = "multipart/form-data" novalidate>
                                             <div class="row">
 											    <div class="col-xl-12">
 												<div class="form-group row">
-													<label class="col-lg-2 col-form-label">Name</label>
+													<label class="col-lg-2 col-form-label">Trade Name</label>
 													<div class="col-lg-9">
 														<?php if (isset($_GET['propertyname'])) { ?>
                                                             <input required type = "text" 
@@ -565,6 +565,8 @@
 
                                             <div class="form-row">
                                                 <div class="col-md-3 mb-3">
+                                                <input type="hidden" class="form-control" id="validationCustom02" name = "property" value="Commercial Property">
+
                                                     <label for="validationCustom06">Number of Available Space</label>
                                                     <?php if (isset($_GET['availablerooms'])) { ?>
                                                         <input required type = "number" 
@@ -620,6 +622,27 @@
                                                         Please provide the monthly rate
                                                     </div>
                                                 </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <label for="validationCustom06">Dimension (sqft)</label>
+                                                    <?php if (isset($_GET['dimension'])) { ?>
+                                                        <input required type = "number" 
+                                                                name = "dimension" 
+                                                                class="form-control"
+                                                                placeholder = "sqft"
+                                                                id="validationCustom06"
+                                                                value = "<?php echo $_GET['dimension']; ?>"><br>
+                                                    <?php } else { ?>
+                                                        <input required type = "number" 
+                                                                name = "dimension" 
+                                                                class="form-control"
+                                                                placeholder = "sqft"
+                                                                id="stpurok"><br>
+                                                    <?php } ?>
+                                                    <div class = "invalid-feedback"> 
+                                                        Please provide the monthly rate
+                                                    </div>
+                                                </div>
                                             </div><br>
                                             
 
@@ -658,7 +681,7 @@
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
@@ -701,13 +724,13 @@
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -744,7 +767,7 @@
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
@@ -765,13 +788,13 @@
                                             
 
                                             <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
-                                                <legend class = "text-left"> Room Images </legend>
+                                                <legend class = "text-left"> Images </legend>
                                                 <br>
                                                 <br>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Room Image:</label>
+                                                <label>Upload Here:</label>
                                                 <input type = "file" name = "image[]" multiple/>
     
                                             </div>

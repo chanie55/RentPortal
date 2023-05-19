@@ -258,12 +258,12 @@
                         <br> <br>
                         <div class="form-group">
                             <div class="form-check">
-                                <label class="form-check-label" for="invalidCheck">
+                                <a href="login.php">
                                     Already have an account?
-                                </label>
-                                <label class="form-check-label" for="invalidCheck" style = "float: right;">
+                                </a>
+                                <a href="#" style = "float: right;">
                                     Forgot Password
-                                </label>
+                                </a>
                         </div>
                     </div>
                     
