@@ -152,7 +152,7 @@ include("dbconn.php");
                         <?php 
                             include "dbconn.php";
 
-							$query=mysqli_query($conn,"SELECT * FROM property"); //property.*, user.uname,user.utype,user.uimage FROM `property`,`user` WHERE property.uid=user.uid");
+							$query=mysqli_query($conn,"SELECT *, propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode"); //property.*, user.uname,user.utype,user.uimage FROM `property`,`user` WHERE property.uid=user.uid");
 								while($row=mysqli_fetch_array($query))
 								{
 							?>
@@ -166,7 +166,7 @@ include("dbconn.php");
                                     </div>
                                     <div class="p-4 pb-0">
                                         <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
-                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a>
+                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode']; ?>"><?php echo $row['propertyname'];?></a>
                                         <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i><?php echo $row['propertyaddress'];?></p>
                                     </div>
                                     <div class="d-flex border-top">

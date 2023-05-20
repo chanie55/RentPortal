@@ -110,7 +110,8 @@ include("dbconn.php");
 				
                 <?php
                       $pid = $_REQUEST['property_ID']; 
-						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
+                      $aid = $_REQUEST['addresscode'];
+						          $query=mysqli_query($conn,"SELECT * FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode WHERE property_ID = '$pid' AND addresscode = '$aid'");
 					          while($row=mysqli_fetch_array($query)) {
 					        ?>
 				  
@@ -411,9 +412,43 @@ function showSlides(n) {
         var singleMarker = L.marker([6.1164, 125.1716], { icon: myMarker, draggable: true });
         var popup = singleMarker.bindPopup('This is my location. ' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);*/
+        <?php
+        include "dbconn.php";
 
-        var pointData = L.geoJSON(pointJson).addTo(map);
+        $mapa = "SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON propertyaddress.addresscode = property.propertyaddress WHERE propertyaddress = '$aid'";
+
+        $dbquery = mysqli_query($conn,$mapa);
+
+        $geojson = array('type' => 'FeatureCollection', 'features' => array());
+
+        while($row = mysqli_fetch_assoc($dbquery)){
+
+            $marker = array(
+                'type' => 'Feature',
+                'properties' => array(
+                'marker-color' => '#f00',
+                'marker-size' => 'small'
+            ),
+                'geometry' => array(
+                'type' => 'Point',
+                'coordinates' => array(
+                    $row['lng'],
+                    $row['lat']
+                    )
+                )
+            );
+
+            array_push($geojson['features'], $marker);
+        }
+?>
+  
+  var geoJson = <?php echo json_encode($geojson,JSON_NUMERIC_CHECK); ?>;
+
+// Pass features and a custom factory function to the map
+
+        var pointData = L.geoJSON(geoJson).addTo(map);
         var popuploc = pointData.bindPopup('Property Location').openPopup();
         popuploc.addTo(map);
+
         L.Control.geocoder().addTo(map);
     </script>

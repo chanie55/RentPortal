@@ -46,10 +46,45 @@
         var singleMarker = L.marker([6.1164, 125.1716], { icon: myMarker, draggable: true });
         var popup = singleMarker.bindPopup('This is my location. ' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);*/
-        
-        var pointData = L.geoJSON(pointJson).addTo(map);
+        <?php
+        include "dbconn.php";
+
+        $mapa = "SELECT * FROM propertyaddress ";
+
+        $dbquery = mysqli_query($conn,$mapa);
+
+        $geojson = array('type' => 'FeatureCollection', 'features' => array());
+
+        while($row = mysqli_fetch_assoc($dbquery)){
+
+            $marker = array(
+                'type' => 'Feature',
+                'properties' => array(
+                'marker-color' => '#f00',
+                'marker-size' => 'small'
+            ),
+                'geometry' => array(
+                'type' => 'Point',
+                'coordinates' => array(
+                    $row['lng'],
+                    $row['lat']
+                    )
+                )
+            );
+
+            array_push($geojson['features'], $marker);
+        }
+?>
+  
+  var geoJson = <?php echo json_encode($geojson,JSON_NUMERIC_CHECK); ?>;
+
+// Pass features and a custom factory function to the map
+
+        var pointData = L.geoJSON(geoJson).addTo(map);
         var popuploc = pointData.bindPopup('Property Location').openPopup();
         popuploc.addTo(map);
-        L.Control.geocoder().addTo(map);
+      //  L.Control.geocoder().addTo(map);
 
+
+        
     </script>
