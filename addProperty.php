@@ -28,6 +28,8 @@ include "dbconn.php";
         $bathtype = $_POST['bath'];
         $bed = $_POST['bed'];
         $dimension = $_POST['dimension'];
+        $lat = $_POST['lat'];
+        $lng = $_POST['lng'];
 
         $code = rand(1, 99999);
         $prop_ID = "RES_".$code;
@@ -37,9 +39,18 @@ include "dbconn.php";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
+            $addcode = rand(1, 99999);
+            $add_ID = "ADRS_".$addcode;
+
+            $addressquery = "INSERT INTO propertyaddress(addresscode, lat, lng) VALUES ('$add_ID', '$lat', '$lng')";
+            $res = mysqli_query($conn, $addressquery);
+            if ($res) {
+                $updateprop = mysqli_query($conn, "UPDATE property SET propertyaddress = '".$add_ID."' WHERE property_ID = '".$prop_ID."'");
+            }
+            
+
 
             //Room Images
-
             if (isset($_FILES['image'])) {
                 foreach ($_FILES['image']['tmp_name'] as $key => $value) {
                     $img_name = $_FILES['image']['name'][$key];

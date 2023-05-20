@@ -61,7 +61,7 @@ include("dbconn.php");
                             </div> 
                             <hr>
                              
-                            <a href="#" class="sub-menu-link">
+                            <a href="seekerUserProfile.php" class="sub-menu-link">
                                 <img src="images/profile.png">
                                 <p>Edit Profile</p>
                                 <span>></span>
@@ -167,7 +167,7 @@ include("dbconn.php");
                                     <div class="p-4 pb-0">
                                         <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
                                         <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a>
-                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</p>
+                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i><?php echo $row['propertyaddress'];?></p>
                                     </div>
                                     <div class="d-flex border-top">
                                         <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?php echo $row['availablerooms'];?> Available Room/s</small>

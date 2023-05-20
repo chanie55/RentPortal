@@ -104,6 +104,7 @@ include("dbconn.php");
 
         <div class="full-row">
             <div class="container">
+                
                 <div class="row">
 				
                 <?php
@@ -115,7 +116,7 @@ include("dbconn.php");
                     <div class="col-lg-8">
 
                         <div class="row">
-                            <div class="col-md-12" style = "background-color: red;">
+                            <div class="col-md-12">
                                 <div id="single-property" style="width:1200px; height:700px; margin:30px auto 50px;"> 
                                     <div class="img">
                                       <div class="mySlides">
@@ -260,7 +261,7 @@ include("dbconn.php");
             </div>	
 					<?php } ?>
 					
-                    <div class="col-lg-4" style = "background-color: green;">
+                    <div class="col-lg-4">
                         <div class="row">
                             <div class="more">
                                 <h4 id="h4"> Reservation </h4>
@@ -308,25 +309,7 @@ include("dbconn.php");
             </div>
         
 
-        <section class="listing-title-area mt-2">
-          <div class="container mt50">
-              <div class="row mb30">
-                  <?php
-                      $pid = $_REQUEST['property_ID']; 
-						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
-						          while($row=mysqli_fetch_array($query)) {
-					        ?>
-                  
-                    
-              </div>
-          </div>
-        </section>
-        </div>
-        </div>
-    </div>
-                     
-
-<?php } ?>
+        
 
       <!-- Footer Start -->
         <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">

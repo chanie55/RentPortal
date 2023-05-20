@@ -46,9 +46,10 @@
         var singleMarker = L.marker([6.1164, 125.1716], { icon: myMarker, draggable: true });
         var popup = singleMarker.bindPopup('This is my location. ' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);*/
-
+        
         var pointData = L.geoJSON(pointJson).addTo(map);
         var popuploc = pointData.bindPopup('Property Location').openPopup();
         popuploc.addTo(map);
         L.Control.geocoder().addTo(map);
+
     </script>

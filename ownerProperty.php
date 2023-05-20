@@ -1,3 +1,9 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");
+?>
 
 
 <!doctype html>
@@ -179,6 +185,8 @@
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
                                                     <label for="validationCustom03">Address</label>
+                                                    <input type = "hidden" name = "lat" value = "<?php echo $_GET['lat']; ?>">
+                                                    <input type = "hidden" name = "lng" value = "<?php echo $_GET['lng']; ?>">
                                                     <a href = "viewmap.php"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
                                                     <div class = "invalid-feedback"> 
                                                         Please provide your property address
