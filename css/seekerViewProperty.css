@@ -267,7 +267,10 @@ body{
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(235, 235, 235);
     padding: 10px;
-    position: relative;
+    position: inherit;
+    width: 64%;
+    margin-top: 20px;
+    margin-left: -12px;
 
 }
 
@@ -311,14 +314,19 @@ label{
     margin-top: 10px;
     padding: 20px;
     border: 1px solid rgb(235, 235, 235);
-    position: relative;
+    position: inherit;
+    width: 63.3%;
+    margin-left: -12px;
+    display: block;
 }
 
 .map{
     margin-top: 10px;
     padding: 20px;
     border: 1px solid rgb(235, 235, 235);
-    position: relative;
+    position: inherit;
+    width: 65%;
+    display: inline-table;
 }
 
 .more{

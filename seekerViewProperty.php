@@ -104,7 +104,7 @@ include("dbconn.php");
 
         <div class="full-row">
             <div class="container">
-                <div class="row"><!-- FOR MORE PROJECTS visit: codeastro.com -->
+                <div class="row">
 				
                 <?php
                       $pid = $_REQUEST['property_ID']; 
@@ -115,210 +115,117 @@ include("dbconn.php");
                     <div class="col-lg-8">
 
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-12" style = "background-color: red;">
                                 <div id="single-property" style="width:1200px; height:700px; margin:30px auto 50px;"> 
-                                    <!-- Full-width images with number text -->
-            <div class="img">
-                <div class="mySlides">
-                    <img src="images/heading.jpg" style="width:60%">
-                </div>
+                                    <div class="img">
+                                      <div class="mySlides">
+                                          <img src="images/heading.jpg" style="width:60%">
+                                      </div>
 
-                <div class="mySlides">
-                    <img src="images/heading.jpg" style="width:60%">
-                </div>
+                                      <div class="mySlides">
+                                          <img src="images/heading.jpg" style="width:60%">
+                                      </div>
 
-                <div class="mySlides">
-                    <img src="images/heading.jpg" style="width:60%">
-                </div>
+                                      <div class="mySlides">
+                                          <img src="images/heading.jpg" style="width:60%">
+                                      </div>
 
-                <div class="mySlides">
-                    <img src="images/heading.jpg" style="width:60%">
-                </div>
+                                      <div class="mySlides">
+                                          <img src="images/heading.jpg" style="width:60%">
+                                      </div>
 
-                <div class="mySlides">
-                    <img src="images/heading.jpg" style="width:60%">
-                </div>
+                                      <div class="mySlides">
+                                          <img src="images/heading.jpg" style="width:60%">
+                                      </div>
 
-                <div class="mySlides">
-                    <img src="images/heading.jpg" style="width:60%">
-                </div>
-            </div>
-
-            <!-- Next and previous buttons -->
-            <a class="prev" onclick="plusSlides(-1)" style="width: 39px;">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)" style="width: 39px;" >&#10095;</a>
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div id="single-property" style="width:600px; height:100px; margin:30px 35px;"> 
-                        <div class="column">
-                            <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(1)" alt="">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(2)" alt="">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(3)" alt="">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(4)" alt="">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(5)" alt="">
-                        </div>
-
-                        <div class="column">
-                            <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(6)" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-lg-12">
-                            <div class="listing_single_description2 mt30-767 mb-767">
-                                <div class="single_property_title">
-                                    <h2> <?php echo $row['propertyname'];?> </h2>
+                                      <div class="mySlides">
+                                          <img src="images/heading.jpg" style="width:60%">
+                                      </div>
                                 </div>
 
-                                <div class="single_property_social_share style2">
-                                    <div class="price">
-                                        <h2> &#8369 <?php echo $row['monthlyrate'];?> </h2>
+                                <!-- Next and previous buttons -->
+                                <a class="prev" onclick="plusSlides(-1)" style="width: 39px;">&#10094;</a>
+                                <a class="next" onclick="plusSlides(1)" style="width: 39px;" >&#10095;</a>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="single-property" style="width:600px; height:100px; margin:30px 35px;"> 
+                                            <div class="column">
+                                                <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(1)" alt="">
+                                            </div>
+
+                                            <div class="column">
+                                                <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(2)" alt="">
+                                            </div>
+
+                                            <div class="column">
+                                                <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(3)" alt="">
+                                            </div>
+
+                                            <div class="column">
+                                                <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(4)" alt="">
+                                            </div>
+
+                                            <div class="column">
+                                                <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(5)" alt="">
+                                            </div>
+
+                                            <div class="column">
+                                                <img class="demo cursor" src="images/heading.jpg" style="width:100%" onclick="currentSlide(6)" alt="">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
 
-                        
-                        
-                                </div>
-                            </div>
-                        </div><!-- FOR MORE PROJECTS visit: codeastro.com -->
-                        
-                        
-                    </div>
-					
-					<?php } ?>
-					
-                    <div class="col-lg-4">
-                        <div class="row">
-                <div class="more">
-                    <h4 id="h4"> Reservation </h4>
-                    <input id ="input" type="label" placeholder>
-                    <input id ="input" type="label" placeholder>
-                    <input id ="input" type="label" placeholder>
-                    <br>
-                    <button class="btn-reserve"> Reserve </button>
-                    <br>
-                </div> 
-            </div>
+                                <!-- Container for the image gallery -->
 
-            <div class="visit">
-                <div class="col-lg-12">
-                    <div class="map">
-                        <h4 class="input1"> Schedule Visit  </h4>
-                        <p class="input1"> Date to Visit </p>
-                            <input type="date" class="input1" style="width: 60%">
-                        <p class="visit"> Time to Visit </p>
-                            <input type="time" class="input1" style="width: 60%">
-                        <br class="input1">
-                        <button class="btn-visit">Visit </button>
-                    </div>
-                </div>
-            </div> 
-                        
-            <div class="sidebar-widget mt-5">
-                            <h4 class="double-down-line-left text-secondary position-relative pb-4 mb-4">Recently Added Property</h4>
-                            <ul class="property_list_widget">
-							
-								<?php 
-								$query=mysqli_query($conn,"SELECT * FROM property ORDER BY date_created DESC LIMIT 7");
-										while($row=mysqli_fetch_array($query))
-										{
-								?>
-                                <li> <img src="images/sample.jpg" alt="pimage" width = 40% height = 40%>
-                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a></h6>
-                                    <span class="font-14"><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</span>
-                                    
-                                </li>
-                                <?php } ?>
+                                <div class="col-lg-12">
+                                    <div class="listing_single_description2 mt30-767 mb-767">
+                                        <div class="single_property_title">
+                                            <h2> <?php echo $row['propertyname'];?> </h2>
+                                        </div>
 
-                            </ul>
-                        </div>
-
-
-                        <!--uphere-->
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <section class="listing-title-area mt-2">
-          <div class="container mt50">
-              <div class="row mb30">
-                  <?php
-                      $pid = $_REQUEST['property_ID']; 
-						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
-						          while($row=mysqli_fetch_array($query)) {
-					        ?>
-                    
-              </div>
-          </div>
-        </section>
-
-        <!-- Container for the image gallery -->
-      
-        <div class="container">
-            <div class="row">
-              
-            
-                <div class="col-md-12 col-lg-8 mt50">
-                    <div class="row">
-
-                        <div class="col-lg-12">
-                            <div class="listing_single_description style2">
-                                <div class="lsd_list">
-                                    <ul class="mb0">
-                                        <li class="list-inline-item">
-                                            <a href="#" style="color: black;"> Apartment </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" style="color: black;"> Beds: </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" style="color: black;"> Bathroom: </a>
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <a href="#" style="color: black;"> Sq Ft: </a>
-                                        </li>
-                                    </ul>
-                                    <br>
-                                    <br>
-                                    <h4 class="mb30"> Description </h4>
-                                    <br>
-                                    <div class="card">
-                                        <input id="ch" type="checkbox">
-                                            <div class="content">
+                                        <div class="single_property_social_share style2">
+                                            <div class="price">
+                                                <h2> &#8369 <?php echo $row['monthlyrate'];?> </h2>
+                                            </div>
+                                        </div>
+                                        <div class="lsd_list">
+                                            <ul class="mb0">
+                                                <li class="list-inline-item">
+                                                    <a href="#" style="color: black;"> Apartment </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="#" style="color: black;"> Beds: </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="#" style="color: black;"> Bathroom: </a>
+                                                </li>
+                                                <li class="list-inline-item">
+                                                    <a href="#" style="color: black;"> Sq Ft: </a>
+                                                </li>
+                                            </ul>
+                                            <br>
+                                            <br>
+                                            <h4 class="mb30"> Description </h4>
+                                            <br>
+                                            <div class="card">
+                                                <input id="ch" type="checkbox">
+                                                    <div class="content">
                                             <!--<div class="collapse show" id="collapseExample" style="" w-100>
                                             <div class="card card-body"> 
                                             <p class="mt10 mb10"></p> -->
-                                                <div><?php echo $row['propertyname'];?></div>
-                                                <div>&nbsp;</div>
-                                                <p><?php echo $row['description'];?></p>
-                                                <label for="ch"> Show less </label>
+                                                        <div><?php echo $row['propertyname'];?></div>
+                                                        <div>&nbsp;</div>
+                                                        <p><?php echo $row['description'];?></p>
+                                                        <label for="ch"> Show less </label>
+                                                    </div>
+                                                    <label for="ch"> Show more </label>
                                             </div>
-                                            <label for="ch"> Show more </label>
-                                    </div>
-                        </div>
+                                </div>  
 
-                        <div class="col-lg-12">
-                            <div class="additional_details">
-                                <div class="row">
-                                    <div class="col-lg-12">
+                                <div class="additional_details">
+                                    <div>
                                         <h4 class="mb15">Property Details</h4>
                                     </div>
                                     <div class="col-md-6 col-lg-6 col-xl-6">
@@ -340,68 +247,85 @@ include("dbconn.php");
                                         </dl>
                                     </div>
                                 </div>
+                                <div class="map">
+                                    <h4> Location </h4>
+                                    <div id = "map">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="col-lg-12">
-                        <div class="map">
-                            <h4> Location </h4>
-                            <div id = "map">
-                            </div>
+                  </div>
+              </div>    
+            </div>	
+					<?php } ?>
+					
+                    <div class="col-lg-4" style = "background-color: green;">
+                        <div class="row">
+                            <div class="more">
+                                <h4 id="h4"> Reservation </h4>
+                                <input id ="input" type="label" placeholder>
+                                <input id ="input" type="label" placeholder>
+                                <input id ="input" type="label" placeholder>
+                                <br>
+                                <button class="btn-reserve"> Reserve </button>
+                                <br>
+                            </div> 
                         </div>
-                    </div>
-                </div>
-             </div>
-        </div>
 
-        <div class="col-lg-4 col-xl-4 mt50">
-            <div class="row">
-                <div class="more">
-                    <h4 id="h4"> Reservation </h4>
-                    <input id ="input" type="label" placeholder>
-                    <input id ="input" type="label" placeholder>
-                    <input id ="input" type="label" placeholder>
-                    <br>
-                    <button class="btn-reserve"> Reserve </button>
-                    <br>
-                </div> 
-            </div>
-
-            <div class="visit">
-                <div class="col-lg-12">
-                    <div class="map">
-                        <h4 class="input1"> Schedule Visit  </h4>
-                        <p class="input1"> Date to Visit </p>
-                            <input type="date" class="input1" style="width: 60%">
-                        <p class="visit"> Time to Visit </p>
-                            <input type="time" class="input1" style="width: 60%">
-                        <br class="input1">
-                        <button class="btn-visit">Visit </button>
-                    </div>
-                </div>
-            </div> 
-            
-            <div class="sidebar-widget mt-5">
+                        <div class="visit">
+                            <div class="col-lg-12">
+                                <div class="map">
+                                    <h4 class="input1"> Schedule Visit  </h4>
+                                    <p class="input1"> Date to Visit </p>
+                                    <input type="date" class="input1" style="width: 60%">
+                                    <p class="visit"> Time to Visit </p>
+                                    <input type="time" class="input1" style="width: 60%">
+                                    <br class="input1">
+                                    <button class="btn-visit">Visit </button>
+                                </div>
+                            </div>
+                        </div> 
+                        
+                        <div class="sidebar-widget mt-5">
                             <h4 class="double-down-line-left text-secondary position-relative pb-4 mb-4">Recently Added Property</h4>
                             <ul class="property_list_widget">
 							
-								<?php 
-								$query=mysqli_query($conn,"SELECT * FROM property ORDER BY date_created DESC LIMIT 7");
-										while($row=mysqli_fetch_array($query))
-										{
-								?>
-                                <li> <img src="images/sample.jpg" alt="pimage" width = 40% height = 40%>
+								            <?php 
+								                $query=mysqli_query($conn,"SELECT * FROM property ORDER BY date_created DESC LIMIT 7");
+										            while($row=mysqli_fetch_array($query))
+										            {
+								            ?>
+                                <li><img src="images/sample.jpg" alt="pimage" width = 40% height = 40%>
                                     <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a></h6>
-                                    <span class="font-14"><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</span>
-                                    
+                                    <span class="font-14"><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</span>   
                                 </li>
-                                <?php } ?>
-
+                            <?php } ?>
                             </ul>
                         </div>
-            </div> 
+                    </div>
+                </div>
+            </div>
+        
+
+        <section class="listing-title-area mt-2">
+          <div class="container mt50">
+              <div class="row mb30">
+                  <?php
+                      $pid = $_REQUEST['property_ID']; 
+						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
+						          while($row=mysqli_fetch_array($query)) {
+					        ?>
+                  
+                    
+              </div>
+          </div>
+        </section>
+        </div>
+        </div>
     </div>
+                     
+
 <?php } ?>
 
       <!-- Footer Start -->
