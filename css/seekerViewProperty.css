@@ -314,7 +314,7 @@ label{
     margin-top: 10px;
     padding: 20px;
     border: 1px solid rgb(235, 235, 235);
-    position: inherit;
+    position: relative;
     width: 63.3%;
     margin-left: -12px;
     display: block;
