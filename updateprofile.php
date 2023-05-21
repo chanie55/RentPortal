@@ -16,7 +16,7 @@ if(!isset($_SESSION['email']))
         $dob = $_POST['dob'];
         $email = $_POST['email'];
 
-        $query = "UPDATE userinfo,user JOIN user ON userinfo.userinfo_ID = user.userInfo_ID SET userinfo.firstname = '.$firstname.', user.email = '$email', WHERE user.email = '$email'";
+        $query = "UPDATE userinfo SET firstname = '$firstname' WHERE email = '$email'";
         $result = mysqli_query($conn, $query);
             if ($result) {
                 header ("Location: seekerDashboard.php?email=$email");

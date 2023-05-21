@@ -267,7 +267,7 @@ include("dbconn.php");
     </div>  
 					<?php } ?>
 					
-                    <div class="col-lg-4" style = "background-color: green; margin-left:65%; margin-top:-67.7%">
+                    <div class="col-lg-4" style = "margin-left:65%; margin-top:-67.7%">
                         <div class="row1">
                             <div class="more">
                                 <h4 id="h4"> Reservation </h4>

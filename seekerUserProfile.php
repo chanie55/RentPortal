@@ -35,7 +35,7 @@ include("dbconn.php");
 
             <?php 
                   $email = $_REQUEST['email'];
-                  $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
+                  $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
                   while($row=mysqli_fetch_array($query))
 								{
 							?>
@@ -102,9 +102,9 @@ include("dbconn.php");
                                 <h5><?php echo $row['password'];?></h5>
                               </div>
                         </div>
-
+                       
                         <div role="tabpanel" class="tab-pane" id="home">
-                            <form>
+                            <form method = "POST" action = "updateprofile.php">
                               <div class="form-group">
                                 <label for="inputName">First Name</label>
                                 <input type="text" class="form-control" name = "firstname" id="inputName" placeholder="Name" value = "<?php echo $row['firstName'];?>">
@@ -127,7 +127,7 @@ include("dbconn.php");
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" name = "email" id="exampleInputEmail1" placeholder="Email" value = "<?php echo $row['email'];?>" disabled>
+                                <input type="email" class="form-control" name = "email" id="exampleInputEmail1" placeholder="Email" value = "<?php echo $row['email'];?>">
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
@@ -152,16 +152,16 @@ include("dbconn.php");
                                     </div>
                                 </div>
                              </fieldset>
-
-                              <button type="submit" class="btn btn-default" name = "update-profile">Submit</button>
-                              <button type="submit" class="btn btn-default">Cancel</button>
+                             <?php } ?>
+                              <button type="submit" class="btn btn-primary" name = "update-profile">Submit</button>
+                              <button type="submit" class="btn btn-secondary">Cancel</button>
                             </form>
                         </div>
                         
                         
                         <div role="tabpanel" class="tab-pane" id="history"><?php echo"$message" ?> </div>
                     </div>
-                    <?php } ?>
+                    
                 </div>
             </div>
         </div>
