@@ -38,10 +38,10 @@ if(isset($_REQUEST['email']) && isset($_POST['password'])){
                             header("Location: adminDashboard.php");
                             exit();
                         } else if ($row['userLevel_ID'] == 2 && $row['status'] == 1) {
-                            header("Location: ownerDashboard.php");
+                            header("Location: ownerDashboard.php?email=$email");
                             exit();
                         } else if ($row['userLevel_ID'] == 3 && $row['status'] == 1) {
-                            header("Location: seekerPage.php");
+                            header("Location: seekerDashboard.php?email=$email");
                             exit();
                         }
                         

@@ -1,4 +1,11 @@
-<doctype html>
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");							
+?>
+
+<doctype html5>
 <html> 
     <head> 
         <meta charset="utf-8">
@@ -35,18 +42,36 @@
 <script src="./leaflet_data/point.js"> </script>
 
     <script> 
-        var map = L.map('map').setView([6.1164, 125.1716], 13);
+        var map = L.map('map').setView([6.1164, 125.1716], 15);
 
         var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         });
         osm.addTo(map);
 
+        map.locate({setView: true, maxzoom:20}) 
+        .on('locationfound', function(e){
+            var marker = L.marker([e.latitude, e.longitude]).bindPopup('Your are here :)');
+            var circle = L.circle([e.latitude, e.longitude], e.accuracy/2, {
+                weight: 1,
+                color: 'blue',
+                fillColor: '#cacaca',
+                fillOpacity: 0.2
+            });
+            map.addLayer(marker);
+            map.addLayer(circle);
+        })
+       .on('locationerror', function(e){
+            console.log(e);
+            alert("Location access denied.");
+        });
+
+        
         //pin location
         map.on('click', function(e) {
             var lat = e.latlng.lat;
             var lng = e.latlng.lng;
-            var popup = `<form action = "pinAddress.php" method = "POST">
+            var popup = `<form action = "" method = "POST">
                             <div class = "form-group"> 
                                 <label for = "name"> Property Name </label>
                                 <input type = "text" name = "name" class = "form-control" placeholder = "">
@@ -54,11 +79,16 @@
                             <input type = "hidden" name = "lat" value = "${lat}">
                             <input type = "hidden" name = "lng" value = "${lng}">
                             <br>
-                            <button type = "submit" class = "btn btn-primary" name = "submit-address"> Submit </button>
+                            <a href = "ownerProperty.php?lat=${lat}&lng=${lng}><button type = "button" class = "btn btn-primary"> Submit </button></a>
                         </form>`;
 
             var singleMarker = L.marker([lat, lng], { icon: myMarker, draggable: true }).bindPopup(popup);
             singleMarker.addTo(map)
+
+            var geocodeService = L.esri.Geocoding.geocodeService();
+            geocodeService.reverse().latlng(e.latlng).run(function(error, result) {
+    L.marker(result.latlng).addTo(map).bindPopup(result.address.Match_addr).openPopup();
+  });
         })
 
         var myMarker = L.icon({
@@ -71,8 +101,16 @@
         var popup = singleMarker.bindPopup('This is my location.' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);*/
 
+        
+
+
+
         //search location
         L.Control.geocoder().addTo(map);
 
         //var pointData = L.geoJSON(pointJson).addTo(map);
+
+        $.get('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=47.217954&lon=-1.552918', function(data){
+    console.log(data.address.road);
+});
     </script>
