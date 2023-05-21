@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 <?php 
 ini_set('session.cache_limiter','public');
 session_cache_limiter(false);
@@ -11,6 +13,7 @@ include("dbconn.php");
     
 ?>
 
+>>>>>>> c5fa2d1c34158e38b0f47919612231b5fa9fe9b8
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +34,13 @@ include("dbconn.php");
 <div class="col-md-12">  
     <div class="col-md-4">      
         <div class="portlet light profile-sidebar-portlet bordered">
+<<<<<<< HEAD
+            <div class="profile-userpic" style="margin-left: 105px;">
+                <img src="images/user1.png"> </div>
+            <div class="profile-usertitle">
+                <div class="profile-usertitle-name"> James Aldrino </div>
+                <div class="profile-usertitle-job"> james.aldrin0@gmail.com </div>
+=======
             <div class="profile-userpic">
 
             <?php 
@@ -43,9 +53,10 @@ include("dbconn.php");
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name"> <?php echo $row['fullName'];?> </div>
                 <div class="profile-usertitle-job"> <?php echo $row['email'];?> </div>
+>>>>>>> c5fa2d1c34158e38b0f47919612231b5fa9fe9b8
             </div>
             <div class="profile-userbuttons">
-                <button type="button" class="btn btn-info  btn-sm" href="index.php">Logout</button>
+                <button type="button" class="btn btn-info  btn-sm" onclick="window.location.href='index.php';">Logout</button>
             </div>
             <div class="profile-usermenu">
             </div>
@@ -101,6 +112,7 @@ include("dbconn.php");
                                 <label for="exampleInputPassword1">Password</label>
                                 <h5><?php echo $row['password'];?></h5>
                               </div>
+                              <button type="button" class="btn btn-default" onclick="window.location.href='seekerDashboard.php';">Back</button>
                         </div>
                        
                         <div role="tabpanel" class="tab-pane" id="home">
@@ -133,6 +145,7 @@ include("dbconn.php");
                                 <label for="exampleInputPassword1">Password</label>
                                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                               </div>
+                              
 
                             <fieldset class="form-group row">
                                 <legend class="col-form-label col-sm-2 float-sm-left pt-0">Gender</legend>
