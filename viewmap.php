@@ -101,6 +101,10 @@ include("dbconn.php");
         var popup = singleMarker.bindPopup('This is my location.' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);*/
 
+        
+
+
+
         //search location
         L.Control.geocoder().addTo(map);
 

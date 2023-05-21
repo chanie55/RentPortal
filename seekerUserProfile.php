@@ -1,3 +1,10 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");							
+?>
+
 <?php
     $name = "James Aldrino"; /*try daw gikan sa table. Itudlo daw asa na table imo gina mean did2 sa website*/
     $message = "This is a message comming from the php"
@@ -25,10 +32,17 @@
     <div class="col-md-4">      
         <div class="portlet light profile-sidebar-portlet bordered">
             <div class="profile-userpic">
-                <img src="images/user1.png" class="img-responsive" alt=""> </div>
+
+            <?php 
+                  $email = $_REQUEST['email'];
+                  $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
+                  while($row=mysqli_fetch_array($query))
+								{
+							?>
+                <img src="images/user.png" class="img-responsive" alt=""> </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name"> <?php echo"$name" ?> </div>
-                <div class="profile-usertitle-job"> james.aldrin0@gmail.com </div>
+                <div class="profile-usertitle-name"> <?php echo $row['fullName'];?> </div>
+                <div class="profile-usertitle-job"> <?php echo $row['email'];?> </div>
             </div>
             <div class="profile-userbuttons">
                 <button type="button" class="btn btn-info  btn-sm" href="index.php">Logout</button>
@@ -61,27 +75,31 @@
                         <form class="frm">
                               <div class="form-group">
                                 <label for="inputName">First Name</label>
-                                <h5>James</h5>
+                                <h5><?php echo $row['firstName'];?></h5>
                               </div>
                                 <div class="form-group">
                                 <label for="inputLastName">Last Name</label>
-                                <h5>Aldrino</h5>
+                                <h5><?php echo $row['lastName'];?></h5>
                               </div>
                               <div class="form-group">
                                 <label for="inputLastName">Contact</label>
-                                <h5>090876353</h5>
+                                <h5><?php echo $row['contact'];?></h5>
+                              </div>
+                              <div class="form-group">
+                                <label for="inputLastName">Address</label>
+                                <h5><?php echo $row['address'];?></h5>
                               </div>
                               <div class="form-group">
                                 <label for="inputLastName">Date of Birth</label>
-                                <h5>April 17, 2001</h5>
+                                <h5><?php echo $row['dob'];?></h5>
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <h5>james.aldrin0@gmail.com</h5>
+                                <h5><?php echo $row['email'];?></h5>
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
-                                <h5>secret</h5>
+                                <h5><?php echo $row['password'];?></h5>
                               </div>
                         </div>
 
@@ -89,23 +107,27 @@
                             <form>
                               <div class="form-group">
                                 <label for="inputName">First Name</label>
-                                <input type="text" class="form-control" id="inputName" placeholder="Name">
+                                <input type="text" class="form-control" name = "firstname" id="inputName" placeholder="Name" value = "<?php echo $row['firstName'];?>">
                               </div>
                                 <div class="form-group">
                                 <label for="inputLastName">Last Name</label>
-                                <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
+                                <input type="text" class="form-control" name = "lastname" id="inputLastName" placeholder="Last Name" value = "<?php echo $row['lastName'];?>">
                               </div>
                               <div class="form-group">
                                 <label for="inputLastName">Contact</label>
-                                <input type="text" class="form-control" id="inputContact" placeholder="Contact">
+                                <input type="text" class="form-control" name = "contact" id="inputContact" placeholder="Contact" value = "<?php echo $row['contact'];?>">
+                              </div>
+                              <div class="form-group">
+                                <label for="inputLastName">Address</label>
+                                <input type="text" class="form-control" name = "address" id="inputContact" placeholder="Contact" value = "<?php echo $row['address'];?>">
                               </div>
                               <div class="form-group">
                                 <label for="inputLastName">Date of Birth</label>
-                                <input type="date" class="form-control" id="inputBirthdate" placeholder="Birthdate">
+                                <input type="date" class="form-control" name = "dob" id="inputBirthdate" placeholder="Birthdate" value = "<?php echo $row['dob'];?>">
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                <input type="email" class="form-control" name = "email" id="exampleInputEmail1" placeholder="Email" value = "<?php echo $row['email'];?>" disabled>
                               </div>
                               <div class="form-group">
                                 <label for="exampleInputPassword1">Password</label>
@@ -131,7 +153,7 @@
                                 </div>
                              </fieldset>
 
-                              <button type="submit" class="btn btn-default">Submit</button>
+                              <button type="submit" class="btn btn-default" name = "update-profile">Submit</button>
                               <button type="submit" class="btn btn-default">Cancel</button>
                             </form>
                         </div>
@@ -139,7 +161,7 @@
                         
                         <div role="tabpanel" class="tab-pane" id="history"><?php echo"$message" ?> </div>
                     </div>
-                
+                    <?php } ?>
                 </div>
             </div>
         </div>

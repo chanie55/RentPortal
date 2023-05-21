@@ -49,7 +49,7 @@
         <?php
         include "dbconn.php";
 
-        $mapa = "SELECT * FROM propertyaddress ";
+        $mapa = "SELECT *,property.propertyname FROM propertyaddress JOIN property ON propertyaddress.addresscode = property.propertyaddress";
 
         $dbquery = mysqli_query($conn,$mapa);
 
@@ -60,6 +60,7 @@
             $marker = array(
                 'type' => 'Feature',
                 'properties' => array(
+                'title' => $row['propertyname'],
                 'marker-color' => '#f00',
                 'marker-size' => 'small'
             ),
@@ -80,10 +81,11 @@
 
 // Pass features and a custom factory function to the map
 
-        var pointData = L.geoJSON(geoJson).addTo(map);
-        var popuploc = pointData.bindPopup('Property Location').openPopup();
-        popuploc.addTo(map);
-      //  L.Control.geocoder().addTo(map);
+        var pointData = L.geoJSON(geoJson, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.title).openPopup();
+            }
+        }).addTo(map);
 
 
         

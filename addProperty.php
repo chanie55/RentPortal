@@ -27,7 +27,6 @@ include "dbconn.php";
         $kitchentype = $_POST['kitchen'];
         $bathtype = $_POST['bath'];
         $bed = $_POST['bed'];
-        $dimension = $_POST['dimension'];
         $lat = $_POST['lat'];
         $lng = $_POST['lng'];
 

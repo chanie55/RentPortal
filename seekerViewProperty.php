@@ -299,12 +299,14 @@ include("dbconn.php");
                             <ul class="property_list_widget">
 							
 								            <?php 
-								                $query=mysqli_query($conn,"SELECT * FROM property ORDER BY date_created DESC LIMIT 7");
+								                $pid = $_REQUEST['property_ID']; 
+                                                $aid = $_REQUEST['addresscode'];
+                                                            $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode ORDER BY date_created DESC LIMIT 7");
 										            while($row=mysqli_fetch_array($query))
 										            {
 								            ?>
                                 <li><img src="images/sample.jpg" alt="pimage" width = 40% height = 40%>
-                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a></h6>
+                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['propertyname'];?></a></h6>
                                     <span class="font-14"><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</span>   
                                 </li>
                             <?php } ?>
@@ -396,7 +398,7 @@ function showSlides(n) {
 <script src="./leaflet_data/point.js"> </script>
 
     <script> 
-        var map = L.map('map').setView([6.1164, 125.1716], 16);
+        var map = L.map('map').setView([6.1164, 125.1716], 13);
 
         var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -426,6 +428,7 @@ function showSlides(n) {
             $marker = array(
                 'type' => 'Feature',
                 'properties' => array(
+                'title' => $row['propertyname'],
                 'marker-color' => '#f00',
                 'marker-size' => 'small'
             ),
@@ -447,7 +450,7 @@ function showSlides(n) {
 // Pass features and a custom factory function to the map
 
         var pointData = L.geoJSON(geoJson).addTo(map);
-        var popuploc = pointData.bindPopup('Property Location').openPopup();
+        var popuploc = pointData.bindPopup('This is my location').openPopup();
         popuploc.addTo(map);
 
         L.Control.geocoder().addTo(map);

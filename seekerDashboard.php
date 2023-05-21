@@ -51,17 +51,23 @@ include("dbconn.php");
                         <a href="login.php" class="nav-item nav-link">Login</a>
                     </div>
                     <div class = "profile-user">
-                        <img src="images/user1.png" class="user-pic" onclick="toggleMenu()">
+                        <?php 
+                            $email = $_REQUEST['email'];
+                            $query = mysqli_query($conn, "SELECT user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
+                            while($row=mysqli_fetch_array($query))
+								{
+							?>
+                        <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
 
                         <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
                             <div class="user-info">
-                                <img src="images/user1.png">
-                                <h4>James Aldrino</h4>
+                                <img src="images/user.png">
+                                <h4><?php echo $row['fullName']; ?></h4>
                             </div> 
                             <hr>
                              
-                            <a href="seekerUserProfile.php" class="sub-menu-link">
+                            <a href="seekerUserProfile.php?email=<?php echo $row['email']; ?>" class="sub-menu-link">
                                 <img src="images/profile.png">
                                 <p>Edit Profile</p>
                                 <span>></span>
@@ -73,6 +79,7 @@ include("dbconn.php");
                             </a>
                         </div>
                         </div>
+                        <?php } ?>
                     </div>      
                 </div>
             </nav>
@@ -160,7 +167,7 @@ include("dbconn.php");
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
+                                        <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode']; ?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
                                         <div class="rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style = "background: #5D59AF;">For Rent</div>
                                         <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;"><?php echo $row['propertytype'];?></div>
                                     </div>

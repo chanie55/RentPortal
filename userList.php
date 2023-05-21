@@ -138,11 +138,11 @@
                  <div class="col-sm-4">
                         <div class="search-box">
                             <i class="bx bxs-search-alt-2"></i>
-                            <input type="text" class="form-control" placeholder="Search&hellip;">                
+                            <input type="text" class="form-control" id = "search" name = "search" placeholder="Search&hellip;">                
                         </div>
                     </div>
                     <a href="report.php" class="btn btn-primary btn-lg" id="print"><span> Print </span></a>
-            <table class="table table-striped table-hover table-bordered">
+            <table class="table table-striped table-hover table-bordered" id = "mytable">
                 
                 <thead>
                     <tr>
@@ -271,6 +271,46 @@
             });
 			
         });      
-   </script>  
+   </script> 
+   
+   <!--Search Bar-->
+   <script> 
+   /*
+        document().ready(function () {
+            $('#mytable tfoot th').each(function () {
+                var title = $(this).text();
+                $(this).html('<input type = "text" placeholder = "Search ' + title + '"/>');
+            });
+
+            var table = $('#mytable').DataTable({
+                initComplete: function () {
+                    this.api()
+                        .columns()
+                        .every(function () {
+                            var that = this;
+
+                            $('input', this.footer()).on('keyup change clear', function () {
+                                if (that.search() !== thi.value) {
+                                    that.search(this.value).draw();
+                                }
+                            })
+                        })
+                }
+            })
+        })
+
+        $(document).ready(function () {
+            $('#mytable').DataTable({
+                searching: true
+            });
+        });*/
+
+        $(document).ready(function () {
+            $('#mytable').DataTable({
+                processing: true,
+                serverSide: true
+            })
+        })
+    </script>
   </body>
 </html>
