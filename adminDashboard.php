@@ -110,10 +110,10 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Edit Profile</a>
+                                            <a href="seekerUserProfile.php">Edit Profile</a>
                                         </li>
                                         <li>
-                                            <a href="#">Logout</a>
+                                            <a href="index.php">Logout</a>
                                         </li>      
                                     </ul>
                                 </li>

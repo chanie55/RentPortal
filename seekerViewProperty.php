@@ -24,103 +24,134 @@ include("dbconn.php");
             include "css/seekerViewProperty.css"
         ?>
     </style>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 
 <body>
     <div class="container-xxl bg-white p-0">
+ 
 
         <!-- Navbar Start -->
         <div class="container-fluid nav-bar bg-transparent">
             <nav class="navbar navbar-expand-lg bg-white navbar-light py-0 px-4">
                 <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
-                    <h1 class="m-0" style = "color: #5D59AF;">Rent.In</h1>
+                    <h1 class="m-0" style = "color: #5D59AF;">Rentin</h1>
                 </a>
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                    </div>     
+                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="#" class="nav-item nav-link">About</a>
+                    </div>
+                    <div class = "profile-user">
+                        <img src="images/user1.png" class="user-pic" onclick="toggleMenu()">
+
+                        <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <div class="user-info">
+                                <img src="images/user1.png">
+                                <h4>James Aldrino</h4>
+                            </div> 
+                            <hr>
+                             
+                            <a href="seekerUserProfile.php" class="sub-menu-link">
+                                <img src="images/profile.png">
+                                <p>Edit Profile</p>
+                                <span>></span>
+                            </a>
+                            <a href="index.php" class="sub-menu-link">
+                                <img src="images/logout1.png">
+                                <p>Logout</p>
+                                <span>></span>
+                            </a>
+                        </div>
+                        </div>
+                    </div>      
                 </div>
             </nav>
         </div>
         <!-- Navbar End -->
-
-        <div class="container-fluid mb-5 wow fadeIn" data-wow-delay="0.1s" style="padding: 35px; background: white;">
-            <div class="container">
+        <!-- Search Start -->
+        <div class="container-xxl search">
+            <div class="container wow fadeIn" data-wow-delay="0.1s" style="padding: 20px; margin-top: 8%; opacity: 0.98">
                 <div class="row g-2">
+                    <h2 class="first">Find A Property Today!</h2>
                     <div class="col-md-10">
                         <div class="row g-2">
                             <div class="col-md-4">
-                                <input type="text" class="form-control border-2 py-3" placeholder="Search Keyword">
+                                <input type="text" class="form-control border-0 py-3" placeholder="Search Keyword">
                             </div>
-
                             <div class="col-md-4">
-                                <select class="form-select border-2 py-3">
-                                  <option selected disabled value="">Choose...</option>
-                                    <?php
-                                        include "dbconn.php";
+                                <select class="form-select border-0 py-3">
+                                <option selected disabled value="">Property Type</option>
+                                <?php
+                                    include "dbconn.php";
                             
-                                        $name_query = "SELECT property FROM propertytype";
-                                        $r = mysqli_query($conn, $name_query);
+                                    $brgy_query = "SELECT property FROM propertytype";
+                                    $r = mysqli_query($conn, $brgy_query);
 
-                                        while ($row = mysqli_fetch_array($r)) {
-                                          ?>
-                                            <option> <?php echo $row['property']; ?></option>
-                                          <?php
-                                        }
-                                      ?>
+                                    while ($row = mysqli_fetch_array($r)) {
+                                    ?>
+                                        <option > <?php echo $row['property']; ?></option>
+                                    <?php
+                                    }
+                                ?>
                                 </select>
                             </div>
-
                             <div class="col-md-4">
-                                <select class="form-select border-2 py-3">
-                                  <?php
-                                        include "dbconn.php";
+                                <select class="form-select border-0 py-3">
+                                <option selected disabled value="">Location</option>
+                                <?php
+                                    include "dbconn.php";
                             
-                                        $name_query = "SELECT barangey FROM useraddress";
-                                        $r = mysqli_query($conn, $name_query);
+                                    $brgy_query = "SELECT barangay FROM useraddress";
+                                    $r = mysqli_query($conn, $brgy_query);
 
-                                        while ($row = mysqli_fetch_array($r)) {
-                                          ?>
-                                            <option> <?php echo $row['barangay']; ?></option>
-                                          <?php
-                                        }
-                                      ?>
+                                    while ($row = mysqli_fetch_array($r)) {
+                                    ?>
+                                        <option > <?php echo $row['barangay']; ?></option>
+                                    <?php
+                                    }
+                                ?>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <button class="btn border-0 w-100 py-3" style = "background: #5D59AF; color: white;">Search</button>
+                        <button class="btn btn-dark border-0 w-100 py-3">Search</button>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
-  
         <!-- Search End -->
+        <br>
+        <br>
+        <br>
 
         <div class="full-row">
             <div class="container">
-                <div class="row">
+                
+                <div class="row" >
 				
                 <?php
                       $pid = $_REQUEST['property_ID']; 
-						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
+                      $aid = $_REQUEST['addresscode'];
+                      $email = $_REQUEST['email'];
+						          $query=mysqli_query($conn,"SELECT * FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode WHERE property_ID = '$pid' AND addresscode = '$aid'");
 					          while($row=mysqli_fetch_array($query)) {
 					        ?>
 				  
                     <div class="col-lg-8">
 
                         <div class="row">
-                            <div class="col-md-12" style = "background-color: red;">
+                            <div class="col-md-12">
                                 <div id="single-property" style="width:1200px; height:700px; margin:30px auto 50px;"> 
                                     <div class="img">
                                       <div class="mySlides">
-                                          <img src="images/heading.jpg" style="width:60%">
+                                          <img src="images/sample.jpg" style="width:60%">
                                       </div>
 
                                       <div class="mySlides">
@@ -254,40 +285,33 @@ include("dbconn.php");
                                     </div>
                                 </div>
                             </div>
+                          </div>
                         </div>
+                      </div>
+
+                      
                     </div>
                   </div>
-              </div>    
-            </div>	
-                </div>
-            </div>
-        </div>
-    </div>  
-					<?php } ?>
-					
-                    <div class="col-lg-4" style = "background-color: green; margin-left:65%; margin-top:-67.7%">
+
+                  <div class="col-lg-4" style = "margin-left:65%; margin-top:-75.7%" >
                         <div class="row1">
                             <div class="more">
-                                <h4 id="h4"> Reservation </h4>
-                                <input id ="input" type="label" placeholder>
-                                <input id ="input" type="label" placeholder>
-                                <input id ="input" type="label" placeholder>
-                                <br>
-                                <button class="btn-reserve"> Reserve </button>
-                                <br>
+                                <div class="card-body">
+                                    <h5 class="card-title">Reservation</h5>
+                                    <p class="card-text">Want to secure your room/space? Reserve Now!</p>
+                                    <a href="seekerReservePage.php?email=<?php echo $email;?>" class="btn btn-primary">Make Reservation</a>
+                                </div>
                             </div> 
                         </div>
 
                         <div class="visit">
                             <div class="col-lg-12">
                                 <div class="map">
-                                    <h4 class="input1"> Schedule Visit  </h4>
-                                    <p class="input1"> Date to Visit </p>
-                                    <input type="date" class="input1" style="width: 60%">
-                                    <p class="visit"> Time to Visit </p>
-                                    <input type="time" class="input1" style="width: 60%">
-                                    <br class="input1">
-                                    <button class="btn-visit">Visit </button>
+                                    <div class="card-body">
+                                        <h5 class="card-title">Visit</h5>
+                                        <p class="card-text">If you are interested and would like to know more, you can visit our place.</p>
+                                        <a href="#" class="btn btn-primary">Schedule Visit</a>
+                                    </div>
                                 </div>
                             </div>
                         </div> 
@@ -297,18 +321,29 @@ include("dbconn.php");
                             <ul class="property_list_widget">
 							
 								            <?php 
-								                $query=mysqli_query($conn,"SELECT * FROM property ORDER BY date_created DESC LIMIT 7");
+								                $pid = $_REQUEST['property_ID']; 
+                                                $aid = $_REQUEST['addresscode'];
+                                                            $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode ORDER BY date_created DESC LIMIT 7");
 										            while($row=mysqli_fetch_array($query))
 										            {
 								            ?>
                                 <li><img src="images/sample.jpg" alt="pimage" width = 40% height = 40%>
-                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a></h6>
+                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['propertyname'];?></a></h6>
                                     <span class="font-14"><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</span>   
                                 </li>
                             <?php } ?>
                             </ul>
                         </div>
                     </div>
+              </div>    
+            </div>	
+                </div>
+            </div>
+        </div>
+   
+					<?php } ?>
+					
+                    
                 </div>
             </div>
         
@@ -316,9 +351,7 @@ include("dbconn.php");
         <section class="listing-title-area mt-2">
           <div class="container mt50">
               <div class="row mb30">
-
-                
-                  <?php 
+                  <?php
                       $pid = $_REQUEST['property_ID']; 
 						          $query=mysqli_query($conn,"SELECT * FROM property WHERE property_ID = '$pid'");
 						          while($row=mysqli_fetch_array($query)) {
@@ -328,60 +361,14 @@ include("dbconn.php");
               </div>
           </div>
         </section>
-        
+        </div>
+        </div>
+    </div>
                      
 
 <?php } ?>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-      <!-- Footer Start -->
-        <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+      <!-- Footer Start 
+<div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
                 <div class="copyright">
                     <div class="row">
@@ -393,8 +380,15 @@ include("dbconn.php");
                 </div>
             </div>
         </div>
-        <!-- Footer End -->              
+        Footer End -->              
                   
+
+
+
+
+
+                                  </div>
+
 
 
 
@@ -441,7 +435,7 @@ function showSlides(n) {
 <script src="./leaflet_data/point.js"> </script>
 
     <script> 
-        var map = L.map('map').setView([6.1164, 125.1716], 16);
+        var map = L.map('map').setView([6.1164, 125.1716], 13);
 
         var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -457,9 +451,44 @@ function showSlides(n) {
         var singleMarker = L.marker([6.1164, 125.1716], { icon: myMarker, draggable: true });
         var popup = singleMarker.bindPopup('This is my location. ' + singleMarker.getLatLng()).openPopup();
         popup.addTo(map);*/
+        <?php
+        include "dbconn.php";
 
-        var pointData = L.geoJSON(pointJson).addTo(map);
-        var popuploc = pointData.bindPopup('Property Location').openPopup();
+        $mapa = "SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON propertyaddress.addresscode = property.propertyaddress WHERE propertyaddress = '$aid'";
+
+        $dbquery = mysqli_query($conn,$mapa);
+
+        $geojson = array('type' => 'FeatureCollection', 'features' => array());
+
+        while($row = mysqli_fetch_assoc($dbquery)){
+
+            $marker = array(
+                'type' => 'Feature',
+                'properties' => array(
+                'title' => $row['propertyname'],
+                'marker-color' => '#f00',
+                'marker-size' => 'small'
+            ),
+                'geometry' => array(
+                'type' => 'Point',
+                'coordinates' => array(
+                    $row['lng'],
+                    $row['lat']
+                    )
+                )
+            );
+
+            array_push($geojson['features'], $marker);
+        }
+?>
+  
+  var geoJson = <?php echo json_encode($geojson,JSON_NUMERIC_CHECK); ?>;
+
+// Pass features and a custom factory function to the map
+
+        var pointData = L.geoJSON(geoJson).addTo(map);
+        var popuploc = pointData.bindPopup('This is my location').openPopup();
         popuploc.addTo(map);
+
         L.Control.geocoder().addTo(map);
     </script>

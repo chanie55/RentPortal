@@ -8,7 +8,11 @@
 	    <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
 
-        <link rel="stylesheet" href="css/adminDashboard.css">
+        <style>
+            <?php
+                include "css/ownerDashboard.css"
+            ?>
+        </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,10 +102,10 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Edit Profile</a>
+                                            <a href="seekerUserProfile.php">Edit Profile</a>
                                         </li>
                                         <li>
-                                            <a href="#">Logout</a>
+                                            <a href="index.php">Logout</a>
                                         </li>      
                                     </ul>
                                 </li>
@@ -113,7 +117,88 @@
 
                 <!--BODY-->
                 <div class = "main-content">
-                    <div class="col-8">
+                <section class="section dashboard">
+            <div class="row">
+               <div class="col-lg-8">
+                  <div class="row">
+                     <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card sales-card">
+                           <div class="card-body">
+                              <h5 class="card-title">Reservations</h5>
+                              <div class="d-flex align-items-center">
+                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bx bxs-calendar-exclamation"></i></div>
+                                 <div class="ps-3">
+                                    <?php
+                                        include "dbconn.php";
+
+                                        $res_query = "SELECT * FROM reservation";
+                                        $res_query_num = mysqli_query($conn, $res_query);
+
+                                            if ($res_total = mysqli_num_rows($res_query_num)) {
+                                                echo '<h6> '.$res_total.' </h6>';
+                                            } else {
+                                                echo '<h3 class = "card-title"> No Data </h3>';
+                                            }
+                                    ?>
+                                    <?php
+                                        include "dbconn.php";
+
+                                        $res_query = "SELECT * FROM reservation";
+                                        $res_query_num = mysqli_query($conn, $res_query);
+
+                                            if ($res_total = mysqli_num_rows($res_query_num)) {
+                                                echo '<span class="text-success small pt-1 fw-bold"> '.$res_total.' </span>';
+                                            } else {
+                                                echo '<h3 class = "card-title"> No Data </h3>';
+                                            }
+                                    ?>
+                                     <span class="text-muted small pt-2 ps-1">Added</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-xxl-4 col-md-6">
+                        <div class="card info-card revenue-card">
+                           <div class="card-body">
+                              <h5 class="card-title">Visit</h5>
+                              <div class="d-flex align-items-center">
+                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bx bxs-face"></i></div>
+                                 <div class="ps-3">
+                                    <h6>$3,264</h6>
+                                    <span class="text-success small pt-1 fw-bold">8</span> <span class="text-muted small pt-2 ps-1">added</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-xxl-4 col-xl-12">
+                        <div class="card info-card customers-card">
+                           <div class="filter">
+                              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                 <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                 </li>
+                                 <li><a class="dropdown-item" href="#">Today</a></li>
+                                 <li><a class="dropdown-item" href="#">This Month</a></li>
+                                 <li><a class="dropdown-item" href="#">This Year</a></li>
+                              </ul>
+                           </div>
+                           <div class="card-body">
+                              <h5 class="card-title">Available Room/Space </h5>
+                              <div class="d-flex align-items-center">
+                                 <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bx bxs-door-open"></i></div>
+                                 <div class="ps-3">
+                                    <h6>1244</h6>
+                                    <span class="text-danger small pt-1 fw-bold">12</span> <span class="text-muted small pt-2 ps-1">occupied</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                     
+                     <div class="col-12">
                         <div class="card recent-sales overflow-auto">
                            <div class="filter">
                               <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
@@ -127,58 +212,160 @@
                               </ul>
                            </div>
                            <div class="card-body">
-                              <h5 class="card-title">Scheduled Visit <span>| Today</span></h5>
-                              <table class="table table-borderless datatable">
+                              <h5 class="card-title">Reservations | <a href = "reservation.php"><span>See All</span></a></h5>
+                              <table class="table table-hover">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>User_ID</th>
+                                                <th>Date</th>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tbody>
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
+
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT *, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['userInfo_ID'] ?> </td>
+                                        <td> <?php echo $row['date'] ?> </td>
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['amount'] ?> </td>
+                                        <td><span class="badge bg-success">Approved</span></td>
+                                    </tr>
+                                <?php
+                            }
+                        ?>      
+                                        </tbody>
+                                    </table>
+                           </div>
+                        </div>
+                     </div>
+                     <div class="col-12">
+                        <div class="card top-selling overflow-auto">
+                           <div class="filter">
+                              <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                                 <li class="dropdown-header text-start">
+                                    <h6>Filter</h6>
+                                 </li>
+                                 <li><a class="dropdown-item" href="#">Today</a></li>
+                                 <li><a class="dropdown-item" href="#">This Month</a></li>
+                                 <li><a class="dropdown-item" href="#">This Year</a></li>
+                              </ul>
+                           </div>
+                           <div class="card-body pb-0">
+                              <h5 class="card-title">Scheduled Visit <span>| See All</span></h5>
+                              <table class="table table-borderless">
                                  <thead>
                                     <tr>
-                                       <th scope="col">ID</th>
-                                       <th scope="col">Date</th>
+                                       <th scope="col">Profile</th>
                                        <th scope="col">Name</th>
-                                       <th scope="col">Visit</th>
+                                       <th scope="col">Date</th>
+                                       <th scope="col">Time</th>
                                        <th scope="col">Status</th>
                                     </tr>
                                  </thead>
                                  <tbody>
                                     <tr>
-                                       <th scope="row"><a href="#">#2457</a></th>
-                                       <td>Brandon Jacob</td>
-                                       <td><a href="#" class="text-primary">At praesentium minu</a></td>
+                                       <th scope="row"><a href="#"><img src="images/user.png" alt="" style = "width: 40px; height: 40px;"></a></th>
+                                       <td><a href="#" class="text-primary fw-bold">Ut inventore ipsa voluptas nulla</a></td>
                                        <td>$64</td>
+                                       <td class="fw-bold">124</td>
                                        <td><span class="badge bg-success">Approved</span></td>
                                     </tr>
                                     <tr>
-                                       <th scope="row"><a href="#">#2147</a></th>
-                                       <td>Bridie Kessler</td>
-                                       <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                       <td>$47</td>
-                                       <td><span class="badge bg-warning">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2049</a></th>
-                                       <td>Ashleigh Langosh</td>
-                                       <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                       <td>$147</td>
+                                       <th scope="row"><a href="#"><img src="images/user.png" alt="" style = "width: 40px; height: 40px;"></a></th>
+                                       <td><a href="#" class="text-primary fw-bold">Exercitationem similique doloremque</a></td>
+                                       <td>$46</td>
+                                       <td class="fw-bold">98</td>
                                        <td><span class="badge bg-success">Approved</span></td>
                                     </tr>
                                     <tr>
-                                       <th scope="row"><a href="#">#2644</a></th>
-                                       <td>Angus Grady</td>
-                                       <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                       <td>$67</td>
-                                       <td><span class="badge bg-danger">Rejected</span></td>
-                                    </tr>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2644</a></th>
-                                       <td>Raheem Lehner</td>
-                                       <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                       <td>$165</td>
+                                       <th scope="row"><a href="#"><img src="images/user.png" alt="" style = "width: 40px; height: 40px;"></a></th>
+                                       <td><a href="#" class="text-primary fw-bold">Doloribus nisi exercitationem</a></td>
+                                       <td>$59</td>
+                                       <td class="fw-bold">74</td>
                                        <td><span class="badge bg-success">Approved</span></td>
                                     </tr>
                                  </tbody>
                               </table>
                            </div>
                         </div>
-                    </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-lg-4">
+                  <div class="card">
+                     <div class="filter">
+                        <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                           <li class="dropdown-header text-start">
+                              <h6>Filter</h6>
+                           </li>
+                           <li><a class="dropdown-item" href="#">Today</a></li>
+                           <li><a class="dropdown-item" href="#">This Month</a></li>
+                           <li><a class="dropdown-item" href="#">This Year</a></li>
+                        </ul>
+                     </div>
+                     <div class="card-body">
+                        <h5 class="card-title">Upcoming Visit <span>| See All</span></h5>
+                        <div class="activity">
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">32 min</div>
+                              <i class='bx bxs-circle activity-badge text-success align-self-start'></i>
+                              <div class="activity-content"> Quia quae rerum <a href="#" class="fw-bold text-dark">explicabo officiis</a> beatae</div>
+                           </div>
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">56 min</div>
+                              <i class='bx bxs-circle activity-badge text-danger align-self-start'></i>
+                              <div class="activity-content"> Voluptatem blanditiis blanditiis eveniet</div>
+                           </div>
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">2 hrs</div>
+                              <i class='bx bxs-circle activity-badge text-primary align-self-start'></i>
+                              <div class="activity-content"> Voluptates corrupti molestias voluptatem</div>
+                           </div>
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">1 day</div>
+                              <i class='bx bxs-circle activity-badge text-info align-self-start'></i>
+                              <div class="activity-content"> Tempore autem saepe <a href="#" class="fw-bold text-dark">occaecati voluptatem</a> tempore</div>
+                           </div>
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">2 days</div>
+                              <i class='bx bxs-circle activity-badge text-warning align-self-start'></i>
+                              <div class="activity-content"> Est sit eum reiciendis exercitationem</div>
+                           </div>
+                           <div class="activity-item d-flex">
+                              <div class="activite-label">4 weeks</div>
+                              <i class='bx bxs-circle activity-badge text-muted align-self-start'></i>
+                              <div class="activity-content"> Dicta dolorem harum nulla eius. Ut quidem quidem sit quas</div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+        </section>
                 </div>
 							
 				<footer class="footer">
@@ -192,8 +379,6 @@
 				        </div>
 				    </div>
                 </footer>
-					
-			</div>
         </div>
     </div>
 
@@ -204,6 +389,7 @@
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery-3.3.1.min.js"></script>
+   <script src="js/simple-datatables.js"></script>
   
   
   <script type="text/javascript">

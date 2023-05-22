@@ -465,3 +465,8 @@ footer .copyright {
     padding: 20px;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
 }
+
+.ck-editor__editable[role="textbox"] {
+    /* editing area */
+    min-height: 200px;
+}

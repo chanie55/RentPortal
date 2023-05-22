@@ -13,7 +13,6 @@ body, html {
 	line-height: 1.8;
     font-family: 'Roboto', sans-serif;
      color: #555e58;
-	 text-transform:capitalize;
 	text-rendering: optimizeLegibility !important;
 	-webkit-font-smoothing: antialiased !important;
 	 font-weight: 400;
@@ -832,6 +831,12 @@ table.table td i {
     padding: 20px;
     box-shadow: 0 1px 1px 1px rgba(0,0,0,.2);
 }
+
+.ck-editor__editable[role="textbox"] {
+    /* editing area */
+    min-height: 200px;
+}
+
 
 
 

@@ -18,10 +18,11 @@ include("dbconn.php");
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="css/bootstrap.min5.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
     <style>
         <?php
             include "css/seekerDashboard.css"
@@ -47,21 +48,25 @@ include("dbconn.php");
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
                         <a href="index.php" class="nav-item nav-link active">Home</a>
-                        <a href="#" class="nav-item nav-link">About</a>
-                        <a href="login.php" class="nav-item nav-link">Login</a>
                     </div>
                     <div class = "profile-user">
-                        <img src="images/user1.png" class="user-pic" onclick="toggleMenu()">
+                        <?php 
+                            $email = $_REQUEST['email'];
+                            $query = mysqli_query($conn, "SELECT user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
+                            while($row=mysqli_fetch_array($query))
+								{
+							?>
+                        <img src="images/user.png" class="user-pic" onclick="toggleMenu()">
 
                         <div class="sub-menu-wrap" id="subMenu">
                         <div class="sub-menu">
                             <div class="user-info">
-                                <img src="images/user1.png">
-                                <h4>James Aldrino</h4>
+                                <img src="images/user.png">
+                                <h4><?php echo $row['fullName']; ?></h4>
                             </div> 
                             <hr>
                              
-                            <a href="#" class="sub-menu-link">
+                            <a href="seekerUserProfile.php?email=<?php echo $row['email']; ?>" class="sub-menu-link">
                                 <img src="images/profile.png">
                                 <p>Edit Profile</p>
                                 <span>></span>
@@ -73,6 +78,7 @@ include("dbconn.php");
                             </a>
                         </div>
                         </div>
+                        <?php } ?>
                     </div>      
                 </div>
             </nav>
@@ -93,35 +99,35 @@ include("dbconn.php");
                             <div class="col-md-4">
                                 <select class="form-select border-0 py-3">
                                 <option selected disabled value="">Property Type</option>
-                                    <?php
-                                        include "dbconn.php";
+                                <?php
+                                    include "dbconn.php";
                             
-                                        $name_query = "SELECT property FROM propertytype JOIN user ON property.user_ID = user.user_ID";
-                                        $r = mysqli_query($conn, $name_query);
+                                    $brgy_query = "SELECT property FROM propertytype";
+                                    $r = mysqli_query($conn, $brgy_query);
 
-                                        while ($row = mysqli_fetch_array($r)) {
-                                            ?>
-                                                <option> <?php echo $row['property']; ?></option>
-                                            <?php
-                                        }
+                                    while ($row = mysqli_fetch_array($r)) {
                                     ?>
+                                        <option > <?php echo $row['property']; ?></option>
+                                    <?php
+                                    }
+                                ?>
                                 </select>
                             </div>
                             <div class="col-md-4">
                                 <select class="form-select border-0 py-3">
                                 <option selected disabled value="">Location</option>
-                                    <?php
-                                        include "dbconn.php";
+                                <?php
+                                    include "dbconn.php";
                             
-                                        $name_query = "SELECT barangay FROM useraddress";
-                                        $r = mysqli_query($conn, $name_query);
+                                    $brgy_query = "SELECT barangay FROM useraddress";
+                                    $r = mysqli_query($conn, $brgy_query);
 
-                                        while ($row = mysqli_fetch_array($r)) {
-                                            ?>
-                                                <option> <?php echo $row['barangay']; ?></option>
-                                            <?php
-                                        }
+                                    while ($row = mysqli_fetch_array($r)) {
                                     ?>
+                                        <option > <?php echo $row['barangay']; ?></option>
+                                    <?php
+                                    }
+                                ?>
                                 </select>
                             </div>
                         </div>
@@ -141,52 +147,47 @@ include("dbconn.php");
                 <div class="row g-0 gx-5 align-items-end">
                     <div class="col-lg-6">
                         <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <h1 class="mb-3">Top Properties</h1>
-                            <p>Below are some of the available properties for rent.</p>
+                            <h1 class="mb-3">Property Listing</h1>
+                            <p>Here are the list of posted properties in the portal</p>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content">
                     <div id="tab-1" class="tab-pane fade show p-0 active">
                         <div class="row g-4">
-                        <?php 
-                            include "dbconn.php";
-
-							$query=mysqli_query($conn,"SELECT * FROM property"); //property.*, user.uname,user.utype,user.uimage FROM `property`,`user` WHERE property.uid=user.uid");
-								while($row=mysqli_fetch_array($query))
-								{
-							?>
+                                    <?php    
+                                        $email = $_REQUEST['email'];
+                                        $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode");
+										    while($row=mysqli_fetch_array($query))
+										    {
+								    ?>
 									
                             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="property-item rounded overflow-hidden">
                                     <div class="position-relative overflow-hidden">
-                                        <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
+                                        <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>&email=<?php echo $email;?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
                                         <div class="rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style = "background: #5D59AF;">For Rent</div>
                                         <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;"><?php echo $row['propertytype'];?></div>
                                     </div>
                                     <div class="p-4 pb-0">
                                         <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
-                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>"><?php echo $row['propertyname'];?></a>
-                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</p>
+                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>&email=<?php echo $email;?>"><?php echo $row['propertyname'];?></a>
+                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i></i><?php echo $row['propertyaddress'];?></p>
                                     </div>
                                     <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-ruler-combined text-primary me-2"></i><?php echo $row['availablerooms'];?> Available Room/s</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-bed text-primary me-2"></i><?php echo $row['bed'];?> Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="fa fa-bath text-primary me-2"></i>Bath - <?php echo $row['bathroom'];?></small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="bx bxs-door-open me-2" style = "color: #5D59AF;"></i></i><?php echo $row['availablerooms'];?> Available Rooms</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="bx bxs-bed me-2" style = "color: #5D59AF;"></i><?php echo $row['bed'];?> Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="bx bxs-bath me-2" style = "color: #5D59AF;"></i>Bath - </i><?php echo $row['bathroom'];?></small>
                                     </div>
                                 </div>
                             </div>
                             <?php } ?>
-
-                            
-                            <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
-                                <a class="btn py-3 px-5" href="" style = "background: #5D59AF; color: white;">Browse More Property</a>
-                            </div>
                         </div>
-                    </div>
+                    </div>          
                 </div>
             </div>
         </div>
+
         <!-- Property List End -->
 
        <!-- Footer Start -->

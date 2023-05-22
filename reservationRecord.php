@@ -138,106 +138,105 @@
                                         <i class="bx bxs-search-alt-2"></i>
                                         <input type="text" class="form-control" placeholder="Search&hellip;">
                                     </div>
+                                    <a href="printreserve.php" class="btn btn-primary btn-lg" id="print"><span> Print </span></a>
                                 </div>
 
-                                <table class="table table-striped table-hover table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>Reservation ID</th>
-                                            <th>Date</th>
-                                            <th>Seeker Name</th>
-                                            <th>Property Name</th>
-                                            <th>Owner Name</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php
-                                            include "dbconn.php";
-                            
-                                                if(isset($_GET['page']) && $_GET['page'] !== "") {
-                                                    $page = $_GET['page'];
-                                                } else {
-                                                    $page = 1;
-                                                }
-
-                                                $limit = 6;
-                                                $offset = ($page - 1) * $limit;
-
-                                                $previous = $page - 1;
-                                                $next = $page + 1;
-
-                                                $sql = "SELECT userinfo.id, user.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id LIMIT $offset, $limit";
-                                                $result = mysqli_query($conn, $sql);
-
-                                                while ($row = mysqli_fetch_assoc($result)) {
-                                                    ?>
-                                                    <tr class = "data-row"> 
-                                                        <td> 12 </td>
-                                                        <td> 05-12-23 </td>
-                                                        <td> <?php echo $row['fullName'] ?> </td>
-                                                        <td> Golden Urban House For Rent </td>
-                                                        <td> Owner One </td>
-                                                        <td>
-                                                            <?php
-                                                                if ($row['status'] == 1) {
-                                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
-                                                                } else {
-                                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
-                                                                }
-                                                            ?>
-                                                        </td>
-                                                    </tr>
+                                <table class="table table-striped table-hover table-bordered" style = "font-size: 12px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Full Name</th>
+                                                            <th>Email</th>
+                                                            <th>Contact</th>
+                                                            <th>Amount</th>
+                                                            <th>Mode of Payment</th>
+                                                            <th>Proof of Payment</th>
+                                                            <th>Status</th>
+                                                            <th>Date Approved</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
                                                     <?php
-                                                }
-                                        ?>                
-                                    </tbody>    
-                                </table>
-                                <div class="clearfix">
+                                                        include "dbconn.php";
+                            
+                                                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                                                $page = $_GET['page'];
+                                                            } else {
+                                                                $page = 1;
+                                                            }
+
+                                                            $limit = 6;
+                                                            $offset = ($page - 1) * $limit;
+
+                                                            $previous = $page - 1;
+                                                            $next = $page + 1;
+
+                                                            $sql = "SELECT *, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                                                            $result = mysqli_query($conn, $sql);
+
+                                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                                ?>
+                                                                    <tr class = "data-row"> 
+                                                                        <td> <?php echo $row['date'] ?> </td>
+                                                                        <td> <?php echo $row['fullName'] ?> </td>
+                                                                        <td> <?php echo $row['email'] ?> </td>
+                                                                        <td> <?php echo $row['contact'] ?> </td>
+                                                                        <td> <?php echo $row['amount'] ?> </td> 
+                                                                        <td> <?php echo $row['mop'] ?> </td>
+                                                                        <td> image </td>
+                                                                        <td> status </td>
+                                                                        <td> date </td>
+                                                                    </tr>
+                                                                <?php
+                                                            }
+                                                    ?> 
+                                                    </tbody>    
+                                                </table>
+                                                <div class="clearfix">
                 
-                                    <ul class="pagination">
-                                    <?php
+                                                    <ul class="pagination">
+                                                        <?php
             
-                                        $query =  "SELECT COUNT(*) FROM user";
-                                        $result_count = mysqli_query($conn, $query);
-                                        $records = mysqli_fetch_row($result_count);
-                                        $total_records = $records[0];
+                                                            $query =  "SELECT COUNT(*) FROM reservation";
+                                                            $result_count = mysqli_query($conn, $query);
+                                                            $records = mysqli_fetch_row($result_count);
+                                                            $total_records = $records[0];
 
-                                        $total_pages = ceil($total_records / $limit);
-                                        $link = "";
+                                                            $total_pages = ceil($total_records / $limit);
+                                                            $link = "";
 
-                                    ?>
+                                                        ?>
         
 
-                                    <?php
-                                        if ($page >= 2) {
-                                            echo "<li class = 'page-item'>
-                                                <a class = 'page-link' href = 'reservationRecord.php?page=".($page-1)."'> 
-                                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
-                                        }
+                                                        <?php
+                                                            if ($page >= 2) {
+                                                                echo "<li class = 'page-item'>
+                                                                <a class = 'page-link' href = 'reservation.php?page=".($page-1)."'> 
+                                                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                                                            }
 
-                                        for ($counter = 1; $counter <= $total_pages; $counter++){
-                                            if ($counter == $page) {
-                                                $link .= "<li class = 'page-item active'>
-                                                <a class = 'page-link' href= 'reservationRecord?page="
-                                                .$counter."'>".$counter." </a></li>";
-                                            } else {
-                                                $link .= "<li class = 'page-item'>
-                                                <a class = 'page-link' href='reservationRecord.php?page=".$counter."'> ".$counter." </a> </li>";
-                                            }
-                                        };
+                                                            for ($counter = 1; $counter <= $total_pages; $counter++){
+                                                                if ($counter == $page) {
+                                                                    $link .= "<li class = 'page-item active'>
+                                                                    <a class = 'page-link' href= 'reservation?page="
+                                                                    .$counter."'>".$counter." </a></li>";
+                                                                } else {
+                                                                    $link .= "<li class = 'page-item'>
+                                                                    <a class = 'page-link' href='reservation.php?page=".$counter."'> ".$counter." </a> </li>";
+                                                                }
+                                                            };
 
-                                        echo $link;
+                                                            echo $link;
 
-                                        if($page < $total_pages) {
-                                            echo "<li class = 'page-item'>
-                                            <a class = 'page-link' href='reservationRecord.php?page=".($page+1)."'>
-                                            <i class = 'bx bxs-chevron-right'></i> </a></li>";
-                                        }
-                                    ?>
-                                    </ul>
-                                    <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
-                                </div>
+                                                            if($page < $total_pages) {
+                                                                echo "<li class = 'page-item'>
+                                                                <a class = 'page-link' href='reservation.php?page=".($page+1)."'>
+                                                                <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                                                            }
+                                                        ?>
+                                                    </ul>
+                                                    <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                                                </div>
                             </div>
                         </div>
                         <footer class="footer">

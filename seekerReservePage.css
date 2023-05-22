@@ -1,16 +1,9 @@
-********** Template CSS **********/
+/********** Template CSS **********/
 :root {
     --primary: #00B98E;
     --secondary: #FF6922;
     --light: #EFFDF5;
     --dark: #0E2E50;
-    --main: #5D59AF;
-    --white: #FFF;
-    --bg: #FEFBFF;
-    --black1: #222;
-    --black2: #999;
-    --title: #402950;
-    
 }
 
 .back-to-top {
@@ -23,6 +16,7 @@
 body{
     background-color: #fff;
 }
+ 
 
 /*** Button ***/
 .btn {
@@ -331,6 +325,7 @@ body{
     color: #DDDDDD;
 }
 
+
 /*** Icon ***/
 .icon {
     padding: 15px;
@@ -342,85 +337,79 @@ body{
     border: 1px dashed var(--primary) !important;
 }
 
-/*** courasel ***/
 
-* {
-    box-sizing: border-box;
-  }
-  
-  /* Position the image container (needed to position the left and right arrows) */
-  .container {
+/*** About ***/
+.about-img img {
     position: relative;
-  }
-  
-  /* Hide the images by default */
-  .mySlides {
-    display: none;
-  }
-  
-  /* Add a pointer when hovering over the thumbnail images */
-  .cursor {
-    cursor: pointer;
-  }
-  
-  /* Next & previous buttons */
-  .prev,
-  .next {
-    cursor: pointer;
-    position: absolute;
-    top: 30%;
-    width: 45%;
-    padding: 16px;
-    margin-top: -50px;
-    color: white;
-    font-weight: bold;
-    font-size: 20px;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-    -webkit-user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
-  .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-    margin-right: 37%;
-  }
-  .prev{
-    right: 0;
-    border-radius: 3px 0 0 3px;
-    margin-right: 95%;
-  }
-  
-  /* On hover, add a black background color with a little bit see-through */
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
-  
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
-  
-  /* Six columns side by side */
-  .column {
-    float: left;
-    width: 16.66%;
-  }
-  
-  /* Add a transparency effect for thumnbail images */
-  .demo {
-    opacity: 0.6;
-  }
-  
-  .active,
-  .demo:hover {
-    opacity: 1;
-  }
+    z-index: 2;
+}
 
-  /*** Footer ***/
+.about-img::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: -50%;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    transform: skew(20deg);
+    z-index: 1;
+}
+
+
+/*** Category ***/
+.cat-item div {
+    background: #FFFFFF;
+    border: 1px dashed rgba(0, 185, 142, .3);
+    transition: .5s;
+}
+
+.cat-item:hover div {
+    background: var(--primary);
+    border-color: transparent;
+}
+
+.cat-item div * {
+    transition: .5s;
+}
+
+.cat-item:hover div * {
+    color: #FFFFFF !important;
+}
+
+
+/*** Property List ***/
+.nav-pills .nav-item .btn {
+    color: var(--dark);
+}
+
+.nav-pills .nav-item .btn:hover,
+.nav-pills .nav-item .btn.active {
+    color: #FFFFFF;
+}
+
+.property-item {
+    box-shadow: 0 0 30px rgba(0, 0, 0, .08);
+}
+
+.property-item img {
+    transition: .5s;
+}
+
+.property-item:hover img {
+    transform: scale(1.1);
+}
+
+.property-item .border-top {
+    border-top: 1px dashed rgba(0, 185, 142, .3) !important;
+}
+
+.property-item .border-end {
+    border-right: 1px dashed rgba(0, 185, 142, .3) !important;
+}
+
+
+/*** Footer ***/
 .footer .btn.btn-social {
     margin-right: 5px;
     width: 35px;
@@ -452,8 +441,8 @@ body{
 
 .footer .btn.btn-link::before {
     position: relative;
-    content: "\f105";
     font-family: "Font Awesome 5 Free";
+    content: "\f105";
     font-weight: 900;
     margin-right: 10px;
 }
@@ -488,134 +477,3 @@ body{
     padding-right: 0;
     border-right: none;
 }
-
-/** details **/
-.lsd_list {
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(235, 235, 235);
-    padding: 10px;
-    position: inherit;
-    width: 64%;
-    margin-top: 20px;
-    margin-left: -12px;
-
-}
-
-.list-inline-item{
-    background-color: rgb(235, 228, 228);
-    border: 1px solid rgb(235, 235, 235);
-    padding: 10px 20px;
-    position: relative;
-    border-radius: 10px;  
-    margin-top: 20px;  
-}
-
-#ch{
-    display: none;
-}
-
-#ch:checked ~ .content{
-    display: block;
-}
-
-#ch:checked ~ label{
-    display: none;
-}
-
-.content{
-    display: none;
-}
-
-label{
-    display: inline-block;
-    cursor: pointer;
-    color: #5D59AF;
-    margin-top: 12px;
-    
-}
-.card{
-    border: none;
-}
-
-.additional_details{
-    margin-top: 10px;
-    padding: 20px;
-    border: 1px solid rgb(235, 235, 235);
-    position: relative;
-    width: 63.3%;
-    margin-left: -12px;
-    display: block;
-}
-
-.map{
-    margin-top: 10px;
-    padding: 20px;
-    position: inherit;
-    width: 65%;
-    display: inline-table;
-}
-
-.more{
-    margin-top: 135px;
-    margin-left: 12px;
-}
-
-#input{
-    padding: 5px;
-}
-
-#h4{
-    margin-top: 30px;
-    padding-right: 10px;
-}
-
-input{
-    margin-bottom: 15px;
-}
-
-#map {
-    width: 100%;
-    height: 80vh;
-}
-
-.btn-reserve{
-    margin-bottom: 20px;
-    background-color: #5D59AF;
-    color: #fff;
-    border: none;
-    padding: 8px;
-    width: 120px;
-}
-
-.btn-visit{
-    background-color: #5D59AF;
-    color: #fff;
-    border: none;
-    padding: 8px;
-    width: 120px;
-}
-
-.visit{
-    width: 106.5%;
-}
-
-.input1{
-    padding: 5px;
-}
-
-button:hover{
-    background-color: #402950;
-}
-
-.property_list_widget li {
-    margin-bottom: 30px;
-    list-style: none;
-  }
-  .property_list_widget li img {
-    width: 80px;
-    height: auto;
-    float: left;
-    margin-right: 15px;
-  }
-
-

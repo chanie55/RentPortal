@@ -35,13 +35,13 @@ if(isset($_REQUEST['email']) && isset($_POST['password'])){
                         $_SESSION['user_ID'] = $row['user_ID'];
                         $_SESSION['email'] = $row['email'];
                         if ($row['userLevel_ID'] == 1 && $row['status'] == 1) {
-                            header("Location: adminDashboard.php");
+                            header("Location: adminDashboard.php?email=$email");
                             exit();
                         } else if ($row['userLevel_ID'] == 2 && $row['status'] == 1) {
-                            header("Location: ownerDashboard.php");
+                            header("Location: ownerDashboard.php?email=$email");
                             exit();
                         } else if ($row['userLevel_ID'] == 3 && $row['status'] == 1) {
-                            header("Location: seekerPage.php");
+                            header("Location: seekerDashboard.php?email=$email");
                             exit();
                         }
                         

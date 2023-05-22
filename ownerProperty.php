@@ -1,3 +1,9 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");
+?>
 
 
 <!doctype html>
@@ -179,6 +185,8 @@
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
                                                     <label for="validationCustom03">Address</label>
+                                                    <input type = "hidden" name = "lat" value = "<?php echo $_GET['lat']; ?>">
+                                                    <input type = "hidden" name = "lng" value = "<?php echo $_GET['lng']; ?>">
                                                     <a href = "viewmap.php"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
                                                     <div class = "invalid-feedback"> 
                                                         Please provide your property address
@@ -370,13 +378,13 @@
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -413,13 +421,13 @@
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -456,13 +464,13 @@
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -535,7 +543,7 @@
 												<div class="form-group row">
 													<label class="col-lg-2 col-form-label">Description</label>
 													<div class="col-lg-9">
-                                                        <textarea name = "description" id = "description" class="form-control" id="validationCustom07" required></textarea>	
+                                                        <textarea name = "description" id = "comdescription" class="form-control" id="validationCustom07" required></textarea>	
 													</div>
                                                     <div class = "invalid-feedback"> 
                                                             Please provide your property name
@@ -687,7 +695,7 @@
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -773,7 +781,7 @@
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -835,11 +843,22 @@
    <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery-3.3.1.min.js"></script>
    <script src = "richtext/jquery.richtext.js"></script>
+   <script src="js/ckeditor.js"></script>
   
-    <script> 
-        window.addEventListener("load", function () {
-            $("#description").richText();
-        });
+   <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#comdescription' ) )
+            .catch( error => {
+                console.error( error );
+            } );
     </script>
     
   <script type="text/javascript">
