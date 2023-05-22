@@ -80,21 +80,29 @@
         <!-- Property List Start -->
         <div class="container-xxl py-2">
             <h1 class="mb-3" style="margin-top: 30px; text-align: center;">Reservation</h1>
-                <form class="needs-validation" novalidate style="margin-left: 3%;">
+                <form method = "POST" action = "addReservation.php" class="needs-validation" novalidate style="margin-left: 3%;">
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
+
+                    <?php 
+                    include "dbconn.php";
+                  $email = $_REQUEST['email'];
+                  $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
+                  while($row=mysqli_fetch_array($query))
+								{
+							?>
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustom01">First name</label>
-                            <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
-                            <div class="valid-feedback">
-                                Looks good!  
-                            </div>
+                            <input type="text" class="form-control" name = "firstname" id="validationCustom01" value="<?php echo $row['firstname'];?>" required>
+                            <div class="invalid-feedback">
+                                Please provide your first name
+                                </div>
                         </div>
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustom02">Last name</label>
-                            <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
-                            <div class="valid-feedback">
-                                Looks good!
-                            </div>
+                            <input type="text" class="form-control" name = "lastname" id="validationCustom02" value="<?php echo $row['lastname'];?>" required>
+                            <div class="invalid-feedback">
+                                Please provide your last name
+                                </div>
                         </div>
                     </div>
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
@@ -104,16 +112,16 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                                 </div>
-                                <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                                <input type="text" class="form-control" name = "email" id="validationCustomUsername" value="<?php echo $row['email'];?>" aria-describedby="inputGroupPrepend" required>
                                 <div class="invalid-feedback">
-                                Please choose a username.
+                                Please provide email address.
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustom03">Contact</label>
-                            <input type="text" class="form-control" id="validationCustom03" required>
+                            <input type="text" class="form-control" name = "contact" value="<?php echo $row['contact'];?>" id="validationCustom03" required>
                             <div class="invalid-feedback">
                                 Please provide a valid contact.
                             </div>
@@ -122,7 +130,7 @@
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div class="col-md-3 mb-3 px-3">
                                 <label for="validationCustom05">Amount</label>
-                                <input type="text" class="form-control" id="validationCustom05" required>
+                                <input type="text" class="form-control" name = "amount" id="validationCustom05" required>
                             <div class="invalid-feedback">
                             Please provide a valid amount.
                             </div>
@@ -130,7 +138,7 @@
 
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustom04">Mode of Payment</label>
-                            <select class="custom-select" id="paymentSelect" required>
+                            <select class="custom-select" name = "mod" id="paymentSelect" required>
                                 <option selected disabled value="">Choose...</option>
                                 <option value="1">Gcash </option>
                                 <option value="2">Payment in Person </option>
@@ -151,16 +159,16 @@
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div id="payPerson" class="col-md-2 mb-3 paymentHide">
                                 <label for="datepicker">Day to Pay</label>
-                                    <?php if (isset($_GET['birthdate'])) { ?>
+                                    <?php if (isset($_GET['payday'])) { ?>
                                         <input required type = "date" 
-                                        name = "birthdate" 
+                                        name = "payday" 
                                         class="form-control" 
                                         width = "276"
                                         max = "2005-01-01"
                                         id="datepicker"><br>
                                     <?php } else { ?>
                                         <input required type = "date" 
-                                        name = "birthdate" 
+                                        name = "payday" 
                                         class="form-control"
                                         max = "2005-01-01"
                                         id="datepicker"><br>
@@ -173,7 +181,7 @@
 
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div class="col-md-3 mb-3 px-3">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
                             <label class="form-check-label" for="invalidCheck">
                                 Agree to <a href="https://www.facebook.com" target="_blank">terms</a> and <a href="" target="_blank">conditions</a> 
                             </label>
@@ -182,9 +190,10 @@
                             </div>
                         </div>
                     </div>
+                    <?php } ?>
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div class="mt-3">
-                            <button class="btn btn-primary" type="submit">Submit form</button>
+                            <button class="btn btn-primary" name = "submit-res" type="submit">Submit form</button>
                         </div>
                     </div>
                 </form>

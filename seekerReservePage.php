@@ -85,31 +85,22 @@
         <!-- Property List Start -->
         <div class="container-xxl py-1">
             <div class="container">
+
+                            <?php 	 
+                                include "dbconn.php";
+
+                                $email = $_REQUEST['email'];
+                                $query=mysqli_query($conn,"SELECT * FROM reservationdetails");
+                                    while($row=mysqli_fetch_array($query))
+                                    {
+                            ?>
                         <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php';">Reserve Now </button>
+                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php?email=<?php echo $email;?>';">Reserve Now </button>
                             <p>How to Reserve?</p>
-                            <h1 class="mb-3">Reservation Method</h1>
-                            <ul>
-                                <li><b>Reservation via Gcash</b></li>
-                                    <ol>
-                                        <li>On Gcash App, select "Send Money".</li>
-                                        <li>On the "Send Money to Gcash Account" section, select "Express Send".</li>
-                                        <li>Input the contact number - 09357859875 (Phm Mha Anarosa M.) and input the amount.</li>
-                                        <li>Review the registered name and amount for validation. Click send to continue.</li>
-                                        <li>Screenshot the gcash transaction.</li>
-                                        <li>On this page, click the "<b>Reserve Now</b>" button.</li>
-                                        <li>Fill out the reservation form and attach your receipt.</li>
-                                    </ol>
-                                    <br>
-                                <li><b>Reservation in Person</b></li>
-                                <ol>
-                                        <li>On this page, click the "<b>Reserve Now</b>" button.</li>
-                                        <li>Fill out your personal information on the reservation form.</li>
-                                        <li>Choose the "Reserve in person" as your payment method.</li>
-                                        <li>Choose the day for your payment.</li>
-                                    </ol>
-                            </ul>
+                            <h1 class="mb-3"><?php echo $row['title'];?></h1>
+                            <p> <?php echo $row['content'];?></p>
                         </div>
+                        <?php } ?>
             </div>
         </div>
         <!-- Property List End -->

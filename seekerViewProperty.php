@@ -139,6 +139,7 @@ include("dbconn.php");
                 <?php
                       $pid = $_REQUEST['property_ID']; 
                       $aid = $_REQUEST['addresscode'];
+                      $email = $_REQUEST['email'];
 						          $query=mysqli_query($conn,"SELECT * FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode WHERE property_ID = '$pid' AND addresscode = '$aid'");
 					          while($row=mysqli_fetch_array($query)) {
 					        ?>
@@ -298,7 +299,7 @@ include("dbconn.php");
                                 <div class="card-body">
                                     <h5 class="card-title">Reservation</h5>
                                     <p class="card-text">Want to secure your room/space? Reserve Now!</p>
-                                    <a href="seekerReservePage.php" class="btn btn-primary">Make Reservation</a>
+                                    <a href="seekerReservePage.php?email=<?php echo $email;?>" class="btn btn-primary">Make Reservation</a>
                                 </div>
                             </div> 
                         </div>

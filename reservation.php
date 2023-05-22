@@ -1,3 +1,30 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");
+if(!isset($_SESSION['email']))
+{
+	header("location:userLogin.php");
+} 
+
+    if(isset($_POST['submit-details'])) {
+        $title = $_POST['title'];
+        $content = $_POST['content'];
+        $userid = $_SESSION['user_ID'];
+        $email = $_SESSION['email'];
+
+        $query = "UPDATE reservationdetails SET title = '$title', content = '$content' WHERE user_ID = '$userid'";
+        $res = mysqli_query($conn, $query);
+
+        if ($res) {
+            header ("Location: reservation.php?email=$email&saved");
+        } else {
+            echo "failed";
+        }
+    }
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -14,6 +41,7 @@
             ?>
         </style>
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" type = "text/css" href="richtext/richtext.min.css">
 	    <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -82,6 +110,7 @@
 
             <!-- Page Content  -->
             <div id="content">
+                
 		
 		        <div class="top-navbar">
                     <nav class="navbar navbar-expand-lg">
@@ -89,88 +118,127 @@
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Reservation </a>
+					    <a class="navbar-brand" href="#"> Room </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="material-icons">more_vert</span>
                         </button>
+
                         <div class="collapse navbar-collapse d-lg-block d-xl-block d-sm-none d-md-none d-none" id="navbarSupportedContent">
-                        <ul class="nav navbar-nav ml-auto">   
-                                <li class="dropdown nav-item active">
-                                    <a href="#" class="nav-link" data-toggle="dropdown">
-                                        <span class="bx bx-user-circle"></span>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a href="#">Edit Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Logout</a>
-                                        </li>      
-                                    </ul>
-                                </li>
-                            </ul>
-                    </div>
+                        </div>
                         </div>
                     </nav>
 	            </div>
 			
 			
 			    <div class="main-content">
-                    <div class = "container" style = "margin-top: 10px"> 
-                        <div class = "row"> 
-                            <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
-                                <h3 class = "text-left"> Reservation </h3>
-                            </div>
-                        </div>
                     
+                    <div class = "container my-5"> 
+                        <nav class = "nav nav-tabs"> 
+                            <button type = "button" class = "nav-link active" data-toggle = "tab" data-target = "#tab-type"> 
+                                Reservation List 
+                            </button>
+                            <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-table"> 
+                                Reservation Details
+                            </button>
+                        </nav>
 
-                    <!--Table Display Reservation-->
-                    <div class="container-xl">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
+                        <div class = "tab-content">
+                            <div class = "tab-pane active show fade" id = "tab-type"> 
+                                <div class="containers">
+                                    <br>
+                                    <!--Table Display Reservation-->
+                                    <div class="container-xl">
+                                        <div class="table-wrapper">
+                                            <div class="table-title">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <div class="search-box">
+                                                            <i class="bx bxs-search-alt-2"></i>
+                                                            <input type="text" class="form-control" placeholder="Search&hellip;">
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                            <div class="col-sm-4">
-                                <div class="search-box">
-                                    <i class="bx bxs-search-alt-2"></i>
-                                <input type="text" class="form-control" placeholder="Search&hellip;">
+                                                <table class="table table-striped table-hover table-bordered" style = "font-size: 12px;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Date</th>
+                                                            <th>Full Name</th>
+                                                            <th>Email</th>
+                                                            <th>Contact</th>
+                                                            <th>Amount</th>
+                                                            <th>Mode of Payment</th>
+                                                            <th>Proof of Payment</th>
+                                                            <th>Status</th>
+                                                            <th>Date Approved</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>05-15-23</td>
+                                                            <td>Aj Lynn Jusayan</td>
+                                                            <td>iamajlynn@gmail.com</td>
+                                                            <td>09090909090</td>
+                                                            <td>2500</td>
+                                                            <td>Gcash</td>
+                                                            <td>image</td>
+                                                            <td><span class="badge bg-warning">Pending</span></td>
+                                                            <td>05-16-23</td>
+                                                        </tr>
+                                                    </tbody>    
+                                                </table>
+                                                <div class="clearfix">
+                                                    <ul class="pagination">
+                        
+                                                    </ul>
+                                                    <!-- <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class = "tab-pane fade" id = "tab-table">  
+                                <div class = "containers"> 
+                                <br> 
+                                    <div class = "row"> 
+                                        <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px">   
+                                            <legend> Update Reservation Details </legend>
+                                        </div>
+
+                                        <div class = "offset-md-1 col-md-10">
+                                            <form method = "POST" action = ""> 
+                                            <?php 
+                            $email = $_REQUEST['email'];
+                            $query = mysqli_query($conn, "SELECT * FROM reservationdetails JOIN user ON reservationdetails.user_ID = user.user_ID WHERE email = '$email'");
+                            while($row=mysqli_fetch_array($query))
+								{
+							?>
+                                                <div class = "form-group">
+                                                    <label> Title </label>
+                                                    <div class="col-lg-9">
+                                                        <input type = "text" name = "title" value = "<?php echo $row['title'];?>" class = "form-control"/>
+                                                    </div>
+                                                </div>
+
+                                                <div class = "form-group"> 
+                                                <label class="col-lg-2 col-form-label">Content</label>
+													<div class="col-lg-9">
+                                                        <textarea name = "content" id = "rescontent" value = "<?php echo $row['content'];?>" class="form-control" id="validationCustom07"></textarea>	
+													</div>
+                                                </div>
+                                                <?php } ?>
+                                                <input type = "submit" name = "submit-details" class = "btn btn-info" value = "Save"/>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <table class="table table-striped table-hover table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Category</th>
-                                    <th>Room</th>
-                                    <th>Name</th>
-                                    <th>Date</th>
-                                    <th>Contact Number</th>
-                                    <th>Proof of Payment</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                        <tbody>
-                       
-                                        </td>
-                                    </tr>
-                        </tbody>    
-                        </table>
-                        <div class="clearfix">
-                
-                        <ul class="pagination">
-                        
-                        </ul>
-                        <!-- <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div> -->
-                    </div>
-                </div>
-            </div>
-            </div>
-                        </div>
-					
+</div>
 				<footer class="footer">
                     <div class="container-fluid">
 				        <div class="row">
@@ -185,7 +253,7 @@
 					
 			</div>
         </div>
-    </div>
+
 
 
     <!-- Optional JavaScript -->
@@ -194,6 +262,7 @@
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery-3.3.1.min.js"></script>
+   <script src="js/ckeditor.js"></script>
   
   
   <script type="text/javascript">
@@ -209,5 +278,14 @@
 			
         });      
    </script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#rescontent' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
   </body>
 </html>
