@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?php 
 ini_set('session.cache_limiter','public');
 session_cache_limiter(false);
@@ -13,7 +11,6 @@ include("dbconn.php");
     
 ?>
 
->>>>>>> c5fa2d1c34158e38b0f47919612231b5fa9fe9b8
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,13 +31,6 @@ include("dbconn.php");
 <div class="col-md-12">  
     <div class="col-md-4">      
         <div class="portlet light profile-sidebar-portlet bordered">
-<<<<<<< HEAD
-            <div class="profile-userpic" style="margin-left: 105px;">
-                <img src="images/user1.png"> </div>
-            <div class="profile-usertitle">
-                <div class="profile-usertitle-name"> James Aldrino </div>
-                <div class="profile-usertitle-job"> james.aldrin0@gmail.com </div>
-=======
             <div class="profile-userpic">
 
             <?php 
@@ -53,7 +43,6 @@ include("dbconn.php");
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name"> <?php echo $row['fullName'];?> </div>
                 <div class="profile-usertitle-job"> <?php echo $row['email'];?> </div>
->>>>>>> c5fa2d1c34158e38b0f47919612231b5fa9fe9b8
             </div>
             <div class="profile-userbuttons">
                 <button type="button" class="btn btn-info  btn-sm" onclick="window.location.href='index.php';">Logout</button>
