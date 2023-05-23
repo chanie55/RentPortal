@@ -11,8 +11,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 	if(isset($_REQUEST['pwdrst'])) {
 		$email = $_REQUEST['email'];
 		$check_email = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email");
-		$res = mysqli_num_rows($check_email);
-			if ($res > 0) {
+			if ($check_email) {
 				$message = '<div>
 				<p><b> Hello! </b> </p>
 				<p> You are receiving this email because we received a password reset

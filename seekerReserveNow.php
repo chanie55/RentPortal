@@ -109,9 +109,6 @@
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustomUsername">Email</label>
                             <div class="input-group">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                </div>
                                 <input type="text" class="form-control" name = "email" id="validationCustomUsername" value="<?php echo $row['email'];?>" aria-describedby="inputGroupPrepend" required>
                                 <div class="invalid-feedback">
                                 Please provide email address.
@@ -164,13 +161,13 @@
                                         name = "payday" 
                                         class="form-control" 
                                         width = "276"
-                                        max = "2005-01-01"
+                                        min = "2023-01-01"
                                         id="datepicker"><br>
                                     <?php } else { ?>
                                         <input required type = "date" 
                                         name = "payday" 
                                         class="form-control"
-                                        max = "2005-01-01"
+                                        min = "2023-01-01"
                                         id="datepicker"><br>
                                     <?php } ?>
                                 <div class = "invalid-feedback"> 

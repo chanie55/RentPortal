@@ -108,7 +108,7 @@ $email = $_REQUEST['email'];
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="seekerUserProfile.php">Edit Profile</a>
+                                            <a href="seekerUserProfile.php?email=<?php echo $_REQUEST['email']?>">Edit Profile</a>
                                         </li>
                                         <li>
                                             <a href="index.php">Logout</a>

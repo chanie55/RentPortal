@@ -7,7 +7,7 @@ include "dbconn.php";
         $cpwd = md5($_REQUEST['cpwd']);
             if ($pwd == $cpwd) {
 
-                $sql = "UPDATE TenantAccount SET password = '$pwd' WHERE email = '$email'";
+                $sql = "UPDATE user SET password = '$pwd' WHERE email = '$email'";
                 $reset_pwd = mysqli_query($conn, $sql);
 
                     if ($reset_pwd > 0) {
@@ -24,7 +24,7 @@ include "dbconn.php";
 
     if($_GET['secret']) {
         $email = base64_decode($_GET['secret']);
-        $check_details = mysqli_query($conn, "SELECT email FROM TenantAccount WHERE email = '$email'");
+        $check_details = mysqli_query($conn, "SELECT email FROM user WHERE email = '$email'");
         $res = mysqli_num_rows($check_details);
             if($res > 0) { ?>
 

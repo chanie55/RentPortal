@@ -14,6 +14,7 @@ include "dbconn.php";
 
 
     if (isset($_POST['submit-property'])) {
+        $email = $_REQUEST['email'];
         $name = $_POST['propertyname'];
         $type = $_POST['property'];
         $description = $_POST['description'];
@@ -74,7 +75,7 @@ include "dbconn.php";
                         header("Location: ownerProperty.php?error=$message");
                     }
             }   
-            header ("Location: ownerProperty.php?saved");
+            header ("Location: ownerProperty.php?email=$email");
             } else {
             echo "failed";
             }

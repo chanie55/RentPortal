@@ -40,7 +40,7 @@ include("dbconn.php");
 
                 <ul class="list-unstyled components">
 			        <li>
-                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="ownerDashboard.php?email=<?php echo $_REQUEST['email']; ?>" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -48,27 +48,27 @@ include("dbconn.php");
 				    </div>
 			
                     <li class="dropdown">
-                        <a href = "ownerProperty.php">
+                        <a href = "ownerProperty.php?email=<?php echo $_REQUEST['email']; ?>">
 					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
                     </li>
                 
                     <li>
-                        <a href = "ownerVisit.php">
+                        <a href = "ownerVisit.php?email=<?php echo $_REQUEST['email']; ?>">
 					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
                     <li>
-                    <a href = "reservation.php">
+                    <a href = "reservation.php?email=<?php echo $_REQUEST['email']; ?>">
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
                     <li>
-                    <a href = "FAQ.php">
+                    <a href = "FAQ.php?email=<?php echo $_REQUEST['email']; ?>">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
                     </li>
 
                     <li class="dropdown">
-                        <a href = "ownerAboutUs.php">
+                        <a href = "ownerAboutUs.php?email=<?php echo $_REQUEST['email']; ?>">
 					    <i class="bx bxs-edit-location"></i><span>About Us</span></a>
                     </li>
 
@@ -187,7 +187,7 @@ include("dbconn.php");
                                                     <label for="validationCustom03">Address</label>
                                                     <input type = "hidden" name = "lat" value = "<?php echo $_GET['lat']; ?>">
                                                     <input type = "hidden" name = "lng" value = "<?php echo $_GET['lng']; ?>">
-                                                    <a href = "viewmap.php"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
+                                                    <a href = "viewmap.php?email=<?php echo $_REQUEST['email']?>"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
                                                     <div class = "invalid-feedback"> 
                                                         Please provide your property address
                                                     </div>

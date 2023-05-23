@@ -257,7 +257,7 @@ $email = $_REQUEST['email'];
                             <div class="card" style="min-height: 485px">
                                 <div class="card-header card-header-text">
                                     <h4 class="card-title">Pending Owner Registration</h4>
-                                    <a href = "manageOwner.php"> <p class="category">See Detailed Information</p> </a>
+                                    <a href = "manageOwner.php?email=<?php echo $_REQUEST['email']?>"> <p class="category">See Detailed Information</p> </a>
                                 </div>
                                 <div class="card-content table-responsive">
                                     <table class="table table-hover">
