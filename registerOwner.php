@@ -261,7 +261,7 @@
                                 <a href="login.php">
                                     Already have an account?
                                 </a>
-                                <a href="#" style = "float: right;">
+                                <a href="forgotpassword.php" style = "float: right;">
                                     Forgot Password
                                 </a>
                         </div>

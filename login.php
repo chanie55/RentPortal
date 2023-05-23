@@ -70,7 +70,7 @@
                     </div>
 
                     <div>
-                        <a href= "forgotpw" class="forgotpw" > Forgot Password? </a>
+                        <a href= "resetpw.php" class="forgotpw" > Forgot Password? </a>
                         <br>
                         <button type="submit" name = "login-submit">Login</button>
                     </div>
