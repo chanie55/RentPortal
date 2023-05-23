@@ -102,10 +102,10 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Edit Profile</a>
+                                            <a href="seekerUserProfile.php">Edit Profile</a>
                                         </li>
                                         <li>
-                                            <a href="#">Logout</a>
+                                            <a href="index.php">Logout</a>
                                         </li>      
                                     </ul>
                                 </li>
@@ -128,8 +128,31 @@
                               <div class="d-flex align-items-center">
                                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bx bxs-calendar-exclamation"></i></div>
                                  <div class="ps-3">
-                                    <h6>145</h6>
-                                    <span class="text-success small pt-1 fw-bold">12</span> <span class="text-muted small pt-2 ps-1">Added</span>
+                                    <?php
+                                        include "dbconn.php";
+
+                                        $res_query = "SELECT * FROM reservation";
+                                        $res_query_num = mysqli_query($conn, $res_query);
+
+                                            if ($res_total = mysqli_num_rows($res_query_num)) {
+                                                echo '<h6> '.$res_total.' </h6>';
+                                            } else {
+                                                echo '<h3 class = "card-title"> No Data </h3>';
+                                            }
+                                    ?>
+                                    <?php
+                                        include "dbconn.php";
+
+                                        $res_query = "SELECT * FROM reservation";
+                                        $res_query_num = mysqli_query($conn, $res_query);
+
+                                            if ($res_total = mysqli_num_rows($res_query_num)) {
+                                                echo '<span class="text-success small pt-1 fw-bold"> '.$res_total.' </span>';
+                                            } else {
+                                                echo '<h3 class = "card-title"> No Data </h3>';
+                                            }
+                                    ?>
+                                     <span class="text-muted small pt-2 ps-1">Added</span>
                                  </div>
                               </div>
                            </div>
@@ -189,55 +212,51 @@
                               </ul>
                            </div>
                            <div class="card-body">
-                              <h5 class="card-title">Reservations <span>| See All</span></h5>
-                              <table class="table table-borderless datatable">
-                                 <thead>
-                                    <tr>
-                                       <th scope="col">User ID</th>
-                                       <th scope="col">Date</th>
-                                       <th scope="col">Name</th>
-                                       <th scope="col">Amount</th>
-                                       <th scope="col">Status</th>
+                              <h5 class="card-title">Reservations | <a href = "reservation.php"><span>See All</span></a></h5>
+                              <table class="table table-hover">
+                                        <thead class="text-primary">
+                                            <tr>
+                                                <th>User_ID</th>
+                                                <th>Date</th>
+                                                <th>Name</th>
+                                                <th>Amount</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tbody>
+                        <?php
+                            include "dbconn.php";
+                            
+                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                $page = $_GET['page'];
+                            } else {
+                                $page = 1;
+                            }
+
+                            $limit = 6;
+                            $offset = ($page - 1) * $limit;
+
+                            $previous = $page - 1;
+                            $next = $page + 1;
+
+                            $sql = "SELECT *, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                            $result = mysqli_query($conn, $sql);
+
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                    <tr class = "data-row"> 
+                                        <td> <?php echo $row['userInfo_ID'] ?> </td>
+                                        <td> <?php echo $row['date'] ?> </td>
+                                        <td> <?php echo $row['fullName'] ?> </td>
+                                        <td> <?php echo $row['amount'] ?> </td>
+                                        <td><span class="badge bg-success">Approved</span></td>
                                     </tr>
-                                 </thead>
-                                 <tbody>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2457</a></th>
-                                       <td>Brandon Jacob</td>
-                                       <td><a href="#" class="text-primary">At praesentium minu</a></td>
-                                       <td>$64</td>
-                                       <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2147</a></th>
-                                       <td>Bridie Kessler</td>
-                                       <td><a href="#" class="text-primary">Blanditiis dolor omnis similique</a></td>
-                                       <td>$47</td>
-                                       <td><span class="badge bg-warning">Pending</span></td>
-                                    </tr>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2049</a></th>
-                                       <td>Ashleigh Langosh</td>
-                                       <td><a href="#" class="text-primary">At recusandae consectetur</a></td>
-                                       <td>$147</td>
-                                       <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2644</a></th>
-                                       <td>Angus Grady</td>
-                                       <td><a href="#" class="text-primar">Ut voluptatem id earum et</a></td>
-                                       <td>$67</td>
-                                       <td><span class="badge bg-danger">Rejected</span></td>
-                                    </tr>
-                                    <tr>
-                                       <th scope="row"><a href="#">#2644</a></th>
-                                       <td>Raheem Lehner</td>
-                                       <td><a href="#" class="text-primary">Sunt similique distinctio</a></td>
-                                       <td>$165</td>
-                                       <td><span class="badge bg-success">Approved</span></td>
-                                    </tr>
-                                 </tbody>
-                              </table>
+                                <?php
+                            }
+                        ?>      
+                                        </tbody>
+                                    </table>
                            </div>
                         </div>
                      </div>

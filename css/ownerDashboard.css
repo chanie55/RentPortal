@@ -82,7 +82,6 @@ a:focus {
 .wrapper {
 	position: relative;
     width:100%;
-	overflow:auto;
 }
 
 

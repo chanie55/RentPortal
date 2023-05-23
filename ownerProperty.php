@@ -378,13 +378,13 @@ include("dbconn.php");
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -421,13 +421,13 @@ include("dbconn.php");
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -464,13 +464,13 @@ include("dbconn.php");
                                                         <span><label class="form-check-label" for="gridRadios2">
                                                             Others, please specify
                                                             <?php if (isset($_GET['totalrooms'])) { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -543,7 +543,7 @@ include("dbconn.php");
 												<div class="form-group row">
 													<label class="col-lg-2 col-form-label">Description</label>
 													<div class="col-lg-9">
-                                                        <textarea name = "description" id = "description" class="form-control" id="validationCustom07" required></textarea>	
+                                                        <textarea name = "description" id = "comdescription" class="form-control" id="validationCustom07" required></textarea>	
 													</div>
                                                     <div class = "invalid-feedback"> 
                                                             Please provide your property name
@@ -695,7 +695,7 @@ include("dbconn.php");
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -781,7 +781,7 @@ include("dbconn.php");
                                                                 id="validationCustom06"
                                                                 value = "<?php echo $_GET['totalrooms']; ?>"><br>
                                                             <?php } else { ?>
-                                                                <input required type = "text" 
+                                                                <input type = "text" 
                                                                 name = "others" 
                                                                 class="form-control"
                                                                 id="validationCustom06"><br>
@@ -843,11 +843,22 @@ include("dbconn.php");
    <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery-3.3.1.min.js"></script>
    <script src = "richtext/jquery.richtext.js"></script>
+   <script src="js/ckeditor.js"></script>
   
-    <script> 
-        window.addEventListener("load", function () {
-            $("#description").richText();
-        });
+   <script>
+        ClassicEditor
+            .create( document.querySelector( '#description' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#comdescription' ) )
+            .catch( error => {
+                console.error( error );
+            } );
     </script>
     
   <script type="text/javascript">

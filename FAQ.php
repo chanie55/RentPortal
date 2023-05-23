@@ -102,10 +102,10 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">Edit Profile</a>
+                                            <a href="seekerUserProfile.php">Edit Profile</a>
                                         </li>
                                         <li>
-                                            <a href="#">Logout</a>
+                                            <a href="index.php">Logout</a>
                                         </li>      
                                     </ul>
                                 </li>
@@ -294,6 +294,15 @@
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery-3.3.1.min.js"></script>
+   <script src="js/ckeditor.js"></script>
+  
+   <script>
+        ClassicEditor
+            .create( document.querySelector( '#answer' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
   
   
   <script type="text/javascript">

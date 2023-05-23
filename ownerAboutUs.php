@@ -114,7 +114,7 @@
                     <div class = "container" style = "margin-top: 10px"> 
                         <div class = "row"> 
                             <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
-                                <h3 class = "text-left"> Add About Us </h3>
+                                <h3 class = "text-left"> Update About Us </h3>
                             </div>
 
                             <div class = "offset-md-1 col-md-10">
@@ -126,7 +126,7 @@
 
                                     <div class = "form-group"> 
                                         <label> Content </label>
-                                        <textarea name = "content" id = "answer" class = "form-control" required> </textarea>
+                                        <textarea name = "content" id = "rescontent" class = "form-control" required> </textarea>
                                     </div>
 
                                     <input type = "submit" name = "submit-about" class = "btn btn-info" value = "Save"/>
@@ -267,6 +267,7 @@
    <script src="js/popper.min.js"></script>
    <script src="js/bootstrap.min.js"></script>
    <script src="js/jquery-3.3.1.min.js"></script>
+   <script src="js/ckeditor.js"></script>
   
   
   <script type="text/javascript">
@@ -290,7 +291,15 @@
             allProgress.forEach(item => {
                 item.style.setProperty('--value', item.dataset.value)
             });
-   </script>  
+   </script> 
+   
+   <script>
+        ClassicEditor
+            .create( document.querySelector( '#rescontent' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
   </body>
 </html>
 

@@ -176,24 +176,86 @@ if(!isset($_SESSION['email']))
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>05-15-23</td>
-                                                            <td>Aj Lynn Jusayan</td>
-                                                            <td>iamajlynn@gmail.com</td>
-                                                            <td>09090909090</td>
-                                                            <td>2500</td>
-                                                            <td>Gcash</td>
-                                                            <td>image</td>
-                                                            <td><span class="badge bg-warning">Pending</span></td>
-                                                            <td>05-16-23</td>
-                                                        </tr>
+                                                    <?php
+                                                        include "dbconn.php";
+                            
+                                                            if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                                                $page = $_GET['page'];
+                                                            } else {
+                                                                $page = 1;
+                                                            }
+
+                                                            $limit = 6;
+                                                            $offset = ($page - 1) * $limit;
+
+                                                            $previous = $page - 1;
+                                                            $next = $page + 1;
+
+                                                            $sql = "SELECT *, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                                                            $result = mysqli_query($conn, $sql);
+
+                                                            while ($row = mysqli_fetch_assoc($result)) {
+                                                                ?>
+                                                                    <tr class = "data-row"> 
+                                                                        <td> <?php echo $row['date'] ?> </td>
+                                                                        <td> <?php echo $row['fullName'] ?> </td>
+                                                                        <td> <?php echo $row['email'] ?> </td>
+                                                                        <td> <?php echo $row['contact'] ?> </td>
+                                                                        <td> <?php echo $row['amount'] ?> </td> 
+                                                                        <td> <?php echo $row['mop'] ?> </td>
+                                                                        <td> image </td>
+                                                                        <td> status </td>
+                                                                        <td> date </td>
+                                                                    </tr>
+                                                                <?php
+                                                            }
+                                                    ?> 
                                                     </tbody>    
                                                 </table>
                                                 <div class="clearfix">
+                
                                                     <ul class="pagination">
-                        
+                                                        <?php
+            
+                                                            $query =  "SELECT COUNT(*) FROM reservation";
+                                                            $result_count = mysqli_query($conn, $query);
+                                                            $records = mysqli_fetch_row($result_count);
+                                                            $total_records = $records[0];
+
+                                                            $total_pages = ceil($total_records / $limit);
+                                                            $link = "";
+
+                                                        ?>
+        
+
+                                                        <?php
+                                                            if ($page >= 2) {
+                                                                echo "<li class = 'page-item'>
+                                                                <a class = 'page-link' href = 'reservation.php?page=".($page-1)."'> 
+                                                                <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                                                            }
+
+                                                            for ($counter = 1; $counter <= $total_pages; $counter++){
+                                                                if ($counter == $page) {
+                                                                    $link .= "<li class = 'page-item active'>
+                                                                    <a class = 'page-link' href= 'reservation?page="
+                                                                    .$counter."'>".$counter." </a></li>";
+                                                                } else {
+                                                                    $link .= "<li class = 'page-item'>
+                                                                    <a class = 'page-link' href='reservation.php?page=".$counter."'> ".$counter." </a> </li>";
+                                                                }
+                                                            };
+
+                                                            echo $link;
+
+                                                            if($page < $total_pages) {
+                                                                echo "<li class = 'page-item'>
+                                                                <a class = 'page-link' href='reservation.php?page=".($page+1)."'>
+                                                                <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                                                            }
+                                                        ?>
                                                     </ul>
-                                                    <!-- <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div> -->
+                                                    <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -212,11 +274,11 @@ if(!isset($_SESSION['email']))
                                         <div class = "offset-md-1 col-md-10">
                                             <form method = "POST" action = ""> 
                                             <?php 
-                            $email = $_REQUEST['email'];
-                            $query = mysqli_query($conn, "SELECT * FROM reservationdetails JOIN user ON reservationdetails.user_ID = user.user_ID WHERE email = '$email'");
-                            while($row=mysqli_fetch_array($query))
-								{
-							?>
+                                                $email = $_REQUEST['email'];
+                                                $query = mysqli_query($conn, "SELECT * FROM reservationdetails JOIN user ON reservationdetails.user_ID = user.user_ID WHERE email = '$email'");
+                                                while($row=mysqli_fetch_array($query))
+								                {
+							                    ?>
                                                 <div class = "form-group">
                                                     <label> Title </label>
                                                     <div class="col-lg-9">
@@ -227,7 +289,7 @@ if(!isset($_SESSION['email']))
                                                 <div class = "form-group"> 
                                                 <label class="col-lg-2 col-form-label">Content</label>
 													<div class="col-lg-9">
-                                                        <textarea name = "content" id = "rescontent" value = "<?php echo $row['content'];?>" class="form-control" id="validationCustom07"></textarea>	
+                                                        <textarea name = "content" id = "rescontent" class="form-control" value = "<?php echo $row['title'];?>"></textarea>	
 													</div>
                                                 </div>
                                                 <?php } ?>
