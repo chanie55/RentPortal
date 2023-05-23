@@ -1,3 +1,9 @@
+<?php
+session_start();
+include "dbconn.php"; 
+$email = $_REQUEST['email'];
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -32,7 +38,7 @@
 
                 <ul class="list-unstyled components">
 			        <li  class="active">
-                        <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="adminDashboard.php?email=<?php echo $_REQUEST['email']; ?>" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -45,7 +51,7 @@
                     
                         <ul class="collapse list-unstyled menu" id="homeSubmenu1" style = "margin-left: 10px;">
                             <li>
-                                <a href="manageAdmin.php">Admin</a>
+                                <a href="manageAdmin.php?email=<?php echo $_REQUEST['email']; ?>">Admin</a>
                             </li>
                             <li>
                                 <a href="manageOwner.php">Owner</a>
@@ -59,10 +65,10 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
                             <li>
-                                <a href="propertyCategory.php">Category</a>
+                                <a href="propertyCategory.php?email=<?php echo $_REQUEST['email']; ?>">Category</a>
                             </li>
                             <li>
-                                <a href="propertyMap.php">Map</a>
+                                <a href="propertyMap.php?email=<?php echo $_REQUEST['email']; ?>">Map</a>
                             </li>
                         </ul>
                     </li>
@@ -73,16 +79,16 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
-                                <a href="userList.php">User List</a>
+                                <a href="userList.php?email=<?php echo $_REQUEST['email']; ?>">User List</a>
                             </li>
                             <li>
-                                <a href="propertyList.php">Property List</a>
+                                <a href="propertyList.php?email=<?php echo $_REQUEST['email']; ?>">Property List</a>
                             </li>
                             <li>
-                                <a href="visitRecord.php">Visit</a>
+                                <a href="visitRecord.php?email=<?php echo $_REQUEST['email']; ?>">Visit</a>
                             </li>
                             <li>
-                                <a href="reservationRecord.php">Reservation</a>
+                                <a href="reservationRecord.php?email=<?php echo $_REQUEST['email']; ?>">Reservation</a>
                             </li>
                         </ul>
                     </li>

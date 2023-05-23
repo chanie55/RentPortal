@@ -1,3 +1,9 @@
+<?php
+session_start();
+include "dbconn.php"; 
+$email = $_REQUEST['email'];
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -31,7 +37,7 @@
 
                 <ul class="list-unstyled components">
 			        <li  class="active">
-                        <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="adminDashboard.php?email=<?php echo $_REQUEST['email']; ?>" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -44,10 +50,10 @@
                     
                         <ul class="collapse list-unstyled menu" id="homeSubmenu1" style = "margin-left: 10px;">
                             <li>
-                                <a href="manageAdmin.php">Admin</a>
+                                <a href="manageAdmin.php?email=<?php echo $_REQUEST['email']; ?>">Admin</a>
                             </li>
                             <li>
-                                <a href="manageOwner.php">Owner</a>
+                                <a href="manageOwner.php?email=<?php echo $_REQUEST['email']; ?>">Owner</a>
                             </li>
                         </ul>
                     </li>
@@ -58,10 +64,10 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
                             <li>
-                                <a href="propertyCategory.php">Category</a>
+                                <a href="propertyCategory.php?email=<?php echo $_REQUEST['email']; ?>">Category</a>
                             </li>
                             <li>
-                                <a href="propertyMap.php">Map</a>
+                                <a href="propertyMap.php?email=<?php echo $_REQUEST['email']; ?>">Map</a>
                             </li>
                         </ul>
                     </li>
@@ -72,16 +78,16 @@
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
-                                <a href="userList.php">User List</a>
+                                <a href="userList.php?email=<?php echo $_REQUEST['email']; ?>">User List</a>
                             </li>
                             <li>
-                                <a href="propertyList.php">Property List</a>
+                                <a href="propertyList.php?email=<?php echo $_REQUEST['email']; ?>">Property List</a>
                             </li>
                             <li>
-                                <a href="visitRecord.php">Visit</a>
+                                <a href="visitRecord.php?email=<?php echo $_REQUEST['email']; ?>">Visit</a>
                             </li>
                             <li>
-                                <a href="reservationRecord.php">Reservation</a>
+                                <a href="reservationRecord.php?email=<?php echo $_REQUEST['email']; ?>">Reservation</a>
                             </li>
                         </ul>
                     </li>
@@ -169,7 +175,7 @@
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.address, user.email, images.image_url, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id AND user.userLevel_ID = 2 JOIN images ON user.user_ID = images.user_ID LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.address, user.email, user.status, images.image_url, user.userInfo_ID, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id AND user.userLevel_ID = 2 JOIN images ON user.user_ID = images.user_ID WHERE status = 0 LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -184,14 +190,59 @@
                                         <td> 
                                         <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
                                         <td>
-                                            <a href="#" class="edit" title="Edit"><i class="bx bxs-user-check"></i></a>
-                                            <a href="#" class="delete" title="Delete"><i class="bx bxs-user-x"></i></a>
+                                            <!-- Button trigger modal -->
+                                            <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm"><i class="bx bxs-user-check"></i></button></a>
+                                            <a href="#" class="delete" title="Delete"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#decline"><i class="bx bxs-user-x"></button></i></a>
                                         </td>
                                     </tr>
-                                <?php
+                               
+                        
+                        <!-- Confirm Modal -->
+                        <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to accept this user?</p>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href=""><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
+                                        <a href="sendEmail.php?email=<?php echo $_REQUEST['email']; ?>&owneremail=<?php echo $row['email'];?>&status=<?php echo $row['status'];?>"><button type="submit" class="btn btn-primary">Confirm</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Decline Modal -->
+                        <div class="modal fade" id="decline" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to decline this user?</p>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <a href=""><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
+                                        <a href="declineEmail.php?email=<?php echo $_REQUEST['email']; ?>&owneremail=<?php echo $row['email'];?>&status=<?php echo $row['status'];?>"><button type="submit" class="btn btn-primary">Confirm</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
                             }
                         ?>   
-                        
                         
                         </tbody>    
                         </table>
@@ -200,7 +251,7 @@
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2";
+                            $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2 AND status = 0";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];

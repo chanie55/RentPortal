@@ -18,12 +18,12 @@
         $message = '<div>
 				<p><b> Hello! </b> </p>
 				<p> This is Rent.in Portal. We are here to inform you that your registration request to our portal has
-                been accepted. </p>
+                been denied. Please make sure to fill out the necessary requirements. </p>
 				<br>
 				
 				<br>
-				<p>You may now login your account. God bless and Have a Great Day! </p>
-                <a href="https://localhost/RentPortal/login.php"> Login Here </a>
+				<p>Try registering again. </p>
+                <a href="https://localhost/RentPortal/registerOwner.php"> Register Here </a>
 				</div>';
 
         $mail->isSMTP();
@@ -44,7 +44,7 @@
 
         $mail->send();
 
-        echo " <script> alert ('Email Confirmation has been sent'); document.location.href = 'ownerstatus.php?email=$email&owneremail=$owneremail&status=1'; </script>";
+        echo " <script> alert ('User registration has been denied'); document.location.href = 'ownerstatus.php?email=$email&owneremail=$owneremail&status=3'; </script>";
         
     }
 
