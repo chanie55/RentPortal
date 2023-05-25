@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2023 at 08:48 AM
+-- Generation Time: May 23, 2023 at 11:31 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -41,44 +41,6 @@ CREATE TABLE `aboutus` (
 INSERT INTO `aboutus` (`id`, `title`, `content`, `user`) VALUES
 (1, 'Sample', ' Some Content', ''),
 (2, 'Test', ' Test', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `baths`
---
-
-CREATE TABLE `baths` (
-  `id` int(11) NOT NULL,
-  `baths` varchar(99) NOT NULL,
-  `bath_Type` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `baths`
---
-
-INSERT INTO `baths` (`id`, `baths`, `bath_Type`) VALUES
-(1, '', 'common');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bed`
---
-
-CREATE TABLE `bed` (
-  `bed_ID` int(11) NOT NULL,
-  `bed_Type` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `bed`
---
-
-INSERT INTO `bed` (`bed_ID`, `bed_Type`) VALUES
-(1, 'single'),
-(2, '2 per room');
 
 -- --------------------------------------------------------
 
@@ -133,7 +95,8 @@ INSERT INTO `images` (`id`, `image_url`, `type`, `user_ID`) VALUES
 (19, 'PROPIMG-646053ea68ae54.39883327.png', 'Valid ID', 'UID_0065'),
 (26, 'IMG-646301833dd845.51731827.jpg', 'Business Permit', 'UID_0066'),
 (27, 'ID-646301836c0467.53521476.jpg', 'Valid ID', 'UID_0066'),
-(28, 'ID-646301838454c7.66889883.jpg', 'Valid ID', 'UID_0066');
+(28, 'ID-646301838454c7.66889883.jpg', 'Valid ID', 'UID_0066'),
+(29, 'IMG-6466d1751a39f3.81879592.jpg', 'Business Permit', 'UID_0067');
 
 -- --------------------------------------------------------
 
@@ -153,25 +116,6 @@ CREATE TABLE `img` (
 INSERT INTO `img` (`id`, `img`) VALUES
 (1, 'PROPIMG-64601e8fccd7d1.96669442.jpg'),
 (2, 'PROPIMG-64601e8fdd0260.42730592.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kitchen`
---
-
-CREATE TABLE `kitchen` (
-  `id` int(11) NOT NULL,
-  `kitchen` varchar(99) NOT NULL,
-  `kitchen_Type` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `kitchen`
---
-
-INSERT INTO `kitchen` (`id`, `kitchen`, `kitchen_Type`) VALUES
-(32, '', 'Not Provided');
 
 -- --------------------------------------------------------
 
@@ -206,7 +150,17 @@ CREATE TABLE `property` (
   `propertytype` varchar(99) NOT NULL,
   `propertyaddress` varchar(99) NOT NULL,
   `description` text NOT NULL,
-  `availability` varchar(99) NOT NULL,
+  `roomtype` varchar(99) NOT NULL,
+  `totalrooms` int(11) NOT NULL,
+  `availablerooms` int(11) NOT NULL,
+  `monthlyrate` int(11) NOT NULL,
+  `dailyrate` int(11) NOT NULL,
+  `bed` int(11) NOT NULL,
+  `kitchen` varchar(99) NOT NULL,
+  `bathroom` varchar(99) NOT NULL,
+  `aircon` varchar(99) NOT NULL,
+  `dimension` int(11) NOT NULL,
+  `date_created` date NOT NULL DEFAULT current_timestamp(),
   `user_ID` varchar(99) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -214,20 +168,13 @@ CREATE TABLE `property` (
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`id`, `property_ID`, `propertyname`, `propertytype`, `propertyaddress`, `description`, `availability`, `user_ID`) VALUES
-(1, '', 'test', 'Boarding House', '', 'test', '', ''),
-(4, 'PROP_22341', 'hello again', 'House Rent', '', 'pls mag save kana', '', ''),
-(5, 'PROP_95353', 'Khytryn BH', 'Boarding House', '', 'some text here', 'available', ''),
-(6, 'PROP_23617', 'With image na po', 'House Rent', '', 'magana ni', 'full', ''),
-(7, 'PROP_35320', 'Liwat', 'Commercial Building', '', 'please gana na', 'full', ''),
-(8, 'PROP_98837', 'test', 'Apartment', '', 'gana na ba', 'available', ''),
-(9, 'PROP_30587', 'HOYYYY', 'Apartment', '', 'pleasee', 'full', ''),
-(10, 'PROP_83167', 'adtu db', 'Boarding House', '', 'adtu na database', 'full', ''),
-(11, 'PROP_23521', 'AGain', 'House Rent', '', 'akkkkkk', 'available', ''),
-(12, 'PROP_85001', 'fight', 'Commercial Building', '', 'fighttting hajii', 'available', ''),
-(13, 'PROP_79140', 'ta', 'Apartment', '', 'kk', 'full', ''),
-(14, 'PROP_72669', 'f', 'House Rent', '', 'ff', 'full', ''),
-(15, 'PROP_14665', 'bolbagan', 'Apartment', '', 'to my youth', 'full', '');
+INSERT INTO `property` (`id`, `property_ID`, `propertyname`, `propertytype`, `propertyaddress`, `description`, `roomtype`, `totalrooms`, `availablerooms`, `monthlyrate`, `dailyrate`, `bed`, `kitchen`, `bathroom`, `aircon`, `dimension`, `date_created`, `user_ID`) VALUES
+(3, 'PROP_94441', 'Jusayan Residence', 'Apartment', '', '<div>kikikiki</div>', 'Big Room', 10, 3, 3500, 500, 2, 'Not Provided', 'Provided', 'Optional', 0, '2023-05-18', 'UID_0067'),
+(4, 'COM_1669', 'Gicale Office Space', 'Commercial Property', '', 'lkcnxcnxmmx', '', 2, 2, 7000, 0, 0, 'Provided', 'Provided', 'Provided', 16, '2023-05-19', 'UID_0067'),
+(6, 'RES_57215', 'Khytryn Room for Rent', 'House Rent', 'ADRS_65566', '<div>ka gg ba nimo ayy</div>', 'Big Room', 20, 4, 7000, 50, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
+(7, 'RES_44632', 'Faye Room for Rent', 'House Rent', 'ADRS_26111', '<div>heyheyehye</div>', 'Big Room', 20, 4, 7000, 50, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
+(8, 'RES_57767', 'Hapi Hapi Apartment', 'Apartment', 'ADRS_49599', '<div>ldnckdvksdbvkdsbvd</div>', 'Single Room', 10, 5, 3500, 0, 1, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
+(9, 'RES_97792', 'Info Assurance', 'House Rent', 'ADRS_49701', '<p>exam namo unyaaaa</p>', 'Single Room', 4, 4, 5000, 0, 2, 'Not Provided', 'Provided', 'Provided', 0, '2023-05-23', 'UID_0068');
 
 -- --------------------------------------------------------
 
@@ -247,7 +194,10 @@ CREATE TABLE `propertyaddress` (
 --
 
 INSERT INTO `propertyaddress` (`id`, `addresscode`, `lat`, `lng`) VALUES
-(3, '', 6.11512, 125.171);
+(3, '', 6.11512, 125.171),
+(5, 'ADRS_26111', 6.16876, 124.767),
+(6, 'ADRS_49599', 6.32387, 124.85),
+(7, 'ADRS_49701', 6.11622, 125.178);
 
 -- --------------------------------------------------------
 
@@ -268,9 +218,51 @@ INSERT INTO `propertytype` (`propertyType_ID`, `property`) VALUES
 (28, 'Boarding House'),
 (29, 'Apartment'),
 (30, 'House Rent'),
-(31, 'Commercial Building'),
-(32, 'Commercial Building'),
-(33, 'test');
+(31, 'Commercial Building');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservation`
+--
+
+CREATE TABLE `reservation` (
+  `id` int(11) NOT NULL,
+  `date` date NOT NULL DEFAULT current_timestamp(),
+  `user_ID` varchar(99) NOT NULL,
+  `amount` float NOT NULL,
+  `mop` varchar(99) NOT NULL,
+  `proof` text NOT NULL,
+  `status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservation`
+--
+
+INSERT INTO `reservation` (`id`, `date`, `user_ID`, `amount`, `mop`, `proof`, `status`) VALUES
+(1, '2023-05-22', 'UID_0067', 2000, '2', '', 0),
+(2, '2023-05-23', 'UID_0068', 1000, '2', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservationdetails`
+--
+
+CREATE TABLE `reservationdetails` (
+  `id` int(11) NOT NULL,
+  `title` varchar(99) NOT NULL,
+  `content` text NOT NULL,
+  `user_ID` varchar(99) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reservationdetails`
+--
+
+INSERT INTO `reservationdetails` (`id`, `title`, `content`, `user_ID`) VALUES
+(8, 'Reservation Method ', '<p><strong>Reservation via Gcash</strong></p><p>1. On Gcash app, select &nbsp;“Send Money”</p><p>2. On the “Send Money to Gcash Account” section, select “Express Send”.</p><p>3. Input the contact number - (Your number here) (Your name here) and input the amount you want to give.&nbsp;<br>4. Review the registered name and amount for validation. Click send to continue.</p><p>5. Screenshot the gcash transaction.</p><p>6. On this page, click the “Reserve Now” button.</p><p>7. Fill-out the reservation form and attach your receipt.</p><p><strong>Reservation in Person</strong></p><p>1. &nbsp;On this page, click the “Reserve Now” button.</p><p>2. Fill-out your personal information on the reservation form.</p><p>3. Choose the “Pay in Person” as your payment method.</p><p>4. Choose the day you wish to Pay.&nbsp;</p>', 'UID_0067');
 
 -- --------------------------------------------------------
 
@@ -311,25 +303,6 @@ INSERT INTO `room` (`id`, `roomtype`, `totalrooms`, `availablerooms`, `monthlyra
 -- --------------------------------------------------------
 
 --
--- Table structure for table `roomtype`
---
-
-CREATE TABLE `roomtype` (
-  `id` int(11) NOT NULL,
-  `room` varchar(99) NOT NULL,
-  `room_Type` varchar(99) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `roomtype`
---
-
-INSERT INTO `roomtype` (`id`, `room`, `room_Type`) VALUES
-(12, '', 'again');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `user`
 --
 
@@ -348,38 +321,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `user_ID`, `email`, `password`, `userInfo_ID`, `userLevel_ID`, `status`) VALUES
-(25, 'UID_0025', 'dadidam@gmail.com', '$2y$10$mZZXjvNkd4n4DhLmyLW3wOl7ckBH85QyKfOMFovMmXZ', 'SE-26', 3, 1),
-(33, 'UID_0033', 'imagetest12@gmail.com', '$2y$10$81f61fYy2R/RcMXiiG9OpueKYxgKE1Eu1AtGTkQCiwt', 'OW-34', 2, 0),
-(35, 'UID_0035', 'kkkkk@gmail.com', '$2y$10$BSQzkhqTW5he78uxdIbAzOKrkGFs5/6UqFoGIghwl0p', 'OW-36', 2, 0),
-(36, 'UID_0036', 'ssss@gmail.com', '$2y$10$Z.Fz4eEZ8Q39PCWVN6V1VO5lctn0avqym97WUV7kNEU', 'OW-37', 2, 0),
-(37, 'UID_0037', 'nnn@gmail.com', '$2y$10$VzLIDKR2trKu6J/xj/tHzOeq7.KzFfq4vtZLwVfrbt3', 'OW-38', 2, 0),
-(38, 'UID_0038', 'you@gmail.com', '$2y$10$Zm7XTS5ZuWba9TYBPV5nguwlbid6RSiw/wfamNkKycR', 'OW-39', 2, 0),
-(41, 'UID_0041', 'recycle@gmail.com', '$2y$10$UxvsGZUEbId5vFNMrIYic.Dzh8WPaLs4P8qc2M79klt', 'OW-42', 2, 0),
-(42, 'UID_0042', 'onelast@gmail.com', '$2y$10$WP43/GsiDt4ZY3qMI3LKUOd.dqTx2k/9CRhp9GIYILU', 'OW-43', 2, 0),
-(43, 'UID_0043', 'lasttime@gmail.com', '$2y$10$G5f14OxZMVP5eANf/YfmyOkIEqJDdcrAIE7yIlQwyu.', 'OW-44', 2, 0),
-(44, 'UID_0044', 'againagain@gmail.com', '$2y$10$qOLCq.4W5LTtqCNVXxM8Ge7yrKtHXuYxnZBVKtdEhEE', 'OW-45', 2, 0),
-(45, 'UID_0045', 'attemptone@gmail.com', '$2y$10$otIM8m0L2j2BAyc75HNuSenuEgBtZpa0oUDxGiQmKcC', 'OW-46', 2, 0),
-(46, 'UID_0046', 'twoattempt@gmail.com', '$2y$10$BMVoCYXlkO0wxvsAYIkkrOyEmQVyq8adNLfv5EoKVON', 'OW-47', 2, 0),
-(47, 'UID_0047', 'attemptthree@gmail.com', '$2y$10$D.l.ALV0.y4j2vf.qwEhDukXkNDr6vQH40DIyLa6Ef6', 'OW-48', 2, 0),
-(48, 'UID_0048', 'fourtimes@gmail.com', '$2y$10$SmcjKWoWojH5V6mzcNfeouif/gADc1e.JnvP0ggjpB6', 'OW-49', 2, 0),
-(49, 'UID_0049', 'fifthy@gmail.com', '$2y$10$pEnkgYiY/zCjUNYWJLfxOe8k8pg4SU1rtJRhEJe0roE', 'OW-50', 2, 0),
-(50, 'UID_0050', 'huhi@gmail.com', '$2y$10$HO8uquIhtWR5SIxAtOsvRu0ETxaqh4KUe6BQ/czlbOO', 'OW-51', 2, 0),
-(51, 'UID_0051', 'dave@gmail.com', '$2y$10$VkIy03QORal91r.uk2MfgumA7pq429U6lDw9s.q4xrr', 'OW-52', 2, 0),
-(52, 'UID_0052', 'stephcurry@gmail.com', '$2y$10$X9jsWiSYcachebxb75zJw.4nIG4KaMlfK9goyPpP2tu', 'OW-53', 2, 0),
-(53, 'UID_0053', 'chanienie@gmail.com', '$2y$10$mvgfvkkAR2Cj63UwzKnrsOcvI3GAF1un5m5qzniKB6u', 'SE-54', 3, 1),
-(54, 'UID_0054', 'joochan@gmail.com', 'Joochan33', 'AD-55', 1, 0),
-(55, 'UID_0055', 'ajlynn@gmail.com', '$2y$10$xmhnEeDZ0MDWsYUvXJ2ymObHivYlElH43Jt8SZkopY4', 'OW-56', 2, 0),
-(56, 'UID_0056', 'ajlynn@gmail.com', '$2y$10$.2onQsyaBRUmnGb2OkIdweJYqhWkw9aFmyt7BqBh8cN', 'AD-57', 1, 1),
-(57, 'UID_0057', 'makapasa@gmail.com', '$2y$10$ZRRH.46bxHs3UUmw1rxCTu0qNYjOAwi05oeLUYMsxSt', 'SE-58', 3, 1),
-(58, 'UID_0058', 'samoka@gmail.com', '$2y$10$PqtnbeCxEjNYDa7CZ93QbO8cy6zxKZgfTjz5NQ5kK/H', 'SE-59', 3, 1),
-(59, 'UID_0059', 'patuluganako@gmail.com', '$2y$10$ReVNrUKHjxRFrCXsUc6vTuSJ6uF75H3h9jY1T.T0HAY', 'SE-60', 3, 1),
-(60, 'UID_0060', 'gggid@gmail.com', '$2y$10$gDEQg6.Ietk4bgbcIHyBou.HMGeeULAcyMaiMDFpwNM', 'OW-61', 2, 0),
+(60, 'UID_0060', 'gggid@gmail.com', '$2y$10$gDEQg6.Ietk4bgbcIHyBou.HMGeeULAcyMaiMDFpwNM', 'OW-61', 2, 1),
 (61, 'UID_0061', 'jebal@gmail.com', '$2y$10$0mLNnR5nKtYPRCuJI5uEQed8to4Jwsj8aCUSfud6VY3', 'SE-62', 3, 1),
 (62, 'UID_0062', 'lastna@gmail.com', '$2y$10$dlmPKpJcE.zKO4QIi8tZO.wdrejamsq60twCT/tDjFb', 'SE-63', 3, 1),
 (63, 'UID_0063', 'bosetjud@gmail.com', '$2y$10$LtcclIxw/rvg5AZ7Dlh8feKBTLsDVlOI26r7nUm9/ne', 'SE-64', 3, 1),
 (64, 'UID_0064', 'purple@gmail.com', '$2y$10$GMFEgypvsgIaCIOlopc4GuCxejyQlFHzsso2bm8LaYL', 'SE-65', 3, 1),
 (65, 'UID_0065', 'maganani@gmail.com', '$2y$10$0ZE3xN5.bHMAMHk1Q4Dcy.2/tRJx7t9oI/1WqmsbCic', 'SE-66', 3, 1),
-(66, 'UID_0066', 'khytrynfaye@gmail.com', '$2y$10$U73cvaOBk4gMIKJlMrgL8uEMJILMMFEpON/ff9sgaF/', 'OW-67', 2, 0);
+(66, 'UID_0066', 'khytrynfaye@gmail.com', '$2y$10$U73cvaOBk4gMIKJlMrgL8uEMJILMMFEpON/ff9sgaF/', 'OW-67', 2, 0),
+(67, 'UID_0067', 'kate@gmail.com', '$2y$10$lQQJ72lNP/O8obaVbqecN.q8EMT3zIW3Lqh6fWL6gsP', 'OW-68', 2, 1),
+(68, 'UID_0068', 'sample@gmail.com', '$2y$10$54fS/HOp1tVbnhsjFk9KLu.HPV/T4AwnAk2yHiH7Ick', 'AD-70', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -388,8 +338,7 @@ INSERT INTO `user` (`id`, `user_ID`, `email`, `password`, `userInfo_ID`, `userLe
 --
 
 CREATE TABLE `useraddress` (
-  `address_ID` int(11) NOT NULL,
-  `stpurok` varchar(99) NOT NULL,
+  `id` int(11) NOT NULL,
   `barangay` varchar(99) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -397,59 +346,35 @@ CREATE TABLE `useraddress` (
 -- Dumping data for table `useraddress`
 --
 
-INSERT INTO `useraddress` (`address_ID`, `stpurok`, `barangay`) VALUES
-(1, '', 'Apopong'),
-(2, '', 'Baluan'),
-(3, '', 'Batomelong'),
-(4, '', 'Buayan'),
-(5, '', 'Bula'),
-(6, '', 'Calumpang'),
-(7, '', 'City Heights'),
-(8, '', 'Conel'),
-(9, '', 'Dadiangas East'),
-(10, '', 'Dadiangas North'),
-(11, '', 'Dadiangas South'),
-(12, '', 'Dadiangas West'),
-(13, '', 'Fatima'),
-(14, '', 'Katangawan'),
-(15, '', 'Labangal'),
-(16, '', 'Lagao (1st & 3rd)'),
-(17, '', 'Ligaya'),
-(18, '', 'Mabuhay'),
-(19, '', 'Olympog'),
-(20, '', 'San Isidro (Lagao 2nd)'),
-(21, '', 'San Jose'),
-(22, '', 'Siguel'),
-(23, '', 'Sinawal'),
-(24, '', 'Tambler'),
-(25, '', 'Tinagacan'),
-(26, '', 'Upper Labay'),
-(27, '', 'Apopong'),
-(28, '', 'Baluan'),
-(29, '', 'Batomelong'),
-(30, '', 'Buayan'),
-(31, '', 'Bula'),
-(32, '', 'Calumpang'),
-(33, '', 'City Heights'),
-(34, '', 'Conel'),
-(35, '', 'Dadiangas East'),
-(36, '', 'Dadiangas North'),
-(37, '', 'Dadiangas South'),
-(38, '', 'Dadiangas West'),
-(39, '', 'Fatima'),
-(40, '', 'Katangawan'),
-(41, '', 'Labangal'),
-(42, '', 'Lagao (1st & 3rd)'),
-(43, '', 'Ligaya'),
-(44, '', 'Mabuhay'),
-(45, '', 'Olympog'),
-(46, '', 'San Isidro (Lagao 2nd)'),
-(47, '', 'San Jose'),
-(48, '', 'Siguel'),
-(49, '', 'Sinawal'),
-(50, '', 'Tambler'),
-(51, '', 'Tinagacan'),
-(52, '', 'Upper Labay');
+INSERT INTO `useraddress` (`id`, `barangay`) VALUES
+(1, 'Apopong'),
+(2, 'Baluan'),
+(3, 'Batomelong'),
+(4, 'Buayan'),
+(5, 'Bula'),
+(6, 'Calumpang'),
+(7, 'City Heights'),
+(8, 'Conel'),
+(9, 'Dadiangas East'),
+(10, 'Dadiangas North'),
+(11, 'Dadiangas South'),
+(12, 'Dadiangas West'),
+(13, 'Fatima'),
+(14, 'Katangawan'),
+(15, 'Labangal'),
+(16, 'Lagao (1st & 3rd)'),
+(17, 'Ligaya'),
+(18, 'Mabuhay'),
+(19, 'Olympog'),
+(20, 'San Isidro (Lagao 2nd)'),
+(21, 'San Jose'),
+(22, 'Siguel'),
+(23, 'Sinawal'),
+(24, 'Tambler'),
+(25, 'Tinagacan'),
+(26, 'Upper Labay'),
+(51, 'Tinagacan'),
+(52, 'Upper Labay');
 
 -- --------------------------------------------------------
 
@@ -474,40 +399,6 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`id`, `userinfo_ID`, `firstname`, `lastname`, `contact`, `dob`, `gender`, `age`, `address`) VALUES
-(25, 'SE-25', 'Katkatt', 'Fayye', 2147483647, '2009-06-15', 'Female', 13, 'Far Away, Dadiangas North, General Santos City'),
-(26, 'SE-26', 'Dada', 'dididam', 2147483647, '2008-01-14', 'Female', 15, 'Block 9, Ligaya, General Santos City'),
-(27, 'OW-27', 'Owner', 'One', 2147483647, '2001-12-03', 'Male', 21, 'IDK Fckin Street, Dadiangas South, General Santos City'),
-(28, 'OW-28', 'Owner', 'Two', 2147483647, '2001-12-03', 'Female', 21, 'IDK Fckin Street, Dadiangas South, General Santos City'),
-(29, 'OW-29', 'I am', 'Me', 2147483647, '2004-11-08', 'Male', 18, 'far away, Fatima, General Santos City'),
-(30, 'OW-30', 'Image', 'Test', 2147483647, '2003-02-03', 'Male', 20, 'frekin frekin, Dadiangas South, General Santos City'),
-(31, 'OW-31', 'my', 'only', 2147483647, '2004-03-04', 'Male', 19, 'likyliky, Dadiangas West, General Santos City'),
-(32, 'OW-32', 'another', 'one', 2147483647, '2001-04-03', 'Female', 22, 'likikili, Dadiangas East, General Santos City'),
-(33, 'OW-33', 'abcd', 'efg', 96543765, '2012-01-17', 'Female', 11, 'somewhere, Dadiangas South, General Santos City'),
-(34, 'OW-34', 'image', 'test', 2147483647, '2001-12-03', 'Male', 21, 'ememe, Dadiangas North, General Santos City'),
-(35, 'OW-35', 'hapihapi', 'purple', 965432186, '2001-12-08', 'Male', 21, 'hapihapi, Dadiangas West, General Santos City'),
-(36, 'OW-36', 'kkkk', 'kkkk', 2147483647, '2002-02-12', 'Male', 21, 'kkkkkk, Labangal, General Santos City'),
-(37, 'OW-37', 'ssssss', 'ssss', 2147483647, '2001-11-01', 'Male', 21, 'sssss, Labangal, General Santos City'),
-(38, 'OW-38', 'nnnn', 'nnnn', 2147483647, '2003-03-23', 'Female', 20, 'nnnnn, Lagao (1st & 3rd), General Santos City'),
-(39, 'OW-39', 'you', 'you', 2147483647, '2004-02-24', 'Female', 19, 'youyu, Dadiangas East, General Santos City'),
-(41, 'OW-41', 'sono', 'gong', 2147483647, '2001-02-04', 'Female', 22, 'sonogong, Dadiangas South, General Santos City'),
-(42, 'OW-42', 'recycle', 'it', 2147483647, '2003-12-04', 'Male', 19, 'kikikiki, Katangawan, General Santos City'),
-(43, 'OW-43', 'One', 'Last', 2147483647, '2001-11-04', 'Female', 21, 'idkidk, Labangal, General Santos City'),
-(44, 'OW-44', 'last', 'time', 2147483647, '2001-11-03', 'Male', 21, 'lololo, Katangawan, General Santos City'),
-(45, 'OW-45', 'again', 'again', 2147483647, '2003-12-04', 'Male', 19, 'againgain, Buayan, General Santos City'),
-(46, 'OW-46', 'attempt', 'one', 965736452, '2001-12-04', 'Female', 21, 'attempt, Fatima, General Santos City'),
-(47, 'OW-47', 'attempt', 'two', 2147483647, '2004-03-12', 'Male', 19, 'twosome, Mabuhay, General Santos City'),
-(48, 'OW-48', 'attempt', 'three', 2147483647, '2004-10-05', 'Male', 18, 'threethree, Katangawan, General Santos City'),
-(49, 'OW-49', 'four', 'four', 2147483647, '2003-10-06', 'Male', 19, 'foursome, Lagao (1st & 3rd), General Santos City'),
-(50, 'OW-50', 'fifth', 'attempt', 2147483647, '2001-12-04', 'Male', 21, 'fifthhhh, Dadiangas South, General Santos City'),
-(51, 'OW-51', 'Huhu', 'hihi', 2147483647, '2005-12-04', 'Female', 17, 'huhuhuhuh, Lagao (1st & 3rd), General Santos City'),
-(52, 'OW-52', 'Dave', 'Froilan', 2147483647, '2000-05-15', 'Male', 22, 'farrr waaayy, Katangawan, General Santos City'),
-(53, 'OW-53', 'Steph', 'Curry', 2147483647, '2001-05-15', 'Male', 21, 'stephcurry, Labangal, General Santos City'),
-(54, 'SE-54', 'Chanie', 'Hong', 2147483647, '2001-12-08', 'Female', 21, 'Sineguelas, Dadiangas East, General Santos City'),
-(55, 'AD-55', 'joo', 'chan', 2147483647, NULL, 'Male', 0, ''),
-(56, 'OW-56', 'Aj Lynn', 'Jusayan', 2147483647, '2001-12-06', 'Male', 21, 'test, Dadiangas South, General Santos City'),
-(57, 'AD-57', 'Aj', 'Lynn', 2147483647, NULL, 'Female', 0, ''),
-(58, 'SE-58', 'Seeker', 'Pasa', 9, '2001-06-18', 'Female', 21, 'ambot asa na, Ligaya, General Santos City'),
-(59, 'SE-59', 'Seek', 'seek', 9, '2004-12-04', 'Male', 18, 'ambotttt, Dadiangas South, General Santos City'),
 (60, 'SE-60', 'tulog', 'nako', 9, '2002-01-08', 'Female', 21, 'samokkk, Katangawan, General Santos City'),
 (61, 'OW-61', 'gg', 'gid', 9, '2004-12-07', 'Female', 18, 'ambot asa na, Lagao (1st & 3rd), General Santos City'),
 (62, 'SE-62', 'jebal', 'pls', 9, '2001-12-08', 'Female', 21, 'yawa judd, Dadiangas North, General Santos City'),
@@ -515,7 +406,10 @@ INSERT INTO `userinfo` (`id`, `userinfo_ID`, `firstname`, `lastname`, `contact`,
 (64, 'SE-64', 'bo', 'set', 9, '2003-12-04', 'Female', 19, 'oksna, Dadiangas South, General Santos City'),
 (65, 'SE-65', 'purple', 'woman', 0, '2001-12-03', 'Female', 21, 'purple world, Labangal, General Santos City'),
 (66, 'SE-66', 'twoid', 'work', 9, '2004-10-06', 'Female', 18, 'ambotasaka, Lagao (1st & 3rd), General Santos City'),
-(67, 'OW-67', 'Khytryn', 'Carcillar', 9, '2001-12-08', 'Female', 21, 'katangawan, Katangawan, General Santos City');
+(67, 'OW-67', 'Khytryn', 'Carcillar', 9, '2001-12-08', 'Female', 21, 'katangawan, Katangawan, General Santos City'),
+(68, 'OW-68', 'Katren', 'Faye', 9, '2004-08-04', 'Male', 18, 'somewhere, Conel, General Santos City'),
+(69, 'SE-69', 'Khytryn Faye', 'Carcillar', 9, '2001-12-08', 'Female', 21, 'Sineguelas St. , Dadiangas East, General Santos City'),
+(70, 'AD-70', 'kat', 'khyt', 2147483647, NULL, 'Female', 0, '');
 
 -- --------------------------------------------------------
 
@@ -548,19 +442,6 @@ ALTER TABLE `aboutus`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `baths`
---
-ALTER TABLE `baths`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `baths` (`baths`);
-
---
--- Indexes for table `bed`
---
-ALTER TABLE `bed`
-  ADD PRIMARY KEY (`bed_ID`);
-
---
 -- Indexes for table `faq`
 --
 ALTER TABLE `faq`
@@ -580,13 +461,6 @@ ALTER TABLE `img`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `kitchen`
---
-ALTER TABLE `kitchen`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `kitchen` (`kitchen`);
-
---
 -- Indexes for table `places`
 --
 ALTER TABLE `places`
@@ -596,8 +470,7 @@ ALTER TABLE `places`
 -- Indexes for table `property`
 --
 ALTER TABLE `property`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `property_ID` (`property_ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `propertyaddress`
@@ -613,17 +486,22 @@ ALTER TABLE `propertytype`
   ADD PRIMARY KEY (`propertyType_ID`);
 
 --
+-- Indexes for table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reservationdetails`
+--
+ALTER TABLE `reservationdetails`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `roomtype`
---
-ALTER TABLE `roomtype`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `room` (`room`);
 
 --
 -- Indexes for table `user`
@@ -639,7 +517,7 @@ ALTER TABLE `user`
 -- Indexes for table `useraddress`
 --
 ALTER TABLE `useraddress`
-  ADD PRIMARY KEY (`address_ID`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `userinfo`
@@ -664,18 +542,6 @@ ALTER TABLE `aboutus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `baths`
---
-ALTER TABLE `baths`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `bed`
---
-ALTER TABLE `bed`
-  MODIFY `bed_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
@@ -685,19 +551,13 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `img`
 --
 ALTER TABLE `img`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `kitchen`
---
-ALTER TABLE `kitchen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `places`
@@ -709,13 +569,13 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `propertyaddress`
 --
 ALTER TABLE `propertyaddress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `propertytype`
@@ -724,34 +584,40 @@ ALTER TABLE `propertytype`
   MODIFY `propertyType_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
+-- AUTO_INCREMENT for table `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `reservationdetails`
+--
+ALTER TABLE `reservationdetails`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT for table `roomtype`
---
-ALTER TABLE `roomtype`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
-
---
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `useraddress`
 --
 ALTER TABLE `useraddress`
-  MODIFY `address_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT for table `userlevel`
