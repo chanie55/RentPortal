@@ -272,22 +272,19 @@ if(!isset($_SESSION['email']))
                                         </div>
 
                                         <div class = "offset-md-1 col-md-10">
-                                            <form method = "POST" action = ""> 
-                                        
+                                            <form method = "POST" action = "">
                                                 <div class = "form-group">
-                                                    <label> Title </label>
-                                                    <div class="col-lg-9">
-                                                        <input type = "text" name = "title" value = "" class = "form-control"/>
+                                                    <!--<label> Title </label>-->
+                                                    <div class="col-lg-5">
+                                                        <input type = "text" name = "title" class = "form-control" placeholder = "Enter your Gcash name"/>
                                                     </div>
                                                 </div>
 
                                                 <div class = "form-group"> 
-                                                <label class="col-lg-2 col-form-label">Content</label>
-													<div class="col-lg-9">
-                                                        <textarea name = "content" id = "rescontent" class="form-control" value = ""></textarea>	
+													<div class="col-lg-5">
+                                                    <input type = "text" name = "title" class = "form-control" placeholder = "Enter your Gcash number"/>	
 													</div>
                                                 </div>
-                                               
                                                 <input type = "submit" name = "submit-details" class = "btn btn-info" value = "Save"/>
                                             </form>
                                         </div>
