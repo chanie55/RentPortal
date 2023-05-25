@@ -96,6 +96,52 @@ if(!isset($_SESSION['email']))
         <!-- Property List Start -->
         <div class="container-xxl py-1">
             <div class="container">
+                <span class="head"> Reservation Rate </span>
+                <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <?php 
+                        include "dbconn.php";
+                        $propid = $_REQUEST['prop_ID'];
+
+                        $result = mysqli_query($conn, "SELECT monthlyrate FROM property WHERE property_ID = '$propid'"); 
+
+                        if ($result && mysqli_num_rows($result) > 0) {
+                            $row = mysqli_fetch_assoc($result);
+                            $rate = $row['monthlyrate'];
+                            $downPayment = $rate * 0.5; // Calculate 50% down payment
+                            $total = $downPayment + $rate; // Calculate the total
+                        } else {
+                            // Handle the case when the query fails
+                            $rate = "N/A";
+                            $downPayment = "N/A";
+                            $total = "N/A";
+                        } 
+                        ?>
+                        <tr>
+                            <th scope="row"> Property Rate </th>
+                            <td> ₱<?php echo $rate ?>.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Property 50% Down Payment </th>
+                            <td> ₱<?php echo $downPayment ?>.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Advance Payment for 1 month </th>
+                            <td> ₱<?php echo $rate ?>.00</td>
+                        </tr>
+                        <tr class="table-light">
+                            <th scope="row"> Total </th>
+                            <td style="font-weight: bold;"> ₱<?php echo $total ?>.00 </td>
+                        </tr>     
+                        <?php  ?>
+                    </tbody>
+                    </table>
 
                             <?php 	 
                                 include "dbconn.php";
@@ -113,7 +159,7 @@ if(!isset($_SESSION['email']))
                             <ol>
                                 <li> On Gcash app, select  “Send Money” </li><br>
                                 <li> On the “Send Money to Gcash Account” section, select “Express Send”. </li><br>
-                                <li> Input the contact number - (Your number here) (Your name here) and input the amount required to pay. </li><br>
+                                <li> Input the contact number - (Your number here) (Your name here) and input <br> the amount required to pay. </li><br>
                                 <li> Review the registered name and amount for validation. Click send to continue. </li><br>
                                 <li> Screenshot the gcash transaction. </li><br>
                                 <li> On this page, click the “Reserve Now” button </li><br>
