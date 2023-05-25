@@ -1,3 +1,14 @@
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
+session_start();
+include("dbconn.php");
+if(!isset($_SESSION['email']))
+{
+	header("location:userLogin.php");
+} 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -89,13 +100,13 @@
                             <?php 	 
                                 include "dbconn.php";
 
-                                $email = $_REQUEST['email'];
+                                $email = $_SESSION['email'];
                                 $query=mysqli_query($conn,"SELECT * FROM reservationdetails");
                                     while($row=mysqli_fetch_array($query))
                                     {
                             ?>
                         <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php?email=<?php echo $email;?>';">Reserve Now </button>
+                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php'">Reserve Now </button>
                             <p>How to Reserve?</p>
                             <h1 class="mb-3"><?php echo $row['title'];?></h1>
                             <p> <?php echo $row['content'];?></p>

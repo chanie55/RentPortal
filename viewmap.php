@@ -79,7 +79,7 @@ include("dbconn.php");
                             <input type = "hidden" name = "lat" value = "${lat}">
                             <input type = "hidden" name = "lng" value = "${lng}">
                             <br>
-                            <a href = "ownerProperty.php?lat=${lat}&lng=${lng}&email=<?php echo $_REQUEST['email']?>"><button type = "button" class = "btn btn-primary"> Submit </button></a>
+                            <a href = "ownerProperty.php?lat=${lat}&lng=${lng}"><button type = "button" class = "btn btn-primary"> Submit </button></a>
                         </form>`;
 
             var singleMarker = L.marker([lat, lng], { icon: myMarker, draggable: true }).bindPopup(popup);

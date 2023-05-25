@@ -2,7 +2,12 @@
 ini_set('session.cache_limiter','public');
 session_cache_limiter(false);
 session_start();
-include("dbconn.php");							
+include("dbconn.php");
+if(!isset($_SESSION['email']))
+{
+	header("location:userLogin.php");
+} 
+							
 ?>
 
 <?php
@@ -34,7 +39,7 @@ include("dbconn.php");
             <div class="profile-userpic">
 
             <?php 
-                  $email = $_REQUEST['email'];
+                  $email = $_SESSION['email'];
                   $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
                   while($row=mysqli_fetch_array($query))
 								{

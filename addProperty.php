@@ -75,7 +75,7 @@ include "dbconn.php";
                         header("Location: ownerProperty.php?error=$message");
                     }
             }   
-            header ("Location: ownerProperty.php?email=$email");
+            header ("Location: ownerProperty.php");
             } else {
             echo "failed";
             }

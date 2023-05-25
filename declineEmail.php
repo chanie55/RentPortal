@@ -44,7 +44,7 @@
 
         $mail->send();
 
-        echo " <script> alert ('User registration has been denied'); document.location.href = 'ownerstatus.php?email=$email&owneremail=$owneremail&status=3'; </script>";
+        echo " <script> alert ('User registration has been denied'); document.location.href = 'ownerstatus.php&status=3'; </script>";
         
     }
 

@@ -40,7 +40,7 @@ include("dbconn.php");
 
                 <ul class="list-unstyled components">
 			        <li>
-                        <a href="ownerDashboard.php?email=<?php echo $_REQUEST['email']; ?>" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -48,27 +48,27 @@ include("dbconn.php");
 				    </div>
 			
                     <li class="dropdown">
-                        <a href = "ownerProperty.php?email=<?php echo $_REQUEST['email']; ?>">
+                        <a href = "ownerProperty.php">
 					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
                     </li>
                 
                     <li>
-                        <a href = "ownerVisit.php?email=<?php echo $_REQUEST['email']; ?>">
+                        <a href = "ownerVisit.php">
 					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
                     <li>
-                    <a href = "reservation.php?email=<?php echo $_REQUEST['email']; ?>">
+                    <a href = "reservation.php">
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
                     <li>
-                    <a href = "FAQ.php?email=<?php echo $_REQUEST['email']; ?>">
+                    <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
                     </li>
 
                     <li class="dropdown">
-                        <a href = "ownerAboutUs.php?email=<?php echo $_REQUEST['email']; ?>">
+                        <a href = "ownerAboutUs.php">
 					    <i class="bx bxs-edit-location"></i><span>About Us</span></a>
                     </li>
 
