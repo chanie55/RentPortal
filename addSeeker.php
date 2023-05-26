@@ -102,7 +102,7 @@ if (isset($_POST['submit-seeker'])) {
                                         header("Location: registerSeeker.php?Successfully added");
                                     } else {
                                         $message = "You cannot upload files of this type";
-                                        header("Location: registerSeeker.php?error=$message");
+                                        header("Location: registerSeeker.php?error=$message&$user_data");
                                     }
                                 }   
                                 header ("Location: verifyemail.php?saved");

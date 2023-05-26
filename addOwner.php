@@ -90,9 +90,9 @@ if (isset($_POST['submit-owner'])) {
                                 $error = $_FILES['document-image']['error'];
             
                                 if ($error === 0) {
-                                    if ($img_size > 125000) {
+                                    if ($img_size > 1250000) {
                                         $message = "Sorry, your file is too large";
-                                        header("Location: registerOwner.php?error=$message");
+                                        header("Location: registerOwner.php?error=$message&$user_data");
                                     } else {
                                         $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
                                         $img_ex_loc = strtolower($img_ex);
@@ -144,15 +144,15 @@ if (isset($_POST['submit-owner'])) {
                                             }
                                         } else {
                                             $message = "You cannot upload files of this type";
-                                            header("Location: registerOwner.php?error=$message");
+                                            header("Location: registerOwner.php?error=$message&$user_data");
                                         }
                                     }
                                 } else {
                                     $message = "unknown error occured";
-                                    header("Location: registerOwner.php?error=$message");
+                                    header("Location: registerOwner.php?error=$message&$user_data");
                                 }
                             } else {
-                                header("Location: registerOwner.php?failed");
+                                header("Location: registerOwner.php?failed&$user_data");
                             }
 
                             $mail = new PHPMailer(true);

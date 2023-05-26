@@ -18,7 +18,7 @@ if(!isset($_SESSION['email']))
         $res = mysqli_query($conn, $query);
 
         if ($res) {
-            header ("Location: reservation.php?email=$email&saved");
+            header ("Location: reservation.php&saved");
         } else {
             echo "failed";
         }
@@ -59,7 +59,7 @@ if(!isset($_SESSION['email']))
 
                 <ul class="list-unstyled components">
 			        <li>
-                        <a href="ownerDashboard.php?email=<?php echo $_REQUEST['email']; ?>" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
+                        <a href="ownerDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
 		            <div class="small-screen navbar-display">
@@ -67,27 +67,27 @@ if(!isset($_SESSION['email']))
 				    </div>
 			
                     <li class="dropdown">
-                        <a href = "ownerProperty.php?email=<?php echo $_REQUEST['email']; ?>">
+                        <a href = "ownerProperty.php">
 					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
                     </li>
                 
                     <li>
-                        <a href = "ownerVisit.php?email=<?php echo $_REQUEST['email']; ?>">
+                        <a href = "ownerVisit.php">
 					    <i class="bx bxs-edit-location"></i><span>Visit Schedule</span></a>
                     </li>
 
                     <li>
-                    <a href = "reservation.php?email=<?php echo $_REQUEST['email']; ?>">
+                    <a href = "reservation.php">
 					    <i class="bx bxs-calendar-exclamation"></i><span>Reservation</span></a>
                     </li>
 
                     <li>
-                    <a href = "FAQ.php?email=<?php echo $_REQUEST['email']; ?>">
+                    <a href = "FAQ.php">
 					    <i class="bx bxs-message-rounded-add"></i><span>FAQ</span></a>
                     </li>
 
                     <li class="dropdown">
-                        <a href = "ownerAboutUs.php?email=<?php echo $_REQUEST['email']; ?>">
+                        <a href = "ownerAboutUs.php">
 					    <i class="bx bxs-edit-location"></i><span>About Us</span></a>
                     </li>
 
@@ -273,26 +273,21 @@ if(!isset($_SESSION['email']))
 
                                         <div class = "offset-md-1 col-md-10">
                                             <form method = "POST" action = ""> 
-                                            <?php 
-                                                $email = $_REQUEST['email'];
-                                                $query = mysqli_query($conn, "SELECT * FROM reservationdetails JOIN user ON reservationdetails.user_ID = user.user_ID WHERE email = '$email'");
-                                                while($row=mysqli_fetch_array($query))
-								                {
-							                    ?>
+                                        
                                                 <div class = "form-group">
                                                     <label> Title </label>
                                                     <div class="col-lg-9">
-                                                        <input type = "text" name = "title" value = "<?php echo $row['title'];?>" class = "form-control"/>
+                                                        <input type = "text" name = "title" value = "" class = "form-control"/>
                                                     </div>
                                                 </div>
 
                                                 <div class = "form-group"> 
                                                 <label class="col-lg-2 col-form-label">Content</label>
 													<div class="col-lg-9">
-                                                        <textarea name = "content" id = "rescontent" class="form-control" value = "<?php echo $row['title'];?>"></textarea>	
+                                                        <textarea name = "content" id = "rescontent" class="form-control" value = ""></textarea>	
 													</div>
                                                 </div>
-                                                <?php } ?>
+                                               
                                                 <input type = "submit" name = "submit-details" class = "btn btn-info" value = "Save"/>
                                             </form>
                                         </div>

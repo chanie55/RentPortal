@@ -44,7 +44,7 @@
 
         $mail->send();
 
-        echo " <script> alert ('Email Confirmation has been sent'); document.location.href = 'ownerstatus.php?email=$email&owneremail=$owneremail&status=1'; </script>";
+        echo " <script> alert ('Email Confirmation has been sent'); document.location.href = 'ownerstatus.php?status=1'; </script>";
         
     }
 

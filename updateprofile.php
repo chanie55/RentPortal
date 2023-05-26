@@ -19,7 +19,7 @@ if(!isset($_SESSION['email']))
         $query = "UPDATE userinfo SET firstname = '$firstname' WHERE email = '$email'";
         $result = mysqli_query($conn, $query);
             if ($result) {
-                header ("Location: seekerDashboard.php?email=$email");
+                header ("Location: seekerDashboard.php?");
             } else {
                 echo "failed";
             }

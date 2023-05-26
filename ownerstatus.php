@@ -9,7 +9,7 @@ $query = "UPDATE user SET status = $status WHERE email = '$owneremail'";
 $result = mysqli_query($conn, $query);
 
 if ($result) {
-    header("Location: manageOwner.php?email=$email&msg=Owner status updated successfully");
+    header("Location: manageOwner.php?msg=Owner status updated successfully");
 } else {
     echo "Failed" ;
 }

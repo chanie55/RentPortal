@@ -19,7 +19,7 @@ if(!isset($_SESSION['email']))
         $res = mysqli_query($conn, $query);
 
         if ($res) {
-            header ("Location: seekerReserveNow.php?email=$email&saved");
+            header ("Location: seekerReserveNow.php&saved");
         } else {
             echo "failed";
         }
