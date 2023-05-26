@@ -98,6 +98,7 @@ if (isset($_POST['submit-seeker'])) {
                 
                                         //into the database
                                         $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Valid ID', '$userid')";
+                                        
                                         mysqli_query($conn, $image_query);
                                         header("Location: registerSeeker.php?Successfully added");
                                     } else {

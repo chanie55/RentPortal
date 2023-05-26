@@ -109,13 +109,57 @@ if(!isset($_SESSION['email']))
                         include "dbconn.php";
                         $propid = $_REQUEST['prop_ID'];
 
-                        $result = mysqli_query($conn, "SELECT monthlyrate FROM property WHERE property_ID = '$propid'"); 
+                        $result = mysqli_query($conn, "SELECT property.monthlyrate, reservationdetails.downpayment, reservationdetails.paycon, reservationdetails.gname,
+                                                        reservationdetails.gnumber, reservationdetails.content FROM property JOIN reservationdetails ON property.property_ID = reservationdetails.prop_ID 
+                                                    WHERE property.property_ID = '$propid'"); 
 
                         if ($result && mysqli_num_rows($result) > 0) {
                             $row = mysqli_fetch_assoc($result);
                             $rate = $row['monthlyrate'];
-                            $downPayment = $rate * 0.5; // Calculate 50% down payment
-                            $total = $downPayment + $rate; // Calculate the total
+                            $down = $row['downpayment'];
+                            $con = $row['paycon'];
+                            $downPayment = $rate * $down; // Calculate 50% down payment
+                            $condition = $downPayment * $con;
+                            $total = $downPayment + $condition; // Calculate the total
+                        ?>
+                        <tr>
+                            <th scope="row"> Property Rate </th>
+                            <td> ₱<?php echo $rate ?>.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> <?php echo $down; ?> % Down Payment </th>
+                            <td> ₱<?php echo $downPayment ?>.00</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"> Advance Payment for <?php echo $con; ?> month/ </th>
+                            <td> ₱<?php echo $condition ?>.00</td>
+                        </tr>
+                        <tr class="table-light">
+                            <th scope="row"> Total </th>
+                            <td style="font-weight: bold;"> ₱<?php echo $total ?>.00 </td>
+                        </tr>     
+                    </tbody>
+                    </table>
+
+                            
+                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php?total=<?php echo $total; ?>'">Reserve Now </button>
+                            <p>How to Reserve?</p>
+                            <h1 class="mb-3">Reservation Method</h1>
+                            <h6> Reservation via Gcash </h6>
+                            <ol>
+                                <li> On Gcash app, select  “Send Money” </li><br>
+                                <li> On the “Send Money to Gcash Account” section, select “Express Send”. </li><br>
+                                <li> Input the contact number - <strong> (<?php echo $row['gnumber']; ?>) - (<?php echo $row['gname'];?>) </strong> and input <br> the amount required to pay. </li><br>
+                                <li> Review the registered name and amount for validation. Click send to continue. </li><br>
+                                <li> Screenshot the gcash transaction. </li><br>
+                                <li> On this page, click the “Reserve Now” button </li><br>
+                                <li> Fill-out the reservation form and attach your receipt. </li><br>
+                            </ol>
+                            <h1 class="mb-3">Terms and Condtion</h1>
+                            <p> <?php echo $row['content']; ?> </p>
+                        </div>
+                        <?php
                         } else {
                             // Handle the case when the query fails
                             $rate = "N/A";
@@ -123,50 +167,7 @@ if(!isset($_SESSION['email']))
                             $total = "N/A";
                         } 
                         ?>
-                        <tr>
-                            <th scope="row"> Property Rate </th>
-                            <td> ₱<?php echo $rate ?>.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"> Property 50% Down Payment </th>
-                            <td> ₱<?php echo $downPayment ?>.00</td>
-                        </tr>
-                        <tr>
-                            <th scope="row"> Advance Payment for 1 month </th>
-                            <td> ₱<?php echo $rate ?>.00</td>
-                        </tr>
-                        <tr class="table-light">
-                            <th scope="row"> Total </th>
-                            <td style="font-weight: bold;"> ₱<?php echo $total ?>.00 </td>
-                        </tr>     
-                        <?php  ?>
-                    </tbody>
-                    </table>
-
-                            <?php 	 
-                                include "dbconn.php";
-
-                                $email = $_SESSION['email'];
-                                $query=mysqli_query($conn,"SELECT * FROM reservationdetails");
-                                    while($row=mysqli_fetch_array($query))
-                                    {
-                            ?>
-                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php'">Reserve Now </button>
-                            <p>How to Reserve?</p>
-                            <h1 class="mb-3">Reservation Method</h1>
-                            <h6> Reservation via Gcash </h6>
-                            <ol>
-                                <li> On Gcash app, select  “Send Money” </li><br>
-                                <li> On the “Send Money to Gcash Account” section, select “Express Send”. </li><br>
-                                <li> Input the contact number - (Your number here) (Your name here) and input <br> the amount required to pay. </li><br>
-                                <li> Review the registered name and amount for validation. Click send to continue. </li><br>
-                                <li> Screenshot the gcash transaction. </li><br>
-                                <li> On this page, click the “Reserve Now” button </li><br>
-                                <li> Fill-out the reservation form and attach your receipt. </li><br>
-                            </ol>
-                        </div>
-                        <?php } ?>
+                        
             </div>
         </div>
         <!-- Property List End -->

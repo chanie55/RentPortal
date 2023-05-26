@@ -91,15 +91,18 @@ if(!isset($_SESSION['email']))
         <!-- Property List Start -->
         <div class="container-xxl py-2">
             <h1 class="mb-3" style="margin-top: 30px; text-align: center;">Reservation</h1>
-                <form method = "POST" action = "addReservation.php" class="needs-validation" novalidate style="margin-left: 3%;">
+                <form method = "POST" action = "addReservation.php" class="needs-validation" novalidate style="margin-left: 3%;" enctype = "multipart/form-data">
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
 
                     <?php 
                     include "dbconn.php";
                   $email = $_SESSION['email'];
-                  $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo JOIN user ON user.id = userinfo.id WHERE email = '$email'");
+                  $total = $_REQUEST['total'];
+                  $query = mysqli_query($conn, "SELECT *,userinfo.firstName, userinfo.lastName, user.email, CONCAT(firstName,' ',lastName) AS fullName FROM userinfo 
+                                        JOIN user ON user.id = userinfo.id WHERE email = '$email'");
                   while($row=mysqli_fetch_array($query))
 								{
+                                    
 							?>
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustom01">First name</label>
@@ -138,7 +141,7 @@ if(!isset($_SESSION['email']))
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div class="col-md-3 mb-3 px-3">
                                 <label for="validationCustom05">Amount</label>
-                                <input type="text" class="form-control" name = "amount" id="validationCustom05" required>
+                                <input type="text" class="form-control" name = "amount" id="validationCustom05" value = "<?php echo $total; ?>" required>
                             <div class="invalid-feedback">
                             Please provide a valid amount.
                             </div>
@@ -146,10 +149,10 @@ if(!isset($_SESSION['email']))
 
                         <div class="col-md-3 mb-3 px-3">
                             <label for="validationCustom04">Mode of Payment</label>
-                            <select class="custom-select" name = "mod" id="paymentSelect" required>
+                            <select class="custom-select" name = "mop" id="paymentSelect" required>
                                 <option selected disabled value="">Choose...</option>
-                                <option value="1">Gcash </option>
-                                <option value="2">Payment in Person </option>
+                                <option value="Gcash">Gcash </option>
+                                <option value="Cash">Cash </option>
                             </select>   
                             <div class="invalid-feedback">
                                 Please select a mode of payment.
@@ -168,18 +171,16 @@ if(!isset($_SESSION['email']))
                         <div id="payPerson" class="col-md-2 mb-3 paymentHide">
                                 <label for="datepicker">Day to Pay</label>
                                     <?php if (isset($_GET['payday'])) { ?>
-                                        <input required type = "date" 
+                                        <input type = "number" 
                                         name = "payday" 
                                         class="form-control" 
-                                        width = "276"
-                                        min = "2023-01-01"
                                         id="datepicker"><br>
                                     <?php } else { ?>
-                                        <input required type = "date" 
+                                        <input type = "number" 
                                         name = "payday" 
                                         class="form-control"
-                                        min = "2023-01-01"
-                                        id="datepicker"><br>
+                                        id="datepicker">
+                                       <br>
                                     <?php } ?>
                                 <div class = "invalid-feedback"> 
                                     Invalid input
@@ -191,7 +192,7 @@ if(!isset($_SESSION['email']))
                         <div class="col-md-3 mb-3 px-3">
                             <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
                             <label class="form-check-label" for="invalidCheck">
-                                Agree to <a href="https://www.facebook.com" target="_blank">terms</a> and <a href="" target="_blank">conditions</a> 
+                                Agree to <!--<a href="https://www.facebook.com" target="_blank">-->terms <!--</a>--> and <!--a href="" target="_blank">--> conditions <!--</a>--> 
                             </label>
                             <div class="invalid-feedback">
                                 You must agree before submitting.
@@ -281,13 +282,13 @@ if(!isset($_SESSION['email']))
 
         sel.addEventListener("change", function(){
             var val = sel.value;
-            if(val == "1"){
+            if(val == "Gcash"){
                 gcash.classList.remove("paymentHide");
                 person.classList.add("paymentHide");
                 person.classList.remove("paymentDisplay");
                 gcash.classList.add("paymentDisplay");
             }
-            else if(val == "2"){
+            else if(val == "Cash"){
                 person.classList.remove("paymentHide");
                 gcash.classList.add("paymentHide");
                 gcash.classList.remove("paymentDisplay");

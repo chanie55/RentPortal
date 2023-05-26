@@ -185,6 +185,7 @@ if(!isset($_SESSION['email']))
                                                             <th>Proof of Payment</th>
                                                             <th>Status</th>
                                                             <th>Date Approved</th>
+                                                            <th>Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -203,10 +204,12 @@ if(!isset($_SESSION['email']))
                                                             $previous = $page - 1;
                                                             $next = $page + 1;
 
-                                                            $sql = "SELECT *, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                                                            $sql = "SELECT *,user.user_ID, user.email, images.image_url, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID 
+                                                                            JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID JOIN images ON images.user_ID = user.user_ID WHERE type = 'Proof of Payment' LIMIT $offset, $limit";
                                                             $result = mysqli_query($conn, $sql);
 
                                                             while ($row = mysqli_fetch_assoc($result)) {
+
                                                                 ?>
                                                                     <tr class = "data-row"> 
                                                                         <td> <?php echo $row['date'] ?> </td>
@@ -216,10 +219,62 @@ if(!isset($_SESSION['email']))
                                                                         <td> <?php echo $row['contact'] ?> </td>
                                                                         <td> <?php echo $row['amount'] ?> </td> 
                                                                         <td> <?php echo $row['mop'] ?> </td>
-                                                                        <td> image </td>
-                                                                        <td> status </td>
+                                                                        <td>
+                                                                        <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#view">View</button></a>
+                                                                        </td>
+                                                                        <td> <?php echo $row['status'] ?> </td>
                                                                         <td> date </td>
+                                                                        <td> 
+                                                                             <!-- Button trigger modal -->
+                                                                            <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm"><i class="bx bx-show"></i></button></a>
+                                                                        </td>
                                                                     </tr>
+
+                                                                     <!-- Confirm Modal -->
+                                                                    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+
+                                                                                <div class="modal-body">
+                                                                                    <p>Are you sure you want to confirm this reservation?</p>
+                                                                                    <form method = "POST" action = "confirmres.php"> 
+                                                                                        <input type = "hidden" name = "useremail" value = "<?php echo $row['email']; ?>"/>
+                                                                                        <input type = "hidden" name = "id" value = "<?php echo $row['user_ID']; ?>"/>
+                                                                                    
+                                                                                </div>
+
+                                                                                <div class="modal-footer">
+                                                                                    <a href=""><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
+                                                                                    <a href="confirmres.php"><button type="submit" name = "okay" class="btn btn-primary">Confirm</button></a>
+                                                                                </div>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Confirm Modal -->
+                                                                    <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                                        <div class="modal-dialog" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header">
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                    </button>
+                                                                                </div>
+
+                                                                                <div class="modal-body"> 
+                                                                                <img src = "<?php echo "images/proof/".$row['image_url']; ?>" width = "470px" height = "500px"> </td>
+                                                                                </div> 
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    
                                                                 <?php
                                                             }
                                                     ?> 
