@@ -108,8 +108,17 @@ if(!isset($_SESSION['email']))
                         <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
                             <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php'">Reserve Now </button>
                             <p>How to Reserve?</p>
-                            <h1 class="mb-3"><?php echo $row['title'];?></h1>
-                            <p> <?php echo $row['content'];?></p>
+                            <h1 class="mb-3">Reservation Method</h1>
+                            <h6> Reservation via Gcash </h6>
+                            <ol>
+                                <li> On Gcash app, select  “Send Money” </li><br>
+                                <li> On the “Send Money to Gcash Account” section, select “Express Send”. </li><br>
+                                <li> Input the contact number - (Your number here) (Your name here) and input the amount required to pay. </li><br>
+                                <li> Review the registered name and amount for validation. Click send to continue. </li><br>
+                                <li> Screenshot the gcash transaction. </li><br>
+                                <li> On this page, click the “Reserve Now” button </li><br>
+                                <li> Fill-out the reservation form and attach your receipt. </li><br>
+                            </ol>
                         </div>
                         <?php } ?>
             </div>
