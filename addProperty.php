@@ -14,7 +14,7 @@ include "dbconn.php";
 
 
     if (isset($_POST['submit-property'])) {
-        $email = $_REQUEST['email'];
+        $email = $_SESSION['email'];
         $name = $_POST['propertyname'];
         $type = $_POST['property'];
         $description = $_POST['description'];
@@ -33,6 +33,7 @@ include "dbconn.php";
 
         $code = rand(1, 99999);
         $prop_ID = "RES_".$code;
+        $propid = $_SESSION[$prop_ID];
 
         $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, roomtype, totalrooms, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, dimension, user_ID)
                     VALUES ('$prop_ID', '$name', '$description', '$type', '$roomtype', '$total', '$available', '$monthlyrate', '$dailyrate', '$bed', '$kitchentype', '$bathtype', '$aircon', '$dimension', '$user_ID')";

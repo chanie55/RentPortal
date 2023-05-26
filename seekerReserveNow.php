@@ -160,7 +160,7 @@ if(!isset($_SESSION['email']))
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div id="payGcash" class="col-md-3 mb-3 paymentHide">
                             <label> Attach Gcash Receipt</label>
-                            <input type = "file" name = "document-image" style="border: solid gray 1px; padding: 6px; width: 80%; border-radius: 4px"/>
+                            <input type = "file" name = "proof" style="border: solid gray 1px; padding: 6px; width: 80%; border-radius: 4px"/>
                         </div>
                     </div>
                     

@@ -1,6 +1,12 @@
-<?php
+<?php 
+ini_set('session.cache_limiter','public');
+session_cache_limiter(false);
 session_start();
-include "dbconn.php"; 
+include("dbconn.php");
+if(!isset($_SESSION['email']))
+{
+	header("location:userLogin.php");
+} 
 ?>
 
 <!doctype html>

@@ -151,7 +151,7 @@ include("dbconn.php");
                                             <div class="row">
 											    <div class="col-xl-12">
 												<div class="form-group row">
-													<label class="col-lg-2 col-form-label">Trade Name</label>
+													<label class="col-lg-2 col-form-label">Business Name</label>
 													<div class="col-lg-9">
 														<?php if (isset($_GET['propertyname'])) { ?>
                                                             <input required type = "text" 
@@ -521,7 +521,7 @@ include("dbconn.php");
                                             <div class="row">
 											    <div class="col-xl-12">
 												<div class="form-group row">
-													<label class="col-lg-2 col-form-label">Trade Name</label>
+													<label class="col-lg-2 col-form-label">Business Name</label>
 													<div class="col-lg-9">
 														<?php if (isset($_GET['propertyname'])) { ?>
                                                             <input required type = "text" 
@@ -818,6 +818,40 @@ include("dbconn.php");
                             </div>
                         </div>
                     </div>         
+
+                    <div class="container">
+                    <div class="tab-content">
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                                    <?php    
+                                        $email = $_SESSION['email'];
+                                        $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode JOIN user ON property.user_ID = user.user_ID WHERE user.email = '$email'");
+										    while($row=mysqli_fetch_array($query))
+										    {
+								    ?>
+									
+                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="property-item rounded overflow-hidden bg-white">
+                                    <div class="position-relative overflow-hidden">
+                                        <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
+                                        <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;"><?php echo $row['propertytype'];?></div>
+                                    </div><br>
+                                    <div class="p-4 pb-0">
+                                        <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
+                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['propertyname'];?></a>
+                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i></i><?php echo $row['propertyaddress'];?></p>
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="flex-fill text-center border-end py-2"><i class="bx bxs-door-open me-2" style = "color: #5D59AF;"></i></i><?php echo $row['availablerooms'];?> Available Rooms</small>
+                                        <small class="flex-fill text-center border-end py-2"><i class="bx bxs-bed me-2" style = "color: #5D59AF;"></i><?php echo $row['bed'];?> Bed</small>
+                                        <small class="flex-fill text-center py-2"><i class="bx bxs-bath me-2" style = "color: #5D59AF;"></i>Bath - </i><?php echo $row['bathroom'];?></small>
+                                    </div>
+                                </div><br>
+                            </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
 							
 				<footer class="footer">
                     <div class="container-fluid">

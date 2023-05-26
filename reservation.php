@@ -9,16 +9,27 @@ if(!isset($_SESSION['email']))
 } 
 
     if(isset($_POST['submit-details'])) {
-        $title = $_POST['title'];
+        $pname = $_POST['pname'];
         $content = $_POST['content'];
         $userid = $_SESSION['user_ID'];
+        $downpayment = $_POST['downpayment'];
+        $paycon = $_POST['paycon'];
+        $paymet = $_POST['paymet'];
+        $payday = $_POST['payday'];
+        $gname = $_POST['gname'];
+        $gnumber = $_POST['gnumber'];
         $email = $_SESSION['email'];
+        $prop_ID = mysqli_query($conn, "SELECT property_ID FROM property WHERE propertyname = $pname");
 
-        $query = "UPDATE reservationdetails SET title = '$title', content = '$content' WHERE user_ID = '$userid'";
+        $code = rand(1, 99999);
+        $resd_ID = "RDES_".$code;
+
+        $query = "INSERT INTO reservationdetails (resdetails_ID, prop_ID, downpayment, paycon, paymet, payday, gname, gnumber, content, user_ID)
+                    VALUES ('$resd_ID', '$prop_ID', '$downpayment', '$paycon', '$paymet', '$payday', '$gname', '$gnumber', '$content', '$userid')";
         $res = mysqli_query($conn, $query);
 
         if ($res) {
-            header ("Location: reservation.php&saved");
+            header ("Location: reservation.php?saved");
         } else {
             echo "failed";
         }
@@ -118,7 +129,7 @@ if(!isset($_SESSION['email']))
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Room </a>
+					    <a class="navbar-brand" href="#"> Reservation </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,7 +176,8 @@ if(!isset($_SESSION['email']))
                                                     <thead>
                                                         <tr>
                                                             <th>Date</th>
-                                                            <th>Full Name</th>
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
                                                             <th>Email</th>
                                                             <th>Contact</th>
                                                             <th>Amount</th>
@@ -198,7 +210,8 @@ if(!isset($_SESSION['email']))
                                                                 ?>
                                                                     <tr class = "data-row"> 
                                                                         <td> <?php echo $row['date'] ?> </td>
-                                                                        <td> <?php echo $row['fullName'] ?> </td>
+                                                                        <td> <?php echo $row['firstname'] ?> </td>
+                                                                        <td> <?php echo $row['lastname'] ?> </td>
                                                                         <td> <?php echo $row['email'] ?> </td>
                                                                         <td> <?php echo $row['contact'] ?> </td>
                                                                         <td> <?php echo $row['amount'] ?> </td> 
@@ -266,29 +279,93 @@ if(!isset($_SESSION['email']))
                             <div class = "tab-pane fade" id = "tab-table">  
                                 <div class = "containers"> 
                                 <br> 
-                                    <div class = "row"> 
-                                        <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px">   
-                                            <legend> Update Reservation Details </legend>
-                                        </div>
-
-                                        <div class = "offset-md-1 col-md-10">
+                                    <div class = "row "> 
+                                        <div class = "offset-md-0 col-md-12">
                                             <form method = "POST" action = "">
-                                                <div class = "form-group">
-                                                    <!--<label> Title </label>-->
-                                                    <div class="col-lg-5">
-                                                        <input type = "text" name = "title" class = "form-control" placeholder = "Enter your Gcash name"/>
+                                                <h5> Payment Information</h5>
+                                                <div class="col-xl-6">
+												    <div class="form-group row">
+													    <label class="col-lg-4 col-form-label">Business Name</label>
+													    <div class="col-lg-8">
+														    <select class="form-control" required name="pname">
+															    <option value="">Select...</option>
+															    <option value="apartment">Apartment</option>
+															    <option value="flat">Flat</option>
+															    <option value="building">Building</option>
+															    <option value="house">House</option>
+															    <option value="villa">Villa</option>
+															    <option value="office">Office</option>
+														    </select>
+													    </div>
+												    </div>
+												    <div class="form-group row">
+													    <label class="col-lg-4 col-form-label">Downpayment %</label>
+													    <div class="col-lg-8">
+														    <select class="form-control" required name="downpayment">
+															    <option value="">Select...</option>
+															    <option value="1">100%</option>
+															    <option value="0.75">75%</option>
+                                                                <option value="0.5">50%</option>
+														    </select>
+													    </div>
+												    </div>
+                                                    <div class="form-group row">
+													    <label class="col-lg-4 col-form-label">Payment Condition</label>
+													    <div class="col-lg-8">
+														    <select class="form-control" required name="paycon">
+															    <option value="">Select...</option>
+															    <option value="1">1 month advance</option>
+															    <option value="2">1 month advance, 1 month deposit</option>
+                                                                <option value="2">2 months advance</option>
+                                                                <option value="3">3 months advance</option>
+														    </select>
+													    </div>
                                                     </div>
-                                                </div>
-
-                                                <div class = "form-group"> 
-													<div class="col-lg-5">
-                                                    <input type = "text" name = "title" class = "form-control" placeholder = "Enter your Gcash number"/>	
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-4 col-form-label">Payment Method</label>
+													    <div class="col-lg-8">
+														    <select class="form-control" required name="paymet">
+															    <option value="">Select one...</option>
+															    <option value="1">Gcash</option>
+															    <option value="2">Cash</option>
+														    </select>
+													    </div>
+												    </div>
+                                                    <div class="form-group row">
+													    <label class="col-lg-4 col-form-label">Day/s to Pay</label>
+													    <div class="col-lg-8">
+														    <input type="number" class="form-control" name="payday" required placeholder="ex. 1">
+													    </div>
+												    </div>
+												    <div class="form-group row">
+													    <label class="col-lg-4 col-form-label">Gcash Name</label>
+													    <div class="col-lg-8">
+														    <input type="text" class="form-control" name="gname" required placeholder="Enter your Gcash Name">
+                                                            <small> *Kindly put n/a if not applicable </small>
+													    </div>
+												    </div>
+												    <div class="form-group row">
+													    <label class="col-lg-4 col-form-label">Gcash Number</label>
+													    <div class="col-lg-8">
+														    <input type="number" class="form-control" name="gnumber" required placeholder="09********">
+                                                            <small> *Kindly put n/a if not applicable </small>
+													    </div>
+												    </div>
+											    </div><br>
+                                                <h5> Terms and Condition</h5>
+                                                <div class="form-group row">
+													<label class="col-lg-2 col-form-label">Content</label>
+													<div class="col-lg-9">
+														<textarea id = "rescontent" name="content" rows="10" cols="30"
+                                                            placeholder = "Here you can put your terms and condition like your payment terms
+                                                            and cancellation policy."></textarea>
 													</div>
-                                                </div>
-                                                <input type = "submit" name = "submit-details" class = "btn btn-info" value = "Save"/>
+												</div><br>
+                                                <input type = "submit" name = "submit-details" class = "btn btn-info" value = "Save" style = "float:right;"/>
                                             </form>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
                         </div>

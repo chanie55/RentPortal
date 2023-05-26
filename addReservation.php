@@ -12,10 +12,10 @@ if(!isset($_SESSION['email']))
         $uid= $_SESSION['user_ID'];
         $email = $_SESSION['email'];
         $amount = $_POST['amount'];
-        $mop = $_POST['mod'];
-        $payday = date('Y-m-d', strtotime($_POST['payday']));
+        $mop = $_POST['mop'];
 
-        $query = "INSERT INTO reservation (user_ID, amount, mop) VALUES ('$uid', '$amount', '$mop')";
+
+        $query = "INSERT INTO reservation (user_ID, amount, status, mop) VALUES ('$uid', '$amount', 'Pending', '$mop')";
         $res = mysqli_query($conn, $query);
 
         if ($res) {
@@ -23,5 +23,7 @@ if(!isset($_SESSION['email']))
         } else {
             echo "failed";
         }
+
+        
     }
 ?>
