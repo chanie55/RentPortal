@@ -408,6 +408,23 @@ body{
     border-right: 1px dashed rgba(0, 185, 142, .3) !important;
 }
 
+.table{
+    width: 30%;
+    position: absolute;
+    margin-left: 50%;
+    margin-top: 4%;
+    font-size: large;
+}
+
+.head{
+    position: absolute;
+    margin-left: 58%;
+    margin-top: 3%;
+    font-size: larger; 
+    font-weight: bold;
+}
+
+
 
 /*** Footer ***/
 .footer .btn.btn-social {

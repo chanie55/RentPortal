@@ -303,7 +303,7 @@ if(!isset($_SESSION['email']))
                                 <div class="card-body">
                                     <h5 class="card-title">Reservation</h5>
                                     <p class="card-text">Want to secure your room/space? Reserve Now!</p>
-                                    <a href="seekerReservePage.php" class="btn btn-primary">Make Reservation</a>
+                                    <a href="seekerReservePage.php?prop_ID=<?php echo $_REQUEST['property_ID']; ?>" class="btn btn-primary">Make Reservation</a>
                                 </div>
                             </div> 
                         </div>
