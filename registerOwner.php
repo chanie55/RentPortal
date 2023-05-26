@@ -170,26 +170,32 @@
 
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Contact</label>
-                                <?php if (isset($_GET['contact'])) { ?>
-                                    <input required type = "number" 
-                                    name = "contact" 
+                            <?php if (isset($_GET['contact'])) {
+                                $contactValue = $_GET['contact'];
+                                if (substr($contactValue, 0, 4) !== '+639') {
+                                    $contactValue = '+639' . ltrim($contactValue, '0');
+                                }
+                            ?>
+                                <input required type="tel"
+                                    name="contact"
                                     class="form-control"
-                                    pattern = "[0-9]{11}" 
-                                    max = "11"
+                                    pattern="[+0-9]{11}"
+                                    maxlength="11"
                                     id="validationCustom06"
-                                    value = "<?php echo $_GET['contact']; ?>"><br>
-                                <?php } else { ?>
-                                    <input required type = "number" 
-                                    name = "contact" 
+                                    value="<?php echo $contactValue; ?>"><br>
+                            <?php } else { ?>
+                                <input required type="tel"
+                                    name="contact"
                                     class="form-control"
-                                    pattern = "[0-9]{11}"
-                                    max = "11"
+                                    pattern="[+0-9]{11}"
+                                    maxlength="11"
                                     id="validationCustom06"><br>
-                                <?php } ?>
-                            <div class = "invalid-feedback"> 
+                            <?php } ?>
+                            <div class="invalid-feedback">
                                 Contact must be 11 digits
                             </div>
-                        </div> 
+                        </div>
+
                     </div>
 
                         
