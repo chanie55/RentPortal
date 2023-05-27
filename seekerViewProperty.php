@@ -314,7 +314,7 @@ if(!isset($_SESSION['email']))
                                     <div class="card-body">
                                         <h5 class="card-title">Visit</h5>
                                         <p class="card-text">If you are interested and would like to know more, you can visit our place.</p>
-                                        <a href="#" class="btn btn-primary">Schedule Visit</a>
+                                        <a href="seekerVisitSchedule.php" class="btn btn-primary">Schedule Visit</a>
                                     </div>
                                 </div>
                             </div>

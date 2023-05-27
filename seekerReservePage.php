@@ -156,7 +156,7 @@ if(!isset($_SESSION['email']))
                                 <li> On this page, click the “Reserve Now” button </li><br>
                                 <li> Fill-out the reservation form and attach your receipt. </li><br>
                             </ol>
-                            <h1 class="mb-3">Terms and Condtion</h1>
+                            <h1 class="mb-3">Terms and Condition</h1>
                             <p> <?php echo $row['content']; ?> </p>
                         </div>
                         <?php

@@ -343,13 +343,20 @@ if(!isset($_SESSION['email']))
 													    <label class="col-lg-4 col-form-label">Business Name</label>
 													    <div class="col-lg-8">
 														    <select class="form-control" required name="pname">
-															    <option value="">Select...</option>
-															    <option value="apartment">Apartment</option>
-															    <option value="flat">Flat</option>
-															    <option value="building">Building</option>
-															    <option value="house">House</option>
-															    <option value="villa">Villa</option>
-															    <option value="office">Office</option>
+                                                            <option selected disabled value="">Choose...</option>
+                                                            <?php
+                                                                include "dbconn.php";
+                            
+                                                                $uid = $_SESSION['user_ID'];
+                                                                $name_query=mysqli_query($conn,"SELECT * FROM property JOIN user ON property.user_ID = user.user_ID WHERE property.user_ID = '$uid'");
+                                                                $r = mysqli_query($conn, $name_query);
+
+                                                                while ($row = mysqli_fetch_array($r)) {
+                                                                ?>
+                                                                <option> <?php echo $row['propertyname']; ?></option>
+                                                                <?php
+                                                                }
+                                                            ?>
 														    </select>
 													    </div>
 												    </div>

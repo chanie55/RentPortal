@@ -105,7 +105,7 @@
                     <div class="events"></div>
                     <div class="add-event-wrapper">
                     <div class="add-event-header">
-                        <div class="title">Add Event</div>
+                        <div class="title">Schedule Visit</div>
                         <i class="fas fa-times close"></i>
                     </div>
                     <div class="add-event-body">
