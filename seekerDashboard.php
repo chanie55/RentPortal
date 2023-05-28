@@ -161,7 +161,8 @@ if(!isset($_SESSION['email']))
                         <div class="row g-4">
                                     <?php    
                                         $email = $_SESSION['email'];
-                                        $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode");
+                                        $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode, businessname.category FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode 
+                                                            JOIN businessname ON businessname.bname_ID = property.bname_ID");
 										    while($row=mysqli_fetch_array($query))
 										    {
 								    ?>
@@ -171,11 +172,12 @@ if(!isset($_SESSION['email']))
                                     <div class="position-relative overflow-hidden">
                                         <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
                                         <div class="rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3" style = "background: #5D59AF;">For Rent</div>
-                                        <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;"><?php echo $row['propertytype'];?></div>
+                                        <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;"><?php echo $row['category'];?></div>
                                     </div>
                                     <div class="p-4 pb-0">
                                         <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
-                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['propertyname'];?></a>
+                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['title'];?></a>
+                                        <p><?php echo $row['bname'];?></p>
                                         <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i></i><?php echo $row['propertyaddress'];?></p>
                                     </div>
                                     <div class="d-flex border-top">

@@ -348,14 +348,15 @@ if(!isset($_SESSION['email']))
                                                                 include "dbconn.php";
                             
                                                                 $uid = $_SESSION['user_ID'];
-                                                                $name_query=mysqli_query($conn,"SELECT * FROM property JOIN user ON property.user_ID = user.user_ID WHERE property.user_ID = '$uid'");
+                                                                $name_query = "SELECT bname FROM businessname WHERE user_ID = '$uid'";
                                                                 $r = mysqli_query($conn, $name_query);
 
                                                                 while ($row = mysqli_fetch_array($r)) {
                                                                 ?>
-                                                                <option> <?php echo $row['propertyname']; ?></option>
+                                                                    <option> <?php echo $row['bname']; ?></option>
                                                                 <?php
                                                                 }
+                                                        
                                                             ?>
 														    </select>
 													    </div>

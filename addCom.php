@@ -14,10 +14,10 @@ include "dbconn.php";
 
 
     if (isset($_POST['submit-property'])) {
-        $name = $_POST['propertyname'];
-        $type = $_POST['property'];
+        $email = $_SESSION['email'];
+        $bname = $_POST['bname'];
+        $title = $_POST['title'];
         $description = $_POST['description'];
-        $total = $_POST['totalrooms'];
         $available = $_POST['availablerooms'];
         $monthlyrate = $_POST['rate'];
         $aircon = $_POST['aircon'];
@@ -28,44 +28,55 @@ include "dbconn.php";
 
         $code = rand(1, 99999);
         $prop_ID = "COM_".$code;
+        $bname_ID = mysqli_query($conn, "SELECT bname_ID FROM businessname WHERE bname = '$bname'");
 
-        $query = "INSERT INTO property(property_ID, propertyname, description,  propertytype, totalrooms, availablerooms, monthlyrate, kitchen, bathroom, aircon, dimension, user_ID)
-                    VALUES ('$prop_ID', '$name', '$description', '$type', '$total', '$available', '$monthlyrate', '$kitchentype', '$bathtype', '$aircon', '$dimension', '$user_ID')";
-        $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($bname_ID) == TRUE) {
+            $row = mysqli_fetch_assoc($bname_ID);
+            $_SESSION['bname_ID'] = $row['bname_ID'];
+            $id = $_SESSION['bname_ID'];
 
-        if ($result) {
+            $query = "INSERT INTO property(property_ID, bname_ID, title, description,  bedtype, availablerooms, monthlyrate, dailyrate, bed, kitchen, bathroom, aircon, dimension)
+                    VALUES ('$prop_ID', '$id', '$title', '$description', '$bedtype', '$available', '$monthlyrate', '$dailyrate', '$bed', '$kitchentype', '$bathtype', '$aircon', '$dimension')";
+            $result = mysqli_query($conn, $query);
 
-            //Room Images
+            if ($result) {
 
-            if (isset($_FILES['image'])) {
-                foreach ($_FILES['image']['tmp_name'] as $key => $value) {
-                    $img_name = $_FILES['image']['name'][$key];
-                    $tmp_name = $_FILES['image']['tmp_name'][$key];
-
-                    $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
-                    $img_ex_loc = strtolower($img_ex);
+                //Room Images
     
-                    $allowed_ex = array ("jpg", "jpeg", "png", "gif");
-
-                    if (in_array($img_ex_loc, $allowed_ex)) {
-                        $new_img_name = uniqid("PROPIMG-", true).'.'.$img_ex_loc;
-                        $img_upload_path = './images/'.$new_img_name;
-                        move_uploaded_file($tmp_name, $img_upload_path);
-
-                        //into the database
-                        $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Property Image', '$prop_ID')";
-                        mysqli_query($conn, $image_query);
-                        header("Location: ownerProperty.php?Successfully added");
-                    } else {
-                        $message = "You cannot upload files of this type";
-                        header("Location: ownerProperty.php?error=$message");
-                    }
-            }   
-            header ("Location: ownerProperty.php?saved");
-            } else {
-            echo "failed";
+                if (isset($_FILES['image'])) {
+                    foreach ($_FILES['image']['tmp_name'] as $key => $value) {
+                        $img_name = $_FILES['image']['name'][$key];
+                        $tmp_name = $_FILES['image']['tmp_name'][$key];
+    
+                        $img_ex = pathinfo($img_name, PATHINFO_EXTENSION);
+                        $img_ex_loc = strtolower($img_ex);
+        
+                        $allowed_ex = array ("jpg", "jpeg", "png", "gif");
+    
+                        if (in_array($img_ex_loc, $allowed_ex)) {
+                            $new_img_name = uniqid("PROPIMG-", true).'.'.$img_ex_loc;
+                            $img_upload_path = './images/'.$new_img_name;
+                            move_uploaded_file($tmp_name, $img_upload_path);
+    
+                            //into the database
+                            $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Property Image', '$prop_ID')";
+                            mysqli_query($conn, $image_query);
+                            header("Location: ownerProperty.php?Successfully added");
+                        } else {
+                            $message = "You cannot upload files of this type";
+                            header("Location: ownerProperty.php?error=$message");
+                        }
+                }   
+                header ("Location: ownerProperty.php?saved");
+                } else {
+                echo "failed";
+                }
             }
         }
+
+        
+
+        
     }
 
 ?>

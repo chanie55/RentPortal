@@ -49,7 +49,7 @@ include("dbconn.php");
 			
                     <li class="dropdown">
                         <a href = "ownerProperty.php">
-					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
+					    <i class="bx bxs-edit-location"></i><span>Post</span></a>
                     </li>
                 
                     <li>
@@ -96,7 +96,7 @@ include("dbconn.php");
                         <button type="button" id="sidebarCollapse" class="d-xl-block d-lg-block d-md-mone d-none">
                             <span class="bx bx-menu-alt-left"></span>
                         </button>
-					    <a class="navbar-brand" href="#"> Post Property </a>
+					    <a class="navbar-brand" href="#"> Post </a>
 					
                         <button class="d-inline-block d-lg-none ml-auto more-button" type="button" data-toggle="collapse"
 					        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,10 +128,10 @@ include("dbconn.php");
                     <div class = "container my-5"> 
                         <nav class = "nav nav-tabs"> 
                             <button type = "button" class = "nav-link active" data-toggle = "tab" data-target = "#tab-residential"> 
-                                For Residential Property
+                                For Residential
                             </button>
                             <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-commercial"> 
-                                For Commercial Property 
+                                For Commercial
                             </button>
                         </nav>
 
@@ -140,7 +140,7 @@ include("dbconn.php");
                                 
                                 <div class = "containers">
                                     <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
-                                        <legend class = "text-left"> Basic Information </legend>
+                                        <legend class = "text-left"> Add new Listing </legend>
                                         <br>
                                         <br>
                                     </div> 
@@ -150,33 +150,61 @@ include("dbconn.php");
                                             <form method = "post" action = "addProperty.php" class="needs-validation" enctype = "multipart/form-data" novalidate>
                                             <div class="row">
 											    <div class="col-xl-12">
+                                                    <div class="form-group row">
+													    <label class="col-lg-2 col-form-label">Business Name</label>
+													    <div class="col-lg-7">
+														    <select class="form-control" required name="bname">
+                                                            <option selected disabled value="">Choose...</option>
+                                                            <?php
+                                                                include "dbconn.php";
+                            
+                                                                $uid = $_SESSION['user_ID'];
+                                                                $name_query = "SELECT bname FROM businessname WHERE user_ID = '$uid'";
+                                                                $r = mysqli_query($conn, $name_query);
+
+                                                                while ($row = mysqli_fetch_array($r)) {
+                                                                ?>
+                                                                    <option> <?php echo $row['bname']; ?></option>
+                                                                <?php
+                                                                }
+                                                        
+                                                            ?>
+														    </select>
+													    </div>
+												    </div>
+                                                    <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label">Featured Photo:</label>
+                                                        <div class="col-lg-5">
+                                                            <input type = "file" name = "featured" style="border: solid gray 1px; padding: 6px; width: 80%; border-radius: 4px"/>
+                                                        </div>
+                                                    </div>
 												<div class="form-group row">
-													<label class="col-lg-2 col-form-label">Business Name</label>
+													<label class="col-lg-2 col-form-label">Title <span style = "color:red;">*</span></label>
 													<div class="col-lg-9">
-														<?php if (isset($_GET['propertyname'])) { ?>
+														<?php if (isset($_GET['title'])) { ?>
                                                             <input required type = "text" 
-                                                            name = "propertyname" 
+                                                            name = "title" 
                                                             class="form-control" 
                                                             id="validationCustom01"
-                                                            value = "<?php echo $_GET['propertyname']; ?>"><br>
+                                                            value = "<?php echo $_GET['title']; ?>"><br>
                                                         <?php } else { ?>
                                                             <input required type = "text" 
-                                                            name = "propertyname" 
+                                                            name = "title" 
                                                             class="form-control"
                                                             id="validationCustom01"><br>
                                                         <?php } ?>
                                                         <div class = "invalid-feedback"> 
-                                                            Please provide your property name
+                                                            Please provide your business name
                                                         </div>
 													</div>
 												</div>
 												<div class="form-group row">
-													<label class="col-lg-2 col-form-label">Description</label>
+													<label class="col-lg-2 col-form-label">Description <span style = "color:red;">*</span></label>
 													<div class="col-lg-9">
                                                         <textarea name = "description" id = "description" class="form-control" id="validationCustom07" required></textarea>	
 													</div>
                                                     <div class = "invalid-feedback"> 
-                                                            Please provide your property name
+                                                            Please provide some description
                                                         </div>
 												</div>
                                             </div>
@@ -184,7 +212,7 @@ include("dbconn.php");
 
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="validationCustom03">Address</label>
+                                                    <label for="validationCustom03">Location</label>
                                                     <input type = "hidden" name = "lat" value = '<?php echo $_GET['lat']; ?>'>
                                                     <input type = "hidden" name = "lng" value = '<?php echo $_GET['lng']; ?>'>
                                                     <a href = "viewmap.php?email=<?php echo $_REQUEST['email']?>"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
@@ -204,50 +232,8 @@ include("dbconn.php");
                                             </div><br>
 
                                             <div class="form-row">
-                                                <div class="col-md-3 mb-3">    
-                                                    <label for="validationCustom02">Residential Type </label>
-                                                    <select class="custom-select" id="validationCustom02" name = "property" required> 
-                                                        <option selected disabled value="">Choose...</option>
-                                                        <?php
-                                                        include "dbconn.php";
-                            
-                                                        $name_query = "SELECT property FROM propertytype";
-                                                        $r = mysqli_query($conn, $name_query);
-
-                                                        while ($row = mysqli_fetch_array($r)) {
-                                                        ?>
-                                                        <option> <?php echo $row['property']; ?></option>
-                                                        <?php
-                                                        }
-                                                         ?>
-                                                    </select>
-                                                    <div class = "invalid-feedback"> 
-                                                        Please select a property type
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Room Type</label>
-                                                    <?php if (isset($_GET['roomtype'])) { ?>
-                                                        <input required type = "text" 
-                                                                name = "roomtype" 
-                                                                class="form-control"
-                                                                id="validationCustom06"
-                                                                placeholder = "Single Room"
-                                                                value = "<?php echo $_GET['roomtype']; ?>"><br>
-                                                    <?php } else { ?>
-                                                        <input required type = "text" 
-                                                                name = "roomtype" 
-                                                                class="form-control"
-                                                                placeholder = "ex. Single Room"
-                                                                id="validationCustom06"><br>
-                                                    <?php } ?>
-                                                    <div class = "invalid-feedback"> 
-                                                        Contact must be 11 digits
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Number of Available Rooms</label>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom06">Available Room/Unit</label>
                                                     <?php if (isset($_GET['availablerooms'])) { ?>
                                                         <input required type = "number" 
                                                                 name = "availablerooms" 
@@ -265,32 +251,42 @@ include("dbconn.php");
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Total Number of Rooms</label>
-                                                    <?php if (isset($_GET['totalrooms'])) { ?>
-                                                        <input required type = "number" 
-                                                                name = "totalrooms" 
-                                                                class="form-control"
-                                                                id="validationCustom06"
-                                                                value = "<?php echo $_GET['totalrooms']; ?>"><br>
-                                                    <?php } else { ?>
-                                                        <input required type = "number" 
-                                                                name = "totalrooms" 
-                                                                class="form-control"
-                                                                id="validationCustom06"><br>
-                                                    <?php } ?>
+                                                <div class="col-md-4 mb-3">    
+                                                    <label for="validationCustom02">Bed Type </label>
+                                                    <select class="custom-select" id="validationCustom02" name = "bedtype" required> 
+                                                        <option selected disabled value="">Choose...</option>
+                                                        <option value="Single Bed">Single Bed</option>
+														<option value="Double Deck">Double Deck</option>
+                                                    </select>
                                                     <div class = "invalid-feedback"> 
-                                                        Contact must be 11 digits
+                                                        Please select a property type
                                                     </div>
                                                 </div>
                                                 
-                                                
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom06">Number of Bed</label>
+                                                    <?php if (isset($_GET['bed'])) { ?>
+                                                        <input required type = "number" 
+                                                                name = "bed" 
+                                                                class="form-control"
+                                                                id="validationCustom06"
+                                                                value = "<?php echo $_GET['bed']; ?>"><br>
+                                                    <?php } else { ?>
+                                                        <input required type = "number" 
+                                                                name = "bed" 
+                                                                class="form-control"
+                                                                id="stpurok"><br>
+                                                    <?php } ?>
+                                                    <div class = "invalid-feedback"> 
+                                                        Please provide the monthly rate
+                                                    </div>
+                                                </div>
                                             </div><br>
                                             
 
                                             <div class="form-row">
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Monthly Rate</label>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom06">Monthly Rate <span><small>(must be an exact amount)</small> </span></label>
                                                     <?php if (isset($_GET['rate'])) { ?>
                                                         <input required type = "number" 
                                                                 name = "rate" 
@@ -308,8 +304,8 @@ include("dbconn.php");
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Daily Rate</label>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom06">Daily Rate <span><small>(if applicable)</small> </span></label>
                                                     <?php if (isset($_GET['drate'])) { ?>
                                                         <input required type = "number" 
                                                                 name = "drate" 
@@ -327,27 +323,10 @@ include("dbconn.php");
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Number of Bed (per room)</label>
-                                                    <?php if (isset($_GET['bed'])) { ?>
-                                                        <input required type = "number" 
-                                                                name = "bed" 
-                                                                class="form-control"
-                                                                id="validationCustom06"
-                                                                value = "<?php echo $_GET['bed']; ?>"><br>
-                                                    <?php } else { ?>
-                                                        <input required type = "number" 
-                                                                name = "bed" 
-                                                                class="form-control"
-                                                                id="stpurok"><br>
-                                                    <?php } ?>
-                                                    <div class = "invalid-feedback"> 
-                                                        Please provide the monthly rate
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                             
-                                            <h5 class = "text-secondary"> Room Inclusions </h5>
+                                            <h5 class = "text-secondary"> Room/Unit Inclusions </h5>
                                             <div class="form-row">
                                                 
                                             <div class="col-sm-4">
@@ -485,15 +464,14 @@ include("dbconn.php");
                                             
 
                                             <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
-                                                <legend class = "text-left"> Room Images </legend>
+                                                <legend class = "text-left"> Images </legend>
                                                 <br>
                                                 <br>
                                             </div>
 
                                             <div class="form-group">
-                                                <label>Room Image:</label>
+                                                <label>Upload Photo:</label>
                                                 <input type = "file" name = "image[]" multiple/>
-    
                                             </div>
 
                                             <button class="btn btn-primary" type="submit" name = "submit-property">POST</button>
@@ -510,7 +488,8 @@ include("dbconn.php");
                                 
                                 <div class = "containers">
                                     <div class = "offset-md-12 col-md-12 modal-header" style = "padding: 0; padding-left: 15px; margin-bottom: 15px"> 
-                                        <legend class = "text-left"> Basic Information </legend>
+                                        <legend class = "text-left"> Add new Listing </legend> 
+                                        <a href = "manageOwner.php"> <h6 class="category">My Listings</p> </h6></a>
                                         <br>
                                         <br>
                                     </div> 
@@ -522,21 +501,49 @@ include("dbconn.php");
 											    <div class="col-xl-12">
 												<div class="form-group row">
 													<label class="col-lg-2 col-form-label">Business Name</label>
+													<div class="col-lg-7">
+														<select class="form-control" required name="bname">
+                                                        <option selected disabled value="">Choose...</option>
+                                                        <?php
+                                                            include "dbconn.php";
+                            
+                                                            $uid = $_SESSION['user_ID'];
+                                                            $name_query = "SELECT bname FROM businessname WHERE user_ID = '$uid'";
+                                                            $r = mysqli_query($conn, $name_query);
+
+                                                            while ($row = mysqli_fetch_array($r)) {
+                                                            ?>
+                                                                <option> <?php echo $row['bname']; ?></option>
+                                                            <?php
+                                                            }
+                                                        
+                                                        ?>
+														</select>
+													</div>
+												</div>
+                                                <div class="form-group row">
+                                                        <label class="col-lg-2 col-form-label">Featured Photo:</label>
+                                                        <div class="col-lg-5">
+                                                            <input type = "file" name = "featured" style="border: solid gray 1px; padding: 6px; width: 80%; border-radius: 4px"/>
+                                                        </div>
+                                                    </div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label">Title <span style = "color:red;">*</span></label>
 													<div class="col-lg-9">
-														<?php if (isset($_GET['propertyname'])) { ?>
+														<?php if (isset($_GET['title'])) { ?>
                                                             <input required type = "text" 
-                                                            name = "propertyname" 
+                                                            name = "title" 
                                                             class="form-control" 
                                                             id="validationCustom01"
-                                                            value = "<?php echo $_GET['propertyname']; ?>"><br>
+                                                            value = "<?php echo $_GET['title']; ?>"><br>
                                                         <?php } else { ?>
                                                             <input required type = "text" 
-                                                            name = "propertyname" 
+                                                            name = "title" 
                                                             class="form-control"
                                                             id="validationCustom01"><br>
                                                         <?php } ?>
                                                         <div class = "invalid-feedback"> 
-                                                            Please provide your property name
+                                                            Please provide your business name
                                                         </div>
 													</div>
 												</div>
@@ -554,7 +561,7 @@ include("dbconn.php");
 
                                             <div class="form-row">
                                                 <div class="col-md-12 mb-3">
-                                                    <label for="validationCustom03">Address</label>
+                                                    <label for="validationCustom03">Location</label>
                                                     <a href = "viewmap.php"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
                                                     <div class = "invalid-feedback"> 
                                                         Please provide your property address
@@ -572,10 +579,10 @@ include("dbconn.php");
                                             </div><br>
 
                                             <div class="form-row">
-                                                <div class="col-md-3 mb-3">
+                                                <div class="col-md-4 mb-3">
                                                 <input type="hidden" class="form-control" id="validationCustom02" name = "property" value="Commercial Property">
 
-                                                    <label for="validationCustom06">Number of Available Space</label>
+                                                    <label for="validationCustom06">Available Space</label>
                                                     <?php if (isset($_GET['availablerooms'])) { ?>
                                                         <input required type = "number" 
                                                                 name = "availablerooms" 
@@ -592,28 +599,9 @@ include("dbconn.php");
                                                         Contact must be 11 digits
                                                     </div>
                                                 </div>
-
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Total Number of Space</label>
-                                                    <?php if (isset($_GET['totalrooms'])) { ?>
-                                                        <input required type = "number" 
-                                                                name = "totalrooms" 
-                                                                class="form-control"
-                                                                id="validationCustom06"
-                                                                value = "<?php echo $_GET['totalrooms']; ?>"><br>
-                                                    <?php } else { ?>
-                                                        <input required type = "number" 
-                                                                name = "totalrooms" 
-                                                                class="form-control"
-                                                                id="validationCustom06"><br>
-                                                    <?php } ?>
-                                                    <div class = "invalid-feedback"> 
-                                                        Contact must be 11 digits
-                                                    </div>
-                                                </div>
                                                 
-                                                <div class="col-md-3 mb-3">
-                                                    <label for="validationCustom06">Monthly Rate</label>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationCustom06">Monthly Rate <span><small>(must be an exact amount)</small> </span></label>
                                                     <?php if (isset($_GET['rate'])) { ?>
                                                         <input required type = "number" 
                                                                 name = "rate" 
@@ -631,7 +619,7 @@ include("dbconn.php");
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-3 mb-3">
+                                                <div class="col-md-4 mb-3">
                                                     <label for="validationCustom06">Dimension (sqft)</label>
                                                     <?php if (isset($_GET['dimension'])) { ?>
                                                         <input required type = "number" 
@@ -658,7 +646,7 @@ include("dbconn.php");
                                                 
                                             </div>
                                             
-                                            <h5 class = "text-secondary"> Room Inclusions </h5>
+                                            <h5 class = "text-secondary"> Space Inclusions </h5>
                                             <div class="form-row">
                                                 
                                             <div class="col-sm-4">
@@ -819,39 +807,7 @@ include("dbconn.php");
                         </div>
                     </div>         
 
-                    <div class="container">
-                    <div class="tab-content">
-                    <div id="tab-1" class="tab-pane fade show p-0 active">
-                        <div class="row g-4">
-                                    <?php    
-                                        $email = $_SESSION['email'];
-                                        $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode JOIN user ON property.user_ID = user.user_ID WHERE user.email = '$email'");
-										    while($row=mysqli_fetch_array($query))
-										    {
-								    ?>
-									
-                            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                                <div class="property-item rounded overflow-hidden bg-white">
-                                    <div class="position-relative overflow-hidden">
-                                        <a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><img class="img-fluid" src="images/sample.jpg" alt=""/></a>
-                                        <div class="bg-white rounded-top position-absolute start-0 bottom-0 mx-4 pt-1 px-3" style = "color: #5D59AF;"><?php echo $row['propertytype'];?></div>
-                                    </div><br>
-                                    <div class="p-4 pb-0">
-                                        <h5 class="mb-3" style = "color: #5D59AF;">&#8369 <?php echo $row['monthlyrate'];?></h5>
-                                        <a class="d-block h5 mb-2" href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['propertyname'];?></a>
-                                        <p><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i></i><?php echo $row['propertyaddress'];?></p>
-                                    </div>
-                                    <div class="d-flex border-top">
-                                        <small class="flex-fill text-center border-end py-2"><i class="bx bxs-door-open me-2" style = "color: #5D59AF;"></i></i><?php echo $row['availablerooms'];?> Available Rooms</small>
-                                        <small class="flex-fill text-center border-end py-2"><i class="bx bxs-bed me-2" style = "color: #5D59AF;"></i><?php echo $row['bed'];?> Bed</small>
-                                        <small class="flex-fill text-center py-2"><i class="bx bxs-bath me-2" style = "color: #5D59AF;"></i>Bath - </i><?php echo $row['bathroom'];?></small>
-                                    </div>
-                                </div><br>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
+                    
 							
 				<footer class="footer">
                     <div class="container-fluid">

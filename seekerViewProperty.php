@@ -144,7 +144,8 @@ if(!isset($_SESSION['email']))
                       $pid = $_REQUEST['property_ID']; 
                       $aid = $_REQUEST['addresscode'];
                       $email = $_SESSION['email'];
-						          $query=mysqli_query($conn,"SELECT * FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode WHERE property_ID = '$pid' AND addresscode = '$aid'");
+						          $query=mysqli_query($conn,"SELECT * FROM property JOIN businessname ON property.bname_ID = businessname.bname_ID 
+                                                    JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode WHERE property_ID = '$pid' AND addresscode = '$aid'");
 					          while($row=mysqli_fetch_array($query)) {
 					        ?>
 				  
@@ -218,7 +219,8 @@ if(!isset($_SESSION['email']))
                                 <div class="col-lg-12">
                                     <div class="listing_single_description2 mt30-767 mb-767">
                                         <div class="single_property_title">
-                                            <h2> <?php echo $row['propertyname'];?> </h2>
+                                            <h2> <?php echo $row['title'];?> </h2>
+                                            <h5> <?php echo $row['bname'];?> </h5>
                                         </div>
 
                                         <div class="single_property_social_share style2">
@@ -251,7 +253,7 @@ if(!isset($_SESSION['email']))
                                             <!--<div class="collapse show" id="collapseExample" style="" w-100>
                                             <div class="card card-body"> 
                                             <p class="mt10 mb10"></p> -->
-                                                        <div><?php echo $row['propertyname'];?></div>
+                                                        <div><?php echo $row['bname'];?></div>
                                                         <div>&nbsp;</div>
                                                         <p><?php echo $row['description'];?></p>
                                                         <label for="ch"> Show less </label>
@@ -277,7 +279,7 @@ if(!isset($_SESSION['email']))
                                     <div class="col-md-6 col-lg-6 col-xl-6">
                                         <dl class="inline">
                                             <dt><p>Property Type :</p></dt>
-                                                <dd><?php echo $row['propertytype'];?></dd>
+                                                <dd><?php echo $row['category'];?></dd>
                                             <dt><p>Property Size :</p></dt>
                                                 <dd><p>301 sqft</p></dd>
                                         </dl>
@@ -327,12 +329,13 @@ if(!isset($_SESSION['email']))
 								            <?php 
 								                $pid = $_REQUEST['property_ID']; 
                                                 $aid = $_REQUEST['addresscode'];
-                                                            $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode ORDER BY date_created DESC LIMIT 7");
+                                                            $query=mysqli_query($conn,"SELECT *,propertyaddress.addresscode FROM property JOIN businessname ON businessname.bname_ID = property.bname_ID 
+                                                                                JOIN propertyaddress ON property.propertyaddress = propertyaddress.addresscode ORDER BY date_created DESC LIMIT 7");
 										            while($row=mysqli_fetch_array($query))
 										            {
 								            ?>
                                 <li><img src="images/sample.jpg" alt="pimage" width = 40% height = 40%>
-                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['propertyname'];?></a></h6>
+                                    <h6 class="text-secondary hover-text-success text-capitalize"><a href="seekerViewProperty.php?property_ID=<?php echo $row['property_ID'];?>&addresscode=<?php echo $row['addresscode'];?>"><?php echo $row['title'];?></a></h6>
                                     <span class="font-14"><i class="bx bxs-map me-2" style = "color: #5D59AF;"></i>123 Street, New York, USA</span>   
                                 </li>
                             <?php } ?>
