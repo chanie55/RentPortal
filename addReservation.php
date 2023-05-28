@@ -14,6 +14,9 @@ if(!isset($_SESSION['email']))
         $email = $_SESSION['email'];
         $amount = $_POST['amount'];
         $mop = $_POST['mop'];
+        $firstname = $_POST['firstname'];
+        $lastname = $_POST['lastname'];
+        $contact = $_POST['contact'];
 
         if (isset($_FILES['proof'])) {
             $img_name = $_FILES['proof']['name'];
@@ -37,12 +40,14 @@ if(!isset($_SESSION['email']))
                         move_uploaded_file($tmp_name, $img_upload_path);
 
                         //into the database
-                        $image_query = "INSERT INTO images(image_url, type, user_ID) VALUES ('$new_img_name', 'Proof of Payment', '$uid')";
-                        $image_result = mysqli_query($conn, $image_query);
 
-                        $query = "INSERT INTO reservation (user_ID, amount, status, mop) VALUES ('$uid', '$amount', 'Pending', '$mop')";
+                        $transactID = "TRANSACT".$uid;
+
+                        $query = "INSERT INTO reservation (transactID, user_ID, amount, status, mop, proof) VALUES ('$transactID','$uid', '$amount', 'Pending', '$mop', '$new_img_name')";
                         $res = mysqli_query($conn, $query);
                         header("Location: seekerReserveNow.php?Successfully added");
+
+                        $update = mysqli_query($conn, "UPDATE userinfo WHERE firstname = '$firstname', lastname = '$lastname', contact = '$contact', email = '$email' WHERE user_ID = '$uid'");
                     } else {
                         $message = "You cannot upload files of this type";
                         header("Location: seekerReserveNow.php?error=$message");

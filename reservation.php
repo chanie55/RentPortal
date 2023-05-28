@@ -19,20 +19,38 @@ if(!isset($_SESSION['email']))
         $gname = $_POST['gname'];
         $gnumber = $_POST['gnumber'];
         $email = $_SESSION['email'];
-        $prop_ID = mysqli_query($conn, "SELECT property_ID FROM property WHERE propertyname = $pname");
-
         $code = rand(1, 99999);
         $resd_ID = "RDES_".$code;
 
-        $query = "INSERT INTO reservationdetails (resdetails_ID, prop_ID, downpayment, paycon, paymet, payday, gname, gnumber, content, user_ID)
-                    VALUES ('$resd_ID', '$prop_ID', '$downpayment', '$paycon', '$paymet', '$payday', '$gname', '$gnumber', '$content', '$userid')";
-        $res = mysqli_query($conn, $query);
+        $getbname = mysqli_query($conn, "SELECT bname_ID FROM businessname WHERE bname = '$pname'");
 
-        if ($res) {
-            header ("Location: reservation.php?saved");
-        } else {
-            echo "failed";
+        if (mysqli_num_rows($getbname) == TRUE) {
+            $row = mysqli_fetch_assoc($getbname);
+            $_SESSION['bname_ID'] = $row['bname_ID'];
+            $bid = $_SESSION['bname_ID'];
+
+            $prop_ID = mysqli_query($conn, "SELECT property_ID FROM property WHERE bname_ID = '$bid'");
+
+            if (mysqli_num_rows($prop_ID) == TRUE) {
+                $row = mysqli_fetch_assoc($prop_ID);
+                $_SESSION['property_ID'] = $row['property_ID'];
+                $id = $_SESSION['property_ID'];
+    
+                $query = "INSERT INTO reservationdetails (resdetails_ID, prop_ID, downpayment, paycon, paymet, payday, gname, gnumber, content, user_ID)
+                        VALUES ('$resd_ID', '$id', '$downpayment', '$paycon', '$paymet', '$payday', '$gname', '$gnumber', '$content', '$userid')";
+                $res = mysqli_query($conn, $query);
+    
+                if ($res) {
+                    header ("Location: reservation.php?saved");
+                } else {
+                    echo "failed";
+                }
+            } 
         }
+        
+        
+
+         
     }
 ?>
 
@@ -178,11 +196,8 @@ if(!isset($_SESSION['email']))
                                                             <th>Date</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Email</th>
                                                             <th>Contact</th>
                                                             <th>Amount</th>
-                                                            <th>Mode of Payment</th>
-                                                            <th>Proof of Payment</th>
                                                             <th>Status</th>
                                                             <th>Date Approved</th>
                                                             <th>Action</th>
@@ -204,8 +219,8 @@ if(!isset($_SESSION['email']))
                                                             $previous = $page - 1;
                                                             $next = $page + 1;
 
-                                                            $sql = "SELECT *,user.user_ID, user.email, images.image_url, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID 
-                                                                            JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID JOIN images ON images.user_ID = user.user_ID WHERE type = 'Proof of Payment' LIMIT $offset, $limit";
+                                                            $sql = "SELECT *, user.user_ID, reservation.status FROM reservation JOIN user ON reservation.user_ID = user.user_ID 
+                                                                            JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID ORDER BY reservation.date LIMIT $offset, $limit";
                                                             $result = mysqli_query($conn, $sql);
 
                                                             while ($row = mysqli_fetch_assoc($result)) {
@@ -215,66 +230,37 @@ if(!isset($_SESSION['email']))
                                                                         <td> <?php echo $row['date'] ?> </td>
                                                                         <td> <?php echo $row['firstname'] ?> </td>
                                                                         <td> <?php echo $row['lastname'] ?> </td>
-                                                                        <td> <?php echo $row['email'] ?> </td>
                                                                         <td> <?php echo $row['contact'] ?> </td>
                                                                         <td> <?php echo $row['amount'] ?> </td> 
-                                                                        <td> <?php echo $row['mop'] ?> </td>
-                                                                        <td>
-                                                                        <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#view">View</button></a>
-                                                                        </td>
                                                                         <td> <?php echo $row['status'] ?> </td>
                                                                         <td> date </td>
                                                                         <td> 
                                                                              <!-- Button trigger modal -->
-                                                                            <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm"><i class="bx bx-show"></i></button></a>
+                                                                            <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#view" data-id='<?php echo $row['user_ID']; ?>'>View</button></a>
                                                                         </td>
                                                                     </tr>
 
-                                                                     <!-- Confirm Modal -->
-                                                                    <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                                                                     <!-- View Modal -->
+                                                                    <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
                                                                         <div class="modal-dialog" role="document">
                                                                             <div class="modal-content">
                                                                                 <div class="modal-header">
+                                                                                    <h5>Accept Reservation?</h5>
                                                                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                                     <span aria-hidden="true">&times;</span>
                                                                                     </button>
                                                                                 </div>
 
                                                                                 <div class="modal-body">
-                                                                                    <p>Are you sure you want to confirm this reservation?</p>
-                                                                                    <form method = "POST" action = "confirmres.php"> 
-                                                                                        <input type = "hidden" name = "useremail" value = "<?php echo $row['email']; ?>"/>
-                                                                                        <input type = "hidden" name = "id" value = "<?php echo $row['user_ID']; ?>"/>
+
+                                                                                </div>
+                                                                                
+                                                                                <div class="modal-footer">
                                                                                     
                                                                                 </div>
-
-                                                                                <div class="modal-footer">
-                                                                                    <a href=""><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
-                                                                                    <a href="confirmres.php"><button type="submit" name = "okay" class="btn btn-primary">Confirm</button></a>
-                                                                                </div>
-                                                                                </form>
                                                                             </div>
                                                                         </div>
-                                                                    </div>
-
-                                                                    <!-- Confirm Modal -->
-                                                                    <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                                                                        <div class="modal-dialog" role="document">
-                                                                            <div class="modal-content">
-                                                                                <div class="modal-header">
-                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                    </button>
-                                                                                </div>
-
-                                                                                <div class="modal-body"> 
-                                                                                <img src = "<?php echo "images/proof/".$row['image_url']; ?>" width = "470px" height = "500px"> </td>
-                                                                                </div> 
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    
+                                                                    </div>  
                                                                 <?php
                                                             }
                                                     ?> 
@@ -479,6 +465,23 @@ if(!isset($_SESSION['email']))
             .catch( error => {
                 console.error( error );
             } );
+    </script>
+
+    <script> 
+        $(document).ready(function(){
+            $('.userinfo').click(function(){
+                var userid = $(this).data('id');
+                $.ajax({
+                    url: 'userdata.php',
+                    type: 'POST',
+                    data: {userid: userid},
+                    success: function(response){
+                        $('.modal-body').html(response);
+                        $('#view').modal('show');
+                    }
+                })
+            });
+        });
     </script>
 
   </body>

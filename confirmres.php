@@ -13,7 +13,6 @@ session_start();
     require 'phpmailer/src/SMTP.php';
 
     
-
     if (isset($_POST['okay'])) {
         $email = $_POST['useremail'];
         $uid = $_POST['id'];
@@ -45,12 +44,8 @@ session_start();
 
         $mail->send();
 
-        echo " <script> alert ('Email Confirmation has been sent'); document.location.href = 'reservation.php'; </script>";
-       
-        
-
-        
-        
+        echo " <script> alert ('Email Confirmation has been sent'); document.location.href = 'reservation.php'; </script>"; 
+        $upstatus = mysqli_query($conn, "UPDATE reservation SET status = 'Acknowledge' WHERE user_ID = '$uid'");    
     }
 
 ?>
