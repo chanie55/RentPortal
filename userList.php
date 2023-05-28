@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "dbconn.php"; 
+$search = isset($_GET['search']);
 ?>
 
 <!doctype html>
@@ -36,7 +37,7 @@ include "dbconn.php";
                 </div>
 
                 <ul class="list-unstyled components">
-			        <li  class="active">
+			        <li>
                         <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
@@ -72,12 +73,12 @@ include "dbconn.php";
                         </ul>
                     </li>
 				
-				    <li class="dropdown">
+				    <li class="active">
                         <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-bar-chart-alt-2"></i><span>Reports</span></a>
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
-                            <li>
+                            <li class="active">
                                 <a href="userList.php">User List</a>
                             </li>
                             <li>
@@ -143,7 +144,7 @@ include "dbconn.php";
                  <div class="col-sm-4">
                         <div class="search-box">
                             <i class="bx bxs-search-alt-2"></i>
-                            <input type="text" class="form-control" id = "search" name = "search" placeholder="Search&hellip;">                
+                            <input type="text" class="form-control" id = "search" name = "search" placeholder="Search&hellip;" value="<?php echo $search ?>">                
                         </div>
                     </div>
                     <a href="report.php" class="btn btn-primary btn-lg" id="print"><span> Print </span></a>
@@ -308,14 +309,19 @@ include "dbconn.php";
             $('#mytable').DataTable({
                 searching: true
             });
-        });*/
+        });
 
         $(document).ready(function () {
             $('#mytable').DataTable({
                 processing: true,
-                serverSide: true
+                serverSide: true 
             })
-        })
+        }) */
     </script>
+    <script>
+$('#search').change(function(){
+    location.replace('userList.php?search='+$(this).val())
+});
+</script>
   </body>
 </html>

@@ -35,7 +35,7 @@ include "dbconn.php";
                 </div>
 
                 <ul class="list-unstyled components">
-			        <li  class="active">
+			        <li>
                         <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
@@ -43,12 +43,12 @@ include "dbconn.php";
                         <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
 				    </div>
 			
-                    <li class="dropdown">
+                    <li class="active" id="manageUserDropdown">
                         <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-user"></i><span>Manage User</span></a>
                     
                         <ul class="collapse list-unstyled menu" id="homeSubmenu1" style = "margin-left: 10px;">
-                            <li>
+                            <li class="active" style=>
                                 <a href="manageAdmin.php">Admin</a>
                             </li>
                             <li>
@@ -56,6 +56,7 @@ include "dbconn.php";
                             </li>
                         </ul>
                     </li>
+                    
                 
                     <li class="dropdown">
                         <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
@@ -318,28 +319,35 @@ include "dbconn.php";
 
                         <div class="col-md-4 mb-3">
                             <label for="validationCustom06">Contact</label>
-                                <?php if (isset($_GET['contact'])) { ?>
-                                    <input required type = "contact" 
-                                    name = "contact" 
+                            <?php if (isset($_GET['contact'])) {
+                                $contactValue = $_GET['contact'];
+                                if (substr($contactValue, 0, 4) !== '+639') {
+                                    $contactValue = '+639' . ltrim($contactValue, '0');
+                                }
+                            ?>
+                                <input required type="tel"
+                                    name="contact"
                                     class="form-control"
-                                    pattern = "[0-9]{11}" 
+                                    pattern="[+0-9]{11}"
+                                    maxlength="11"
                                     id="validationCustom06"
-                                    value = "<?php echo $_GET['contact']; ?>"><br>
-                                <?php } else { ?>
-                                    <input required type = "contact" 
-                                    name = "contact" 
+                                    value="<?php echo $contactValue; ?>"><br>
+                            <?php } else { ?>
+                                <input required type="tel"
+                                    name="contact"
                                     class="form-control"
-                                    pattern = "[0-9]{11}"
+                                    pattern="[+0-9]{11}"
+                                    maxlength="11"
                                     id="validationCustom06"><br>
-                                <?php } ?>
+                            <?php } ?>
                             <div class = "invalid-feedback"> 
                                 Contact must be 11 digits
                             </div>
                         </div>
 
                         <fieldset class="form-group row">
-                            <legend class="col-form-label col-sm-2 float-sm-left pt-0">Gender</legend>
-                            <div class="col-sm-10">
+                            <legend class="col-form-label col-sm-6 float-sm-left pt-0">Gender</legend>
+                            <div>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="gender" id="gridRadios1" value="Male" checked>
                                     <label class="form-check-label" for="gridRadios1">
@@ -408,7 +416,9 @@ include "dbconn.php";
    <script src="js/jquery-3.3.1.min.js"></script>
   
   
-  <script type="text/javascript">
+  
+
+<script type="text/javascript">
   $(document).ready(function () {
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
@@ -451,5 +461,6 @@ include "dbconn.php";
   }, false);
 })();
 </script>
+
   </body>
 </html>

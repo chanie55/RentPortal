@@ -266,7 +266,7 @@ if(!isset($_SESSION['email']))
                                     <div>
                                         <h4 class="mb15">Property Details</h4>
                                     </div>
-                                    <div class="col-md-6 col-lg-6 col-xl-6">
+                                    <div class="col-md-6 col-lg-6 col-xl-6 ">
                                         <dl class="inline">
                                             <dt> <p> Bedrooms :</p></dt>
                                                 <dd> <?php echo $row['bed'];?> </dd>
@@ -290,6 +290,23 @@ if(!isset($_SESSION['email']))
                                     <div id = "map">
                                     </div>
                                 </div>
+                                <?php 
+                                    include "dbconn.php";
+
+
+                                    $query = "SELECT user.email, userinfo.address, .userinfo.contact, CONCAT(firstname,' ', lastname) AS fullName FROM userinfo JOIN user ON userinfo.id =user.id";
+                                    $result = mysqli_query($conn, $query);
+                                
+                                    if ($row = mysqli_fetch_assoc($result)) {
+                                ?>
+                                <div class="lsd_list">
+                                    <h4> Owner Information </h4>
+                                    <p> Name: <?php echo $row['fullName'] ?></p>
+                                    <p> Contact: <?php echo $row['contact'] ?></p>
+                                    <p> Email: <?php echo $row['email'] ?></p>
+                                    <p> Address: <?php echo $row['address'] ?></p>
+                                </div>
+                                <?php } ?>
                             </div>
                           </div>
                         </div>
@@ -355,7 +372,7 @@ if(!isset($_SESSION['email']))
             </div>
         
 
-        <section class="listing-title-area mt-2">
+        <section class="listing-title-area mt-2" style="margin-bottom: 110%;">
           <div class="container mt50">
               <div class="row mb30">
                   <?php
@@ -374,7 +391,7 @@ if(!isset($_SESSION['email']))
                      
 
 <?php } ?>
-      <!-- Footer Start 
+      <!-- Footer Start -->
 <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
             <div class="container">
                 <div class="copyright">
@@ -387,7 +404,7 @@ if(!isset($_SESSION['email']))
                 </div>
             </div>
         </div>
-        Footer End -->              
+        <!-- Footer End   -->       
                   
 
 

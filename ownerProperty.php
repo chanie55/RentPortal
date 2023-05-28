@@ -215,7 +215,7 @@ include("dbconn.php");
                                                     <label for="validationCustom03">Location</label>
                                                     <input type = "hidden" name = "lat" value = '<?php echo $_GET['lat']; ?>'>
                                                     <input type = "hidden" name = "lng" value = '<?php echo $_GET['lng']; ?>'>
-                                                    <a href = "viewmap.php?email=<?php echo $_REQUEST['email']?>"><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
+                                                    <a href = 'viewmap.php?email=<?php echo $_REQUEST['email']?>'><button type = "button" class = "btn btn-secondary"> Get Map<i class = "bx bxs-edit-location"> </i> </button></a>
                                                     <div class = "invalid-feedback"> 
                                                         Please provide your property address
                                                     </div>

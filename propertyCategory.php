@@ -35,7 +35,7 @@ include "dbconn.php";
                 </div>
 
                 <ul class="list-unstyled components">
-			        <li  class="active">
+			        <li>
                         <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
@@ -57,12 +57,12 @@ include "dbconn.php";
                         </ul>
                     </li>
                 
-                    <li class="dropdown">
+                    <li class="active">
                         <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-folder-open"></i><span>Property</span></a>
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu2" style = "margin-left: 10px;">
-                            <li>
+                            <li class="active">
                                 <a href="propertyCategory.php">Category</a>
                             </li>
                             <li>

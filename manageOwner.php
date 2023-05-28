@@ -35,7 +35,7 @@ include "dbconn.php";
                 </div>
 
                 <ul class="list-unstyled components">
-			        <li  class="active">
+			        <li>
                         <a href="adminDashboard.php" class="dashboard"><i class="bx bxs-home"></i><span>Dashboard</span></a>
                     </li>
 		
@@ -43,7 +43,7 @@ include "dbconn.php";
                         <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
 				    </div>
 			
-                    <li class="dropdown">
+                    <li class="active">
                         <a href="#homeSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
 					    <i class="bx bxs-user"></i><span>Manage User</span></a>
                     
@@ -51,7 +51,7 @@ include "dbconn.php";
                             <li>
                                 <a href="manageAdmin.php">Admin</a>
                             </li>
-                            <li>
+                            <li class="active">
                                 <a href="manageOwner.php">Owner</a>
                             </li>
                         </ul>
