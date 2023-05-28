@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 23, 2023 at 11:31 PM
+-- Generation Time: May 28, 2023 at 09:52 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.32
 
@@ -41,6 +41,29 @@ CREATE TABLE `aboutus` (
 INSERT INTO `aboutus` (`id`, `title`, `content`, `user`) VALUES
 (1, 'Sample', ' Some Content', ''),
 (2, 'Test', ' Test', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `businessname`
+--
+
+CREATE TABLE `businessname` (
+  `id` int(11) NOT NULL,
+  `bname_ID` varchar(99) NOT NULL,
+  `bname` varchar(99) NOT NULL,
+  `category` varchar(99) NOT NULL,
+  `user_ID` varchar(99) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `businessname`
+--
+
+INSERT INTO `businessname` (`id`, `bname_ID`, `bname`, `category`, `user_ID`) VALUES
+(1, 'BN_97402', 'Kate Apartment', 'Apartment', 'UID_0067'),
+(2, 'BN_89890', 'Kate Commercial Office Space', 'House Rent', 'UID_0067'),
+(3, 'BN_765', 'Kate Boarding House', 'Boarding House', 'UID_0067');
 
 -- --------------------------------------------------------
 
@@ -87,35 +110,10 @@ CREATE TABLE `images` (
 --
 
 INSERT INTO `images` (`id`, `image_url`, `type`, `user_ID`) VALUES
-(1, 'IMG-645e28f2ebff96.54406007.jpg', 'Business Permit', 'UID_0060'),
-(2, 'ID-645e28f330c530.49656469.jpg', 'Valid ID', 'UID_0060'),
-(3, 'ID-645e2b2293c8d4.32234339.jpg', 'Valid ID', 'UID_0063'),
-(13, 'ID-646014f76e2d75.29559841.jpg', 'Valid ID', 'UID_0064'),
-(18, 'PROPIMG-646053ea4da756.61214722.png', 'Valid ID', 'UID_0065'),
-(19, 'PROPIMG-646053ea68ae54.39883327.png', 'Valid ID', 'UID_0065'),
-(26, 'IMG-646301833dd845.51731827.jpg', 'Business Permit', 'UID_0066'),
-(27, 'ID-646301836c0467.53521476.jpg', 'Valid ID', 'UID_0066'),
-(28, 'ID-646301838454c7.66889883.jpg', 'Valid ID', 'UID_0066'),
-(29, 'IMG-6466d1751a39f3.81879592.jpg', 'Business Permit', 'UID_0067');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `img`
---
-
-CREATE TABLE `img` (
-  `id` int(11) NOT NULL,
-  `img` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `img`
---
-
-INSERT INTO `img` (`id`, `img`) VALUES
-(1, 'PROPIMG-64601e8fccd7d1.96669442.jpg'),
-(2, 'PROPIMG-64601e8fdd0260.42730592.jpg');
+(32, 'PROOF-6470f89a42bec0.07106970.jpg', 'Proof of Payment', 'UID_0064'),
+(35, 'ID-6471171279a932.75629399.png', 'Valid ID', 'UID_0069'),
+(36, 'ID-64711712b54e01.30476211.png', 'Valid ID', 'UID_0069'),
+(37, 'PROOF-647117725d5a75.00809192.png', 'Proof of Payment', 'UID_0069');
 
 -- --------------------------------------------------------
 
@@ -146,12 +144,11 @@ INSERT INTO `places` (`place_ID`, `place`) VALUES
 CREATE TABLE `property` (
   `id` int(11) NOT NULL,
   `property_ID` varchar(99) NOT NULL,
-  `propertyname` varchar(99) NOT NULL,
-  `propertytype` varchar(99) NOT NULL,
+  `bname_ID` varchar(99) NOT NULL,
+  `title` varchar(99) NOT NULL,
   `propertyaddress` varchar(99) NOT NULL,
   `description` text NOT NULL,
-  `roomtype` varchar(99) NOT NULL,
-  `totalrooms` int(11) NOT NULL,
+  `bedtype` varchar(99) NOT NULL,
   `availablerooms` int(11) NOT NULL,
   `monthlyrate` int(11) NOT NULL,
   `dailyrate` int(11) NOT NULL,
@@ -168,13 +165,16 @@ CREATE TABLE `property` (
 -- Dumping data for table `property`
 --
 
-INSERT INTO `property` (`id`, `property_ID`, `propertyname`, `propertytype`, `propertyaddress`, `description`, `roomtype`, `totalrooms`, `availablerooms`, `monthlyrate`, `dailyrate`, `bed`, `kitchen`, `bathroom`, `aircon`, `dimension`, `date_created`, `user_ID`) VALUES
-(3, 'PROP_94441', 'Jusayan Residence', 'Apartment', '', '<div>kikikiki</div>', 'Big Room', 10, 3, 3500, 500, 2, 'Not Provided', 'Provided', 'Optional', 0, '2023-05-18', 'UID_0067'),
-(4, 'COM_1669', 'Gicale Office Space', 'Commercial Property', '', 'lkcnxcnxmmx', '', 2, 2, 7000, 0, 0, 'Provided', 'Provided', 'Provided', 16, '2023-05-19', 'UID_0067'),
-(6, 'RES_57215', 'Khytryn Room for Rent', 'House Rent', 'ADRS_65566', '<div>ka gg ba nimo ayy</div>', 'Big Room', 20, 4, 7000, 50, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
-(7, 'RES_44632', 'Faye Room for Rent', 'House Rent', 'ADRS_26111', '<div>heyheyehye</div>', 'Big Room', 20, 4, 7000, 50, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
-(8, 'RES_57767', 'Hapi Hapi Apartment', 'Apartment', 'ADRS_49599', '<div>ldnckdvksdbvkdsbvd</div>', 'Single Room', 10, 5, 3500, 0, 1, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
-(9, 'RES_97792', 'Info Assurance', 'House Rent', 'ADRS_49701', '<p>exam namo unyaaaa</p>', 'Single Room', 4, 4, 5000, 0, 2, 'Not Provided', 'Provided', 'Provided', 0, '2023-05-23', 'UID_0068');
+INSERT INTO `property` (`id`, `property_ID`, `bname_ID`, `title`, `propertyaddress`, `description`, `bedtype`, `availablerooms`, `monthlyrate`, `dailyrate`, `bed`, `kitchen`, `bathroom`, `aircon`, `dimension`, `date_created`, `user_ID`) VALUES
+(3, 'PROP_94441', 'Jusayan Residence', '', '', '<div>kikikiki</div>', 'Big Room', 3, 3500, 500, 2, 'Not Provided', 'Provided', 'Optional', 0, '2023-05-18', 'UID_0067'),
+(4, 'COM_1669', 'Gicale Office Space', '', '', 'lkcnxcnxmmx', '', 2, 7000, 0, 0, 'Provided', 'Provided', 'Provided', 16, '2023-05-19', 'UID_0067'),
+(6, 'RES_57215', 'Khytryn Room for Rent', '', 'ADRS_65566', '<div>ka gg ba nimo ayy</div>', 'Big Room', 4, 7000, 50, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
+(7, 'RES_44632', 'Faye Room for Rent', '', 'ADRS_26111', '<div>heyheyehye</div>', 'Big Room', 4, 7000, 50, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
+(8, 'RES_57767', 'Hapi Hapi Apartment', '', 'ADRS_49599', '<div>ldnckdvksdbvkdsbvd</div>', 'Single Room', 5, 3500, 0, 1, 'Provided', 'Provided', 'Provided', 0, '2023-05-20', ''),
+(9, 'RES_97792', 'Info Assurance', '', 'ADRS_49701', '<p>exam namo unyaaaa</p>', 'Single Room', 4, 5000, 0, 2, 'Not Provided', 'Provided', 'Provided', 0, '2023-05-23', 'UID_0068'),
+(12, 'RES_3512', 'BN_97402', 'Ladies Room for Rent', 'ADRS_7855', '<p>fkdjsfkdsnsmdf</p>', 'Double Deck', 2, 2500, 0, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-27', ''),
+(13, 'RES_38446', 'BN_765', 'COME ON', 'ADRS_87888', '<p>JSNKSDNVDNV</p>', 'Double Deck', 2, 2600, 0, 2, 'Provided', 'Provided', 'Provided', 0, '2023-05-27', ''),
+(14, 'COM_66544', 'BN_89890', 'OFFICE SPACE FOR RENT', '', '<p>KGKLVXVKDFGKFDJN</p>', '', 2, 7000, 0, 0, 'Provided', 'Provided', 'Provided', 16, '2023-05-28', '');
 
 -- --------------------------------------------------------
 
@@ -197,7 +197,11 @@ INSERT INTO `propertyaddress` (`id`, `addresscode`, `lat`, `lng`) VALUES
 (3, '', 6.11512, 125.171),
 (5, 'ADRS_26111', 6.16876, 124.767),
 (6, 'ADRS_49599', 6.32387, 124.85),
-(7, 'ADRS_49701', 6.11622, 125.178);
+(7, 'ADRS_49701', 6.11622, 125.178),
+(8, 'ADRS_19760', 0, 0),
+(9, 'ADRS_73255', 0, 0),
+(10, 'ADRS_7855', 0, 0),
+(11, 'ADRS_87888', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -217,8 +221,7 @@ CREATE TABLE `propertytype` (
 INSERT INTO `propertytype` (`propertyType_ID`, `property`) VALUES
 (28, 'Boarding House'),
 (29, 'Apartment'),
-(30, 'House Rent'),
-(31, 'Commercial Building');
+(30, 'House Rent');
 
 -- --------------------------------------------------------
 
@@ -232,17 +235,16 @@ CREATE TABLE `reservation` (
   `user_ID` varchar(99) NOT NULL,
   `amount` float NOT NULL,
   `mop` varchar(99) NOT NULL,
-  `proof` text NOT NULL,
-  `status` int(11) NOT NULL
+  `status` varchar(99) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `date`, `user_ID`, `amount`, `mop`, `proof`, `status`) VALUES
-(1, '2023-05-22', 'UID_0067', 2000, '2', '', 0),
-(2, '2023-05-23', 'UID_0068', 1000, '2', '', 0);
+INSERT INTO `reservation` (`id`, `date`, `user_ID`, `amount`, `mop`, `status`) VALUES
+(8, '2023-05-26', 'UID_0064', 5250, 'Gcash', 'Acknowledge'),
+(11, '2023-05-26', 'UID_0069', 5250, 'Gcash', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -252,53 +254,27 @@ INSERT INTO `reservation` (`id`, `date`, `user_ID`, `amount`, `mop`, `proof`, `s
 
 CREATE TABLE `reservationdetails` (
   `id` int(11) NOT NULL,
-  `title` varchar(99) NOT NULL,
-  `content` text NOT NULL,
-  `user_ID` varchar(99) NOT NULL
+  `resdetails_ID` varchar(99) NOT NULL,
+  `prop_ID` varchar(99) NOT NULL,
+  `downpayment` double NOT NULL,
+  `paycon` int(11) NOT NULL,
+  `paymet` varchar(99) NOT NULL,
+  `payday` int(11) NOT NULL,
+  `gname` varchar(99) NOT NULL,
+  `gnumber` int(11) NOT NULL,
+  `user_ID` varchar(99) NOT NULL,
+  `content` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `reservationdetails`
 --
 
-INSERT INTO `reservationdetails` (`id`, `title`, `content`, `user_ID`) VALUES
-(8, 'Reservation Method ', '<p><strong>Reservation via Gcash</strong></p><p>1. On Gcash app, select &nbsp;“Send Money”</p><p>2. On the “Send Money to Gcash Account” section, select “Express Send”.</p><p>3. Input the contact number - (Your number here) (Your name here) and input the amount you want to give.&nbsp;<br>4. Review the registered name and amount for validation. Click send to continue.</p><p>5. Screenshot the gcash transaction.</p><p>6. On this page, click the “Reserve Now” button.</p><p>7. Fill-out the reservation form and attach your receipt.</p><p><strong>Reservation in Person</strong></p><p>1. &nbsp;On this page, click the “Reserve Now” button.</p><p>2. Fill-out your personal information on the reservation form.</p><p>3. Choose the “Pay in Person” as your payment method.</p><p>4. Choose the day you wish to Pay.&nbsp;</p>', 'UID_0067');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `room`
---
-
-CREATE TABLE `room` (
-  `id` int(11) NOT NULL,
-  `roomtype` varchar(99) NOT NULL,
-  `totalrooms` varchar(99) NOT NULL,
-  `availablerooms` varchar(99) NOT NULL,
-  `monthlyrate` float NOT NULL,
-  `kitchen` varchar(99) NOT NULL,
-  `bathroom` varchar(99) NOT NULL,
-  `aircon` varchar(99) NOT NULL,
-  `property_ID` varchar(99) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `room`
---
-
-INSERT INTO `room` (`id`, `roomtype`, `totalrooms`, `availablerooms`, `monthlyrate`, `kitchen`, `bathroom`, `aircon`, `property_ID`) VALUES
-(1, '', '4', '2', 7000, '0', '0', '0', 'PROP_22341'),
-(2, 'again', '20', '10', 4500, 'Not Provided', 'common', 'Not Provided', 'PROP_95353'),
-(3, 'again', '20', '0', 3500, 'Not Provided', 'common', 'Optional', 'PROP_23617'),
-(4, 'again', '20', '0', 2000, 'Not Provided', 'common', 'Not Provided', 'PROP_35320'),
-(5, 'again', '30', '2', 2500, 'Not Provided', 'common', 'Optional', 'PROP_98837'),
-(6, 'again', '30', '5', 3500, 'Not Provided', 'common', 'Not Provided', 'PROP_30587'),
-(7, 'again', '30', '0', 3400, 'Not Provided', 'common', 'Not Provided', 'PROP_83167'),
-(8, 'again', '20', '2', 4000, 'Not Provided', 'common', 'Optional', 'PROP_23521'),
-(9, 'again', '30', '2', 4500, 'Not Provided', 'common', 'Optional', 'PROP_85001'),
-(10, 'again', '30', '4', 400, 'Not Provided', 'common', 'Optional', 'PROP_79140'),
-(11, 'again', '30', '2', 4000, 'Not Provided', 'common', 'Optional', 'PROP_72669'),
-(12, 'again', '30', '0', 5000, 'Not Provided', 'common', 'Optional', 'PROP_14665');
+INSERT INTO `reservationdetails` (`id`, `resdetails_ID`, `prop_ID`, `downpayment`, `paycon`, `paymet`, `payday`, `gname`, `gnumber`, `user_ID`, `content`) VALUES
+(8, 'Reservation Method ', '', 0, 0, '', 0, '', 0, '', '<p><strong>Reservation via Gcash</strong></p><p>1. On Gcash app, select &nbsp;“Send Money”</p><p>2. On the “Send Money to Gcash Account” section, select “Express Send”.</p><p>3. Input the contact number - (Your number here) (Your name here) and input the amount you want to give.&nbsp;<br>4. Review the registered name and amount for validation. Click send to continue.</p><p>5. Screenshot the gcash transaction.</p><p>6. On this page, click the “Reserve Now” button.</p><p>7. Fill-out the reservation form and attach your receipt.</p><p>'),
+(9, 'RDES_18176', '', 1, 1, '1', 1, 'khytryn', 977554367, 'UID_0067', '<p><strong>Payment</strong></p><ul><li>You must pay the required amount stated. Unable to pay would result for your reservation to be cancelled.&nbsp;</li><li>Payment first before the reserve</li></ul>'),
+(10, 'RDES_22575', '', 0.75, 2, '1', 1, 'khytryn', 977554367, 'UID_0067', '<p>hihi</p>'),
+(11, 'RDES_79798', 'RES_57767', 0.5, 2, '1', 2, 'kakakaka', 909090909, 'UID_0067', '<p>anananmanmanwhwjwnn</p>');
 
 -- --------------------------------------------------------
 
@@ -313,6 +289,8 @@ CREATE TABLE `user` (
   `password` varchar(50) NOT NULL,
   `userInfo_ID` varchar(99) NOT NULL,
   `userLevel_ID` int(11) NOT NULL,
+  `verificationcode` varchar(99) NOT NULL,
+  `is_verified` varchar(99) NOT NULL,
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -320,16 +298,12 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `user_ID`, `email`, `password`, `userInfo_ID`, `userLevel_ID`, `status`) VALUES
-(60, 'UID_0060', 'gggid@gmail.com', '$2y$10$gDEQg6.Ietk4bgbcIHyBou.HMGeeULAcyMaiMDFpwNM', 'OW-61', 2, 1),
-(61, 'UID_0061', 'jebal@gmail.com', '$2y$10$0mLNnR5nKtYPRCuJI5uEQed8to4Jwsj8aCUSfud6VY3', 'SE-62', 3, 1),
-(62, 'UID_0062', 'lastna@gmail.com', '$2y$10$dlmPKpJcE.zKO4QIi8tZO.wdrejamsq60twCT/tDjFb', 'SE-63', 3, 1),
-(63, 'UID_0063', 'bosetjud@gmail.com', '$2y$10$LtcclIxw/rvg5AZ7Dlh8feKBTLsDVlOI26r7nUm9/ne', 'SE-64', 3, 1),
-(64, 'UID_0064', 'purple@gmail.com', '$2y$10$GMFEgypvsgIaCIOlopc4GuCxejyQlFHzsso2bm8LaYL', 'SE-65', 3, 1),
-(65, 'UID_0065', 'maganani@gmail.com', '$2y$10$0ZE3xN5.bHMAMHk1Q4Dcy.2/tRJx7t9oI/1WqmsbCic', 'SE-66', 3, 1),
-(66, 'UID_0066', 'khytrynfaye@gmail.com', '$2y$10$U73cvaOBk4gMIKJlMrgL8uEMJILMMFEpON/ff9sgaF/', 'OW-67', 2, 0),
-(67, 'UID_0067', 'kate@gmail.com', '$2y$10$lQQJ72lNP/O8obaVbqecN.q8EMT3zIW3Lqh6fWL6gsP', 'OW-68', 2, 1),
-(68, 'UID_0068', 'sample@gmail.com', '$2y$10$54fS/HOp1tVbnhsjFk9KLu.HPV/T4AwnAk2yHiH7Ick', 'AD-70', 1, 1);
+INSERT INTO `user` (`id`, `user_ID`, `email`, `password`, `userInfo_ID`, `userLevel_ID`, `verificationcode`, `is_verified`, `status`) VALUES
+(64, 'UID_0064', 'purple@gmail.com', '$2y$10$GMFEgypvsgIaCIOlopc4GuCxejyQlFHzsso2bm8LaYL', 'SE-65', 3, '', '', 1),
+(65, 'UID_0065', 'maganani@gmail.com', '$2y$10$0ZE3xN5.bHMAMHk1Q4Dcy.2/tRJx7t9oI/1WqmsbCic', 'SE-66', 3, '', '', 1),
+(67, 'UID_0067', 'kate@gmail.com', '$2y$10$lQQJ72lNP/O8obaVbqecN.q8EMT3zIW3Lqh6fWL6gsP', 'OW-68', 2, '', '', 1),
+(68, 'UID_0068', 'sample@gmail.com', '$2y$10$54fS/HOp1tVbnhsjFk9KLu.HPV/T4AwnAk2yHiH7Ick', 'AD-70', 1, '', '', 1),
+(69, 'UID_0069', 'chaniejoo@gmail.com', '$2y$10$xXVAUFk/7yyQNacI72DH6u79jZf1eGI8jqOOHXdQIZB', 'SE-71', 3, '484805', '0', 1);
 
 -- --------------------------------------------------------
 
@@ -399,17 +373,13 @@ CREATE TABLE `userinfo` (
 --
 
 INSERT INTO `userinfo` (`id`, `userinfo_ID`, `firstname`, `lastname`, `contact`, `dob`, `gender`, `age`, `address`) VALUES
-(60, 'SE-60', 'tulog', 'nako', 9, '2002-01-08', 'Female', 21, 'samokkk, Katangawan, General Santos City'),
-(61, 'OW-61', 'gg', 'gid', 9, '2004-12-07', 'Female', 18, 'ambot asa na, Lagao (1st & 3rd), General Santos City'),
-(62, 'SE-62', 'jebal', 'pls', 9, '2001-12-08', 'Female', 21, 'yawa judd, Dadiangas North, General Santos City'),
-(63, 'SE-63', 'last ', 'na', 9, '2001-12-02', 'Female', 21, 'samokaaaaaaa, Dadiangas West, General Santos City'),
 (64, 'SE-64', 'bo', 'set', 9, '2003-12-04', 'Female', 19, 'oksna, Dadiangas South, General Santos City'),
 (65, 'SE-65', 'purple', 'woman', 0, '2001-12-03', 'Female', 21, 'purple world, Labangal, General Santos City'),
 (66, 'SE-66', 'twoid', 'work', 9, '2004-10-06', 'Female', 18, 'ambotasaka, Lagao (1st & 3rd), General Santos City'),
 (67, 'OW-67', 'Khytryn', 'Carcillar', 9, '2001-12-08', 'Female', 21, 'katangawan, Katangawan, General Santos City'),
 (68, 'OW-68', 'Katren', 'Faye', 9, '2004-08-04', 'Male', 18, 'somewhere, Conel, General Santos City'),
 (69, 'SE-69', 'Khytryn Faye', 'Carcillar', 9, '2001-12-08', 'Female', 21, 'Sineguelas St. , Dadiangas East, General Santos City'),
-(70, 'AD-70', 'kat', 'khyt', 2147483647, NULL, 'Female', 0, '');
+(71, 'SE-71', 'Khytryn', 'Faye', 9, '2001-12-08', 'Female', 21, 'Sineguelas Street, Dadiangas East, General Santos City');
 
 -- --------------------------------------------------------
 
@@ -442,6 +412,12 @@ ALTER TABLE `aboutus`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `businessname`
+--
+ALTER TABLE `businessname`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `faq`
 --
 ALTER TABLE `faq`
@@ -453,12 +429,6 @@ ALTER TABLE `faq`
 ALTER TABLE `images`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_ID` (`user_ID`);
-
---
--- Indexes for table `img`
---
-ALTER TABLE `img`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `places`
@@ -495,12 +465,6 @@ ALTER TABLE `reservation`
 -- Indexes for table `reservationdetails`
 --
 ALTER TABLE `reservationdetails`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `room`
---
-ALTER TABLE `room`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -542,6 +506,12 @@ ALTER TABLE `aboutus`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `businessname`
+--
+ALTER TABLE `businessname`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
@@ -551,13 +521,7 @@ ALTER TABLE `faq`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
-
---
--- AUTO_INCREMENT for table `img`
---
-ALTER TABLE `img`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `places`
@@ -569,13 +533,13 @@ ALTER TABLE `places`
 -- AUTO_INCREMENT for table `property`
 --
 ALTER TABLE `property`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `propertyaddress`
 --
 ALTER TABLE `propertyaddress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `propertytype`
@@ -587,25 +551,19 @@ ALTER TABLE `propertytype`
 -- AUTO_INCREMENT for table `reservation`
 --
 ALTER TABLE `reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `reservationdetails`
 --
 ALTER TABLE `reservationdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `room`
---
-ALTER TABLE `room`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `useraddress`
@@ -617,7 +575,7 @@ ALTER TABLE `useraddress`
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `userlevel`
