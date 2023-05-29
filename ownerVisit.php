@@ -143,7 +143,7 @@ include "dbconn.php";
             </div>
 
             <!-- calendar -->
-            <div class="container py-5" id="page-container">
+            <div class="container py-5 bg-white" id="page-container">
                 <div class="row">
                     <div class="col-md-9">
                         <div id="calendar"></div>
@@ -189,10 +189,10 @@ include "dbconn.php";
                         <div class="modal-body rounded-0">
                             <div class="container-fluid">
                                 <dl>
-                                    <dt class="text-muted">Title</dt>
+                                    <!--<dt class="text-muted">Title</dt>
                                     <dd id="title" class="fw-bold fs-4"></dd>
                                     <dt class="text-muted">Description</dt>
-                                    <dd id="description" class=""></dd>
+                                    <dd id="description" class=""></dd>-->
                                     <dt class="text-muted">Start</dt>
                                     <dd id="start" class=""></dd>
                                     <dt class="text-muted">End</dt>

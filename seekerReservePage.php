@@ -50,7 +50,7 @@ if(!isset($_SESSION['email']))
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="seekerDashboard.php" class="nav-item nav-link active">Home</a>
                         <a href="#" class="nav-item nav-link">About</a>
                     </div>
                     <div class = "profile-user">
