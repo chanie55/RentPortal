@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 require_once('dbconn.php');
 if($_SERVER['REQUEST_METHOD'] !='POST'){
     echo "<script> alert('Error: No data to save.'); location.replace('./ownerVisit.php') </script>";
@@ -7,11 +9,12 @@ if($_SERVER['REQUEST_METHOD'] !='POST'){
 }
 extract($_POST);
 $allday = isset($allday);
+$uid = $_SESSION['user_ID'];
 
 if(empty($id)){
-    $sql = "INSERT INTO `schedule_list` (`title`,`description`,`start_datetime`,`end_datetime`) VALUES ('$title','$description','$start_datetime','$end_datetime')";
+    $sql = "INSERT INTO schedule_list (start_datetime, end_datetime, user_ID) VALUES ('$start_datetime','$end_datetime', '$uid')";
 }else{
-    $sql = "UPDATE `schedule_list` set `title` = '{$title}', `description` = '{$description}', `start_datetime` = '{$start_datetime}', `end_datetime` = '{$end_datetime}' where `id` = '{$id}'";
+    $sql = "UPDATE `schedule_list` set  `start_datetime` = '{$start_datetime}', `end_datetime` = '{$end_datetime}' where `id` = '{$id}'";
 }
 $save = $conn->query($sql);
 if($save){

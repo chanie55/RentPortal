@@ -14,8 +14,6 @@ if(!isset($_SESSION['email']))
         $userid = $_SESSION['user_ID'];
         $downpayment = $_POST['downpayment'];
         $paycon = $_POST['paycon'];
-        $paymet = $_POST['paymet'];
-        $payday = $_POST['payday'];
         $gname = $_POST['gname'];
         $gnumber = $_POST['gnumber'];
         $email = $_SESSION['email'];
@@ -36,8 +34,8 @@ if(!isset($_SESSION['email']))
                 $_SESSION['property_ID'] = $row['property_ID'];
                 $id = $_SESSION['property_ID'];
     
-                $query = "INSERT INTO reservationdetails (resdetails_ID, prop_ID, downpayment, paycon, paymet, payday, gname, gnumber, content, user_ID)
-                        VALUES ('$resd_ID', '$id', '$downpayment', '$paycon', '$paymet', '$payday', '$gname', '$gnumber', '$content', '$userid')";
+                $query = "INSERT INTO reservationdetails (resdetails_ID, prop_ID, downpayment, paycon, gname, gnumber, content, user_ID)
+                        VALUES ('$resd_ID', '$id', '$downpayment', '$paycon', '$gname', '$gnumber', '$content', '$userid')";
                 $res = mysqli_query($conn, $query);
     
                 if ($res) {
@@ -177,7 +175,7 @@ if(!isset($_SESSION['email']))
                     <div class = "container my-5"> 
                         <nav class = "nav nav-tabs"> 
                             <button type = "button" class = "nav-link active" data-toggle = "tab" data-target = "#tab-type"> 
-                                Reservation List 
+                                Reservations 
                             </button>
                             <button type = "button" class = "nav-link" data-toggle = "tab" data-target = "#tab-table"> 
                                 Reservation Details
@@ -207,10 +205,9 @@ if(!isset($_SESSION['email']))
                                                             <th>Date</th>
                                                             <th>First Name</th>
                                                             <th>Last Name</th>
-                                                            <th>Contact</th>
+                                                            <th>Property Listing</th>
                                                             <th>Amount</th>
                                                             <th>Status</th>
-                                                            <th>Date Approved</th>
                                                             <th>Action</th>
                                                         </tr>
                                                     </thead>
@@ -230,8 +227,8 @@ if(!isset($_SESSION['email']))
                                                             $previous = $page - 1;
                                                             $next = $page + 1;
 
-                                                            $sql = "SELECT *, user.user_ID, reservation.status FROM reservation JOIN user ON reservation.user_ID = user.user_ID 
-                                                                            JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID ORDER BY reservation.date LIMIT $offset, $limit";
+                                                            $sql = "SELECT *,reservation.date, reservation.amount, reservation.status, userinfo.firstname FROM property JOIN reservation ON reservation.property_ID = property.property_ID
+                                                                        JOIN user ON user.user_ID = reservation.user_ID JOIN userinfo ON userinfo.userInfo_ID = user.userInfo_ID WHERE reservation.status != 'Acknowledge' ORDER BY reservation.date LIMIT $offset, $limit";
                                                             $result = mysqli_query($conn, $sql);
 
                                                             while ($row = mysqli_fetch_assoc($result)) {
@@ -241,10 +238,9 @@ if(!isset($_SESSION['email']))
                                                                         <td> <?php echo $row['date'] ?> </td>
                                                                         <td> <?php echo $row['firstname'] ?> </td>
                                                                         <td> <?php echo $row['lastname'] ?> </td>
-                                                                        <td> <?php echo $row['contact'] ?> </td>
+                                                                        <td> <?php echo $row['title'] ?> </td>
                                                                         <td> <?php echo $row['amount'] ?> </td> 
                                                                         <td> <?php echo $row['status'] ?> </td>
-                                                                        <td> date </td>
                                                                         <td> 
                                                                              <!-- Button trigger modal -->
                                                                             <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#view" data-id='<?php echo $row['user_ID']; ?>'>View</button></a>
@@ -381,22 +377,6 @@ if(!isset($_SESSION['email']))
 														    </select>
 													    </div>
                                                     </div>
-                                                    <div class="form-group row">
-                                                        <label class="col-lg-4 col-form-label">Payment Method</label>
-													    <div class="col-lg-8">
-														    <select class="form-control" required name="paymet">
-															    <option value="">Select one...</option>
-															    <option value="1">Gcash</option>
-															    <option value="2">Cash</option>
-														    </select>
-													    </div>
-												    </div>
-                                                    <div class="form-group row">
-													    <label class="col-lg-4 col-form-label">Day/s to Pay</label>
-													    <div class="col-lg-8">
-														    <input type="number" class="form-control" name="payday" required placeholder="ex. 1">
-													    </div>
-												    </div>
 												    <div class="form-group row">
 													    <label class="col-lg-4 col-form-label">Gcash Name</label>
 													    <div class="col-lg-8">

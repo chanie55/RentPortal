@@ -16,6 +16,8 @@ session_start();
     if (isset($_POST['okay'])) {
         $email = $_POST['useremail'];
         $uid = $_POST['id'];
+        $list = $_POST['title'];
+
 
         $mail = new PHPMailer(true);
 
@@ -45,7 +47,8 @@ session_start();
         $mail->send();
 
         echo " <script> alert ('Email Confirmation has been sent'); document.location.href = 'reservation.php'; </script>"; 
-        $upstatus = mysqli_query($conn, "UPDATE reservation SET status = 'Acknowledge' WHERE user_ID = '$uid'");    
+        $upstatus = mysqli_query($conn, "UPDATE reservation SET status = 'Acknowledge' WHERE user_ID = '$uid'");  
+        $uproom = mysqli_query($conn, "UPDATE property SET availablerooms = availablerooms - 1 WHERE title = '$list'");  
     }
 
 ?>

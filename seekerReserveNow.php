@@ -45,7 +45,7 @@ if(!isset($_SESSION['email']))
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="index.php" class="nav-item nav-link active">Home</a>
+                        <a href="seekerDashboard.php" class="nav-item nav-link active">Home</a>
                         <a href="#" class="nav-item nav-link">About</a>
                     </div>
                     <div class = "profile-user">
@@ -90,7 +90,7 @@ if(!isset($_SESSION['email']))
 
         <!-- Property List Start -->
         <div class="container-xxl py-2">
-            <h1 class="mb-3" style="margin-top: 30px; text-align: center;">Reservation</h1>
+            <h1 class="mb-3" style="margin-top: 30px; text-align: center;">Reservation Form</h1>
                 <form method = "POST" action = "addReservation.php" class="needs-validation" novalidate style="margin-left: 3%;" enctype = "multipart/form-data">
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
 
@@ -146,51 +146,15 @@ if(!isset($_SESSION['email']))
                             Please provide a valid amount.
                             </div>
                         </div>
-
-                        <div class="col-md-3 mb-3 px-3">
-                            <label for="validationCustom04">Mode of Payment</label>
-                            <select class="custom-select" name = "mop" id="paymentSelect" required>
-                                <option selected disabled value="">Choose...</option>
-                                <option value="Gcash">Gcash </option>
-                                <option value="Cash">Cash </option>
-                            </select>   
-                            <div class="invalid-feedback">
-                                Please select a mode of payment.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-row col-md d-flex justify-content-center align-items-center">
-                        <div id="payGcash" class="col-md-3 mb-3 paymentHide">
+                        <div id="payGcash" class="col-md-3 mb-3">
                             <label> Attach Gcash Receipt</label>
                             <input type = "file" name = "proof" style="border: solid gray 1px; padding: 6px; width: 80%; border-radius: 4px"/>
                         </div>
                     </div>
-                    
-                    <div class="form-row col-md d-flex justify-content-center align-items-center">
-                        <div id="payPerson" class="col-md-2 mb-3 paymentHide">
-                                <label for="datepicker">Day to Pay</label>
-                                    <?php if (isset($_GET['payday'])) { ?>
-                                        <input type = "number" 
-                                        name = "payday" 
-                                        class="form-control" 
-                                        id="datepicker"><br>
-                                    <?php } else { ?>
-                                        <input type = "number" 
-                                        name = "payday" 
-                                        class="form-control"
-                                        id="datepicker">
-                                       <br>
-                                    <?php } ?>
-                                <div class = "invalid-feedback"> 
-                                    Invalid input
-                                </div>
-                            </div>
-                        </div>
 
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div class="col-md-3 mb-3 px-3">
-                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                            <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
                             <label class="form-check-label" for="invalidCheck">
                                 Agree to <!--<a href="https://www.facebook.com" target="_blank">-->terms <!--</a>--> and <!--a href="" target="_blank">--> conditions <!--</a>--> 
                             </label>
@@ -202,7 +166,7 @@ if(!isset($_SESSION['email']))
                     <?php } ?>
                     <div class="form-row col-md d-flex justify-content-center align-items-center">
                         <div class="mt-3">
-                            <button class="btn btn-primary" name = "submit-res" type="submit">Submit form</button>
+                            <button class="btn btn-primary" name = "submit-res" type="submit">Submit</button>
                         </div>
                     </div>
                 </form>
@@ -273,7 +237,7 @@ if(!isset($_SESSION['email']))
 
     </script>
 
-    <!-- Payment Selection -->
+    <!-- Payment Selection 
     <script>
 
         var sel = document.getElementById("paymentSelect");
@@ -295,7 +259,7 @@ if(!isset($_SESSION['email']))
                 person.classList.add("paymentDisplay");
             }
         });
-    </script>
+    </script>-->
 
 </body>
 
