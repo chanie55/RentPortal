@@ -46,6 +46,11 @@ include("dbconn.php");
 		            <div class="small-screen navbar-display">
                         <li class="dropdown d-lg-none d-md-block d-xl-none d-sm-block"> </li>
 				    </div>
+ 
+                    <li>
+                    <a href = "ownerBN.php">
+					    <i class="bx bxs-message-rounded-add"></i><span>Business Name</span></a>
+                    </li>
 			
                     <li class="dropdown">
                         <a href = "ownerProperty.php">
@@ -78,7 +83,13 @@ include("dbconn.php");
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
-                                <a href="#">Property List</a>
+                                <a href="ownerpropertylist">Property List</a>
+                            </li>
+                            <li>
+                                <a href="reservation.php">Reservation List</a>
+                            </li>
+                            <li>
+                                <a href="#">Visit List</a>
                             </li>
                         </ul>
                     </li>
