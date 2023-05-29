@@ -106,7 +106,7 @@ include "dbconn.php";
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
-                                    <form action="calendar_save_schedule.php" method="post" id="schedule-form">
+                                    <form action="seekersavevisit.php" method="post" id="schedule-form">
                                         <input type="hidden" name="id" value="">
                                         <div class="form-group mb-2">
                                             <label for="start_datetime" class="control-label">Start</label>
