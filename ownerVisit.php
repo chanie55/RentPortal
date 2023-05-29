@@ -152,11 +152,13 @@ include "dbconn.php";
                         <div class="cardt rounded-0 shadow">
                             <div class="card-header bg-gradient bg-primary text-light">
                                 <h5 class="card-title">Schedule Form</h5>
+                                
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
                                     <form action="calendar_save_schedule.php" method="post" id="schedule-form">
                                         <input type="hidden" name="id" value="">
+                                        <h6> Set Available Date </h6>
                                         <div class="form-group mb-2">
                                             <label for="start_datetime" class="control-label">Start</label>
                                             <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
