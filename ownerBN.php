@@ -48,7 +48,7 @@ include("dbconn.php");
 			
                     <li class="dropdown">
                         <a href = "ownerProperty.php">
-					    <i class="bx bxs-edit-location"></i><span>Post Property</span></a>
+					    <i class="bx bxs-edit-location"></i><span>Post</span></a>
                     </li>
                 
                     <li>
@@ -77,7 +77,13 @@ include("dbconn.php");
 
                         <ul class="collapse list-unstyled menu" id="pageSubmenu5" style = "margin-left: 10px;">
                             <li>
-                                <a href="#">Property List</a>
+                                <a href="ownerpropertylist.php">Property List</a>
+                            </li>
+                            <li>
+                                <a href="reservation.php">Reservation List</a>
+                            </li>
+                            <li>
+                                <a href="#">Visit List</a>
                             </li>
                         </ul>
                     </li>
