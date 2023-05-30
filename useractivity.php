@@ -82,7 +82,7 @@ if(!isset($_SESSION['email']))
         </div>
         <!-- Navbar End -->
 
-        <!-- Search Start -->
+        <!-- Search Start 
         <div class="container-xxl search">
         <div class="container wow fadeIn" data-wow-delay="0.1s" style="padding: 20px; margin-top: 8%; opacity: 0.98">
                 <div class="row g-2">
@@ -90,18 +90,17 @@ if(!isset($_SESSION['email']))
                 </div>
             </div>
         </div>
-        <!-- Search End -->
+         Search End -->
 
-
+        <br>
         <!-- Property List Start -->
         <div class="container-xxl py-1">
             <div class="container">
                 <h1 class="mb-3">Reservations</h1>
                 <p> You have made 1 reservation today </p>
 
-                <div class="container-xl">
-                    <div class="table-wrapper">
-                        <div class="table-title"> 
+                <div class="">
+                        <div class=""> 
                             <table class="table table-striped table-hover table-bordered" style = "font-size: 12px;">
                                 <thead>
                                     <tr>
@@ -122,7 +121,7 @@ if(!isset($_SESSION['email']))
                                             $page = 1;
                                         }
 
-                                        $limit = 6;
+                                        $limit = 4;
                                         $offset = ($page - 1) * $limit;
 
                                         $previous = $page - 1;
@@ -194,9 +193,112 @@ if(!isset($_SESSION['email']))
                             <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
                             </div>
                         </div> 
-                    </div> 
-                </div>   
-                <div> <h4> Contact Owner </h4> </div>       
+                    </div>    
+            </div>
+        </div>
+        <!-- Property List End -->
+<br>
+<br>
+                <!-- Property List Start -->
+                <div class="container-xxl py-1">
+            <div class="container">
+                <h1 class="mb-3">Scheduled Visit</h1>
+                <p> You have scheduled a visit today </p>
+
+                <div class="">
+                        <div class=""> 
+                            <table class="table table-striped table-hover table-bordered" style = "font-size: 12px;">
+                                <thead>
+                                    <tr>
+                                        <th>Start Date</th>
+                                        <th>End Date</th>
+                                        <th>Property Listing</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                        include "dbconn.php";
+                                        $uid = $_SESSION['user_ID'];
+                            
+                                        if(isset($_GET['page']) && $_GET['page'] !== "") {
+                                            $page = $_GET['page'];
+                                        } else {
+                                            $page = 1;
+                                        }
+
+                                        $limit = 4;
+                                        $offset = ($page - 1) * $limit;
+
+                                        $previous = $page - 1;
+                                        $next = $page + 1;
+
+                                        $sql = "SELECT * FROM schedule_list JOIN property ON property.property_ID = schedule_list.property_ID WHERE schedule_list.user_ID = '$uid' LIMIT $offset, $limit";
+                                        $result = mysqli_query($conn, $sql);
+
+                                        while ($row = mysqli_fetch_assoc($result)) {
+
+                                            ?>
+                                                <tr class = "data-row"> 
+                                                    <td> <?php echo $row['start_datetime'] ?> </td>
+                                                    <td> <?php echo $row['end_datetime'] ?> </td>
+                                                    <td> <?php echo $row['title'] ?> </td> 
+                                                    <td> <?php echo $row['status'] ?> </td>
+                                                </tr>
+
+                                                 
+                                            <?php
+                                        }
+                                    ?> 
+                                </tbody>    
+                            </table>
+                            <div class="clearfix">
+                
+                            <ul class="pagination">
+                                <?php
+            
+                                    $query =  "SELECT COUNT(*) FROM reservation";
+                                    $result_count = mysqli_query($conn, $query);
+                                    $records = mysqli_fetch_row($result_count);
+                                    $total_records = $records[0];
+
+                                    $total_pages = ceil($total_records / $limit);
+                                    $link = "";
+
+                                ?>
+        
+
+                                <?php
+                                    if ($page >= 2) {
+                                        echo "<li class = 'page-item'>
+                                        <a class = 'page-link' href = 'reservation.php?page=".($page-1)."'> 
+                                        <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
+                                    }
+
+                                    for ($counter = 1; $counter <= $total_pages; $counter++){
+                                        if ($counter == $page) {
+                                            $link .= "<li class = 'page-item active'>
+                                            <a class = 'page-link' href= 'reservation?page="
+                                                .$counter."'>".$counter." </a></li>";
+                                        } else {
+                                            $link .= "<li class = 'page-item'>
+                                                <a class = 'page-link' href='reservation.php?page=".$counter."'> ".$counter." </a> </li>";
+                                        }
+                                    };
+
+                                    echo $link;
+
+                                    if($page < $total_pages) {
+                                        echo "<li class = 'page-item'>
+                                        <a class = 'page-link' href='reservation.php?page=".($page+1)."'>
+                                        <i class = 'bx bxs-chevron-right'></i> </a></li>";
+                                    }
+                                ?>
+                            </ul>
+                            <div class="hint-text">Showing <b> <?= $page; ?> </b> out of <b> <?= $total_pages; ?></b> page</div>
+                            </div>
+                        </div> 
+                    </div>      
             </div>
         </div>
         <!-- Property List End -->

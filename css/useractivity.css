@@ -459,13 +459,7 @@ table.table td i {
     border-right: 1px dashed rgba(0, 185, 142, .3) !important;
 }
 
-.table{
-    width: 30%;
-    position: absolute;
-    margin-left: 50%;
-    margin-top: 10%;
-    font-size: large;
-}
+
 
 .head{
     position: absolute;

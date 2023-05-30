@@ -107,7 +107,7 @@ if(!isset($_SESSION['email']))
                 <tbody>
                         <?php 
                         include "dbconn.php";
-                        $propid = $_REQUEST['prop_ID'];
+                        $propid = $_REQUEST['pid'];
 
                         $result = mysqli_query($conn, "SELECT property.monthlyrate, reservationdetails.downpayment, reservationdetails.paycon, reservationdetails.gname,
                                                         reservationdetails.gnumber, reservationdetails.content FROM property JOIN reservationdetails ON property.property_ID = reservationdetails.prop_ID 
