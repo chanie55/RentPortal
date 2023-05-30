@@ -243,7 +243,7 @@ if(!isset($_SESSION['email']))
                                                                         <td> <?php echo $row['status'] ?> </td>
                                                                         <td> 
                                                                              <!-- Button trigger modal -->
-                                                                            <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#view" data-id='<?php echo $row['user_ID']; ?>'>View</button></a>
+                                                                            <a href="#" class="edit" title="View"><button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#view" data-id='<?php echo $row['user_ID']; ?>'>View</button></a>
                                                                         </td>
                                                                     </tr>
 

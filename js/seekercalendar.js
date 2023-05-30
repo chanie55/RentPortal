@@ -27,7 +27,7 @@ $(function() {
             var _details = $('#event-details-modal')
             var id = info.event.id
             if (!!scheds[id]) {
-               // _details.find('#title').text(scheds[id].title)
+                _details.find('#title').text(scheds[id].title)
                // _details.find('#description').text(scheds[id].description)
                 _details.find('#start').text(scheds[id].sdate)
                 _details.find('#end').text(scheds[id].edate)

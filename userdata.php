@@ -26,7 +26,7 @@
         <form method = "POST" action = "confirmres.php"> 
             <input type = "hidden" name = "useremail" value = "<?php echo $row['email']; ?>"/>
             <input type = "hidden" name = "id" value = "<?php echo $row['user_ID']; ?>"/> 
-            <input type = "hidden" name = "list" value = "<?php echo $row['title']; ?>"/> 
+            <input type = "hidden" name = 'list' value = "<?php echo $row['title']; ?>"/> 
             <a href="confirmres.php"><button type="submit" name = "okay" class="btn btn-primary">Confirm</button></a>
             <a href="#"><button type="submit" class="btn btn-secondary" name = "no" data-dismiss="modal">Cancel</button></a>
         </form>

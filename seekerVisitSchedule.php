@@ -106,11 +106,28 @@ include "dbconn.php";
                             </div>
                             <div class="card-body">
                                 <div class="container-fluid">
+                                    <?php 
+                                        include "dbconn.php";
+
+                                        $uid = $_SESSION['user_ID'];
+                                        $sql = mysqli_query($conn, "SELECT firstname FROM userinfo JOIN user ON userinfo.userInfo_ID = user.userinfo_ID WHERE user_ID = '$uid'");
+
+                                        if (mysqli_num_rows($sql) == TRUE) {
+                                            $row = mysqli_fetch_assoc($sql);
+                                            $_SESSION['firstname'] = $row['firstname'];
+                                            $fn = $_SESSION['firstname'];
+                                        }
+                                    ?>
                                     <form action="seekersavevisit.php" method="post" id="schedule-form">
                                         <input type="hidden" name="id" value="<?php echo $_REQUEST['prop_ID']; ?>">
                                         <div class="form-group mb-2">
+                                            <label for="start_datetime" class="control-label">Name</label>
+                                            <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" value = "<?php echo $fn; ?>" required> 
+                                        </div>
+                                        <div class="form-group mb-2">
                                             <label for="start_datetime" class="control-label">Start</label>
-                                            <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
+                                            <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" min = "{{date('Y=m-d')}}" required>
+                                        '   
                                         </div>
                                         <div class="form-group mb-2">
                                             <label for="end_datetime" class="control-label">End</label>

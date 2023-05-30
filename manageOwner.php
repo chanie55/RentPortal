@@ -3,6 +3,7 @@ session_start();
 include "dbconn.php"; 
 ?>
 
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -153,8 +154,7 @@ include "dbconn.php";
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Address</th>
-                                    <th>Property Document</th>
-                                    <th>Valid ID</th>
+                                    <th>Uploaded Images</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -174,7 +174,7 @@ include "dbconn.php";
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.address, user.email, user.status, images.image_url, user.userInfo_ID, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id AND user.userLevel_ID = 2 JOIN images ON user.user_ID = images.user_ID WHERE status = 0 LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.address, user.email, user.status, user.userInfo_ID, user.user_ID, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 2 AND status = 0 LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -184,17 +184,35 @@ include "dbconn.php";
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> <?php echo $row['address'] ?> </td>
                                         <td> 
-                                        <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
+                                        <a href="#" class="edit" title="View"><button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#view" data-id='<?php echo $row['user_ID']; ?>'>View</button></a>
                                         </td>
-                                        <td> 
-                                        <img src = "<?php echo "./images/".$row['image_url']; ?>" width = "200px" height = "200px"> </td>
                                         <td>
                                             <!-- Button trigger modal -->
-                                            <a href="#" class="edit" title="Edit"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm"><i class="bx bxs-user-check"></i></button></a>
-                                            <a href="#" class="delete" title="Delete"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#decline"><i class="bx bxs-user-x"></button></i></a>
+                                            <a href="#" class="edit" title="Accept"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm"><i class="bx bxs-user-check"></i></button></a>
+                                            <a href="#" class="delete" title="Deny"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#decline"><i class="bx bxs-user-x"></button></i></a>
                                         </td>
                                     </tr>
-                               
+
+                        <!-- View Modal -->
+                        <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                    </div>
+                                                                                
+                                    <div class="modal-footer">
+                                                                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         
                         <!-- Confirm Modal -->
                         <div class="modal fade" id="confirm" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
@@ -340,5 +358,22 @@ include "dbconn.php";
                 item.style.setProperty('--value', item.dataset.value)
             });
    </script>  
+
+    <script> 
+        $(document).ready(function(){
+            $('.userinfo').click(function(){
+                var userid = $(this).data('id');
+                $.ajax({
+                    url: 'validid.php',
+                    type: 'POST',
+                    data: {userid: userid},
+                    success: function(response){
+                        $('.modal-body').html(response);
+                        $('#view').modal('show');
+                    }
+                })
+            });
+        });
+    </script>
   </body>
 </html>

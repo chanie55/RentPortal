@@ -16,7 +16,7 @@ session_start();
     if (isset($_POST['okay'])) {
         $email = $_POST['useremail'];
         $uid = $_POST['id'];
-        $list = $_POST['title'];
+        $list = $_POST['list'];
 
 
         $mail = new PHPMailer(true);

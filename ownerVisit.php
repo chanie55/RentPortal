@@ -170,6 +170,7 @@ include "dbconn.php";
                                     <form action="calendar_save_schedule.php" method="post" id="schedule-form">
                                         <input type="hidden" name="id" value="">
                                         <h6> Set Available Date </h6>
+                                        <input type = "hidden" class = "form-control" name = "title" id = "title"/>
                                         <div class="form-group mb-2">
                                             <label for="start_datetime" class="control-label">Start</label>
                                             <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" required>
@@ -202,9 +203,9 @@ include "dbconn.php";
                         <div class="modal-body rounded-0">
                             <div class="container-fluid">
                                 <dl>
-                                    <!--<dt class="text-muted">Title</dt>
+                                    <dt class="text-muted">Title</dt>
                                     <dd id="title" class="fw-bold fs-4"></dd>
-                                    <dt class="text-muted">Description</dt>
+                                    <!--<dt class="text-muted">Description</dt>
                                     <dd id="description" class=""></dd>-->
                                     <dt class="text-muted">Start</dt>
                                     <dd id="start" class=""></dd>
@@ -215,8 +216,8 @@ include "dbconn.php";
                         </div>
                         <div class="modal-footer rounded-0">
                             <div class="text-end">
-                                <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Edit</button>
-                                <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Delete</button>
+                                <button type="button" class="btn btn-primary btn-sm rounded-0" id="edit" data-id="">Confirm</button>
+                                <button type="button" class="btn btn-danger btn-sm rounded-0" id="delete" data-id="">Cancel</button>
                                 <button type="button" class="btn btn-secondary btn-sm rounded-0" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>

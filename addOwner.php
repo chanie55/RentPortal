@@ -101,7 +101,7 @@ if (isset($_POST['submit-owner'])) {
             
                                         if (in_array($img_ex_loc, $allowed_ex)) {
                                             $new_img_name = uniqid("IMG-", true).'.'.$img_ex_loc;
-                                            $img_upload_path = './images/'.$new_img_name;
+                                            $img_upload_path = 'images/permits/'.$new_img_name;
                                             move_uploaded_file($tmp_name, $img_upload_path);
             
                                             //into the database
@@ -122,7 +122,7 @@ if (isset($_POST['submit-owner'])) {
                                     
                                                         if (in_array($img_ex_loc, $allowed_ex)) {
                                                             $new_img_name = uniqid("ID-", true).'.'.$img_ex_loc;
-                                                            $img_upload_path = './images/'.$new_img_name;
+                                                            $img_upload_path = 'images/validid/'.$new_img_name;
                                                             move_uploaded_file($tmp_name, $img_upload_path);
                                     
                                                             //into the database
