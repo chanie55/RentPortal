@@ -186,10 +186,10 @@ include "dbconn.php";
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td>
                                             <?php
-                                                if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
+                                                if ($row['status'] == 'Active') {
+                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=Inactive"> active </a> </p>';
                                                 } else {
-                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
+                                                    echo '<p> <a href = "adminstatus.php?id='.$row['id'].'&status=Active"> inactive </a> </p>';
                                                 }
                                             ?>
                                         </td>

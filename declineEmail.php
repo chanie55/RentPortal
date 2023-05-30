@@ -8,11 +8,9 @@
     require 'phpmailer/src/PHPMailer.php';
     require 'phpmailer/src/SMTP.php';
 
-    $owneremail = $_GET['owneremail'];
-    $email = $_GET['email'];
-    $status = $_GET['status'];
+    $owneremail = $_POST['email'];
 
-    if (isset($_GET['owneremail'])) {
+    if (isset($_POST['email'])) {
         $mail = new PHPMailer(true);
 
         $message = '<div>
@@ -44,7 +42,8 @@
 
         $mail->send();
 
-        echo " <script> alert ('User registration has been denied'); document.location.href = 'ownerstatus.php&status=3'; </script>";
+        $upstatus = mysqli_query($conn, "UPDATE user SET status = 'Inactive' WHERE email = '$owneremail'");
+        echo " <script> alert ('User registration has been denied'); document.location.href = 'manageOwner.php'; </script>";
         
     }
 

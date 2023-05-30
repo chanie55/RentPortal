@@ -154,7 +154,8 @@ include "dbconn.php";
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Address</th>
-                                    <th>Uploaded Images</th>
+                                    <th>Business Permit</th>
+                                    <th>Valid ID</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -174,7 +175,7 @@ include "dbconn.php";
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.address, user.email, user.status, user.userInfo_ID, user.user_ID, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 2 AND status = 0 LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.address, user.email, user.status, user.userInfo_ID, user.user_ID, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userinfo_ID = user.userInfo_ID WHERE user.userLevel_ID = 2 AND user.status = 'Pending' LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -184,18 +185,21 @@ include "dbconn.php";
                                         <td> <?php echo $row['email'] ?> </td>
                                         <td> <?php echo $row['address'] ?> </td>
                                         <td> 
-                                        <a href="#" class="edit" title="View"><button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#view" data-id='<?php echo $row['user_ID']; ?>'>View</button></a>
+                                            <button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#viewper" data-id='<?php echo $row['user_ID']; ?>'>View</button>
+                                        </td>
+                                        <td> 
+                                            <button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#viewid" data-id='<?php echo $row['user_ID']; ?>'>View</button>
                                         </td>
                                         <td>
                                             <!-- Button trigger modal -->
-                                            <a href="#" class="edit" title="Accept"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#confirm"><i class="bx bxs-user-check"></i></button></a>
-                                            <a href="#" class="delete" title="Deny"><button type="button" class="btn btn-primary addType" data-toggle="modal" data-target="#decline"><i class="bx bxs-user-x"></button></i></a>
+                                            <button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#confirm" data-id='<?php echo $row['user_ID']; ?>'><i class="bx bxs-user-check"></i></button>
+                                            <button type="button" class="btn btn-primary addType userinfo" data-toggle="modal" data-target="#decline" data-id='<?php echo $row['user_ID']; ?>'><i class="bx bxs-user-x"></i></button>
                                         </td>
                                     </tr>
 
                         <!-- View Modal -->
-                        <div class="modal fade" id="view" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal fade" id="viewid" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -203,7 +207,28 @@ include "dbconn.php";
                                         </button>
                                     </div>
 
-                                    <div class="modal-body">
+                                    <div class="modal-body modal-id">
+
+                                    </div>
+                                                                                
+                                    <div class="modal-footer">
+                                                                                    
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- View Modal -->
+                        <div class="modal fade" id="viewper" tabindex="-1" role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body modal-permit">
 
                                     </div>
                                                                                 
@@ -223,15 +248,15 @@ include "dbconn.php";
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to accept this user?</p>
+                                    <form method = "POST" action = "">
+                                    <div class="modal-body modal-accept">
+                                        
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a href=""><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
-                                        <a href="sendEmail.php?status=<?php echo $row['status'];?>"><button type="submit" class="btn btn-primary">Confirm</button></a>
+                                
                                     </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -246,13 +271,12 @@ include "dbconn.php";
                                         </button>
                                     </div>
 
-                                    <div class="modal-body">
-                                        <p>Are you sure you want to decline this user?</p>
+                                    <div class="modal-body modal-decline">
+                                      
                                     </div>
 
                                     <div class="modal-footer">
-                                        <a href=""><button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button></a>
-                                        <a href="declineEmail.php?status=<?php echo $row['status'];?>"><button type="submit" class="btn btn-primary">Confirm</button></a>
+                        
                                     </div>
                                 </div>
                             </div>
@@ -268,7 +292,7 @@ include "dbconn.php";
                         <ul class="pagination">
                         <?php
             
-                            $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2 AND status = 0";
+                            $query =  "SELECT COUNT(*) FROM user WHERE userLevel_ID = 2 AND status != 'Active'";
                             $result_count = mysqli_query($conn, $query);
                             $records = mysqli_fetch_row($result_count);
                             $total_records = $records[0];
@@ -368,8 +392,59 @@ include "dbconn.php";
                     type: 'POST',
                     data: {userid: userid},
                     success: function(response){
-                        $('.modal-body').html(response);
-                        $('#view').modal('show');
+                        $('.modal-id').html(response);
+                        $('#viewid').modal('show');
+                    }
+                })
+            });
+        });
+    </script>
+
+    <script> 
+        $(document).ready(function(){
+            $('.userinfo').click(function(){
+                var userid = $(this).data('id');
+                $.ajax({
+                    url: 'permits.php',
+                    type: 'POST',
+                    data: {userid: userid},
+                    success: function(response){
+                        $('.modal-permit').html(response);
+                        $('#viewper').modal('show');
+                    }
+                })
+            });
+        });
+    </script>
+
+    <script> 
+        $(document).ready(function(){
+            $('.userinfo').click(function(){
+                var userid = $(this).data('id');
+                $.ajax({
+                    url: 'accept.php',
+                    type: 'POST',
+                    data: {userid: userid},
+                    success: function(response){
+                        $('.modal-accept').html(response);
+                        $('#confirm').modal('show');
+                    }
+                })
+            });
+        });
+    </script>
+
+<script> 
+        $(document).ready(function(){
+            $('.userinfo').click(function(){
+                var userid = $(this).data('id');
+                $.ajax({
+                    url: 'deny.php',
+                    type: 'POST',
+                    data: {userid: userid},
+                    success: function(response){
+                        $('.modal-decline').html(response);
+                        $('#decline').modal('show');
                     }
                 })
             });

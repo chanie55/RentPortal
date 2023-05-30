@@ -191,7 +191,7 @@ if(!isset($_SESSION['email']))
                                 <?php
                                         include "dbconn.php";
 
-                                        $owners_query = "SELECT * FROM user WHERE userLevel_ID = 2 AND status = 1";
+                                        $owners_query = "SELECT * FROM user WHERE userLevel_ID = 2 AND status = 'Active'";
                                         $owners_query_num = mysqli_query($conn, $owners_query);
 
                                             if ($owners_total = mysqli_num_rows($owners_query_num)) {
@@ -288,7 +288,7 @@ if(!isset($_SESSION['email']))
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.userInfo_ID, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id WHERE user.userLevel_ID = 2 AND status = 0 LIMIT $offset, $limit";
+                            $sql = "SELECT userinfo.userInfo_ID, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.userinfo_ID = user.userInfo_ID WHERE user.userLevel_ID = 2 AND status = 'Pending' LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {

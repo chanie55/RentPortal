@@ -194,13 +194,7 @@ $search = isset($_GET['search']);
                                             ?>
                                         </td>
                                         <td>
-                                            <?php
-                                                if ($row['status'] == 1) {
-                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
-                                                } else {
-                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
-                                                }
-                                            ?>
+                                           <?php echo $row['status']?>
                                         </td>
                                     </tr>
                                 <?php

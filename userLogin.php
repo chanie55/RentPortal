@@ -34,13 +34,13 @@ if(isset($_REQUEST['email']) && isset($_POST['password'])){
                     if (password_verify($pass, $hashed_pw)) {
                         $_SESSION['user_ID'] = $row['user_ID'];
                         $_SESSION['email'] = $row['email'];
-                        if ($row['userLevel_ID'] == 1 && $row['status'] == 1) {
+                        if ($row['userLevel_ID'] == 1 && $row['status'] == 'Active') {
                             header("Location: adminDashboard.php");
                             exit();
-                        } else if ($row['userLevel_ID'] == 2 && $row['status'] == 1) {
+                        } else if ($row['userLevel_ID'] == 2 && $row['status'] == 'Active') {
                             header("Location: ownerDashboard.php");
                             exit();
-                        } else if ($row['userLevel_ID'] == 3 && $row['status'] == 1) {
+                        } else if ($row['userLevel_ID'] == 3 && $row['status'] == 'Active') {
                             header("Location: seekerDashboard.php");
                             exit();
                         }
