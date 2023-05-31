@@ -148,12 +148,12 @@ include "dbconn.php";
                                 <table class="table table-striped table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Visit ID</th>
                                             <th>Date</th>
                                             <th>Seeker Name</th>
                                             <th>Property Name</th>
                                             <th>Owner Name</th>
                                             <th>Status</th>
+                                            <th>Approved Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -172,26 +172,20 @@ include "dbconn.php";
                                                 $previous = $page - 1;
                                                 $next = $page + 1;
 
-                                                $sql = "SELECT userinfo.id, user.email, user.userLevel_ID, user.status, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id LIMIT $offset, $limit";
+                                                $sql = "SELECT *, CONCAT(firstname, ' ', lastname) AS fullName FROM schedule_list JOIN user ON user.user_ID = schedule_list.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
                                                 $result = mysqli_query($conn, $sql);
 
                                                 while ($row = mysqli_fetch_assoc($result)) {
                                                     ?>
                                                     <tr class = "data-row"> 
-                                                        <td> 12 </td>
                                                         <td> 05-12-23 </td>
                                                         <td> <?php echo $row['fullName'] ?> </td>
                                                         <td> Golden Urban House For Rent </td>
                                                         <td> Owner One </td>
                                                         <td>
-                                                            <?php
-                                                                if ($row['status'] == 1) {
-                                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=0"> active </a> </p>';
-                                                                } else {
-                                                                    echo '<p> <a href = "userstatus.php?id='.$row['id'].'&status=1"> inactive </a> </p>';
-                                                                }
-                                                            ?>
+                                                            <?php echo $row['status']; ?> 
                                                         </td>
+                                                        <td>  null </td>
                                                     </tr>
                                                     <?php
                                                 }

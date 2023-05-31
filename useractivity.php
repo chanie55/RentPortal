@@ -166,18 +166,18 @@ if(!isset($_SESSION['email']))
                                 <?php
                                     if ($page >= 2) {
                                         echo "<li class = 'page-item'>
-                                        <a class = 'page-link' href = 'reservation.php?page=".($page-1)."'> 
+                                        <a class = 'page-link' href = 'useractivity.php?page=".($page-1)."'> 
                                         <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
                                     }
 
                                     for ($counter = 1; $counter <= $total_pages; $counter++){
                                         if ($counter == $page) {
                                             $link .= "<li class = 'page-item active'>
-                                            <a class = 'page-link' href= 'reservation?page="
+                                            <a class = 'page-link' href= 'useractivity?page="
                                                 .$counter."'>".$counter." </a></li>";
                                         } else {
                                             $link .= "<li class = 'page-item'>
-                                                <a class = 'page-link' href='reservation.php?page=".$counter."'> ".$counter." </a> </li>";
+                                                <a class = 'page-link' href='useractivity.php?page=".$counter."'> ".$counter." </a> </li>";
                                         }
                                     };
 
@@ -185,7 +185,7 @@ if(!isset($_SESSION['email']))
 
                                     if($page < $total_pages) {
                                         echo "<li class = 'page-item'>
-                                        <a class = 'page-link' href='reservation.php?page=".($page+1)."'>
+                                        <a class = 'page-link' href='useractivity.php?page=".($page+1)."'>
                                         <i class = 'bx bxs-chevron-right'></i> </a></li>";
                                     }
                                 ?>
@@ -271,18 +271,18 @@ if(!isset($_SESSION['email']))
                                 <?php
                                     if ($page >= 2) {
                                         echo "<li class = 'page-item'>
-                                        <a class = 'page-link' href = 'reservation.php?page=".($page-1)."'> 
+                                        <a class = 'page-link' href = 'useractivity.php?page=".($page-1)."'> 
                                         <i class = 'bx bxs-chevron-left'> </i> </a> </li>";
                                     }
 
                                     for ($counter = 1; $counter <= $total_pages; $counter++){
                                         if ($counter == $page) {
                                             $link .= "<li class = 'page-item active'>
-                                            <a class = 'page-link' href= 'reservation?page="
+                                            <a class = 'page-link' href= 'useractivity?page="
                                                 .$counter."'>".$counter." </a></li>";
                                         } else {
                                             $link .= "<li class = 'page-item'>
-                                                <a class = 'page-link' href='reservation.php?page=".$counter."'> ".$counter." </a> </li>";
+                                                <a class = 'page-link' href='useractivity.php?page=".$counter."'> ".$counter." </a> </li>";
                                         }
                                     };
 
@@ -290,7 +290,7 @@ if(!isset($_SESSION['email']))
 
                                     if($page < $total_pages) {
                                         echo "<li class = 'page-item'>
-                                        <a class = 'page-link' href='reservation.php?page=".($page+1)."'>
+                                        <a class = 'page-link' href='useractivity.php?page=".($page+1)."'>
                                         <i class = 'bx bxs-chevron-right'></i> </a></li>";
                                     }
                                 ?>

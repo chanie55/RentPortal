@@ -155,7 +155,6 @@ include "dbconn.php";
                                                             <th>Contact</th>
                                                             <th>Amount</th>
                                                             <th>Mode of Payment</th>
-                                                            <th>Proof of Payment</th>
                                                             <th>Status</th>
                                                             <th>Date Approved</th>
                                                         </tr>
@@ -176,7 +175,7 @@ include "dbconn.php";
                                                             $previous = $page - 1;
                                                             $next = $page + 1;
 
-                                                            $sql = "SELECT *, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
+                                                            $sql = "SELECT *, reservation.status, CONCAT(firstName,' ', lastName) AS fullName FROM reservation JOIN user ON reservation.user_ID = user.user_ID JOIN userinfo ON userinfo.userinfo_ID = user.userInfo_ID LIMIT $offset, $limit";
                                                             $result = mysqli_query($conn, $sql);
 
                                                             while ($row = mysqli_fetch_assoc($result)) {
@@ -188,8 +187,7 @@ include "dbconn.php";
                                                                         <td> <?php echo $row['contact'] ?> </td>
                                                                         <td> <?php echo $row['amount'] ?> </td> 
                                                                         <td> <?php echo $row['mop'] ?> </td>
-                                                                        <td> image </td>
-                                                                        <td> status </td>
+                                                                        <td> <?php echo $row['status'] ?> </td>
                                                                         <td> date </td>
                                                                     </tr>
                                                                 <?php

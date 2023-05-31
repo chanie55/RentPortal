@@ -107,7 +107,7 @@ if(!isset($_SESSION['email']))
                 <tbody>
                         <?php 
                         include "dbconn.php";
-                        $propid = $_REQUEST['pid'];
+                        $propid = $_REQUEST['prop_ID'];
 
                         $result = mysqli_query($conn, "SELECT property.monthlyrate, reservationdetails.downpayment, reservationdetails.paycon, reservationdetails.gname,
                                                         reservationdetails.gnumber, reservationdetails.content FROM property JOIN reservationdetails ON property.property_ID = reservationdetails.prop_ID 
@@ -143,7 +143,7 @@ if(!isset($_SESSION['email']))
 
                             
                         <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
-                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php?total=<?php echo $total; ?>'">Reserve Now </button>
+                            <button class="reserveBtn" type="button" onclick="window.location.href='seekerReserveNow.php?prop_ID=<?php echo $_REQUEST['prop_ID']?>&total=<?php echo $total; ?>'">Reserve Now </button>
                             <p>How to Reserve?</p>
                             <h1 class="mb-3">Reservation Method</h1>
                             <h6> Reservation via Gcash </h6>

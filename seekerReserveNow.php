@@ -149,6 +149,7 @@ if(!isset($_SESSION['email']))
                         <div id="payGcash" class="col-md-3 mb-3">
                             <label> Attach Gcash Receipt</label>
                             <input type = "file" name = "proof" style="border: solid gray 1px; padding: 6px; width: 80%; border-radius: 4px"/>
+                            <input type = "hidden" name = "prop" value = "<?php echo $_REQUEST['prop_ID']; ?>">
                         </div>
                     </div>
 

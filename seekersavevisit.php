@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] !='POST'){
 extract($_POST);
 $allday = isset($allday);
 $uid = $_SESSION['user_ID'];
-$pid = $_POST['id'];
+$pid = $_POST['pid'];
 
 if(empty($id)){
     $sql = "INSERT INTO schedule_list (start_datetime, end_datetime, user_ID, status, property_ID) VALUES ('$start_datetime','$end_datetime', '$uid', 'Pending', '$pid')";

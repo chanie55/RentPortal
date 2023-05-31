@@ -151,11 +151,9 @@ include "dbconn.php";
                 <thead>
                     <tr>
                         <th>Property ID</th>
-                        <th>Trade Name</th>
+                        <th>Business Name</th>
                         <th>Property Type</th>
                         <th>Business Address</th>
-                        <th>Owner Name</th>
-                        <th>Owner Address</th>
                         <th>Date Posted</th>
                     </tr>
                 </thead>
@@ -175,18 +173,16 @@ include "dbconn.php";
                             $previous = $page - 1;
                             $next = $page + 1;
 
-                            $sql = "SELECT userinfo.address, property.propertyname, property.propertyaddress, property.propertytype, property.date_created, property.property_ID, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON userinfo.id = user.id JOIN property ON user.user_ID = property.user_ID LIMIT $offset, $limit";
+                            $sql = "SELECT *, businessname.bname, businessname.category FROM property JOIN businessname ON property.bname_ID = businessname.bname_ID LIMIT $offset, $limit";
                             $result = mysqli_query($conn, $sql);
 
                             while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <tr> 
                                         <td> <?php echo $row['property_ID'] ?> </td>
-                                        <td> <?php echo $row['propertyname'] ?> </td>
-                                        <td> <?php echo $row['propertytype'] ?> </td>
+                                        <td> <?php echo $row['bname'] ?> </td>
+                                        <td> <?php echo $row['category'] ?> </td>
                                         <td> <?php echo $row['propertyaddress'] ?> </td>
-                                        <td> <?php echo $row['fullName'] ?> </td>
-                                        <td> <?php echo $row['address'] ?> </td>
                                         <td> <?php echo $row['date_created'] ?> </td>
                                     </tr>
                                 <?php

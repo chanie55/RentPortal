@@ -292,8 +292,8 @@ if(!isset($_SESSION['email']))
                                 </div>
                                 <?php
                                     include "dbconn.php";
-
-                                    $sql = "SELECT user.userInfo_ID, userinfo.address, userinfo.contact, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON user.userLevel_ID = 2";
+                                    $email = $_SESSION['email'];
+                                    $sql = "SELECT user.userInfo_ID, userinfo.address, userinfo.contact, user.email, CONCAT(firstName,' ', lastName) AS fullName FROM userinfo JOIN user ON user.userInfo_ID = userinfo.userinfo_ID WHERE user.email = '$email'";
                                   // $sql = "SELECT "; 
                                   $result = mysqli_query($conn, $sql);
         

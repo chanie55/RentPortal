@@ -119,11 +119,8 @@ include "dbconn.php";
                                         }
                                     ?>
                                     <form action="seekersavevisit.php" method="post" id="schedule-form">
-                                        <input type="hidden" name="id" value="<?php echo $_REQUEST['prop_ID']; ?>">
-                                        <div class="form-group mb-2">
-                                            <label for="start_datetime" class="control-label">Name</label>
-                                            <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" value = "<?php echo $fn; ?>" required> 
-                                        </div>
+                                        <input type="hidden" name="pid" value="<?php echo $_REQUEST['prop_ID']; ?>">
+                                        
                                         <div class="form-group mb-2">
                                             <label for="start_datetime" class="control-label">Start</label>
                                             <input type="datetime-local" class="form-control form-control-sm rounded-0" name="start_datetime" id="start_datetime" min = "{{date('Y=m-d')}}" required>

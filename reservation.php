@@ -228,7 +228,7 @@ if(!isset($_SESSION['email']))
                                                             $next = $page + 1;
 
                                                             $sql = "SELECT *,reservation.date, reservation.amount, reservation.status, userinfo.firstname FROM property JOIN reservation ON reservation.property_ID = property.property_ID
-                                                                        JOIN user ON user.user_ID = reservation.user_ID JOIN userinfo ON userinfo.userInfo_ID = user.userInfo_ID WHERE reservation.status != 'Acknowledge' ORDER BY reservation.date LIMIT $offset, $limit";
+                                                                        JOIN user ON user.user_ID = reservation.user_ID JOIN userinfo ON userinfo.userInfo_ID = user.userInfo_ID WHERE reservation.status = 'Pending' ORDER BY reservation.date LIMIT $offset, $limit";
                                                             $result = mysqli_query($conn, $sql);
 
                                                             while ($row = mysqli_fetch_assoc($result)) {

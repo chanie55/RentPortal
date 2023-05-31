@@ -181,8 +181,31 @@ include "dbconn.php";
                               <div class="d-flex align-items-center">
                                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bx bxs-face"></i></div>
                                  <div class="ps-3">
-                                    <h6>$3,264</h6>
-                                    <span class="text-success small pt-1 fw-bold">8</span> <span class="text-muted small pt-2 ps-1">added</span>
+                                 <?php
+                                        include "dbconn.php";
+
+                                        $res_query = "SELECT * FROM schedule_list";
+                                        $res_query_num = mysqli_query($conn, $res_query);
+
+                                            if ($res_total = mysqli_num_rows($res_query_num)) {
+                                                echo '<h6> '.$res_total.' </h6>';
+                                            } else {
+                                                echo '<h3 class = "card-title"> No Data </h3>';
+                                            }
+                                    ?>
+                                    <?php
+                                        include "dbconn.php";
+
+                                        $res_query = "SELECT * FROM schedule_list";
+                                        $res_query_num = mysqli_query($conn, $res_query);
+
+                                            if ($res_total = mysqli_num_rows($res_query_num)) {
+                                                echo '<span class="text-success small pt-1 fw-bold"> '.$res_total.' </span>';
+                                            } else {
+                                                echo '<h3 class = "card-title"> No Data </h3>';
+                                            }
+                                    ?>
+                                    <span class="text-muted small pt-2 ps-1">added</span>
                                  </div>
                               </div>
                            </div>

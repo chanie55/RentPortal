@@ -4,7 +4,7 @@
     $userid = $_POST['userid'];
 
     $sql = "SELECT *,reservation.date, reservation.amount, reservation.status, userinfo.firstname, CONCAT(firstname,' ', lastname) AS fullName FROM property JOIN reservation ON reservation.property_ID = property.property_ID
-                JOIN user ON user.user_ID = reservation.user_ID JOIN userinfo ON userinfo.userInfo_ID = user.userInfo_ID WHERE user.user_ID = '$userid'";
+                JOIN user ON user.user_ID = reservation.user_ID JOIN userinfo ON userinfo.userInfo_ID = user.userInfo_ID WHERE user.user_ID = '$userid' AND reservation.status = 'Pending'";
     $result = mysqli_query($conn, $sql);
 
     while ($row = mysqli_fetch_assoc($result)) {

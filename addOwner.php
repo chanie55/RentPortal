@@ -24,12 +24,11 @@ if (isset($_POST['submit-owner'])) {
     $password = $_POST['password'];
     $hashed_pw = password_hash($password, PASSWORD_DEFAULT);
     $password2 = $_POST['password2'];
-    $docu = $_POST['document'];
     $length = strlen ($contact);
     $code = rand(999999, 111111);
     $is_verified = 0;
 
-    $user_data = 'username='. $user_name. '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&birthdate='. $dob.  '&gender='. $gender.  '&address='. $address;
+    $user_data = '&firstname='. $first_name. '&lastname='. $last_name. '&email='. $email. '&contact='. $contact. '&birthdate='. $dob.  '&gender='. $gender;
     $address = $stpurok .', '. $barangay .', '. 'General Santos City';
 
     $em = "SELECT email FROM user WHERE email = '$email'";
@@ -71,16 +70,46 @@ if (isset($_POST['submit-owner'])) {
                 $query = "UPDATE userinfo SET userinfo_ID = '".$userID."' WHERE id = '".$lastid."'";
                 $res = mysqli_query($conn, $query);
 
-                if($result === TRUE) {
+                if($res === TRUE) {
                     $sql2 = "INSERT INTO user(email, password, userInfo_ID, status, userLevel_ID)
                         VALUES ('$email', '$hashed_pw', '$userID', 0, 2)";
                     $result2 = mysqli_query($conn, $sql2);
+
+                    $mail = new PHPMailer(true);
+
+                            $message = '<div>
+				                <p><b> Hello! </b> </p>
+				                <p> Your verification code is '.$code.' </p>
+				                <br>
+				                </div>';
+
+                            $mail->isSMTP();
+                            $mail->Host = 'smtp.gmail.com';
+                            $mail->SMTPAuth = true;
+                            $mail->Username = "anya.sc30@gmail.com";
+                            $mail->Password = "igicgkctmoucexit";
+                            $mail->SMTPSecure = 'ssl';
+                            $mail->Port= 465;
+
+                            $mail->setFrom('anya.sc30@gmail.com');
+
+                            $mail->addAddress($email);
+
+                            $mail->isHTML(true);
+                            $mail->Subject = "Rent.in Email Verification";
+                            $mail->Body = $message;
+
+                            $mail->send();
+
+                            echo " <script> alert ('Email Verification has been sent'); document.location.href = 'verifyOwner.php'; </script>";  
                     if ($result2) {
                         $userlastid = mysqli_insert_id($conn);
                         if ($userlastid) {
                             $userid = "UID_00".$userlastid;
                             $query2 = "UPDATE user SET user_ID = '".$userid."' WHERE id = '".$userlastid."'";
                             $res2 = mysqli_query($conn, $query2);
+
+                            
 
                             //documents
                             if (isset($_FILES['document-image'])) {
@@ -148,40 +177,14 @@ if (isset($_POST['submit-owner'])) {
                                         }
                                     }
                                 } else {
-                                    $message = "unknown error occured";
+                                    $message = "Please upload the required images";
                                     header("Location: registerOwner.php?error=$message&$user_data");
                                 }
                             } else {
                                 header("Location: registerOwner.php?failed&$user_data");
                             }
 
-                            $mail = new PHPMailer(true);
-
-                            $message = '<div>
-				                <p><b> Hello! </b> </p>
-				                <p> Your verification code is '.$code.' </p>
-				                <br>
-				                </div>';
-
-                            $mail->isSMTP();
-                            $mail->Host = 'smtp.gmail.com';
-                            $mail->SMTPAuth = true;
-                            $mail->Username = "anya.sc30@gmail.com";
-                            $mail->Password = "igicgkctmoucexit";
-                            $mail->SMTPSecure = 'ssl';
-                            $mail->Port= 465;
-
-                            $mail->setFrom('anya.sc30@gmail.com');
-
-                            $mail->addAddress($email);
-
-                            $mail->isHTML(true);
-                            $mail->Subject = "Rent.in Email Verification";
-                            $mail->Body = $message;
-
-                            $mail->send();
-
-                            echo " <script> alert ('Email Verification has been sent'); document.location.href = 'verifyOwner.php'; </script>";  
+                            
 
                         }
                     }

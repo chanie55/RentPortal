@@ -231,20 +231,6 @@
                             </div>
                         </div>
 
-                        <div class="form-row">
-                            <div class="col-md-12 mb-3">
-                                <label> <strong> Please provide any Valid ID applicable </strong> </label> <br>
-                                
-                                <label> Front:</label>
-                                <input type = "file" name = "id[]"/><br><br>
-                                <lab
-                                
-                                
-                                el> Back:</label>
-                                <input type = "file" name = "id[]"/><br><br>
-                            </div>
-                        </div>
-
                         <button class="btn btn-primary" type="submit" name = "submit-seeker">Register</button>
                         <br><br>
                         <div class="form-group">

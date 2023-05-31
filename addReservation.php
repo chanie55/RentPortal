@@ -9,6 +9,7 @@ if(!isset($_SESSION['email']))
 } 
 
     if(isset($_POST['submit-res'])) {
+        $prop = $_POST['prop'];
         $total = $_REQUEST['total'];
         $uid= $_SESSION['user_ID'];
         $email = $_SESSION['email'];
@@ -17,6 +18,7 @@ if(!isset($_SESSION['email']))
         $firstname = $_POST['firstname'];
         $lastname = $_POST['lastname'];
         $contact = $_POST['contact'];
+        
 
         if (isset($_FILES['proof'])) {
             $img_name = $_FILES['proof']['name'];
@@ -43,7 +45,7 @@ if(!isset($_SESSION['email']))
 
                         $transactID = "TRANSACT".$uid;
 
-                        $query = "INSERT INTO reservation (transactID, user_ID, amount, status, mop, proof) VALUES ('$transactID','$uid', '$amount', 'Pending', '$mop', '$new_img_name')";
+                        $query = "INSERT INTO reservation (transactID, user_ID, amount, property_ID, status, mop, proof) VALUES ('$transactID','$uid', '$amount', '$prop', 'Pending', 'Gcash', '$new_img_name')";
                         $res = mysqli_query($conn, $query);
                         header("Location: seekerReserveNow.php?Successfully added");
 
@@ -53,7 +55,7 @@ if(!isset($_SESSION['email']))
                         header("Location: seekerReserveNow.php?error=$message");
                     }
                 }     
-                header ("Location: seekerReserveNow.php?total=$total&saved");
+                header ("Location: useractivity.php");
             } else {
             echo "failed";
             }
